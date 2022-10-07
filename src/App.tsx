@@ -1,7 +1,12 @@
 import React from 'react';
+import logoImg from "!/images/logo.svg";
 
 const App = () => {
-  return <div>Hello world from react</div>;
+  return (
+    <div>
+      <img src={logoImg} alt='' />
+    </div>
+  );
 };
 
 export default App;
