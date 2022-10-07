@@ -1,16 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
 *,
 *:after,
 *:before {
     margin: 0;
     padding: 0;
-    outline: none;
     box-sizing: border-box;
 }
 
 :root {
     --background-primary: #111;
     --text-primary: #fff;
-    --font-primary: sans-serif;
+    --text-secondary: #666;
+    --border-primary: #222;
+    --font-primary: 'Poppins', sans-serif;
 }
 
 body {
