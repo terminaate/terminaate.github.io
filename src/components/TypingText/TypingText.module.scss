@@ -1,0 +1,32 @@
+.typingTextContainer {
+    display: flex;
+    align-items: center;
+    justify-content: inherit;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+
+    span {
+        line-height: 100%;
+        animation: typingTextAnimation 0.7s both;
+        font-size: 16px;
+
+        @keyframes typingTextAnimation {
+            0% {
+                opacity: 0;
+                transform: translateX(-15px);
+            }
+            50% {
+                text-shadow: 0 0 30px var(--text-primary);
+            }
+            75% {
+                text-shadow: 0 0 5px var(--text-primary);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                text-shadow: none;
+            }
+        }
+    }
+}

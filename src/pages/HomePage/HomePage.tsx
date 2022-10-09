@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import cl from './HomePage.module.scss';
-import Routing from '@/components/Routing';
+import BasicPage from '@/components/BasicPage';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 
-const HomePage = () => {
+const HomePage: FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className={cl.homePage}>
-      <div className={cl.container}>
+      <BasicPage className={cl.homePage}>
         <Header />
-        <div className={cl.pageContainer}>
-          <Routing />
+        <div className={cl.container}>
+
         </div>
-      </div>
-    </div>
+      </BasicPage>
   );
 };
 
