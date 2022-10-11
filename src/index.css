@@ -10,6 +10,7 @@
 
 :root {
     --background-primary: #111;
+    --background-secondary: rgba(17, 17, 17, 0.6);
     --text-primary: #fff;
     --text-secondary: #666;
     --red: #da1111;

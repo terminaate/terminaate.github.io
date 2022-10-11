@@ -14,7 +14,6 @@ export interface IParticles {
 }
 
 interface IConfig {
-  backgroundColor: string;
   particlesSize: number;
   particlesCount: number;
   particlesColor: string;
@@ -60,7 +59,6 @@ class Particle {
 }
 
 const Particles: FC<IParticles> = ({
-                                     backgroundColor = '#111',
                                      particlesCount = 100,
                                      particlesSize = Math.random() * 2,
                                      particlesColor = '#fff',
@@ -101,7 +99,6 @@ const Particles: FC<IParticles> = ({
   };
 
   const [config] = useState<IConfig>({
-    backgroundColor,
     particlesSize: getParticlesSize(),
     particlesCount,
     particlesColor,
@@ -123,8 +120,9 @@ const Particles: FC<IParticles> = ({
     addEventListener('resize', resizeHandler);
 
     function drawBackground() {
-      ctx.fillStyle = config.backgroundColor;
-      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+      // ctx.fillStyle = config.backgroundColor;
+      // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
 
     function drawParticles() {
