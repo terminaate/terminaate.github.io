@@ -1,7 +1,7 @@
-import React, { FC, MutableRefObject, useEffect, useState } from 'react';
+import React, { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import cl from './PlayerControls.module.scss';
-import { BiHelpCircle, IoMdVolumeLow } from 'react-icons/all';
+import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
 
 interface IPlayerControls {
   playerRef: MutableRefObject<null | YouTubeTarget>;
@@ -12,6 +12,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   const [playerVolume, setPlayerVolume] = useState<number>(
     playerRef.current?.getVolume() || 10,
   );
+  const oldVolume = useRef<number>(playerVolume);
 
   const handleVideoState = () => {
     if (isPlayed) {
@@ -25,6 +26,16 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   useEffect(() => {
     playerRef.current?.setVolume(playerVolume);
   }, [playerVolume]);
+
+  const onVolumeButtonClick = () => {
+    if (playerVolume) {
+      oldVolume.current = playerVolume;
+      setPlayerVolume(0);
+    } else {
+      setPlayerVolume(oldVolume.current);
+      oldVolume.current = playerVolume;
+    }
+  }
 
   return (
     <div className={cl.playerControlsContainer}>
@@ -49,12 +60,22 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         <BiHelpCircle />
       </button>
       <div className={cl.volumeControlContainer}>
-        <button className={cl.volumeButton}>
-          <IoMdVolumeLow />
+        <button onClick={onVolumeButtonClick} className={cl.volumeButton}>
+          {playerVolume < 50 ? (
+            <>
+              {playerVolume === 0 ? (
+                <IoMdVolumeMute />
+              ) : (
+                <IoMdVolumeLow />
+              )}
+            </>
+          ) : (
+            <IoMdVolumeHigh />
+          )}
         </button>
         <input
           className={cl.volumeInput}
-          type="range"
+          type='range'
           value={playerVolume}
           min={0}
           max={100}

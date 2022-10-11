@@ -9,6 +9,7 @@ const Routing = () => {
   const previousRoute = useRef<string>(location.pathname);
 
   useEffect(() => {
+    // Im too lazy for doing a context for that. so thats why im just a set previousRoute as a window property
     window.previousRoute = previousRoute.current;
     previousRoute.current = location.pathname;
   }, [location.pathname]);
