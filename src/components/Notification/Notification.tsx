@@ -1,32 +1,36 @@
-import React, { FC, useEffect } from 'react';
-import cl from './Notification.module.css';
+import React, { useEffect, useState } from 'react';
+import cl from './Notification.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
 
-interface INotification {
-  state: string;
-  setState: React.Dispatch<React.SetStateAction<string>>;
-  timeout?: number;
-}
+const Notification = () => {
+  const [state, setState] = useState<string>('');
+  const [timeout, setTimeout] = useState<number>(1000);
 
-const Notification: FC<INotification> = ({
-  state,
-  setState,
-  timeout = 1500,
-}) => {
   useEffect(() => {
-    setTimeout(() => setState(''), timeout);
+    window.setNotification = (text, newTimeout = timeout) => {
+      if (timeout !== newTimeout) {
+        setTimeout(newTimeout);
+      }
+      setState(text);
+    };
+  }, []);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      setState('');
+    }, timeout);
+    return () => clearTimeout(t);
   }, [state]);
 
-  // TODO
-  // Rewrite logic and add normal animation
-
   return (
-    <>
+    <AnimatePresence>
       {state && (
-        <div data-state={state} className={cl.notificationContainer}>
+        <motion.div transition={{ duration: 0.5 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }} className={cl.notificationContainer}>
           {state}
-        </div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 

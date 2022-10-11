@@ -35,7 +35,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
       setPlayerVolume(oldVolume.current);
       oldVolume.current = playerVolume;
     }
-  }
+  };
 
   return (
     <div className={cl.playerControlsContainer}>
@@ -50,11 +50,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         <span />
       </div>
       <button
-        onClick={() =>
-          alert(
-            'Currently playing \n' + playerRef.current?.getVideoData().title,
-          )
-        }
+        onClick={() => window.setNotification(playerRef.current?.getVideoData().title)}
         className={cl.trackTitleButton}
       >
         <BiHelpCircle />
