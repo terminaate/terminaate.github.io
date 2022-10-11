@@ -4,7 +4,11 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 import classNames from 'classnames';
 import { AiOutlineExpand, BiMinus, IoClose } from 'react-icons/all';
 
-export type MovableModalStatement = 'not-exist' | 'collapsed' | 'active' | 'inactive'
+export type MovableModalStatement =
+  | 'not-exist'
+  | 'collapsed'
+  | 'active'
+  | 'inactive';
 
 interface IMovableModal {
   modal: MovableModalStatement;
@@ -22,20 +26,19 @@ interface IMovableModal {
 }
 
 const MovableModal: FC<IMovableModal> = ({
-                                           modal,
-                                           setModal,
-                                           children,
-                                           title = 'MovableModal',
-                                           onClose = () => {
-                                           },
-                                           minWidth = '300px',
-                                           minHeight = '150px',
-                                           width = minWidth,
-                                           height = minHeight,
-                                           initialX = innerWidth / 4,
-                                           initialY = innerHeight / 7,
-                                           className = '',
-                                         }) => {
+  modal,
+  setModal,
+  children,
+  title = 'MovableModal',
+  onClose = () => {},
+  minWidth = '300px',
+  minHeight = '150px',
+  width = minWidth,
+  height = minHeight,
+  initialX = innerWidth / 4,
+  initialY = innerHeight / 7,
+  className = '',
+}) => {
   const [sizes, setSizes] = useState({ width, height, fullscreen: false });
   const [cords, setCords] = useState({ x: initialX, y: initialY });
   const [localModal, setLocalModal] = useState(modal);
@@ -49,7 +52,11 @@ const MovableModal: FC<IMovableModal> = ({
     setTimeoutModal(modal);
   }, [modal]);
 
-  useOutsideClick(modalRef, () => setModal('inactive'), () => setModal('active'));
+  useOutsideClick(
+    modalRef,
+    () => setModal('inactive'),
+    () => setModal('active'),
+  );
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const clickedX = e.clientX - cords.x;
@@ -59,7 +66,6 @@ const MovableModal: FC<IMovableModal> = ({
     const dragHandler = (e: MouseEvent) => {
       const x = e.clientX - clickedX;
       const y = e.clientY - clickedY;
-
 
       if (sizes.fullscreen && y > 0) {
         turnOffFullScreen();
@@ -131,22 +137,28 @@ const MovableModal: FC<IMovableModal> = ({
 
   return (
     <>
-      {(modal !== 'not-exist' && modal !== 'collapsed') && (
-        <div ref={modalRef}
-             style={{
-               top: cords.y,
-               left: cords.x,
-               minHeight,
-               minWidth,
-               width: sizes.width,
-               height: sizes.height,
-               transition,
-             }}
-             onClick={e => e.stopPropagation()}
-             data-modal={localModal}
-             data-fullscreen={sizes.fullscreen}
-             className={classNames(cl.modalContainer, className)}>
-          <div onMouseDown={onMouseDown} onDoubleClick={fullScreenButtonHandler} className={cl.modalHeader}>
+      {modal !== 'not-exist' && modal !== 'collapsed' && (
+        <div
+          ref={modalRef}
+          style={{
+            top: cords.y,
+            left: cords.x,
+            minHeight,
+            minWidth,
+            width: sizes.width,
+            height: sizes.height,
+            transition,
+          }}
+          onClick={(e) => e.stopPropagation()}
+          data-modal={localModal}
+          data-fullscreen={sizes.fullscreen}
+          className={classNames(cl.modalContainer, className)}
+        >
+          <div
+            onMouseDown={onMouseDown}
+            onDoubleClick={fullScreenButtonHandler}
+            className={cl.modalHeader}
+          >
             <span className={cl.modalHeaderTitle}>{title}</span>
             <div className={cl.modalHeaderButtons}>
               <button onClick={() => setTimeoutModal('collapsed')}>
@@ -160,9 +172,7 @@ const MovableModal: FC<IMovableModal> = ({
               </button>
             </div>
           </div>
-          <div className={cl.modalContent}>
-            {children}
-          </div>
+          <div className={cl.modalContent}>{children}</div>
         </div>
       )}
     </>

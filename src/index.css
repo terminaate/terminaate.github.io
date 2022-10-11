@@ -3,49 +3,49 @@
 *,
 *:after,
 *:before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
 }
 
 :root {
-    --background-primary: #111;
-    --background-secondary: rgba(17, 17, 17, 0.6);
-    --text-primary: #fff;
-    --text-secondary: #666;
-    --red: #da1111;
-    --border-primary: #222;
-    --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Source Code Pro', monospace;
+  --background-primary: #111;
+  --background-secondary: rgba(17, 17, 17, 0.8);
+  --text-primary: #fff;
+  --text-secondary: #666;
+  --red: #da1111;
+  --border-primary: #222;
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Source Code Pro', monospace;
 }
 
 body {
-    color: var(--text-primary);
-    background-color: var(--background-primary);
-    font-family: var(--font-primary);
-    overflow-x: hidden;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  font-family: var(--font-primary);
+  overflow-x: hidden;
 }
 
-
 button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-primary);
-    font-family: var(--font-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
 }
 
 a {
-    color: var(--text-primary);
-    text-decoration: none;
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
 ::-webkit-scrollbar {
-    width: 2px;
-    background: none;
+  width: 2px;
+  background: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--text-primary);
-    border-radius: 5px;
+  background-color: var(--text-primary);
+  border-radius: 5px;
 }

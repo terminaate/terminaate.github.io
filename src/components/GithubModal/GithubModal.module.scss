@@ -1,130 +1,129 @@
 .githubModal > div:nth-child(2) {
+  display: flex;
+  /*align-items: center;*/
+  justify-content: center;
+  column-gap: 40px;
+
+  .userInfo {
     display: flex;
-    /*align-items: center;*/
-    justify-content: center;
-    column-gap: 40px;
+    flex-direction: column;
 
-    .userInfo {
-        display: flex;
-        flex-direction: column;
-
-        .userAvatar {
-            border: 0.5px solid var(--text-secondary-alt);
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            border-radius: 50%;
-            height: 128px;
-            width: 128px;
-            box-shadow: 0 0 20px var(--text-secondary-alt);
-        }
-
-        .userName {
-            font-weight: 500;
-            font-family: var(--font-primary);
-            margin-top: 10px;
-            line-height: 150%;
-        }
-
-        .userNickname {
-            font-weight: 400;
-            opacity: 0.5;
-            text-decoration: underline;
-            cursor: pointer;
-            width: max-content;
-        }
-
-        .userBio {
-            margin-top: 10px;
-        }
-
-        .userFollowers {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            column-gap: 5px;
-            font-family: var(--font-primary);
-
-            img {
-                height: 14px;
-                opacity: 0.5;
-            }
-
-            span span {
-                opacity: 0.5;
-            }
-        }
-
-        .userLocation {
-            margin-top: 10px;
-        }
+    .userAvatar {
+      border: 0.5px solid var(--text-secondary-alt);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      border-radius: 50%;
+      height: 128px;
+      width: 128px;
+      box-shadow: 0 0 20px var(--text-secondary-alt);
     }
 
-    .userRepos {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        overflow-y: scroll;
-        overflow-x: hidden;
+    .userName {
+      font-weight: 500;
+      font-family: var(--font-primary);
+      margin-top: 10px;
+      line-height: 150%;
     }
 
-
-    .repoContainer {
-        width: 100%;
-        padding-block: 20px;
-        border-bottom: 2px solid var(--text-secondary-alt);
+    .userNickname {
+      font-weight: 400;
+      opacity: 0.5;
+      text-decoration: underline;
+      cursor: pointer;
+      width: max-content;
     }
 
-    .repoHeader {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
+    .userBio {
+      margin-top: 10px;
     }
 
-    .repoName {
-        display: flex;
-        align-items: center;
-        column-gap: 10px;
-        cursor: pointer;
-        text-decoration: underline;
+    .userFollowers {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      font-family: var(--font-primary);
+
+      img {
+        height: 14px;
+        opacity: 0.5;
+      }
+
+      span span {
+        opacity: 0.5;
+      }
     }
 
-    .repoName img {
-        height: 20px;
-        border-radius: 100%;
+    .userLocation {
+      margin-top: 10px;
     }
+  }
 
-    .repoName span {
-        font-weight: 500;
-        font-family: var(--font-primary);
-        text-shadow: 0 0 5px var(--text-primary);
-    }
+  .userRepos {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 
-    .repoDesc {
-        font-size: 15px;
-        margin-block: 10px;
-        color: var(--text-secondary)
-    }
+  .repoContainer {
+    width: 100%;
+    padding-block: 20px;
+    border-bottom: 2px solid var(--text-secondary-alt);
+  }
 
-    .repoLastCommit {
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
-        margin-top: 15px;
-    }
+  .repoHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-    .repoLastCommit img {
-        opacity: .5;
-    }
+  .repoName {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
-    .repoLastCommit span {
-        font-size: 15px;
-    }
+  .repoName img {
+    height: 20px;
+    border-radius: 100%;
+  }
 
-    .repoLanguage {
-        margin-right: 10px;
-        height: 18px;
-    }
+  .repoName span {
+    font-weight: 500;
+    font-family: var(--font-primary);
+    text-shadow: 0 0 5px var(--text-primary);
+  }
+
+  .repoDesc {
+    font-size: 15px;
+    margin-block: 10px;
+    color: var(--text-secondary);
+  }
+
+  .repoLastCommit {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-top: 15px;
+  }
+
+  .repoLastCommit img {
+    opacity: 0.5;
+  }
+
+  .repoLastCommit span {
+    font-size: 15px;
+  }
+
+  .repoLanguage {
+    margin-right: 10px;
+    height: 18px;
+  }
 }

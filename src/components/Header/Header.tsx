@@ -10,7 +10,7 @@ const Header = () => {
       <header className={cl.header}>
         <div className={cl.headerContainer}>
           <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt='' />
+            <img src={logoImg} alt="" />
           </Link>
           <NavLink to={'/posts'}>
             <MdArticle />

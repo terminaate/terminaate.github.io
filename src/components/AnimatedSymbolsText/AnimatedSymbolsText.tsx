@@ -1,7 +1,6 @@
 import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
 import TextService from '@/services/TextService';
 
-
 interface IAnimatedSymbolsText {
   className?: string;
   delay?: number;
@@ -12,18 +11,20 @@ interface IAnimatedSymbolsText {
 }
 
 const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
-                                                         className = '',
-                                                         delay = 200,
-                                                         clearDelay = delay,
-                                                         infinite = false,
-                                                         text,
-                                                         onClick,
-                                                       }) => {
+  className = '',
+  delay = 200,
+  clearDelay = delay,
+  infinite = false,
+  text,
+  onClick,
+}) => {
   const [renderText, setRenderText] = useState<string[]>([...text]);
   const [animate, setAnimate] = useState<boolean>(false);
 
   const updateSymbol = (index: number, newValue: string) => {
-    setRenderText(values => values.map((value, i) => i === index ? newValue : value));
+    setRenderText((values) =>
+      values.map((value, i) => (i === index ? newValue : value)),
+    );
   };
 
   const animation = () => {
@@ -43,15 +44,14 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
     }
   };
 
-
   useEffect(() => {
     animation();
   }, [animate]);
 
   return (
     <span onClick={onClick} className={className}>
-			{renderText.join('')}
-		</span>
+      {renderText.join('')}
+    </span>
   );
 };
 

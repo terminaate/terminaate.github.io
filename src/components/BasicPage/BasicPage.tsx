@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
-import React, { FC, ReactNode, useRef, useState } from 'react';
+import React, { FC, ReactNode, useRef } from 'react';
 import classNames from 'classnames';
 import cl from './BasicPage.module.scss';
 import Header from '@/components/Header';
-import YoutubePlayer from '@/components/YoutubePlayer/YoutubePlayer';
+import YoutubePlayer from '@/components/YoutubePlayer';
+import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
+import PlayerControls from '../PlayerControls';
 
 interface IBasicPage {
   children?: ReactNode;
@@ -16,27 +18,36 @@ interface IBasicPage {
 }
 
 const BasicPage: FC<IBasicPage> = ({
-                                     children,
-                                     className,
-                                     containerClassName,
-                                     container = false,
-                                     header = false,
-                                     backgroundVideo = false,
-                                     videoControls = false,
-                                   }) => {
-  const playerRef = useRef(null);
+  children,
+  className,
+  containerClassName,
+  container = false,
+  header = false,
+  backgroundVideo = false,
+}) => {
+  const playerRef = useRef<null | YouTubeTarget>(null);
 
   return (
-    <motion.div transition={{ duration: 0.5 }} className={classNames(cl.basicPage, className!)} initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div
+      transition={{ duration: 0.5 }}
+      className={classNames(cl.basicPage, className!)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       {header && <Header />}
       {container ? (
         <div className={classNames(cl.container, containerClassName!)}>
           {children}
         </div>
-      ) : children}
+      ) : (
+        children
+      )}
       {backgroundVideo && (
-        <YoutubePlayer playerRef={playerRef}/>
+        <>
+          <YoutubePlayer playerRef={playerRef} />
+          <PlayerControls playerRef={playerRef} />
+        </>
       )}
     </motion.div>
   );

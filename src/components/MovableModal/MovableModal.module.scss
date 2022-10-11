@@ -1,83 +1,83 @@
 .modalContainer {
-    position: fixed;
-    width: max-content;
+  position: fixed;
+  width: max-content;
+  z-index: 40;
+  border-radius: 3px;
+  border: 0.5px solid var(--text-secondary);
+  background: none;
+  backdrop-filter: blur(5px);
+
+  &[data-modal='active'] {
+    z-index: 45;
+    box-shadow: 0 0 10px var(--text-secondary);
+  }
+
+  &[data-modal='inactive'] {
     z-index: 40;
-    border-radius: 3px;
-    border: 0.5px solid var(--text-secondary);
-    background: none;
-    backdrop-filter: blur(5px);
+  }
 
-    &[data-modal="active"] {
-        z-index: 45;
-        box-shadow: 0 0 10px var(--text-secondary);
-    }
+  &[data-modal='not-exist'] {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+  }
 
-    &[data-modal="inactive"] {
-        z-index: 40;
-    }
+  &[data-modal='collapsed'] {
+    opacity: 0;
+  }
 
-    &[data-modal="not-exist"] {
-        opacity: 0;
-        pointer-events: none;
-        transform: scale(0.8);
-    }
+  &[data-fullscreen='true'] {
+    box-shadow: none;
+    border: none;
+  }
 
-    &[data-modal="collapsed"] {
-        opacity: 0;
-    }
+  .modalHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
 
-    &[data-fullscreen="true"] {
-        box-shadow: none;
-        border: none;
-    }
+    .modalHeaderButtons {
+      display: flex;
+      align-items: center;
+      justify-content: right;
 
-    .modalHeader {
-        width: 100%;
+      button {
+        padding: 8px;
+        background: none;
+        height: min-content;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        user-select: none;
-
-        .modalHeaderButtons {
-            display: flex;
-            align-items: center;
-            justify-content: right;
-
-            button {
-                padding: 8px;
-                background: none;
-                height: min-content;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: none;
-                color: var(--text-primary);
-
-                &:hover {
-                    background-color: var(--text-secondary);
-                }
-            }
-
-            .closeButton:hover {
-                background-color: var(--red) !important;
-            }
-        }
-
-        .modalHeaderTitle {
-            font-weight: 400;
-            font-size: 15px;
-            opacity: .6;
-            font-family: monospace;
-            margin-left: 6px;
-            /*margin-top: 6px;*/
-        }
-    }
-
-    .modalContent {
-        padding: 4px;
+        justify-content: center;
+        border: none;
         color: var(--text-primary);
-        height: 93%;
-        width: 100%;
-        overflow: hidden;
+
+        &:hover {
+          background-color: var(--text-secondary);
+        }
+      }
+
+      .closeButton:hover {
+        background-color: var(--red) !important;
+      }
     }
+
+    .modalHeaderTitle {
+      font-weight: 400;
+      font-size: 15px;
+      opacity: 0.6;
+      font-family: monospace;
+      margin-left: 6px;
+      /*margin-top: 6px;*/
+    }
+  }
+
+  .modalContent {
+    padding: 4px;
+    color: var(--text-primary);
+    height: 93%;
+    width: 100%;
+    overflow: hidden;
+  }
 }

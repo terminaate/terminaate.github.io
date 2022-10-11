@@ -21,10 +21,14 @@ const IntroPage = () => {
   };
 
   const onMouseMoveEventHandler = (e: MouseEvent) => {
-    containerRef.current!.style.transform = `translate(${(window.innerWidth - e.pageX * 1.4) / 90}px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
+    containerRef.current!.style.transform = `translate(${
+      (window.innerWidth - e.pageX * 1.4) / 90
+    }px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
   };
 
-  const onTypingTextClick = (e: React.MouseEvent<HTMLElement> & { target: HTMLElement }) => {
+  const onTypingTextClick = (
+    e: React.MouseEvent<HTMLElement> & { target: HTMLElement },
+  ) => {
     e.target.style.background = 'none';
   };
 
@@ -35,11 +39,12 @@ const IntroPage = () => {
           <TypingText
             onClick={onTypingTextClick}
             className={visited.current ? cl.introTypingVisitedText : ''}
-            text={'A programmer is a person who writes code and compiles it himself into an executable file, so we are all "script kiddy")'}
+            text={
+              'A programmer is a person who writes code and compiles it himself into an executable file, so we are all "script kiddy")'
+            }
           />
-          <div onClick={skipButtonClickHandler}
-               className={cl.introSkipButton}>
-            <motion.span exit={{marginRight: "15px"}}>-</motion.span>
+          <div onClick={skipButtonClickHandler} className={cl.introSkipButton}>
+            <motion.span exit={{ marginRight: '15px' }}>-</motion.span>
             <span>{visited.current ? 'skip' : 'who.... cares?'}</span>
           </div>
         </div>

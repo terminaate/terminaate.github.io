@@ -18,7 +18,7 @@
 
       .introTypingVisitedText {
         background: var(--text-primary);
-        transition: background .2s;
+        transition: background 0.2s;
         user-select: none;
         font-family: var(--font-secondary);
         cursor: pointer;
@@ -45,7 +45,7 @@
 
         span {
           animation: introSkipTextAnimation 2s infinite;
-          transition: margin .2s;
+          transition: margin 0.2s;
         }
 
         &:hover span:nth-child(1) {

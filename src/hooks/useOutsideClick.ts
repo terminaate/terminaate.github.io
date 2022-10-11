@@ -1,6 +1,10 @@
 import { RefObject, useEffect } from 'react';
 
-export default (ref: RefObject<HTMLElement>, then: () => void, elseThen: () => void) => {
+export default (
+  ref: RefObject<HTMLElement>,
+  then: () => void,
+  elseThen: () => void,
+) => {
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const { target } = e as MouseEvent & { target: HTMLElement };
@@ -18,4 +22,4 @@ export default (ref: RefObject<HTMLElement>, then: () => void, elseThen: () => v
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
-}
+};

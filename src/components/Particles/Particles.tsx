@@ -33,8 +33,10 @@ class Particle {
     this.config = config;
     this.x = Math.random() * ctx.canvas.width;
     this.y = Math.random() * ctx.canvas.height;
-    this.velocityX = Math.random() * (config.particlesVelocity * 2) - config.particlesVelocity;
-    this.velocityY = Math.random() * (config.particlesVelocity * 2) + config.particlesVelocity;
+    this.velocityX =
+      Math.random() * (config.particlesVelocity * 2) - config.particlesVelocity;
+    this.velocityY =
+      Math.random() * (config.particlesVelocity * 2) + config.particlesVelocity;
   }
 
   reDraw() {
@@ -48,25 +50,25 @@ class Particle {
   position() {
     this.x += this.velocityX;
     if (this.x < 0) {
-      this.x = this.ctx.canvas.width - (this.x * 10);
+      this.x = this.ctx.canvas.width - this.x * 10;
     }
 
     this.y -= this.velocityY;
     if (this.y < 0) {
-      this.y = this.ctx.canvas.height - (this.y * 10);
+      this.y = this.ctx.canvas.height - this.y * 10;
     }
   }
 }
 
 const Particles: FC<IParticles> = ({
-                                     particlesCount = 100,
-                                     particlesSize = Math.random() * 2,
-                                     particlesColor = '#fff',
-                                     particlesVelocity = 0.4,
-                                     className = '',
-                                     height = '100%',
-                                     width = '100%',
-                                   }) => {
+  particlesCount = 100,
+  particlesSize = Math.random() * 2,
+  particlesColor = '#fff',
+  particlesVelocity = 0.4,
+  className = '',
+  height = '100%',
+  width = '100%',
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const getHeight = () => {
@@ -120,7 +122,7 @@ const Particles: FC<IParticles> = ({
     addEventListener('resize', resizeHandler);
 
     function drawBackground() {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       // ctx.fillStyle = config.backgroundColor;
       // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
@@ -154,7 +156,10 @@ const Particles: FC<IParticles> = ({
   }, []);
 
   return (
-    <div style={{ height: localHeight, width: localWidth }} className={classNames(cl.particlesContainer, className)}>
+    <div
+      style={{ height: localHeight, width: localWidth }}
+      className={classNames(cl.particlesContainer, className)}
+    >
       <canvas ref={canvasRef} height={localHeight} width={localWidth} />
     </div>
   );

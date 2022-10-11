@@ -9,31 +9,41 @@ interface IYoutubePlayer {
 
 const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
   // Todo add backend for this
-  const videos = useRef(['ZiADuDjueJc']);
-  const videoId = useRef(videos.current[Math.floor(Math.random() * videos.current.length)]);
+  const videos = useRef(['ZiADuDjueJc', 'FzpJl-i7ZRg']);
+  const videoId = useRef(
+    videos.current[Math.floor(Math.random() * videos.current.length)],
+  );
 
   const onReady: YouTubeProps['onPlayerReady'] = (e) => {
     playerRef.current = e.target;
-    e.target.playVideo()
-    e.target.setVolume(10)
+    if (window.previousRoute === '/') {
+      e.target.playVideo();
+    }
+    e.target.setVolume(10);
   };
 
   return (
     <div className={cl.backgroundVideoContainer}>
-      <YouTube onReady={onReady} opts={{
-        height: '100%',
-        width: '100%',
-        opts: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          loop: 1,
-          modestbranding: 1,
-          showinfo: 0
-        },
-      }} className={cl.video} videoId={videoId.current} />
+      <YouTube
+        onReady={onReady}
+        opts={{
+          height: '100%',
+          width: '100%',
+          opts: {
+            autoplay: window.previousRoute === '/' ? 1 : 0,
+            controls: 0,
+            disablekb: 1,
+            loop: 1,
+            modestbranding: 1,
+            showinfo: 0,
+          },
+        }}
+        onEnd={(e) => e.target.playVideo()}
+        className={cl.video}
+        videoId={videoId.current}
+      />
     </div>
-  )
+  );
 };
 
 export default YoutubePlayer;

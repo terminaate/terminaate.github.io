@@ -8,7 +8,7 @@ export type GithubUserProps = {
   followers: number;
   location: string;
   blog: string;
-}
+};
 
 export type GithubRepoProps = {
   svn_url: string;
@@ -17,8 +17,7 @@ export type GithubRepoProps = {
   language: string;
   description: string;
   updated_at: string;
-}
-
+};
 
 class GithubService {
   public static getMe(): Promise<AxiosResponse<GithubUserProps>> {
