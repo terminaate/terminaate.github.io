@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
 import PostsPage from '@/pages/PostsPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 const Routing = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const Routing = () => {
         <Route path={'/posts'} element={<PostsPage />} />
         <Route path={'/works'} element={<PostsPage />} />
         <Route path={'/github'} element={<PostsPage />} />
+        <Route path={'/*'} element={<NotFoundPage />} />
       </Routes>
     </AnimatePresence>
   );
