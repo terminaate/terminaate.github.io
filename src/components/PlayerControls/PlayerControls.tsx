@@ -1,18 +1,7 @@
-import React, {
-  FC,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import cl from './PlayerControls.module.scss';
-import {
-  BiHelpCircle,
-  IoMdVolumeHigh,
-  IoMdVolumeLow,
-  IoMdVolumeMute,
-} from 'react-icons/all';
+import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
 
 interface IPlayerControls {
   playerRef: MutableRefObject<null | YouTubeTarget>;
@@ -40,9 +29,16 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
     setPlayed(!isPlayed);
   };
 
-  useEffect(() => {
-    playerRef.current?.setVolume(playerVolume);
-  }, [playerVolume]);
+  // useEffect(() => {
+  //   try {
+  //     if (null !== playerRef.current) {
+  //       playerRef.current.setVolume(playerVolume);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //
+  // }, [playerVolume]);
 
   const onVolumeButtonClick = () => {
     if (playerVolume) {
@@ -84,7 +80,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         </button>
         <input
           className={cl.volumeInput}
-          type="range"
+          type='range'
           value={playerVolume}
           min={0}
           max={100}

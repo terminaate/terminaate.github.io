@@ -21,9 +21,11 @@ const IntroPage = () => {
   };
 
   const onMouseMoveEventHandler = (e: MouseEvent) => {
-    containerRef.current!.style.transform = `translate(${
-      (window.innerWidth - e.pageX * 1.4) / 90
-    }px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
+    if (null !== containerRef.current) {
+      containerRef.current.style.transform = `translate(${
+        (window.innerWidth - e.pageX * 1.4) / 90
+      }px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
+    }
   };
 
   const onTypingTextClick = (
