@@ -13,21 +13,24 @@ interface IBasicPage {
 }
 
 const BasicPage: FC<IBasicPage> = ({
-                                     children,
-                                     className,
-                                     containerClassName,
-                                     container = false,
-                                     header = false,
-                                   }) => {
+  children,
+  className,
+  containerClassName,
+  container = false,
+  header = false,
+}) => {
   return (
     <>
-      {(header && container) ? (
+      {header && container ? (
         <div className={classNames(cl.basicPage, className!)}>
           <Header />
-          <motion.div initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }} transition={{ duration: 0.5 }}
-                      className={classNames(cl.container, containerClassName!)}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className={classNames(cl.container, containerClassName!)}
+          >
             {children}
           </motion.div>
         </div>

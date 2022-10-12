@@ -4,11 +4,7 @@ import BasicPage from '@/components/BasicPage';
 
 const NotFoundPage: FC = () => {
   return (
-    <BasicPage
-      header={true}
-      container={true}
-      className={cl.notFoundPage}
-    >
+    <BasicPage header={true} container={true} className={cl.notFoundPage}>
       Sry but i cant find page with this path ¯\_(ツ)_/¯
     </BasicPage>
   );

@@ -1,7 +1,18 @@
-import React, { FC, MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import cl from './PlayerControls.module.scss';
-import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
+import {
+  BiHelpCircle,
+  IoMdVolumeHigh,
+  IoMdVolumeLow,
+  IoMdVolumeMute,
+} from 'react-icons/all';
 
 interface IPlayerControls {
   playerRef: MutableRefObject<null | YouTubeTarget>;
@@ -16,9 +27,9 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
 
   useEffect(() => {
     if (window.previousRoute === '/') {
-      setPlayed(true)
+      setPlayed(true);
     }
-  } ,[])
+  }, []);
 
   const handleVideoState = () => {
     if (isPlayed) {
@@ -56,7 +67,9 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         <span />
       </div>
       <button
-        onClick={() => window.setNotification(playerRef.current?.getVideoData().title)}
+        onClick={() =>
+          window.setNotification(playerRef.current?.getVideoData().title)
+        }
         className={cl.trackTitleButton}
       >
         <BiHelpCircle />
@@ -64,20 +77,14 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
       <div className={cl.volumeControlContainer}>
         <button onClick={onVolumeButtonClick} className={cl.volumeButton}>
           {playerVolume < 50 ? (
-            <>
-              {playerVolume === 0 ? (
-                <IoMdVolumeMute />
-              ) : (
-                <IoMdVolumeLow />
-              )}
-            </>
+            <>{playerVolume === 0 ? <IoMdVolumeMute /> : <IoMdVolumeLow />}</>
           ) : (
             <IoMdVolumeHigh />
           )}
         </button>
         <input
           className={cl.volumeInput}
-          type='range'
+          type="range"
           value={playerVolume}
           min={0}
           max={100}

@@ -4,11 +4,7 @@ import BasicPage from '@/components/BasicPage';
 
 const HomePage: FC = () => {
   return (
-    <BasicPage
-      header={true}
-      container={true}
-      className={cl.homePage}
-    >
+    <BasicPage header={true} container={true} className={cl.homePage}>
       Currently home page is blank ¯\_(ツ)_/¯
     </BasicPage>
   );

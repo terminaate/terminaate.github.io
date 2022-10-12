@@ -16,8 +16,8 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
   const isLastRouteIntro = useRef<boolean>(false);
 
   useEffect(() => {
-    isLastRouteIntro.current = window.previousRoute === '/'
-  }, [])
+    isLastRouteIntro.current = window.previousRoute === '/';
+  }, []);
 
   const onReady: YouTubeProps['onPlayerReady'] = (e) => {
     playerRef.current = e.target;

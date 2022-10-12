@@ -9,35 +9,39 @@ const Header = () => {
   const location = useLocation();
   const routes = useRef([
     {
-      path: "/posts",
-      text: "Posts",
-      icon: <MdArticle/>
+      path: '/posts',
+      text: 'Posts',
+      icon: <MdArticle />,
     },
     {
-      path: "/works",
-      text: "Works",
-      icon: <GrUserWorker/>
+      path: '/works',
+      text: 'Works',
+      icon: <GrUserWorker />,
     },
     {
-      path: "/github",
-      text: "Github",
-      icon: <FaGithub />
+      path: '/github',
+      text: 'Github',
+      icon: <FaGithub />,
     },
-  ])
+  ]);
 
   return (
     <>
       <header className={cl.header}>
         <div className={cl.headerContainer}>
           <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt='' />
+            <img src={logoImg} alt="" />
           </Link>
           {routes.current.map((route, key) => (
             <NavLink key={key} to={route.path}>
               {route.icon}
               <motion.span
                 initial={{ color: 'var(--text-secondary)' }}
-                animate={location.pathname === route.path ? { color: 'var(--text-primary)' } : {}}
+                animate={
+                  location.pathname === route.path
+                    ? { color: 'var(--text-primary)' }
+                    : {}
+                }
                 exit={{ color: 'var(--text-secondary)' }}
               >
                 {route.text}
