@@ -8,11 +8,17 @@ interface IPlayerControls {
 }
 
 const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
-  const [isPlayed, setPlayed] = useState<boolean>(window.previousRoute === '/');
+  const [isPlayed, setPlayed] = useState<boolean>(false);
   const [playerVolume, setPlayerVolume] = useState<number>(
     playerRef.current?.getVolume() || 10,
   );
   const oldVolume = useRef<number>(playerVolume);
+
+  useEffect(() => {
+    if (window.previousRoute === '/') {
+      setPlayed(true)
+    }
+  } ,[])
 
   const handleVideoState = () => {
     if (isPlayed) {

@@ -98,10 +98,10 @@
     .volumeInput {
       appearance: none !important;
       -webkit-appearance: none !important;
-      background: none;
-      border: 1px solid var(--text-primary);
+      background-color: var(--text-primary);
       border-radius: 4px;
-      height: 8px;
+      height: 6px;
+      width: 100px;
       cursor: pointer;
 
       &::-moz-range-thumb {

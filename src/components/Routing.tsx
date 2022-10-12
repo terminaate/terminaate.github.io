@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
+import PostsPage from '@/pages/PostsPage';
 
 const Routing = () => {
   const location = useLocation();
@@ -19,6 +20,9 @@ const Routing = () => {
       <Routes location={location} key={location.key}>
         <Route index element={<IntroPage />} />
         <Route path={'/home'} element={<HomePage />} />
+        <Route path={'/posts'} element={<PostsPage />} />
+        <Route path={'/works'} element={<PostsPage />} />
+        <Route path={'/github'} element={<PostsPage />} />
       </Routes>
     </AnimatePresence>
   );

@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, useRef } from 'react';
+import React, { FC, MutableRefObject, useEffect, useRef } from 'react';
 import cl from './YoutubePlayer.module.scss';
 import YouTube from 'react-youtube';
 import YouTubeProps, { YouTubePlayer as YouTubeTarget } from 'react-youtube';
@@ -13,10 +13,15 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
   const videoId = useRef(
     videos.current[Math.floor(Math.random() * videos.current.length)],
   );
+  const isLastRouteIntro = useRef<boolean>(false);
+
+  useEffect(() => {
+    isLastRouteIntro.current = window.previousRoute === '/'
+  }, [])
 
   const onReady: YouTubeProps['onPlayerReady'] = (e) => {
     playerRef.current = e.target;
-    if (window.previousRoute === '/') {
+    if (isLastRouteIntro.current) {
       e.target.playVideo();
     }
     e.target.setVolume(10);
@@ -30,7 +35,7 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
           height: '100%',
           width: '100%',
           opts: {
-            autoplay: window.previousRoute === '/' ? 1 : 0,
+            autoplay: isLastRouteIntro.current ? 1 : 0,
             controls: 0,
             disablekb: 1,
             loop: 1,
