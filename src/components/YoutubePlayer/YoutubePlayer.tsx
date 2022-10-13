@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, useEffect, useRef } from 'react';
+import React, { FC, memo, MutableRefObject, useEffect, useRef } from 'react';
 import cl from './YoutubePlayer.module.scss';
 import YouTube from 'react-youtube';
 import YouTubeProps, { YouTubePlayer as YouTubeTarget } from 'react-youtube';
@@ -51,4 +51,4 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
   );
 };
 
-export default YoutubePlayer;
+export default memo(YoutubePlayer);
