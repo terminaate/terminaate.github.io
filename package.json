@@ -8,17 +8,25 @@
     "format": "prettier --write ./src/**/*",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "new:util": "hygen new util",
+    "new:hook": "hygen new hook",
+    "new:component": "hygen new component",
+    "new:service": "hygen new service",
+    "new:page": "hygen new page",
+    "new:slice": "hygen new slice"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.0",
     "axios": "^1.1.2",
     "classnames": "^2.3.2",
     "framer-motion": "^7.5.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.4.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.2",
-    "react-youtube": "^10.0.0"
+    "react-youtube": "^10.0.0",
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.8.3",

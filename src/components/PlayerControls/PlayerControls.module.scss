@@ -101,15 +101,15 @@
       -webkit-appearance: none !important;
       background-color: var(--text-primary);
       border-radius: 3px;
-      height: 6px;
+      height: 5px;
       width: 100px;
       cursor: pointer;
 
       &::-moz-range-thumb {
         -webkit-appearance: none !important;
         border: 1px solid var(--text-primary);
-        height: 15px;
-        width: 15px;
+        height: 12px;
+        width: 12px;
         transition: 0.2s;
         border-radius: 50%;
       }

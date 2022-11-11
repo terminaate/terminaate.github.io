@@ -5,14 +5,14 @@ import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
 import PostsPage from '@/pages/PostsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import History from '@/utils/history';
 
 const Routing = () => {
   const location = useLocation();
   const previousRoute = useRef<string>(location.pathname);
 
   useEffect(() => {
-    // Im too lazy for doing a context for that. so thats why im just a set previousRoute as a window property
-    window.previousRoute = previousRoute.current;
+    History.previousRoute = previousRoute.current;
     previousRoute.current = location.pathname;
   }, [location.pathname]);
 

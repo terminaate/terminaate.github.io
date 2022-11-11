@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import React, { FC, useEffect, useState } from 'react';
 import MovableModal, { MovableModalStatement } from '../MovableModal';
 import cl from './StatsModal.module.scss';

@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import cl from './Notification.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
+import { setNotificationText } from '@/store/reducers/notificationSlice';
+import { useAppDispatch, useAppSelector } from '@/store';
 
 const Notification = () => {
-  const [state, setState] = useState<string>('');
-  const [timeout, setTimeout] = useState<number>(1000);
+  const { timeout, text } = useAppSelector(state => state.notificationSlice);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    window.setNotification = (text, newTimeout = timeout) => {
-      if (timeout !== newTimeout) {
-        setTimeout(newTimeout);
-      }
-      setState(text);
-    };
-  }, []);
-
-  useEffect(() => {
-    const t = window.setTimeout(() => {
-      setState('');
+    const t = setTimeout(() => {
+      dispatch(setNotificationText(''));
     }, timeout);
+
     return () => clearTimeout(t);
-  }, [state]);
+  }, [text]);
 
   return (
     <AnimatePresence>
-      {state && (
+      {text && (
         <motion.div
           transition={{ duration: 0.5 }}
           initial={{ opacity: 0 }}
@@ -32,7 +26,7 @@ const Notification = () => {
           exit={{ opacity: 0 }}
           className={cl.notificationContainer}
         >
-          {state}
+          {text}
         </motion.div>
       )}
     </AnimatePresence>
