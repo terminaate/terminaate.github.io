@@ -14,7 +14,9 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   const dispatch = useAppDispatch();
   const [isPlayed, setPlayed] = useState<boolean>(false);
   const [playerVolume, setPlayerVolume] = useState<number>(
-    Number(localStorage.getItem('volume')) || playerRef.current?.getVolume() || 10,
+    Number(localStorage.getItem('volume')) ||
+    playerRef.current?.getVolume() ||
+    10,
   );
   const oldVolume = useRef<number>(playerVolume);
 
@@ -55,7 +57,14 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   };
 
   const onTitleButtonClick = () => {
-    dispatch(setNotificationText(playerRef.current?.getVideoData().title));
+    const notificationElement = (
+      <>
+        <span>{playerRef.current?.getVideoData().title}</span>
+        <span style={{ color: 'green' }}>(Copied to your clipboard)</span>
+      </>
+    );
+    dispatch(setNotificationText(notificationElement));
+    navigator.clipboard.writeText(playerRef.current?.getVideoData().title);
   };
 
   const onPlayerVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -84,10 +93,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         <span />
         <span />
       </div>
-      <button
-        onClick={onTitleButtonClick}
-        className={cl.trackTitleButton}
-      >
+      <button onClick={onTitleButtonClick} className={cl.trackTitleButton}>
         <BiHelpCircle />
       </button>
       <div className={cl.volumeControlContainer}>

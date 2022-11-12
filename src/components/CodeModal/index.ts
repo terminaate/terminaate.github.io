@@ -1,3 +1,3 @@
-import CodeModal from "./CodeModal"
+import CodeModal from './CodeModal';
 
-export default CodeModal
+export default CodeModal;

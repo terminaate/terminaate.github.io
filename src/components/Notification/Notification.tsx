@@ -5,7 +5,7 @@ import { setNotificationText } from '@/store/reducers/notificationSlice';
 import { useAppDispatch, useAppSelector } from '@/store';
 
 const Notification = () => {
-  const { timeout, text } = useAppSelector(state => state.notificationSlice);
+  const { timeout, text } = useAppSelector((state) => state.notificationSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

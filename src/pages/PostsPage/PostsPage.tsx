@@ -6,7 +6,12 @@ const PostsPage: FC = () => {
   // const [posts, setPosts] = useState([])
 
   return (
-    <BasicPage header={true} container={true} containerClassName={cl.postsPageContainer} className={cl.postsPage}>
+    <BasicPage
+      header={true}
+      container={true}
+      containerClassName={cl.postsPageContainer}
+      className={cl.postsPage}
+    >
       Currently posts page is blank ¯\_(ツ)_/¯
     </BasicPage>
   );

@@ -5,19 +5,28 @@ import cl from './Input.module.scss';
 interface IInput extends InputHTMLAttributes<any> {
   className?: string;
   container?: boolean;
+  containerClassName?: string;
   children?: ReactNode;
 }
 
-const Input: FC<IInput> = ({ className, container, children, ...props }) => {
+const Input: FC<IInput> = ({ className, container, children, containerClassName, ...props }) => {
   return (
     <>
       {container ? (
-        <div className={cl.inputContainer}>
-          <input type='text' className={classNames(className!, cl.input)} {...props} />
+        <div className={classNames(containerClassName!, cl.inputContainer)}>
+          <input
+            type='text'
+            className={classNames(className!, cl.input)}
+            {...props}
+          />
           {children}
         </div>
       ) : (
-        <input type='text' className={classNames(className!, cl.input)} {...props} />
+        <input
+          type='text'
+          className={classNames(className!, cl.input)}
+          {...props}
+        />
       )}
     </>
   );

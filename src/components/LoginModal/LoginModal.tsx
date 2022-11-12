@@ -11,7 +11,7 @@ const LoginModal = () => {
   const [loginInput, onLoginChange, setLoginInput] = useInputState('');
   const [passwordInput, onPasswordChange, setPasswordInput] = useInputState('');
   const [codeInput, onCodeChange, setCodeInput] = useInputState('');
-  const { loginModal } = useAppSelector(state => state.modalsSlice);
+  const { loginModal } = useAppSelector((state) => state.modalsSlice);
   const dispatch = useAppDispatch();
 
   const setLoginModal = (state: boolean) => {
@@ -35,14 +35,31 @@ const LoginModal = () => {
   return (
     <Modal onExit={onExit} state={loginModal} setState={setLoginModal}>
       <div className={cl.inputsContainer}>
-        <Input value={loginInput} onChange={onLoginChange} placeholder={'Login'} />
-        <Input value={passwordInput} onChange={onPasswordChange} placeholder={'Password'} />
-        <Input container={true} value={codeInput} onChange={onCodeChange} placeholder={'Auth code'}>
-          <button onClick={openCodeModal} className={cl.createCodeButton}>Create auth code</button>
+        <Input
+          value={loginInput}
+          onChange={onLoginChange}
+          placeholder={'Login'}
+        />
+        <Input
+          value={passwordInput}
+          onChange={onPasswordChange}
+          placeholder={'Password'}
+        />
+        <Input
+          container={true}
+          value={codeInput}
+          onChange={onCodeChange}
+          placeholder={'Auth code'}
+        >
+          <button onClick={openCodeModal} className={cl.createCodeButton}>
+            Create auth code
+          </button>
         </Input>
       </div>
       <div className={cl.buttonsContainer}>
-        <button onClick={openRegisterModal} className={cl.registerButton}>Don't have account? Register</button>
+        <button onClick={openRegisterModal} className={cl.registerButton}>
+          Don't have account? Register
+        </button>
         <Button className={cl.loginButton}>Login</Button>
       </div>
     </Modal>

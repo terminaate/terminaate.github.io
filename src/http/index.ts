@@ -10,7 +10,8 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  const accessToken = (store.getState().userSlice as UserState).user.accessToken;
+  const accessToken = (store.getState().userSlice as UserState).user
+    .accessToken;
   if (accessToken) {
     config.headers!.Authorization = `Bearer ${accessToken}`;
   }

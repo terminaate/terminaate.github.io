@@ -6,7 +6,11 @@ interface INavPreventedLink extends NavLinkProps {
   children: ReactNode;
 }
 
-const NavPreventedLink: FC<INavPreventedLink> = ({ to, children, ...props }) => {
+const NavPreventedLink: FC<INavPreventedLink> = ({
+  to,
+  children,
+  ...props
+}) => {
   const location = useLocation();
 
   const onClick = (e: MouseEvent) => {

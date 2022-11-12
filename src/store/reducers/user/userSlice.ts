@@ -8,8 +8,8 @@ export interface UserState {
   authorized: boolean;
   user: {
     id: null | string;
-    login: null | string
-    posts: PostData[]
+    login: null | string;
+    posts: PostData[];
     accessToken: null | string;
   };
 }
