@@ -8,6 +8,9 @@ import PlayerControls from '@/components/PlayerControls';
 import { useLocation } from 'react-router-dom';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import { AnimatePresence, motion } from 'framer-motion';
+import LoginModal from '@/components/LoginModal';
+import RegisterModal from '@/components/RegisterModal';
+import CodeModal from '@/components/CodeModal';
 
 const App: FC = () => {
   const location = useLocation();
@@ -24,7 +27,7 @@ const App: FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5 }}
           >
             <YoutubePlayer playerRef={playerRef} />
             <PlayerControls playerRef={playerRef} />
@@ -33,6 +36,9 @@ const App: FC = () => {
       </AnimatePresence>
       <Routing />
       <Notification />
+      <LoginModal />
+      <RegisterModal />
+      <CodeModal />
     </>
   );
 };

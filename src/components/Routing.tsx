@@ -5,7 +5,7 @@ import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
 import PostsPage from '@/pages/PostsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
-import History from '@/utils/history';
+import { History } from '@/utils/history';
 
 const Routing = () => {
   const location = useLocation();

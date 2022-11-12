@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState }
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import cl from './PlayerControls.module.scss';
 import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
-import History from '@/utils/history';
+import { History } from '@/utils/history';
 import { useAppDispatch } from '@/store';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
 
@@ -14,16 +14,26 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   const dispatch = useAppDispatch();
   const [isPlayed, setPlayed] = useState<boolean>(false);
   const [playerVolume, setPlayerVolume] = useState<number>(
-    playerRef.current?.getVolume() || 10,
+    Number(localStorage.getItem('volume')) || playerRef.current?.getVolume() || 10,
   );
   const oldVolume = useRef<number>(playerVolume);
 
   useEffect(() => {
-    console.log(History.previousRoute);
     if (History.previousRoute === '/') {
       setPlayed(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (null !== playerRef.current) {
+      try {
+        playerRef.current.setVolume(playerVolume);
+        localStorage.setItem('volume', playerVolume + '');
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }, [playerVolume]);
 
   const handleVideoState = () => {
     if (isPlayed) {

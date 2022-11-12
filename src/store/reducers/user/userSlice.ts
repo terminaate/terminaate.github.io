@@ -1,5 +1,5 @@
 import { AnyAction, createSlice, Draft } from '@reduxjs/toolkit';
-import History from '@/utils/history';
+import { History } from '@/utils/history';
 import authAsyncThunks, { login, refresh, register } from './authAPI';
 import { PostData } from '@/types/PostData';
 

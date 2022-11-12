@@ -7,11 +7,9 @@ interface IHistory {
   previousRoute: null | string;
 }
 
-const History: IHistory = {
+export const History: IHistory = {
   navigate: null,
   location: null,
   push: (to: string) => History.navigate!(to),
   previousRoute: null,
 };
-
-export default History;
