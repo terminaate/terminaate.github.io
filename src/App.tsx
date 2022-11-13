@@ -8,9 +8,7 @@ import PlayerControls from '@/components/PlayerControls';
 import { useLocation } from 'react-router-dom';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import { AnimatePresence, motion } from 'framer-motion';
-import LoginModal from '@/components/LoginModal';
-import RegisterModal from '@/components/RegisterModal';
-import CodeModal from '@/components/CodeModal';
+import Modals from '@/components/Modals';
 
 const App: FC = () => {
   const location = useLocation();
@@ -36,9 +34,7 @@ const App: FC = () => {
       </AnimatePresence>
       <Routing />
       <Notification />
-      <LoginModal />
-      <RegisterModal />
-      <CodeModal />
+      <Modals />
     </>
   );
 };

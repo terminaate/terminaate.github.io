@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 
 export default (
   initialState: string,
+  handler?: (e: ChangeEvent<HTMLInputElement>) => void,
 ): [
   string,
   (e: ChangeEvent<HTMLInputElement>) => void,
@@ -11,6 +12,9 @@ export default (
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setState(e.target.value);
+    if (handler) {
+      handler(e);
+    }
   };
 
   return [state, onChange, setState];

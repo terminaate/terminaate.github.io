@@ -1,5 +1,6 @@
 import $api from '@/http';
 import { CreatePostData, PatchPostData, PostData } from '@/types/PostData';
+import { UserData } from '@/types/UserData';
 
 class UserService {
   async createPost(postData: CreatePostData) {
@@ -14,8 +15,17 @@ class UserService {
     return $api.patch<PostData>('/posts/' + postData.id, postData);
   }
 
+  async deletePost(postId: string) {
+    return $api.delete<PostData>('/posts/' + postId);
+
+  }
+
   async getAllPosts() {
     return $api.get<PostData[]>('/posts');
+  }
+
+  async getAllUsers() {
+    return $api.get<UserData[]>('/users');
   }
 
   async generateJwt(secret: string, data: any) {

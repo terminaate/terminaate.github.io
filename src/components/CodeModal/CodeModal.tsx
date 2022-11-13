@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import useInputState from '@/hooks/useInputState';
 import { useAppDispatch, useAppSelector } from '@/store';
 import Modal from '@/components/Modal';
@@ -9,14 +9,7 @@ import Button from '@/components/UI/Button';
 import UsersService from '@/services/UserService';
 import { FaCopy } from 'react-icons/all';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
-
-const Error: FC<{ error: string }> = ({ error }) => {
-  return (
-    <div data-error={Boolean(error)} className={cl.errorContainer}>
-      <span className={cl.error}>{error}</span>
-    </div>
-  );
-};
+import ErrorMessage from '@/components/ErrorMessage';
 
 const CodeModal = () => {
   const [secretInput, onSecretChange, setSecretInput] = useInputState('');
@@ -78,26 +71,27 @@ const CodeModal = () => {
     <Modal onExit={resetData} contentClassName={cl.codeModal} state={codeModal} setState={setCodeModal}>
       <h1 className={cl.title}>Creating auth code</h1>
       {result ? (
-        <div className={cl.resultContainer}>
+        <>
           <h2 className={cl.subtitle}>Result:</h2>
           <Input value={result} placeholder={'result'} container={true} containerClassName={cl.resultInputContainer}>
             <Button onClick={onCopyResultButtonClick} className={cl.resultCopyButton}><FaCopy /></Button>
           </Input>
           <span onClick={resetData} className={cl.resetResult}>Reset result</span>
           <Button className={cl.loginButton} onClick={openLoginModal}>Try to use auth code</Button>
-        </div>
+        </>
       ) : (
         <>
           <div className={cl.inputsContainer}>
             <Input container={true} value={secretInput} onChange={onSecretChange} placeholder={'Secret of token'}>
-              <Error error={secretError} />
+              <ErrorMessage error={secretError} />
             </Input>
             <Input container={true} className={cl.dataInput} value={dataInput} onChange={onDataChange}
                    placeholder={'Data of token (JSON)'}>
-              <Error error={dataError} />
+              <ErrorMessage error={dataError} />
             </Input>
           </div>
           <Button className={cl.generateButton} onClick={generateCode}>Generate</Button>
+          <span onClick={openLoginModal} className={cl.resetResult}>Back to login page</span>
         </>
       )}
     </Modal>

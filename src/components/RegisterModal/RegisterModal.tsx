@@ -33,7 +33,8 @@ const RegisterModal = () => {
   };
 
   return (
-    <Modal onExit={onExit} state={registerModal} setState={setRegisterModal}>
+    <Modal onExit={onExit} contentClassName={cl.registerModal} state={registerModal} setState={setRegisterModal}>
+      <h1 className={cl.title}>Sign up</h1>
       <div className={cl.inputsContainer}>
         <Input
           value={loginInput}
@@ -44,6 +45,7 @@ const RegisterModal = () => {
           value={passwordInput}
           onChange={onPasswordChange}
           placeholder={'Password'}
+          type={'password'}
         />
         <Input
           container={true}

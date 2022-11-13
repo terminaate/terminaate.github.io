@@ -16,13 +16,13 @@ export interface IModal {
 }
 
 const Modal: FC<IModal> = ({
-  state,
-  setState,
-  children,
-  onExit,
-  className,
-  contentClassName,
-}) => {
+                             state,
+                             setState,
+                             children,
+                             onExit,
+                             className,
+                             contentClassName,
+                           }) => {
   const closeModal = (e: MouseEvent) => {
     setState(false);
     if (onExit) {
@@ -34,7 +34,7 @@ const Modal: FC<IModal> = ({
     <AnimatePresence>
       {state && (
         <motion.div
-          onClick={closeModal}
+          onMouseDown={closeModal}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -42,7 +42,7 @@ const Modal: FC<IModal> = ({
           className={classNames(className!, cl.modalScreen)}
         >
           <div
-            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
             className={classNames(contentClassName!, cl.modalContent)}
           >
             {children}

@@ -9,39 +9,35 @@
   }
 
   .subtitle {
+    margin-top: 10px;
     font-size: 15px;
     font-family: var(--font-primary);
     font-weight: 500;
   }
 
-  .resultContainer {
-    margin-top: 10px;
+
+  .resultInputContainer {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    column-gap: 10px;
+    flex-direction: row;
+    height: 100%;
 
-    .resultInputContainer {
-      width: 100%;
-      display: flex;
-      column-gap: 10px;
-      flex-direction: row;
+    .resultCopyButton {
       height: 100%;
-
-      .resultCopyButton {
-        height: 100%;
-        font-size: 17px;
-        padding-inline: 13px;
-        padding: 10px;
-      }
+      font-size: 17px;
+      padding-inline: 13px;
+      padding: 10px;
     }
+  }
 
-    .resetResult {
-      cursor: pointer;
-      text-decoration: underline;
-    }
+  .resetResult {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
-    .loginButton {
-      margin-top: 15px;
-    }
+  .loginButton {
+    margin-top: 15px;
   }
 
   .inputsContainer {
@@ -52,23 +48,6 @@
 
     .dataInput {
       font-family: var(--font-secondary);
-    }
-
-    .errorContainer {
-      height: 5px;
-      width: max-content;
-      overflow: hidden;
-      transition: height 0.2s;
-
-      &[data-error='true'] {
-        height: 20px;
-      }
-
-      .error {
-        color: var(--red);
-        font-size: 12px;
-        font-family: var(--font-primary);
-      }
     }
   }
 

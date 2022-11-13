@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React from 'react';
 import cl from './Header.module.scss';
 import logoImg from '!/logo.svg';
 import { Link, useLocation } from 'react-router-dom';
@@ -7,12 +7,11 @@ import { motion } from 'framer-motion';
 import NavPreventedLink from '@/components/NavPreventedLink';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { setModal } from '@/store/reducers/modalsSlice';
-
-const userAvatarLink = 'https://robohash.org/' + Math.random();
+import { userAvatarUrl } from '@/http';
 
 const Header = () => {
   const location = useLocation();
-  const { authorized } = useAppSelector((state) => state.userSlice.user);
+  const { authorized, user } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
 
   const routes = [
@@ -33,9 +32,11 @@ const Header = () => {
     },
   ];
 
-  const openLoginModal = () => {
+  const onUserButtonClick = () => {
     if (!authorized) {
       dispatch(setModal({ loginModal: true }));
+    } else {
+      dispatch(setModal({ userModal: true, userModalData: user }));
     }
   };
 
@@ -44,7 +45,7 @@ const Header = () => {
       <div className={cl.headerContainer}>
         <div className={cl.linksContainer}>
           <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt="" />
+            <img src={logoImg} alt='' />
           </Link>
           {routes.map((route, key) => (
             <NavPreventedLink key={key} to={route.path}>
@@ -63,9 +64,9 @@ const Header = () => {
             </NavPreventedLink>
           ))}
         </div>
-        <div onClick={openLoginModal} className={cl.userAvatar}>
-          <img src={userAvatarLink} alt="" />
-        </div>
+        <button onClick={onUserButtonClick} className={cl.userAvatar}>
+          <img src={userAvatarUrl + user.id} alt='' />
+        </button>
       </div>
     </header>
   );

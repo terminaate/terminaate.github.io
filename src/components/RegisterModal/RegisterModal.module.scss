@@ -1,31 +1,44 @@
-.inputsContainer {
+.registerModal {
   display: flex;
-  row-gap: 15px;
   flex-direction: column;
 
-  .createCodeButton {
+  .title {
+    font-size: 18px;
     font-family: var(--font-primary);
-    text-decoration: underline;
-    font-size: 13px;
-    letter-spacing: -0.5px;
-  }
-}
-
-.buttonsContainer {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-
-  .loginButton {
-    font-family: var(--font-primary);
-    text-decoration: underline;
-    font-size: 13px;
-    letter-spacing: -0.5px;
+    font-weight: 500;
   }
 
-  .registerButton {
-    width: 80px;
+  .inputsContainer {
+    display: flex;
+    row-gap: 15px;
+    margin-top: 15px;
+    flex-direction: column;
+
+    .createCodeButton {
+      font-family: var(--font-primary);
+      text-decoration: underline;
+      font-size: 13px;
+      letter-spacing: -0.5px;
+    }
   }
+
+  .buttonsContainer {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .loginButton {
+      font-family: var(--font-primary);
+      text-decoration: underline;
+      font-size: 13px;
+      letter-spacing: -0.5px;
+    }
+
+    .registerButton {
+      width: 80px;
+    }
+  }
+
 }
