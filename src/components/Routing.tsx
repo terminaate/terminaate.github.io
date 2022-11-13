@@ -9,6 +9,10 @@ import { History } from '@/utils/history';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { refresh } from '@/store/reducers/user/authAPI';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
+import WorksPage from '@/pages/WorksPage';
+import GithubPage from '@/pages/GithubPage';
+import EditPostPage from '@/pages/EditPostPage';
+import CreatePostPage from '@/pages/CreatePostPage';
 
 const Routing = () => {
   const location = useLocation();
@@ -27,9 +31,6 @@ const Routing = () => {
     }
   }, []);
 
-  // todo
-  // add posts routes
-
   useEffect(() => {
     if (serverError) {
       dispatch(setNotificationText(serverError));
@@ -42,8 +43,10 @@ const Routing = () => {
         <Route index element={<IntroPage />} />
         <Route path={'/home'} element={<HomePage />} />
         <Route path={'/posts'} element={<PostsPage />} />
-        <Route path={'/works'} element={<PostsPage />} />
-        <Route path={'/github'} element={<PostsPage />} />
+        <Route path={'/posts/:id/edit'} element={<EditPostPage />} />
+        <Route path={'/posts/create'} element={<CreatePostPage />} />
+        <Route path={'/works'} element={<WorksPage />} />
+        <Route path={'/github'} element={<GithubPage />} />
         <Route path={'/*'} element={<NotFoundPage />} />
       </Routes>
     </AnimatePresence>
