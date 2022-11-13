@@ -28,7 +28,7 @@ export const userSlice = createSlice({
       return { ...state, ...action.payload };
     },
     logout() {
-      History.push('/login');
+      localStorage.removeItem('accessToken');
       return initialState;
     },
   },

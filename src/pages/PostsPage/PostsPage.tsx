@@ -2,7 +2,6 @@ import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import cl from './PostsPage.module.scss';
 import BasicPage from '@/components/BasicPage';
 import { PostData } from '@/types/PostData';
-import { UserData } from '@/types/UserData';
 import UserService from '@/services/UserService';
 import Input from '@/components/UI/Input';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,12 +12,12 @@ import Button from '@/components/UI/Button';
 import useInputState from '@/hooks/useInputState';
 import { FaSearch } from 'react-icons/all';
 import { useNavigate } from 'react-router-dom';
+import { UserData } from '@/types/UserData';
 
 const PostsPage: FC = () => {
   const dispatch = useAppDispatch();
   const { authorized } = useAppSelector((state) => state.userSlice);
   const [posts, setPosts] = useState<PostData[]>([]);
-  const [users, setUsers] = useState<UserData[]>([]);
   const [searchedPosts, setSearchedPosts] = useState<PostData[]>([]);
   const [searchInput, onSearchInputChange] = useInputState('', (e) => {
     setSearchedPosts(
@@ -30,7 +29,6 @@ const PostsPage: FC = () => {
   const navigate = useNavigate();
 
   const getServerData = async () => {
-    const { data: serverUsers } = await UserService.getAllUsers();
     const { data: serverPosts } = await UserService.getAllPosts();
     setPosts(
       serverPosts.reverse().map((post) => ({
@@ -41,7 +39,6 @@ const PostsPage: FC = () => {
             : post.content,
       })),
     );
-    setUsers(serverUsers);
   };
 
   useEffect(() => {
@@ -54,7 +51,10 @@ const PostsPage: FC = () => {
         id: '123',
         content: '123',
         title: '123',
-        author: '123',
+        author: {
+          id: '123',
+          login: '123',
+        },
       },
       ...posts,
     ]);
@@ -66,14 +66,9 @@ const PostsPage: FC = () => {
     setPosts(posts.filter((post) => post.id !== deletedPost.id));
   };
 
-  const getPostAuthorName = (userId: string) => {
-    return users.find((u) => u.id === userId)?.login;
-  };
-
-  const openUserModal = (e: MouseEvent, userId: string) => {
+  const openUserModal = async (e: MouseEvent, userData: UserData) => {
     e.stopPropagation();
-    const user = users.find((u) => u.id === userId)!;
-    dispatch(setModal({ userModal: true, userModalData: user }));
+    dispatch(setModal({ userModal: true, userModalData: userData }));
   };
 
   const navigateToPostPage = (postId: string) => {
@@ -138,9 +133,9 @@ const PostsPage: FC = () => {
                   className={cl.authorContainer}
                 >
                   <div className={cl.authorImage}>
-                    <img src={userAvatarUrl + post.author} alt="" />
+                    <img src={userAvatarUrl + post.author.id} alt='' />
                   </div>
-                  <span>{getPostAuthorName(post.author)}</span>
+                  <span>{post.author.login}</span>
                 </div>
                 <h1 className={cl.postTitle}>{post.title}</h1>
                 <span className={cl.postDesc}>{post.content}</span>

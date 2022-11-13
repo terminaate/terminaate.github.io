@@ -23,12 +23,12 @@ class UserService {
     return $api.get<PostData[]>('/posts');
   }
 
-  async getAllUsers() {
-    return $api.get<UserData[]>('/users');
-  }
-
   async generateJwt(secret: string, data: any) {
     return $api.post<{ token: string }>('/jwt/create', { secret, data });
+  }
+
+  async getUser(userId: string) {
+    return $api.get<UserData>('/users/' + userId);
   }
 }
 
