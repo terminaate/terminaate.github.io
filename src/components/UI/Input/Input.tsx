@@ -10,7 +10,14 @@ interface IInput extends InputHTMLAttributes<any> {
   icon?: ReactElement;
 }
 
-const Input: FC<IInput> = ({ className, container, children, containerClassName, icon, ...props }) => {
+const Input: FC<IInput> = ({
+  className,
+  container,
+  children,
+  containerClassName,
+  icon,
+  ...props
+}) => {
   return (
     <>
       {container ? (
@@ -29,7 +36,6 @@ const Input: FC<IInput> = ({ className, container, children, containerClassName,
             <input className={classNames(className!, cl.input)} {...props} />
           )}
         </>
-
       )}
     </>
   );

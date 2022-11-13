@@ -45,7 +45,7 @@ const Header = () => {
       <div className={cl.headerContainer}>
         <div className={cl.linksContainer}>
           <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt='' />
+            <img src={logoImg} alt="" />
           </Link>
           {routes.map((route, key) => (
             <NavPreventedLink key={key} to={route.path}>
@@ -65,7 +65,7 @@ const Header = () => {
           ))}
         </div>
         <button onClick={onUserButtonClick} className={cl.userAvatar}>
-          <img src={userAvatarUrl + user.id} alt='' />
+          <img src={userAvatarUrl + user.id} alt="" />
         </button>
       </div>
     </header>

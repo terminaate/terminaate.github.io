@@ -16,8 +16,8 @@ const LoginModal = () => {
   const [loginError, setLoginError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
   const [codeError, setCodeError] = useState<string>('');
-  const { loginModal } = useAppSelector(state => state.modalsSlice);
-  const { authorized } = useAppSelector(state => state.userSlice);
+  const { loginModal } = useAppSelector((state) => state.modalsSlice);
+  const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
 
   const setLoginModal = (state: boolean) => {
@@ -64,15 +64,28 @@ const LoginModal = () => {
       return setCodeError('Input code!');
     }
 
-    dispatch(login({ login: loginInput, password: passwordInput, authCode: codeInput }));
+    dispatch(
+      login({
+        login: loginInput,
+        password: passwordInput,
+        authCode: codeInput,
+      }),
+    );
   };
 
   useEffect(() => {
-    dispatch(setModal({ loginModal: false, codeModal: false, registerModal: false }));
+    dispatch(
+      setModal({ loginModal: false, codeModal: false, registerModal: false }),
+    );
   }, [authorized]);
 
   return (
-    <Modal contentClassName={cl.loginModal} onExit={resetData} state={loginModal} setState={setLoginModal}>
+    <Modal
+      contentClassName={cl.loginModal}
+      onExit={resetData}
+      state={loginModal}
+      setState={setLoginModal}
+    >
       <h1 className={cl.title}>Sign in</h1>
       <div className={cl.inputsContainer}>
         <Input
@@ -108,7 +121,9 @@ const LoginModal = () => {
         <button onClick={openRegisterModal} className={cl.registerButton}>
           Don't have account? Register
         </button>
-        <Button onClick={onLoginButtonClick} className={cl.loginButton}>Login</Button>
+        <Button onClick={onLoginButtonClick} className={cl.loginButton}>
+          Login
+        </Button>
       </div>
     </Modal>
   );

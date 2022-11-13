@@ -15,16 +15,19 @@ export const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    setNotificationText(state, action: PayloadAction<NotificationState['text']>) {
+    setNotificationText(
+      state,
+      action: PayloadAction<NotificationState['text']>,
+    ) {
       state.text = action.payload;
     },
-    setNotificationTimeout(state, action: PayloadAction<NotificationState['timeout']>) {
+    setNotificationTimeout(
+      state,
+      action: PayloadAction<NotificationState['timeout']>,
+    ) {
       state.timeout = action.payload;
     },
-    setNotification(
-      state,
-      action: PayloadAction<NotificationState>,
-    ) {
+    setNotification(state, action: PayloadAction<NotificationState>) {
       return action.payload;
     },
   },

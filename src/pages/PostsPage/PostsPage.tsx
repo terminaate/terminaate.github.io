@@ -16,22 +16,31 @@ import { useNavigate } from 'react-router-dom';
 
 const PostsPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { authorized } = useAppSelector(state => state.userSlice);
+  const { authorized } = useAppSelector((state) => state.userSlice);
   const [posts, setPosts] = useState<PostData[]>([]);
   const [users, setUsers] = useState<UserData[]>([]);
   const [searchedPosts, setSearchedPosts] = useState<PostData[]>([]);
   const [searchInput, onSearchInputChange] = useInputState('', (e) => {
-    setSearchedPosts(posts.filter(post => post.title.toLowerCase().includes(e.target.value.toLowerCase())));
+    setSearchedPosts(
+      posts.filter((post) =>
+        post.title.toLowerCase().includes(e.target.value.toLowerCase()),
+      ),
+    );
   });
   const navigate = useNavigate();
 
   const getServerData = async () => {
     const { data: serverUsers } = await UserService.getAllUsers();
     const { data: serverPosts } = await UserService.getAllPosts();
-    setPosts(serverPosts.reverse().map(post => ({
-      ...post,
-      content: post.content.length > 40 ? post.content.slice(0, post.content.length / 1.5) + '...' : post.content,
-    })));
+    setPosts(
+      serverPosts.reverse().map((post) => ({
+        ...post,
+        content:
+          post.content.length > 40
+            ? post.content.slice(0, post.content.length / 1.5) + '...'
+            : post.content,
+      })),
+    );
     setUsers(serverUsers);
   };
 
@@ -40,27 +49,30 @@ const PostsPage: FC = () => {
   }, []);
 
   const createNewPost = () => {
-    setPosts([{
-      id: '123',
-      content: '123',
-      title: '123',
-      author: '123',
-    }, ...posts]);
+    setPosts([
+      {
+        id: '123',
+        content: '123',
+        title: '123',
+        author: '123',
+      },
+      ...posts,
+    ]);
   };
 
   const deletePost = async (e: MouseEvent, postId: string) => {
     e.stopPropagation();
     const { data: deletedPost } = await UserService.deletePost(postId);
-    setPosts(posts.filter(post => post.id !== deletedPost.id));
+    setPosts(posts.filter((post) => post.id !== deletedPost.id));
   };
 
   const getPostAuthorName = (userId: string) => {
-    return users.find(u => u.id === userId)?.login;
+    return users.find((u) => u.id === userId)?.login;
   };
 
   const openUserModal = (e: MouseEvent, userId: string) => {
     e.stopPropagation();
-    const user = users.find(u => u.id === userId)!;
+    const user = users.find((u) => u.id === userId)!;
     dispatch(setModal({ userModal: true, userModalData: user }));
   };
 
@@ -76,10 +88,17 @@ const PostsPage: FC = () => {
       className={cl.postsPage}
     >
       <div className={cl.filterContainer}>
-        <Input icon={<FaSearch />} value={searchInput} onChange={onSearchInputChange} className={cl.searchInput}
-               placeholder={'Search'} />
+        <Input
+          icon={<FaSearch />}
+          value={searchInput}
+          onChange={onSearchInputChange}
+          className={cl.searchInput}
+          placeholder={'Search'}
+        />
         {authorized && (
-          <Button onClick={createNewPost} className={cl.createPostButton}>Create post</Button>
+          <Button onClick={createNewPost} className={cl.createPostButton}>
+            Create post
+          </Button>
         )}
       </div>
       <motion.div
@@ -97,7 +116,7 @@ const PostsPage: FC = () => {
         className={cl.postsContainer}
       >
         <AnimatePresence>
-          {(searchInput ? searchedPosts : posts).map(post => (
+          {(searchInput ? searchedPosts : posts).map((post) => (
             <motion.div
               layout
               initial={{ x: -100, opacity: 0 }}
@@ -108,11 +127,18 @@ const PostsPage: FC = () => {
               className={cl.postContainer}
               onClick={() => navigateToPostPage(post.id)}
             >
-              <motion.div initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.5 }}
-                          className={cl.postInfo}>
-                <div onClick={(e) => openUserModal(e, post.author)} className={cl.authorContainer}>
+              <motion.div
+                initial={{ x: -50, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className={cl.postInfo}
+              >
+                <div
+                  onClick={(e) => openUserModal(e, post.author)}
+                  className={cl.authorContainer}
+                >
                   <div className={cl.authorImage}>
-                    <img src={userAvatarUrl + post.author} alt='' />
+                    <img src={userAvatarUrl + post.author} alt="" />
                   </div>
                   <span>{getPostAuthorName(post.author)}</span>
                 </div>
@@ -121,8 +147,12 @@ const PostsPage: FC = () => {
               </motion.div>
               {authorized && (
                 <div className={cl.postButtonsContainer}>
-                  <Button onClick={(e) => deletePost(e, post.id)}
-                          className={cl.deletePostButton}>Delete</Button>
+                  <Button
+                    onClick={(e) => deletePost(e, post.id)}
+                    className={cl.deletePostButton}
+                  >
+                    Delete
+                  </Button>
                   <Button className={cl.changePostButton}>Change</Button>
                 </div>
               )}

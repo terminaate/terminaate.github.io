@@ -16,13 +16,13 @@ export interface IModal {
 }
 
 const Modal: FC<IModal> = ({
-                             state,
-                             setState,
-                             children,
-                             onExit,
-                             className,
-                             contentClassName,
-                           }) => {
+  state,
+  setState,
+  children,
+  onExit,
+  className,
+  contentClassName,
+}) => {
   const closeModal = (e: MouseEvent) => {
     setState(false);
     if (onExit) {

@@ -1,7 +1,19 @@
-import React, { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 import cl from './PlayerControls.module.scss';
-import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
+import {
+  BiHelpCircle,
+  IoMdVolumeHigh,
+  IoMdVolumeLow,
+  IoMdVolumeMute,
+} from 'react-icons/all';
 import { History } from '@/utils/history';
 import { useAppDispatch } from '@/store';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
@@ -15,8 +27,8 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   const [isPlayed, setPlayed] = useState<boolean>(false);
   const [playerVolume, setPlayerVolume] = useState<number>(
     Number(localStorage.getItem('volume')) ||
-    playerRef.current?.getVolume() ||
-    10,
+      playerRef.current?.getVolume() ||
+      10,
   );
   const oldVolume = useRef<number>(playerVolume);
 
@@ -102,7 +114,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         </button>
         <input
           className={cl.volumeInput}
-          type='range'
+          type="range"
           value={playerVolume}
           min={0}
           max={100}

@@ -33,7 +33,12 @@ const RegisterModal = () => {
   };
 
   return (
-    <Modal onExit={onExit} contentClassName={cl.registerModal} state={registerModal} setState={setRegisterModal}>
+    <Modal
+      onExit={onExit}
+      contentClassName={cl.registerModal}
+      state={registerModal}
+      setState={setRegisterModal}
+    >
       <h1 className={cl.title}>Sign up</h1>
       <div className={cl.inputsContainer}>
         <Input

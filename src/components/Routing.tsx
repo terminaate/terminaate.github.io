@@ -14,7 +14,7 @@ const Routing = () => {
   const location = useLocation();
   const previousRoute = useRef<string>(location.pathname);
   const dispatch = useAppDispatch();
-  const { error: serverError } = useAppSelector(state => state.userSlice);
+  const { error: serverError } = useAppSelector((state) => state.userSlice);
 
   useEffect(() => {
     History.previousRoute = previousRoute.current;

@@ -14,16 +14,21 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-  const accessToken = (store.getState().userSlice as UserState).user.accessToken || localStorage.getItem('accessToken');
+  const accessToken =
+    (store.getState().userSlice as UserState).user.accessToken ||
+    localStorage.getItem('accessToken');
   if (accessToken) {
     config.headers!.Authorization = `Bearer ${accessToken}`;
   }
   return config;
 });
 
-$api.interceptors.response.use((config) => config, (e) => {
-  logError(e);
-  store.dispatch(setNotificationText(getErrorObject(e).message));
-});
+$api.interceptors.response.use(
+  (config) => config,
+  (e) => {
+    logError(e);
+    store.dispatch(setNotificationText(getErrorObject(e).message));
+  },
+);
 
 export default $api;

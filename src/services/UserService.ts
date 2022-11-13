@@ -17,7 +17,6 @@ class UserService {
 
   async deletePost(postId: string) {
     return $api.delete<PostData>('/posts/' + postId);
-
   }
 
   async getAllPosts() {

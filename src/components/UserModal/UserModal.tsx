@@ -4,7 +4,9 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { setModal } from '@/store/reducers/modalsSlice';
 
 const UserModal = () => {
-  const { userModal, userModalData } = useAppSelector(state => state.modalsSlice);
+  const { userModal, userModalData } = useAppSelector(
+    (state) => state.modalsSlice,
+  );
   const dispatch = useAppDispatch();
 
   const setUserModal = (state: boolean) => {
@@ -14,7 +16,6 @@ const UserModal = () => {
       dispatch(setModal({ userModal: state }));
     }
   };
-
 
   // todo
   // do this a logout button

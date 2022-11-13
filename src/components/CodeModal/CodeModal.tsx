@@ -68,30 +68,63 @@ const CodeModal = () => {
   };
 
   return (
-    <Modal onExit={resetData} contentClassName={cl.codeModal} state={codeModal} setState={setCodeModal}>
+    <Modal
+      onExit={resetData}
+      contentClassName={cl.codeModal}
+      state={codeModal}
+      setState={setCodeModal}
+    >
       <h1 className={cl.title}>Creating auth code</h1>
       {result ? (
         <>
           <h2 className={cl.subtitle}>Result:</h2>
-          <Input value={result} placeholder={'result'} container={true} containerClassName={cl.resultInputContainer}>
-            <Button onClick={onCopyResultButtonClick} className={cl.resultCopyButton}><FaCopy /></Button>
+          <Input
+            value={result}
+            placeholder={'result'}
+            container={true}
+            containerClassName={cl.resultInputContainer}
+          >
+            <Button
+              onClick={onCopyResultButtonClick}
+              className={cl.resultCopyButton}
+            >
+              <FaCopy />
+            </Button>
           </Input>
-          <span onClick={resetData} className={cl.resetResult}>Reset result</span>
-          <Button className={cl.loginButton} onClick={openLoginModal}>Try to use auth code</Button>
+          <span onClick={resetData} className={cl.resetResult}>
+            Reset result
+          </span>
+          <Button className={cl.loginButton} onClick={openLoginModal}>
+            Try to use auth code
+          </Button>
         </>
       ) : (
         <>
           <div className={cl.inputsContainer}>
-            <Input container={true} value={secretInput} onChange={onSecretChange} placeholder={'Secret of token'}>
+            <Input
+              container={true}
+              value={secretInput}
+              onChange={onSecretChange}
+              placeholder={'Secret of token'}
+            >
               <ErrorMessage error={secretError} />
             </Input>
-            <Input container={true} className={cl.dataInput} value={dataInput} onChange={onDataChange}
-                   placeholder={'Data of token (JSON)'}>
+            <Input
+              container={true}
+              className={cl.dataInput}
+              value={dataInput}
+              onChange={onDataChange}
+              placeholder={'Data of token (JSON)'}
+            >
               <ErrorMessage error={dataError} />
             </Input>
           </div>
-          <Button className={cl.generateButton} onClick={generateCode}>Generate</Button>
-          <span onClick={openLoginModal} className={cl.resetResult}>Back to login page</span>
+          <Button className={cl.generateButton} onClick={generateCode}>
+            Generate
+          </Button>
+          <span onClick={openLoginModal} className={cl.resetResult}>
+            Back to login page
+          </span>
         </>
       )}
     </Modal>
