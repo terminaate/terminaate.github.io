@@ -4,7 +4,7 @@ import React, { FC, memo, MutableRefObject, useEffect, useRef } from 'react';
 import cl from './YoutubePlayer.module.scss';
 import YouTube from 'react-youtube';
 import YouTubeProps, { YouTubePlayer as YouTubeTarget } from 'react-youtube';
-import History from '@/utils/history';
+import { History } from '@/utils/history';
 
 interface IYoutubePlayer {
   playerRef: MutableRefObject<null | YouTubeTarget>;

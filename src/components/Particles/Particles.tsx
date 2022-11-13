@@ -61,7 +61,7 @@ class Particle {
 }
 
 const Particles: FC<IParticles> = ({
-  particlesCount = 100,
+  particlesCount = 50,
   particlesSize = Math.random() * 2,
   particlesColor = '#fff',
   particlesVelocity = 0.4,

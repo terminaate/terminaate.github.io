@@ -1,0 +1,24 @@
+.button {
+  --text-accent: var(--text-primary);
+  --background-accent: var(--background-secondary);
+
+  font-family: var(--font-primary);
+  background-color: var(--background-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10px;
+  padding: 5px;
+  padding-inline: 15px;
+  font-size: 15px;
+  color: var(--text-accent);
+  border: 2px solid var(--text-accent);
+  border-radius: 3px;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: var(--text-accent);
+    color: var(--background-accent);
+    box-shadow: 0 0 20px var(--text-accent);
+  }
+}

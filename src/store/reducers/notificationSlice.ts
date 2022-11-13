@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ReactElement } from 'react';
 
 export interface NotificationState {
-  text: string;
+  text: string | ReactElement;
   timeout: number;
 }
 
@@ -14,16 +15,19 @@ export const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    setNotificationText(state, action: PayloadAction<string>) {
+    setNotificationText(
+      state,
+      action: PayloadAction<NotificationState['text']>,
+    ) {
       state.text = action.payload;
     },
-    setNotificationTimeout(state, action: PayloadAction<number>) {
+    setNotificationTimeout(
+      state,
+      action: PayloadAction<NotificationState['timeout']>,
+    ) {
       state.timeout = action.payload;
     },
-    setNotification(
-      state,
-      action: PayloadAction<{ text: string; timeout: number }>,
-    ) {
+    setNotification(state, action: PayloadAction<NotificationState>) {
       return action.payload;
     },
   },
