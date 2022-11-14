@@ -28,15 +28,29 @@ const PostsPage: FC = () => {
   });
   const navigate = useNavigate();
 
+  const getPostDate = (d: string) => {
+    const date = new Date(d);
+    if (!date) {
+      return d;
+    }
+    const hours = date.getHours() < 9 ? '0' + date.getHours() : date.getHours();
+    const minutes = date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
+    return `${hours}:${minutes} ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+  };
+
+  const getPostContent = (content: string) => {
+    return (content.length > 40
+      ? content.slice(0, content.length / 1.5)
+      : content) + '...';
+  };
+
   const getServerData = async () => {
     const { data: serverPosts } = await UserService.getAllPosts();
     setPosts(
       serverPosts.reverse().map((post) => ({
         ...post,
-        content:
-          post.content.length > 40
-            ? post.content.slice(0, post.content.length / 1.5) + '...'
-            : post.content,
+        content: getPostContent(post.content),
+        updatedAt: getPostDate(post.updatedAt),
       })),
     );
   };
@@ -55,6 +69,7 @@ const PostsPage: FC = () => {
           id: '123',
           login: '123',
         },
+        updatedAt: 'asd',
       },
       ...posts,
     ]);
@@ -138,6 +153,7 @@ const PostsPage: FC = () => {
                 </div>
                 <h1 className={cl.postTitle}>{post.title}</h1>
                 <span className={cl.postDesc}>{post.content}</span>
+                <span className={cl.postDate}>{post.updatedAt}</span>
               </motion.div>
               {authorized && (
                 <div className={cl.postButtonsContainer}>

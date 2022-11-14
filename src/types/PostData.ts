@@ -5,6 +5,7 @@ export type PostData = {
   title: string;
   content: string;
   author: UserData;
+  updatedAt: string;
 };
 
 export type PatchPostData = Pick<PostData, 'id' | 'title' | 'content'>;

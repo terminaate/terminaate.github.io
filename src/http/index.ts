@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '@/store';
-import { UserState } from '@/store/reducers/user/userSlice';
+import { logout, UserState } from '@/store/reducers/user/userSlice';
 import { getErrorObject } from '@/utils/getErrorObject';
 import { logError } from '@/utils/logError';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
@@ -28,6 +28,9 @@ $api.interceptors.response.use(
   (e) => {
     logError(e);
     store.dispatch(setNotificationText(getErrorObject(e).message));
+    if (e.response.code === 401) {
+      store.dispatch(logout());
+    }
   },
 );
 

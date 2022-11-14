@@ -22,9 +22,13 @@
       z-index: 10;
       backdrop-filter: blur(5px);
 
+      .searchInput {
+        border-radius: 5px;
+      }
+
       .createPostButton {
         width: 20%;
-        --text-accent: var(--blue);
+        --text-accent: var(--green);
 
         &:hover {
           --background-accent: var(--text-primary);
@@ -115,7 +119,7 @@
           }
 
           .changePostButton {
-            --text-accent: var(--blue);
+            --text-accent: var(--green);
 
             &:hover {
               --background-accent: var(--text-primary);

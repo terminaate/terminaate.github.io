@@ -14,11 +14,12 @@
   --background-secondary: rgba(17, 17, 17, 0.8);
   --text-primary: #fff;
   --text-secondary: #666;
-  --red: #da1111;
-  --blue: #0000ff;
+  --red: #cb1111;
+  --green: rgba(10, 243, 78, 0.77);
   --border-primary: #222;
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Source Code Pro', monospace;
+  --header-width: 800px;
 }
 
 body {
