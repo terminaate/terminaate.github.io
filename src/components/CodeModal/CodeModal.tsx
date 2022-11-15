@@ -33,7 +33,6 @@ const CodeModal = () => {
   };
 
   const openLoginModal = () => {
-    resetData();
     dispatch(setModal({ loginModal: true }));
   };
 

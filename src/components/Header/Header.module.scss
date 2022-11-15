@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 800px;
+    max-width: var(--header-width);
     width: 100%;
 
     .linksContainer {
@@ -41,6 +41,7 @@
       }
 
       a {
+        text-decoration: none;
         display: flex;
         align-items: center;
         column-gap: 5px;

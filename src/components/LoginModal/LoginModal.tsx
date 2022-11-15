@@ -38,6 +38,7 @@ const LoginModal = () => {
     setCodeInput('');
     setLoginError('');
     setPasswordError('');
+    setCodeError('');
   };
 
   const onLoginButtonClick = () => {

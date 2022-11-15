@@ -1,6 +1,6 @@
 // noinspection SpellCheckingInspection
 
-import React, { FC, memo, MutableRefObject, useEffect, useRef } from 'react';
+import React, { FC, memo, MutableRefObject, useEffect, useRef, useState } from 'react';
 import cl from './YoutubePlayer.module.scss';
 import YouTube from 'react-youtube';
 import YouTubeProps, { YouTubePlayer as YouTubeTarget } from 'react-youtube';
@@ -17,6 +17,7 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
     videos.current[Math.floor(Math.random() * videos.current.length)],
   );
   const isLastRouteIntro = useRef<boolean>(false);
+  const [played, setPlayed] = useState<boolean>(false);
 
   useEffect(() => {
     isLastRouteIntro.current = History.previousRoute === '/';
@@ -32,6 +33,7 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
 
   return (
     <div className={cl.backgroundVideoContainer}>
+      <div data-played={played} className={cl.videoSplash} />
       <YouTube
         onReady={onReady}
         opts={{
@@ -49,6 +51,8 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
         onEnd={(e) => e.target.playVideo()}
         className={cl.video}
         videoId={videoId.current}
+        onPlay={() => setPlayed(true)}
+        onPause={() => setPlayed(false)}
       />
     </div>
   );
