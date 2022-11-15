@@ -11,8 +11,23 @@
   pointer-events: none;
   overflow: hidden;
 
+
+  .videoSplash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-primary);
+    transition: .2s background;
+
+    &[data-played="true"] {
+      background: none;
+    }
+  }
+
   .video {
     width: 100%;
-    height: 115%;
+    height: 115%
   }
 }
