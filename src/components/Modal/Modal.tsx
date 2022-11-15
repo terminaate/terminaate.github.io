@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { FC, MouseEvent, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect } from 'react';
 import cl from './Modal.module.scss';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -9,26 +9,32 @@ export interface IModal {
   setState:
     | React.Dispatch<React.SetStateAction<boolean>>
     | ((state: boolean) => void);
-  onExit?: (e: MouseEvent) => void;
+  onExit?: () => void;
   children?: ReactNode;
   className?: string;
   contentClassName?: string;
 }
 
 const Modal: FC<IModal> = ({
-  state,
-  setState,
-  children,
-  onExit,
-  className,
-  contentClassName,
-}) => {
-  const closeModal = (e: MouseEvent) => {
+                             state,
+                             setState,
+                             children,
+                             onExit,
+                             className,
+                             contentClassName,
+                           }) => {
+  const closeModal = () => {
     setState(false);
     if (onExit) {
-      onExit(e);
+      onExit();
     }
   };
+
+  useEffect(() => {
+    if (!state && onExit) {
+      onExit();
+    }
+  }, [state]);
 
   return createPortal(
     <AnimatePresence>

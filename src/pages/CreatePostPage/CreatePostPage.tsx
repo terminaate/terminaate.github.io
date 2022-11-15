@@ -52,7 +52,7 @@ const CreatePostPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const createPost = async () => {
+  const onCreateButtonClick = async () => {
     if (!title) {
       return dispatch(setNotificationText('Input title!'));
     } else if (title.length < 3) {
@@ -83,16 +83,16 @@ const CreatePostPage = () => {
                 {tab.icon}
                 <h3 className={cl.tabTitle}>{tab.title}</h3>
               </div>
-              {tab.key === currentTab ? (
+              {tab.key === currentTab && (
                 <motion.div className={cl.underline} layoutId='underline' />
-              ) : null}
+              )}
             </div>
           ))}
         </div>
         {tabs.find(e => e.key === currentTab)!.content(content, onContentChange)}
       </div>
       <div className={cl.buttonsContainer}>
-        <Button onClick={createPost} className={cl.createButton}>Create</Button>
+        <Button onClick={onCreateButtonClick}>Create</Button>
       </div>
     </BasicPage>
   );

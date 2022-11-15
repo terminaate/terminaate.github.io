@@ -13,6 +13,7 @@ import useInputState from '@/hooks/useInputState';
 import { FaSearch } from 'react-icons/all';
 import { useNavigate } from 'react-router-dom';
 import { UserData } from '@/types/UserData';
+import DateService from '@/services/DateService';
 
 const PostsPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -28,16 +29,6 @@ const PostsPage: FC = () => {
   });
   const navigate = useNavigate();
 
-  const getPostDate = (d: string) => {
-    const date = new Date(d);
-    if (!date) {
-      return d;
-    }
-    const hours = date.getHours() < 9 ? '0' + date.getHours() : date.getHours();
-    const minutes = date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
-    return `${hours}:${minutes} ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
-  };
-
   const getPostContent = (content: string) => {
     return (content.length > 40
       ? content.slice(0, content.length / 1.5)
@@ -50,7 +41,7 @@ const PostsPage: FC = () => {
       serverPosts.reverse().map((post) => ({
         ...post,
         content: getPostContent(post.content),
-        updatedAt: getPostDate(post.updatedAt),
+        updatedAt: DateService.getFormattedData(post.updatedAt),
       })),
     );
   };
@@ -67,6 +58,11 @@ const PostsPage: FC = () => {
     e.stopPropagation();
     const { data: deletedPost } = await UserService.deletePost(postId);
     setPosts(posts.filter((post) => post.id !== deletedPost.id));
+  };
+
+  const changePost = (e: MouseEvent, postId: string) => {
+    e.stopPropagation();
+    navigate(`/posts/${postId}/edit`);
   };
 
   const openUserModal = async (e: MouseEvent, userData: UserData) => {
@@ -152,7 +148,7 @@ const PostsPage: FC = () => {
                   >
                     Delete
                   </Button>
-                  <Button className={cl.changePostButton}>Change</Button>
+                  <Button onClick={(e) => changePost(e, post.id)} className={cl.changePostButton}>Change</Button>
                 </div>
               )}
             </motion.div>

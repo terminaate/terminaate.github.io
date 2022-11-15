@@ -14,12 +14,12 @@ import GithubPage from '@/pages/GithubPage';
 import EditPostPage from '@/pages/EditPostPage';
 import CreatePostPage from '@/pages/CreatePostPage';
 import PostPage from '@/pages/PostPage';
+import AuthorizedRoute from '@/components/AuthorizedRoute';
 
 const Routing = () => {
   const location = useLocation();
   const previousRoute = useRef<string>(location.pathname);
   const dispatch = useAppDispatch();
-  const { error: serverError } = useAppSelector((state) => state.userSlice);
 
   useEffect(() => {
     History.previousRoute = previousRoute.current;
@@ -32,12 +32,6 @@ const Routing = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (serverError) {
-      dispatch(setNotificationText(serverError));
-    }
-  }, [serverError]);
-
   return (
     <AnimatePresence mode={'wait'}>
       <Routes location={location} key={location.key}>
@@ -45,8 +39,16 @@ const Routing = () => {
         <Route path={'/home'} element={<HomePage />} />
         <Route path={'/posts'} element={<PostsPage />} />
         <Route path={'/posts/:id'} element={<PostPage />} />
-        <Route path={'/posts/:id/edit'} element={<EditPostPage />} />
-        <Route path={'/posts/create'} element={<CreatePostPage />} />
+        <Route path={'/posts/:id/edit'} element={
+          <AuthorizedRoute>
+            <EditPostPage />
+          </AuthorizedRoute>
+        } />
+        <Route path={'/posts/create'} element={
+          <AuthorizedRoute>
+            <CreatePostPage />
+          </AuthorizedRoute>
+        } />
         <Route path={'/works'} element={<WorksPage />} />
         <Route path={'/github'} element={<GithubPage />} />
         <Route path={'/*'} element={<NotFoundPage />} />
