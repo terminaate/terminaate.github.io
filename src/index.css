@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  filter: none !important;
+  backdrop-filter: none !important;
 }
 
 :root {
@@ -56,5 +58,4 @@ input {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--text-primary);
-  border-radius: 5px;
 }

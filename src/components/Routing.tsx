@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { lazy, useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import IntroPage from '@/pages/IntroPage';
@@ -6,15 +6,15 @@ import HomePage from '@/pages/HomePage';
 import PostsPage from '@/pages/PostsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import { History } from '@/utils/history';
-import { useAppDispatch, useAppSelector } from '@/store';
+import { useAppDispatch } from '@/store';
 import { refresh } from '@/store/reducers/user/authAPI';
-import { setNotificationText } from '@/store/reducers/notificationSlice';
 import WorksPage from '@/pages/WorksPage';
 import GithubPage from '@/pages/GithubPage';
-import EditPostPage from '@/pages/EditPostPage';
-import CreatePostPage from '@/pages/CreatePostPage';
-import PostPage from '@/pages/PostPage';
 import AuthorizedRoute from '@/components/AuthorizedRoute';
+
+const PostPage = lazy(() => import('@/pages/PostPage'));
+const EditPostPage = lazy(() => import('@/pages/EditPostPage'));
+const CreatePostPage = lazy(() => import('@/pages/CreatePostPage'));
 
 const Routing = () => {
   const location = useLocation();

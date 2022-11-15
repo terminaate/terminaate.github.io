@@ -1,5 +1,4 @@
 import React, { FC, useRef } from 'react';
-import cl from './App.module.scss';
 import Particles from '@/components/Particles';
 import Routing from '@/components/Routing';
 import Notification from '@/components/Notification';
@@ -16,9 +15,7 @@ const App: FC = () => {
 
   return (
     <>
-      <div className={cl.backgroundParticles}>
-        <Particles particlesCount={200} />
-      </div>
+      <Particles particlesCount={200} />
       <AnimatePresence>
         {location.pathname !== '/' && (
           <motion.div
