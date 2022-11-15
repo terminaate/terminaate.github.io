@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    minify: "terser"
+    minify: 'terser',
   },
   resolve: {
     alias: {
@@ -16,4 +16,5 @@ export default defineConfig({
     },
   },
   base: '',
+  publicDir: './public',
 });
