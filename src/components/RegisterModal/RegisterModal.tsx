@@ -17,7 +17,7 @@ const RegisterModal = () => {
   const [passwordError, setPasswordError] = useState<string>('');
   const [codeError, setCodeError] = useState<string>('');
   const { registerModal } = useAppSelector((state) => state.modalsSlice);
-  const { authorized } = useAppSelector((state) => state.userSlice.user);
+  const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
 
   const setRegisterModal = (state: boolean) => {

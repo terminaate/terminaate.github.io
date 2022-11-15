@@ -8,6 +8,7 @@ import NavPreventedLink from '@/components/NavPreventedLink';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { setModal } from '@/store/reducers/modalsSlice';
 import { userAvatarUrl } from '@/http';
+import { UserData } from '@/types/UserData';
 
 const Header = () => {
   const location = useLocation();
@@ -36,7 +37,7 @@ const Header = () => {
     if (!authorized) {
       dispatch(setModal({ loginModal: true }));
     } else {
-      dispatch(setModal({ userModal: true, userModalData: user }));
+      dispatch(setModal({ userModal: true, userModalData: user as UserData }));
     }
   };
 
@@ -48,7 +49,7 @@ const Header = () => {
       <div className={cl.headerContainer}>
         <div className={cl.linksContainer}>
           <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt="" />
+            <img src={logoImg} alt='' />
           </Link>
           {routes.map((route, key) => (
             <NavPreventedLink key={key} to={route.path}>
@@ -68,7 +69,7 @@ const Header = () => {
           ))}
         </div>
         <button onClick={onUserButtonClick} className={cl.userAvatar}>
-          <img src={userAvatarUrl + user.id} alt="" />
+          <img src={userAvatarUrl + user.id} alt='' />
         </button>
       </div>
     </header>
