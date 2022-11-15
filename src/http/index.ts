@@ -27,7 +27,9 @@ $api.interceptors.response.use(
   (config) => config,
   (e) => {
     logError(e);
-    store.dispatch(setNotificationText(getErrorObject(e).message));
+    if (e.response.code !== 500) {
+      store.dispatch(setNotificationText(getErrorObject(e).message));
+    }
     if (e.response.code === 401) {
       store.dispatch(logout());
     }

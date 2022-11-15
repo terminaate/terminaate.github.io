@@ -13,6 +13,7 @@ import WorksPage from '@/pages/WorksPage';
 import GithubPage from '@/pages/GithubPage';
 import EditPostPage from '@/pages/EditPostPage';
 import CreatePostPage from '@/pages/CreatePostPage';
+import PostPage from '@/pages/PostPage';
 
 const Routing = () => {
   const location = useLocation();
@@ -43,6 +44,7 @@ const Routing = () => {
         <Route index element={<IntroPage />} />
         <Route path={'/home'} element={<HomePage />} />
         <Route path={'/posts'} element={<PostsPage />} />
+        <Route path={'/posts/:id'} element={<PostPage />} />
         <Route path={'/posts/:id/edit'} element={<EditPostPage />} />
         <Route path={'/posts/create'} element={<CreatePostPage />} />
         <Route path={'/works'} element={<WorksPage />} />
