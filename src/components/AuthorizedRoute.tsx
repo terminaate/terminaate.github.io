@@ -17,8 +17,8 @@ const AuthorizedRoute: FC<IAuthorizedRoute> = ({ children }) => {
   useEffect(() => {
     if (accessToken || localStorage.getItem('accessToken')) {
       AuthService.refresh().then(r => {
-        dispatch(updateUser({ authorized: true, user: { ...r.data.user, accessToken: r.data.token } }));
-        localStorage.setItem('accessToken', r.data.token);
+        dispatch(updateUser({ authorized: true, user: { ...r.data.user, accessToken: r.data.accessToken } }));
+        localStorage.setItem('accessToken', r.data.accessToken);
         isUserAuthorized.current = true;
       }).catch(() => isUserAuthorized.current = false);
     }
