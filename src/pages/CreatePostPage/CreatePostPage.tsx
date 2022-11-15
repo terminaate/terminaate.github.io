@@ -62,7 +62,7 @@ const CreatePostPage = () => {
     }
 
     const newPost = await UserService.createPost({ title, content });
-    if (newPost.status === 200) {
+    if (newPost.status === 201) {
       return navigate('/posts');
     }
   };
