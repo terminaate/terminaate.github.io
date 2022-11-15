@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm';
 import ReactMarkdown from 'react-markdown';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {atelierDuneDark} from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import rehypeRaw from 'rehype-raw';
 
 interface IMarkdown {
   children: string;
@@ -28,7 +29,7 @@ const Markdown: React.FC<IMarkdown> = ({ children }) => {
           </code>
         );
       },
-    }} remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+    }} remarkPlugins={[[remarkGfm, { singleTilde: false }]]} rehypePlugins={[rehypeRaw]}>
       {children}
     </ReactMarkdown>
   );

@@ -69,17 +69,20 @@
     }
 
     .textArea {
+      padding: 15px;
       border: none;
       border-radius: 0 0 var(--border-radius) var(--border-radius);
       font-family: var(--font-secondary);
+      height: 380px;
     }
 
     .previewContainer {
       background-color: var(--background-secondary);
       backdrop-filter: blur(2px);
-      min-height: 300px;
+      height: 380px;
       padding: 32px;
       border-radius: 0 0 var(--border-radius) var(--border-radius);
+      overflow: scroll;
     }
   }
 
