@@ -40,6 +40,9 @@ const Header = () => {
     }
   };
 
+  // todo
+  // fix icon animation (color)
+
   return (
     <header className={cl.header}>
       <div className={cl.headerContainer}>

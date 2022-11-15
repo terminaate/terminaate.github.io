@@ -60,19 +60,7 @@ const PostsPage: FC = () => {
   }, []);
 
   const createNewPost = () => {
-    setPosts([
-      {
-        id: '123',
-        content: '123',
-        title: '123',
-        author: {
-          id: '123',
-          login: '123',
-        },
-        updatedAt: 'asd',
-      },
-      ...posts,
-    ]);
+    navigate('/posts/create');
   };
 
   const deletePost = async (e: MouseEvent, postId: string) => {

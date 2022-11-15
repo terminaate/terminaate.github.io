@@ -10,4 +10,4 @@ export type PostData = {
 
 export type PatchPostData = Pick<PostData, 'id' | 'title' | 'content'>;
 
-export type CreatePostData = Omit<PatchPostData, 'id'>;
+export type CreatePostData = Omit<PostData, 'id' | 'updatedAt' | 'author'>;

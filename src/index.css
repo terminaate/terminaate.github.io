@@ -6,7 +6,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  list-style-type: none;
 }
 
 :root {
@@ -29,6 +28,10 @@ body {
   overflow-x: hidden;
 }
 
+img, button, h1 {
+  user-select: none;
+}
+
 button {
   background: none;
   border: none;
@@ -41,10 +44,10 @@ input {
   outline: none;
 }
 
-a {
-  color: var(--text-primary);
-  text-decoration: none;
-}
+/*a {*/
+/*  color: var(--text-primary);*/
+/*  text-decoration: none;*/
+/*}*/
 
 ::-webkit-scrollbar {
   width: 2px;
