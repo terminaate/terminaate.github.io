@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import IntroPage from '@/pages/IntroPage';
@@ -33,27 +33,29 @@ const Routing = () => {
   }, []);
 
   return (
-    <AnimatePresence mode={'wait'}>
-      <Routes location={location} key={location.key}>
-        <Route index element={<IntroPage />} />
-        <Route path={'/home'} element={<HomePage />} />
-        <Route path={'/posts'} element={<PostsPage />} />
-        <Route path={'/posts/:id'} element={<PostPage />} />
-        <Route path={'/posts/:id/edit'} element={
-          <AuthorizedRoute>
-            <EditPostPage />
-          </AuthorizedRoute>
-        } />
-        <Route path={'/posts/create'} element={
-          <AuthorizedRoute>
-            <CreatePostPage />
-          </AuthorizedRoute>
-        } />
-        <Route path={'/works'} element={<WorksPage />} />
-        <Route path={'/github'} element={<GithubPage />} />
-        <Route path={'/*'} element={<NotFoundPage />} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={null}>
+      <AnimatePresence mode={'wait'}>
+        <Routes location={location} key={location.key}>
+          <Route index element={<IntroPage />} />
+          <Route path={'/home'} element={<HomePage />} />
+          <Route path={'/posts'} element={<PostsPage />} />
+          <Route path={'/posts/:id'} element={<PostPage />} />
+          <Route path={'/posts/:id/edit'} element={
+            <AuthorizedRoute>
+              <EditPostPage />
+            </AuthorizedRoute>
+          } />
+          <Route path={'/posts/create'} element={
+            <AuthorizedRoute>
+              <CreatePostPage />
+            </AuthorizedRoute>
+          } />
+          <Route path={'/works'} element={<WorksPage />} />
+          <Route path={'/github'} element={<GithubPage />} />
+          <Route path={'/*'} element={<NotFoundPage />} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   );
 };
 

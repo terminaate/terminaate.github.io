@@ -6,8 +6,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  filter: none !important;
-  backdrop-filter: none !important;
 }
 
 :root {
@@ -46,10 +44,12 @@ input {
   outline: none;
 }
 
-/*a {*/
-/*  color: var(--text-primary);*/
-/*  text-decoration: none;*/
-/*}*/
+@media screen and (max-width: 700px) {
+  * {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
 
 ::-webkit-scrollbar {
   width: 2px;
