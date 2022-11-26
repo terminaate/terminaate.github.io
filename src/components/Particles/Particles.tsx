@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.scss';
 import classNames from 'classnames';
 
@@ -61,27 +61,28 @@ class Particle {
 }
 
 const Particles: FC<IParticles> = ({
-  particlesCount = 50,
-  particlesSize = Math.random() * 2,
-  particlesColor = '#fff',
-  particlesVelocity = 0.4,
-  className = '',
-  height = '100%',
-  width = '100%',
-}) => {
+                                     particlesCount = 50,
+                                     particlesSize = Math.random() * 2,
+                                     particlesColor = '#fff',
+                                     particlesVelocity = 0.4,
+                                     className = '',
+                                     height = '100%',
+                                     width = '100%',
+                                   }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const getHeight = () => {
+  const getHeight = useCallback(() => {
     if (typeof height === 'number') return height;
     if (height.endsWith('%')) return (innerHeight / 100) * parseInt(height);
     return parseInt(height);
-  };
+  }, [height]);
 
-  const getWidth = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const getWidth = useCallback(() => {
     if (typeof width === 'number') return width;
     if (width.endsWith('%')) return (innerWidth / 100) * parseInt(width);
     return parseInt(width);
-  };
+  }, [width]);
 
   const [localHeight, setLocalHeight] = useState(getHeight());
   const [localWidth, setLocalWidth] = useState(getWidth());
