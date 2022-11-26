@@ -1,46 +1,33 @@
-// noinspection SpellCheckingInspection
-
-import React, { FC, memo, MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, MutableRefObject, useRef } from 'react';
 import cl from './YoutubePlayer.module.scss';
 import YouTube from 'react-youtube';
 import YouTubeProps, { YouTubePlayer as YouTubeTarget } from 'react-youtube';
-import { History } from '@/utils/history';
 
 interface IYoutubePlayer {
   playerRef: MutableRefObject<null | YouTubeTarget>;
+  state: boolean;
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
+const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef, state, setState }) => {
   // Todo add backend for this
-  const videos = useRef(['ZiADuDjueJc', 'FzpJl-i7ZRg']);
-  const videoId = useRef(
-    videos.current[Math.floor(Math.random() * videos.current.length)],
-  );
-  const isLastRouteIntro = useRef<boolean>(false);
-  const [played, setPlayed] = useState<boolean>(false);
-
-  useEffect(() => {
-    isLastRouteIntro.current = History.previousRoute === '/';
-  }, []);
+  const videoId = useRef('FzpJl-i7ZRg');
 
   const onReady: YouTubeProps['onPlayerReady'] = (e) => {
     playerRef.current = e.target;
-    if (isLastRouteIntro.current) {
-      e.target.playVideo();
-    }
     e.target.setVolume(10);
   };
 
   return (
     <div className={cl.backgroundVideoContainer}>
-      <div data-played={played} className={cl.videoSplash} />
+      <div data-played={state} className={cl.videoSplash} />
       <YouTube
         onReady={onReady}
         opts={{
           height: '100%',
           width: '100%',
           opts: {
-            autoplay: isLastRouteIntro.current ? 1 : 0,
+            autoplay: true,
             controls: 0,
             disablekb: 1,
             loop: 1,
@@ -51,8 +38,8 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef }) => {
         onEnd={(e) => e.target.playVideo()}
         className={cl.video}
         videoId={videoId.current}
-        onPlay={() => setPlayed(true)}
-        onPause={() => setPlayed(false)}
+        onPlay={() => setState(true)}
+        onPause={() => setState(false)}
       />
     </div>
   );

@@ -1,42 +1,24 @@
-import React, {
-  ChangeEvent,
-  FC,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
+import React, { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState } from 'react';
 import cl from './PlayerControls.module.scss';
-import {
-  BiHelpCircle,
-  IoMdVolumeHigh,
-  IoMdVolumeLow,
-  IoMdVolumeMute,
-} from 'react-icons/all';
-import { History } from '@/utils/history';
+import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
 import { useAppDispatch } from '@/store';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
+import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 
 interface IPlayerControls {
   playerRef: MutableRefObject<null | YouTubeTarget>;
+  state: boolean;
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
+const PlayerControls: FC<IPlayerControls> = ({ playerRef, state, setState }) => {
   const dispatch = useAppDispatch();
-  const [isPlayed, setPlayed] = useState<boolean>(false);
   const [playerVolume, setPlayerVolume] = useState<number>(
     Number(localStorage.getItem('volume')) ||
-      playerRef.current?.getVolume() ||
-      10,
+    playerRef.current?.getVolume() ||
+    10,
   );
   const oldVolume = useRef<number>(playerVolume);
-
-  useEffect(() => {
-    if (History.previousRoute === '/') {
-      setPlayed(true);
-    }
-  }, []);
 
   useEffect(() => {
     if (null !== playerRef.current) {
@@ -50,12 +32,11 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   }, [playerVolume]);
 
   const handleVideoState = () => {
-    if (isPlayed) {
-      playerRef.current.pauseVideo();
+    if (state) {
+      playerRef.current?.pauseVideo();
     } else {
-      playerRef.current.playVideo();
+      playerRef.current?.playVideo();
     }
-    setPlayed(!isPlayed);
   };
 
   const onVolumeButtonClick = () => {
@@ -72,7 +53,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
     const notificationElement = (
       <>
         <span>{playerRef.current?.getVideoData().title}</span>
-        <span style={{ color: 'green' }}>(Copied to your clipboard)</span>
+        <span style={{ color: 'var(--green)' }}>(Copied to your clipboard)</span>
       </>
     );
     dispatch(setNotificationText(notificationElement));
@@ -96,7 +77,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
   return (
     <div className={cl.playerControlsContainer}>
       <div
-        data-played={isPlayed}
+        data-played={state}
         onClick={handleVideoState}
         className={cl.controlsContainer}
       >
@@ -114,7 +95,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef }) => {
         </button>
         <input
           className={cl.volumeInput}
-          type="range"
+          type='range'
           value={playerVolume}
           min={0}
           max={100}

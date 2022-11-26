@@ -20,6 +20,7 @@
     height: 100%;
     background: var(--background-primary);
     transition: .2s background;
+    z-index: -100000;
 
     &[data-played="true"] {
       background: none;
