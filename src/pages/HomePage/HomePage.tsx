@@ -3,9 +3,12 @@ import cl from './HomePage.module.scss';
 import BasicPage from '@/components/BasicPage';
 import logoImg from '!/logo.svg';
 import TypingText from '@/components/TypingText';
-import { skills } from '@/pages/HomePage/data';
+import { SkillProps, skills } from '@/pages/HomePage/data';
+import { Trans, useTranslation } from 'react-i18next';
 
 const HomePage = () => {
+  const { t } = useTranslation('home');
+
   return (
     <BasicPage
       header={true}
@@ -17,39 +20,42 @@ const HomePage = () => {
         <span>rn nothing is here</span>
         <div className={cl.greetingsBlock}>
           <span>
-            Hello world! I'm <img src={logoImg} alt="" /> and i'm{' '}
-            <span>
-              young frontend developer <div />
-            </span>
+            <Trans ns={'home'} i18nKey={'greetings'}
+                   components={{ span: <span />, div: <div />, logo: <img src={logoImg} alt='' /> }} />
           </span>
         </div>
       </div>
       <div className={cl.userContainer}>
         <div className={cl.userContent}>
           <TypingText
-            text={'Bahram Itkulov'}
+            text={t('name')!}
             animateOnVisible={true}
             className={cl.name}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt="T$rm1naate" />
-            <TypingText
-              text={'( developer )'}
-              className={cl.logoText}
-              animateOnVisible={true}
-            />
+            <img src={logoImg} alt='T$rm1naate' />
           </div>
         </div>
         <div className={cl.userImage}>img</div>
       </div>
+      <div className={cl.aboutContainer}>
+        <TypingText
+          className={cl.aboutTitle}
+          text={t('about-me_title')!}
+          animateOnVisible={true}
+        />
+        <span className={cl.aboutText}>
+          Bahram is a freelance and a full-stack developer based in Russia
+        </span>
+      </div>
       <div className={cl.skillsContainer}>
         <TypingText
           className={cl.skillsTitle}
-          text={'Skills'}
+          text={t('skills_title')!}
           animateOnVisible={true}
         />
         <div className={cl.skillsContent}>
-          {skills.map((skill, key) => (
+          {skills.map((skill: SkillProps, key: number) => (
             <div key={key} className={cl.skillContainer}>
               <TypingText
                 className={cl.skillTitle}
@@ -57,9 +63,13 @@ const HomePage = () => {
                 animateOnVisible={true}
               />
               <div className={cl.skillContents}>
-                {skill.content.map((content, key) => (
+                {skill.content.map((content: SkillProps['content'], key: number) => (
                   <div className={cl.skillContent} key={key}>
-                    {content.icon}
+                    {content.icon && (
+                      <>
+                        {content.icon}
+                      </>
+                    )}
                     <TypingText
                       className={cl.skillContentText}
                       text={content.text}
@@ -72,6 +82,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+      <span>asd</span>
     </BasicPage>
   );
 };

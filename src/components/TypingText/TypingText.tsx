@@ -21,9 +21,11 @@ const TypingText: FC<ITypingText> = ({
   const parsedText = useRef<Array<Record<string, any>>>([]);
   const containerRef = useIntersectionObserver(() => {
     if (animateOnVisible && parsedText.current.length) {
+      setIsElementVisibled(true);
       animate();
     }
   });
+  const [isElementVisibled, setIsElementVisibled] = useState<boolean>(false);
   const oldText = useRef<ITypingText['text']>(text);
   const [animationIsOn, setAnimationIsOn] = useState<boolean>(false);
 
@@ -56,22 +58,19 @@ const TypingText: FC<ITypingText> = ({
 
   const animate = () => {
     setAnimationIsOn(true);
-    return new Promise(resolve => {
-      for (const i in parsedText.current) {
-        const timeout = setTimeout(() => {
-          const isLastIndex = Number(i) === parsedText.current.length - 1;
-          if (isLastIndex) {
-            setAnimationIsOn(false);
-            clearTimeout(timeout);
-            return resolve(0);
-          }
-          setRenderedWords((words: string[]) => [
-            ...words,
-            parsedText.current[i].text,
-          ]);
-        }, (parsedText.current[i].delay ? parsedText.current[i].delay : defaultDelay) * Number(i));
-      }
-    });
+    for (const i in parsedText.current) {
+      const timeout = setTimeout(() => {
+        const isLastIndex = Number(i) === parsedText.current.length - 1;
+        if (isLastIndex) {
+          setAnimationIsOn(false);
+          clearTimeout(timeout);
+        }
+        setRenderedWords((words: string[]) => [
+          ...words,
+          parsedText.current[i].text,
+        ]);
+      }, (parsedText.current[i].delay ? parsedText.current[i].delay : defaultDelay) * Number(i));
+    }
   };
 
   useEffect(() => {
@@ -86,7 +85,7 @@ const TypingText: FC<ITypingText> = ({
       // setNewTextDetected();
       setRenderedWords([]);
       parseText();
-      if (!animateOnVisible) {
+      if (!animateOnVisible || isElementVisibled) {
         animate();
       }
       oldText.current = text;

@@ -1,30 +1,39 @@
 import React, { ReactElement } from 'react';
 import {
+  FaBootstrap,
   FaCss3,
   FaHtml5,
   FaReact,
   FaVuejs,
+  SiElectron,
   SiExpress,
   SiFramer,
+  SiGulp,
   SiJavascript,
+  SiMobx,
   SiMongodb,
+  SiMysql,
   SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
   SiPug,
   SiRedux,
+  SiRollupdotjs,
   SiSass,
+  SiSequelize,
   SiSqlite,
   SiThreedotjs,
   SiTypescript,
+  SiVite,
+  SiWebpack,
 } from 'react-icons/all';
 
-type SkillProps = {
+export type SkillProps = {
   title: string;
   content: Array<{
     text: string;
-    icon: ReactElement;
+    icon?: ReactElement;
   }>;
 };
 
@@ -49,6 +58,10 @@ export const skills: SkillProps[] = [
         icon: <SiSass />,
       },
       {
+        text: 'Bootstrap',
+        icon: <FaBootstrap />,
+      },
+      {
         text: 'Javascript',
         icon: <SiJavascript />,
       },
@@ -57,12 +70,32 @@ export const skills: SkillProps[] = [
         icon: <SiTypescript />,
       },
       {
+        text: 'Vite',
+        icon: <SiVite />,
+      },
+      {
+        text: 'Webpack',
+        icon: <SiWebpack />,
+      },
+      {
+        text: 'Rollup',
+        icon: <SiRollupdotjs />,
+      },
+      {
+        text: 'Gulp',
+        icon: <SiGulp />,
+      },
+      {
         text: 'React',
         icon: <FaReact />,
       },
       {
         text: 'Redux',
         icon: <SiRedux />,
+      },
+      {
+        text: 'Mobx',
+        icon: <SiMobx />,
       },
       {
         text: 'Next',
@@ -97,6 +130,10 @@ export const skills: SkillProps[] = [
         text: 'Nest.js',
         icon: <SiNestjs />,
       },
+      {
+        text: 'Electron',
+        icon: <SiElectron />,
+      },
     ],
   },
   {
@@ -113,6 +150,36 @@ export const skills: SkillProps[] = [
       {
         text: 'Postgresql',
         icon: <SiPostgresql />,
+      },
+      {
+        text: 'Mysql',
+        icon: <SiMysql />,
+      },
+    ],
+  },
+  {
+    title: 'ORM\'s',
+    content: [
+      {
+        text: 'Sequelize',
+        icon: <SiSequelize />,
+      },
+    ],
+  },
+  {
+    title: 'Principles',
+    content: [
+      {
+        text: 'SOLID',
+      },
+      {
+        text: 'DRY',
+      },
+      {
+        text: 'KISS',
+      },
+      {
+        text: 'YAGNI',
       },
     ],
   },

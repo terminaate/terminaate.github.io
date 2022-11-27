@@ -50,12 +50,16 @@
               height: 100%;
               width: 15px;
               background-color: var(--text-primary);
-              filter: blur(10px);
-              animation: blurMovingAnimation 2s both infinite;
+              mix-blend-mode: difference;
+              filter: blur(2px);
+              animation: blurMovingAnimation 4s infinite alternate;
 
               @keyframes blurMovingAnimation {
-                30% {
-                  left: 100%;
+                from {
+                  left: 0;
+                }
+                to {
+                  left: 95%;
                 }
               }
             }
@@ -68,6 +72,7 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      margin-top: 15px;
 
       .userContent {
         display: flex;
@@ -109,11 +114,46 @@
       }
     }
 
+    .aboutContainer {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+
+      .aboutTitle {
+        font-weight: 600;
+        font-family: var(--font-primary);
+        font-size: 20px;
+
+        &:after {
+          content: ' ';
+          position: absolute;
+          top: 90%;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          height: 4px;
+          background-color: var(--text-secondary);
+        }
+      }
+
+      .aboutText {
+        text-indent: 25px;
+        text-align: justify;
+        hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+      }
+    }
+
     .skillsContainer {
       width: 100%;
       display: flex;
       align-items: flex-start;
       flex-direction: column;
+      margin-top: 15px;
+
 
       .skillsTitle {
         font-weight: 600;

@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import cl from './IntroPage.module.scss';
 import TypingText from '@/components/TypingText';
 import { useNavigate } from 'react-router-dom';
@@ -19,12 +19,7 @@ const IntroPage = () => {
     }
   }, []);
 
-  console.log(t('intro_main'));
   useEffect(() => {
-  }, [lang]);
-
-  useEffect(() => {
-
     addEventListener('mousemove', onMouseMoveEventHandler);
 
     return () => removeEventListener('mousemove', onMouseMoveEventHandler);
@@ -59,7 +54,7 @@ const IntroPage = () => {
           />
           <div onClick={skipButtonClickHandler} className={cl.introSkipButton}>
             <motion.span exit={{ marginRight: '15px' }}>-</motion.span>
-            <span>{'skip'}</span>
+            <span>{t('intro_skip')}</span>
           </div>
         </div>
       </div>
