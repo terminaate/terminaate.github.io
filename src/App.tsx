@@ -6,16 +6,17 @@ import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Modals from '@/components/Modals';
 import Player from '@/components/Player';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const App: FC = () => {
   const location = useLocation();
+
   return (
     <>
+      <LanguageSwitcher />
       <Particles particlesCount={200} />
       <AnimatePresence>
-        {location.pathname !== '/' && (
-          <Player />
-        )}
+        {location.pathname !== '/' && <Player />}
       </AnimatePresence>
       <Routing />
       <Notification />

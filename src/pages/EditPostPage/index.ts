@@ -1,3 +1,3 @@
-import EditPostPage from "./EditPostPage"
+import EditPostPage from './EditPostPage';
 
-export default EditPostPage
+export default EditPostPage;

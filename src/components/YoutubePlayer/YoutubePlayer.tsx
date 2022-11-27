@@ -1,4 +1,4 @@
-import React, { FC, memo, MutableRefObject, useRef } from 'react';
+import React, { FC, memo, MutableRefObject } from 'react';
 import cl from './YoutubePlayer.module.scss';
 import YouTube from 'react-youtube';
 import YouTubeProps, { YouTubePlayer as YouTubeTarget } from 'react-youtube';
@@ -9,10 +9,11 @@ interface IYoutubePlayer {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef, state, setState }) => {
-  // Todo add backend for this
-  const videoId = useRef('FzpJl-i7ZRg');
+// Todo add backend for this
+// add videos database and removing videos, and add previews to videos, and changing videos.
+const videoId = 'FzpJl-i7ZRg';
 
+const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef, state, setState }) => {
   const onReady: YouTubeProps['onPlayerReady'] = (e) => {
     playerRef.current = e.target;
     e.target.setVolume(10);
@@ -37,7 +38,7 @@ const YoutubePlayer: FC<IYoutubePlayer> = ({ playerRef, state, setState }) => {
         }}
         onEnd={(e) => e.target.playVideo()}
         className={cl.video}
-        videoId={videoId.current}
+        videoId={videoId}
         onPlay={() => setState(true)}
         onPause={() => setState(false)}
       />

@@ -1,3 +1,3 @@
-import CreatePostPage from "./CreatePostPage"
+import CreatePostPage from './CreatePostPage';
 
-export default CreatePostPage
+export default CreatePostPage;

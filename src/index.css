@@ -18,7 +18,7 @@
   --border-primary: #222;
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Source Code Pro', monospace;
-  --header-width: 800px;
+  --header-width: 700px;
 }
 
 body {
@@ -28,7 +28,9 @@ body {
   overflow-x: hidden;
 }
 
-img, button, h1 {
+img,
+button,
+h1 {
   user-select: none;
 }
 

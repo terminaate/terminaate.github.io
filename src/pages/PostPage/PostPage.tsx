@@ -13,7 +13,7 @@ import { setModal } from '@/store/reducers/modalsSlice';
 import Button from '@/components/UI/Button';
 
 const PostPage = () => {
-  const { authorized } = useAppSelector(state => state.userSlice);
+  const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
   const [post, setPost] = useState<PostData>();
   const { id } = useParams();
@@ -41,8 +41,8 @@ const PostPage = () => {
   };
 
   const onChangeButtonClick = () => {
-    navigate(`/posts/${post?.id}/edit`)
-  }
+    navigate(`/posts/${post?.id}/edit`);
+  };
 
   return (
     <BasicPage containerClassName={cl.container} header={true} container={true}>
@@ -50,21 +50,19 @@ const PostPage = () => {
         <div className={cl.postInfoContainer}>
           <div onClick={onAuthorContainerClick} className={cl.authorContainer}>
             <div className={cl.authorImage}>
-              <img src={userAvatarUrl + post?.author.id} alt='' />
+              <img src={userAvatarUrl + post?.author.id} alt="" />
             </div>
             <span>{post?.author.login}</span>
           </div>
           <h1 className={cl.title}>{post?.title}</h1>
-          <span className={cl.updatedAt}>{DateService.getFormattedData(post?.updatedAt!)}</span>
+          <span className={cl.updatedAt}>
+            {DateService.getFormattedData(post?.updatedAt!)}
+          </span>
         </div>
-        {authorized && (
-          <Button onClick={onChangeButtonClick}>Change</Button>
-        )}
+        {authorized && <Button onClick={onChangeButtonClick}>Change</Button>}
       </header>
       <div className={cl.postContentContainer}>
-        <Markdown>
-          {post?.content!}
-        </Markdown>
+        <Markdown>{post?.content!}</Markdown>
       </div>
     </BasicPage>
   );

@@ -8,6 +8,7 @@ import { setModal } from '@/store/reducers/modalsSlice';
 import Modal from '@/components/Modal';
 import ErrorMessage from '@/components/ErrorMessage';
 import { register } from '@/store/reducers/user/authAPI';
+import { useTranslation } from 'react-i18next';
 
 const RegisterModal = () => {
   const [loginInput, onLoginChange, setLoginInput] = useInputState('');
@@ -19,6 +20,7 @@ const RegisterModal = () => {
   const { registerModal } = useAppSelector((state) => state.modalsSlice);
   const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('auth');
 
   const setRegisterModal = (state: boolean) => {
     dispatch(setModal({ registerModal: state }));
@@ -46,30 +48,32 @@ const RegisterModal = () => {
     setPasswordError('');
 
     if (!loginInput) {
-      return setLoginError('Input login!');
+      return setLoginError(t('am_e_login-zero-input')!);
     }
 
     if (loginInput.length < 5) {
-      return setLoginError('Min length of input is 5 symbols!');
+      return setLoginError(t('am_e_login-min-length')!);
     }
 
     if (!passwordInput) {
-      return setPasswordError('Input password!');
+      return setPasswordError(t('am_e_password-zero-input')!);
     }
 
     if (passwordInput.length < 7) {
-      return setPasswordError('Min length of input is 5 symbols!');
+      return setPasswordError(t('am_e_password-min-length')!);
     }
 
     if (!codeInput) {
-      return setCodeError('Input code!');
+      return setCodeError(t('am_e_auth-code-zero-input')!);
     }
 
-    dispatch(register({
-      login: loginInput,
-      password: passwordInput,
-      authCode: codeInput,
-    }));
+    dispatch(
+      register({
+        login: loginInput,
+        password: passwordInput,
+        authCode: codeInput,
+      }),
+    );
   };
 
   useEffect(() => {
@@ -78,7 +82,6 @@ const RegisterModal = () => {
     );
   }, [authorized]);
 
-
   return (
     <Modal
       onExit={onExit}
@@ -86,12 +89,12 @@ const RegisterModal = () => {
       state={registerModal}
       setState={setRegisterModal}
     >
-      <h1 className={cl.title}>Sign up</h1>
+      <h1 className={cl.title}>{t('am_register-title')}</h1>
       <div className={cl.inputsContainer}>
         <Input
           value={loginInput}
           onChange={onLoginChange}
-          placeholder={'Login'}
+          placeholder={t('am_login-placeholder')!}
           container={true}
         >
           <ErrorMessage error={loginError} />
@@ -99,7 +102,7 @@ const RegisterModal = () => {
         <Input
           value={passwordInput}
           onChange={onPasswordChange}
-          placeholder={'Password'}
+          placeholder={t('am_password-placeholder')!}
           type={'password'}
           container={true}
         >
@@ -108,20 +111,22 @@ const RegisterModal = () => {
         <Input
           value={codeInput}
           onChange={onCodeChange}
-          placeholder={'Auth code'}
+          placeholder={t('am_auth-code-placeholder')!}
           container={true}
         >
           <button onClick={openCodeModal} className={cl.createCodeButton}>
-            Create auth code
+            {t('am_auth-code-create')}
           </button>
           <ErrorMessage error={codeError} />
         </Input>
       </div>
       <div className={cl.buttonsContainer}>
         <button onClick={openLoginModal} className={cl.loginButton}>
-          Already have account? Login
+          {t('am_login-link')}
         </button>
-        <Button onClick={onRegisterButtonClick} className={cl.registerButton}>Register</Button>
+        <Button onClick={onRegisterButtonClick} className={cl.registerButton}>
+          {t('am_register-button')}
+        </Button>
       </div>
     </Modal>
   );

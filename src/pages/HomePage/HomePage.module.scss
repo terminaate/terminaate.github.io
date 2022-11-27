@@ -1,9 +1,188 @@
 .homePage {
-  position: absolute;
-  height: 100%;
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+
+  .homePageContainer {
+    max-width: 600px;
+
+    .canvasContainer {
+      width: 100%;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      //background: #fff;
+      position: relative;
+
+      .greetingsBlock {
+        position: absolute;
+        width: 100%;
+        background-color: var(--background-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+        border-radius: 5px;
+        padding: 15px;
+        bottom: 10px;
+
+        span {
+          font-size: 16px;
+          font-weight: 500;
+          font-family: var(--font-primary);
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+
+          img {
+            height: 20px;
+          }
+
+          span {
+            font-weight: 600;
+            position: relative;
+
+            div {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              height: 100%;
+              width: 15px;
+              background-color: var(--text-primary);
+              filter: blur(10px);
+              animation: blurMovingAnimation 2s both infinite;
+
+              @keyframes blurMovingAnimation {
+                30% {
+                  left: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .userContainer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .userContent {
+        display: flex;
+        row-gap: 2px;
+        flex-direction: column;
+
+        .name {
+          font-family: var(--font-primary);
+          font-weight: 700;
+          font-size: 32px;
+          position: relative;
+        }
+
+        .logoContainer {
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+
+          img {
+            height: 25px;
+          }
+
+          .logoText {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            font-size: 17px;
+          }
+        }
+      }
+
+      .userImage {
+        width: 100px;
+        height: 100px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .skillsContainer {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+
+      .skillsTitle {
+        font-weight: 600;
+        font-family: var(--font-primary);
+        font-size: 20px;
+
+        &:after {
+          content: ' ';
+          position: absolute;
+          top: 90%;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          height: 4px;
+          background-color: var(--text-secondary);
+        }
+      }
+
+      .skillsContent {
+        padding-left: 20px;
+        margin-top: 15px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .skillContainer {
+          display: flex;
+          flex-direction: column;
+          margin-top: 5px;
+
+          .skillTitle {
+            font-weight: 600;
+            font-family: var(--font-primary);
+            font-size: 17px;
+
+            &:after {
+              content: ' ';
+              position: absolute;
+              top: 90%;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              width: 100%;
+              height: 4px;
+              background-color: var(--text-secondary);
+            }
+          }
+
+          .skillContents {
+            margin-top: 10px;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+
+            .skillContent {
+              display: flex;
+              align-items: center;
+              column-gap: 5px;
+              font-size: 17px;
+
+              .skillContentText {
+                font-family: var(--font-primary);
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -61,14 +61,14 @@ class Particle {
 }
 
 const Particles: FC<IParticles> = ({
-                                     particlesCount = 50,
-                                     particlesSize = Math.random() * 2,
-                                     particlesColor = '#fff',
-                                     particlesVelocity = 0.4,
-                                     className = '',
-                                     height = '100%',
-                                     width = '100%',
-                                   }) => {
+  particlesCount = 50,
+  particlesSize = Math.random() * 2,
+  particlesColor = '#fff',
+  particlesVelocity = 0.4,
+  className = '',
+  height = '100%',
+  width = '100%',
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const getHeight = useCallback(() => {

@@ -1,62 +1,107 @@
-import React, { FC, MouseEventHandler, useEffect, useState } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import cl from './TypingText.module.scss';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import classNames from 'classnames';
 
-interface ITypingText {
+interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
   defaultDelay?: number;
-  className?: string;
-  onClick?: MouseEventHandler;
+  animateOnVisible?: boolean;
+  containerClassName?: string;
 }
 
 const TypingText: FC<ITypingText> = ({
-  text,
-  defaultDelay = 300,
-  className = '',
-  onClick,
-}) => {
+                                       text,
+                                       defaultDelay = 300,
+                                       animateOnVisible = false,
+                                       containerClassName,
+                                       ...props
+                                     }) => {
   const [renderedWords, setRenderedWords] = useState<string[]>([]);
+  const parsedText = useRef<Array<Record<string, any>>>([]);
+  const containerRef = useIntersectionObserver(() => {
+    if (animateOnVisible && parsedText.current.length) {
+      animate();
+    }
+  });
+  const oldText = useRef<ITypingText['text']>(text);
+  const [animationIsOn, setAnimationIsOn] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (!Array.isArray(text)) {
-      text = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
+  const parseText = () => {
+    parsedText.current = [];
+    let textArray: (string | number)[];
+
+    if (Array.isArray(text)) {
+      textArray = text;
+    } else {
+      textArray = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
     }
 
-    const formattedText: Array<Record<string, any>> = [];
-
-    for (let i = 0; i < text.length; i++) {
-      if (typeof text[i] === 'number' && typeof text[i + 1] === 'string') {
-        formattedText.push({ text: text[i + 1], delay: text[i] });
+    for (let i = 0; i < textArray.length; i++) {
+      if (typeof textArray[i] === 'number' && typeof textArray[i + 1] === 'string') {
+        parsedText.current.push({ text: textArray[i + 1], delay: textArray[i] });
       } else if (
-        typeof text[i] === 'string' &&
-        typeof text[i - 1] !== 'number'
+        typeof textArray[i] === 'string' &&
+        typeof textArray[i - 1] !== 'number'
       ) {
-        formattedText.push({ text: text[i] });
+        parsedText.current.push({ text: textArray[i] });
       } else if (
-        typeof text[i] === 'number' &&
-        typeof text[i + 1] !== 'string'
+        typeof textArray[i] === 'number' &&
+        typeof textArray[i + 1] !== 'string'
       ) {
-        formattedText.push({ delay: text[i] });
+        parsedText.current.push({ delay: textArray[i] });
       }
     }
+  };
 
-    for (const i in formattedText) {
-      setTimeout(() => {
-        setRenderedWords((words: string[]) => [
-          ...words,
-          formattedText[i].text,
-        ]);
-      }, (formattedText[i].delay ? formattedText[i].delay : defaultDelay) * Number(i));
+  const animate = () => {
+    setAnimationIsOn(true);
+    return new Promise(resolve => {
+      for (const i in parsedText.current) {
+        const timeout = setTimeout(() => {
+          const isLastIndex = Number(i) === parsedText.current.length - 1;
+          if (isLastIndex) {
+            setAnimationIsOn(false);
+            clearTimeout(timeout);
+            return resolve(0);
+          }
+          setRenderedWords((words: string[]) => [
+            ...words,
+            parsedText.current[i].text,
+          ]);
+        }, (parsedText.current[i].delay ? parsedText.current[i].delay : defaultDelay) * Number(i));
+      }
+    });
+  };
+
+  useEffect(() => {
+    parseText();
+    if (!animateOnVisible) {
+      animate();
     }
   }, []);
 
+  useEffect(() => {
+    if (text !== oldText.current && !animationIsOn) {
+      // setNewTextDetected();
+      setRenderedWords([]);
+      parseText();
+      if (!animateOnVisible) {
+        animate();
+      }
+      oldText.current = text;
+    }
+  }, [text, animationIsOn]);
+
   return (
-    <div className={cl.typingTextContainer}>
+    <div
+      ref={containerRef}
+      className={classNames(cl.typingTextContainer, containerClassName!)}
+    >
       {renderedWords.map((obj, key) => (
-        <>
-          <span onClick={onClick} className={className} key={key}>
-            {obj}
-          </span>
-        </>
+        <span key={key} {...props}>
+          {obj}
+        </span>
       ))}
     </div>
   );

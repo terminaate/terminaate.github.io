@@ -5,9 +5,10 @@ class DateService {
       return d;
     }
     const hours = date.getHours() < 9 ? '0' + date.getHours() : date.getHours();
-    const minutes = date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
+    const minutes =
+      date.getMinutes() < 9 ? '0' + date.getMinutes() : date.getMinutes();
     return `${hours}:${minutes} ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
   }
 }
 
-export default new DateService()
+export default new DateService();

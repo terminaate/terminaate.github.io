@@ -5,7 +5,7 @@
   .title {
     font-size: 18px;
     font-family: var(--font-primary);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .inputsContainer {
@@ -37,7 +37,7 @@
     }
 
     .registerButton {
-      width: 80px;
+      min-width: 80px;
     }
   }
 }

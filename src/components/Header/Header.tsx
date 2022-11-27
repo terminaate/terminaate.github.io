@@ -10,28 +10,36 @@ import { setModal } from '@/store/reducers/modalsSlice';
 import { userAvatarUrl } from '@/http';
 import { UserData } from '@/types/UserData';
 
+type RouteProps = {
+  path: string;
+  text: string;
+  icon: JSX.Element;
+  external?: boolean;
+};
+
+const routes: RouteProps[] = [
+  {
+    path: '/posts',
+    text: 'Posts',
+    icon: <MdArticle />,
+  },
+  {
+    path: '/works',
+    text: 'Works',
+    icon: <GrUserWorker />,
+  },
+  {
+    path: 'https://github.com/terminaate/terminaate.github.io',
+    text: 'Github',
+    icon: <FaGithub />,
+    external: true,
+  },
+];
+
 const Header = () => {
   const location = useLocation();
   const { authorized, user } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
-
-  const routes = [
-    {
-      path: '/posts',
-      text: 'Posts',
-      icon: <MdArticle />,
-    },
-    {
-      path: '/works',
-      text: 'Works',
-      icon: <GrUserWorker />,
-    },
-    {
-      path: '/github',
-      text: 'Github',
-      icon: <FaGithub />,
-    },
-  ];
 
   const onUserButtonClick = () => {
     if (!authorized) {
@@ -49,27 +57,36 @@ const Header = () => {
       <div className={cl.headerContainer}>
         <div className={cl.linksContainer}>
           <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt='' />
+            <img src={logoImg} alt="T$rm1naate" />
           </Link>
           {routes.map((route, key) => (
-            <NavPreventedLink key={key} to={route.path}>
-              {route.icon}
-              <motion.span
-                initial={{ color: 'var(--text-secondary)' }}
-                animate={
-                  location.pathname === route.path && {
-                    color: 'var(--text-primary)',
-                  }
-                }
-                exit={{ color: 'var(--text-secondary)' }}
-              >
-                {route.text}
-              </motion.span>
-            </NavPreventedLink>
+            <div key={key}>
+              {route.external ? (
+                <a href={route.path} target={'_blank'} rel="noreferrer">
+                  {route.icon}
+                  <span>{route.text}</span>
+                </a>
+              ) : (
+                <NavPreventedLink to={route.path}>
+                  {route.icon}
+                  <motion.span
+                    initial={{ color: 'var(--text-secondary)' }}
+                    animate={
+                      location.pathname === route.path && {
+                        color: 'var(--text-primary)',
+                      }
+                    }
+                    exit={{ color: 'var(--text-secondary)' }}
+                  >
+                    {route.text}
+                  </motion.span>
+                </NavPreventedLink>
+              )}
+            </div>
           ))}
         </div>
         <button onClick={onUserButtonClick} className={cl.userAvatar}>
-          <img src={userAvatarUrl + user.id} alt='' />
+          <img src={userAvatarUrl + user.id} alt="" />
         </button>
       </div>
     </header>

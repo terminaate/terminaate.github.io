@@ -1,6 +1,18 @@
-import React, { ChangeEvent, FC, MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import cl from './PlayerControls.module.scss';
-import { BiHelpCircle, IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeMute } from 'react-icons/all';
+import {
+  BiHelpCircle,
+  IoMdVolumeHigh,
+  IoMdVolumeLow,
+  IoMdVolumeMute,
+} from 'react-icons/all';
 import { useAppDispatch } from '@/store';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
 import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
@@ -11,12 +23,16 @@ interface IPlayerControls {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PlayerControls: FC<IPlayerControls> = ({ playerRef, state, setState }) => {
+const PlayerControls: FC<IPlayerControls> = ({
+  playerRef,
+  state,
+  setState,
+}) => {
   const dispatch = useAppDispatch();
   const [playerVolume, setPlayerVolume] = useState<number>(
     Number(localStorage.getItem('volume')) ||
-    playerRef.current?.getVolume() ||
-    10,
+      playerRef.current?.getVolume() ||
+      10,
   );
   const oldVolume = useRef<number>(playerVolume);
 
@@ -53,7 +69,9 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef, state, setState }) => 
     const notificationElement = (
       <>
         <span>{playerRef.current?.getVideoData().title}</span>
-        <span style={{ color: 'var(--green)' }}>(Copied to your clipboard)</span>
+        <span style={{ color: 'var(--green)' }}>
+          (Copied to your clipboard)
+        </span>
       </>
     );
     dispatch(setNotificationText(notificationElement));
@@ -95,7 +113,7 @@ const PlayerControls: FC<IPlayerControls> = ({ playerRef, state, setState }) => 
         </button>
         <input
           className={cl.volumeInput}
-          type='range'
+          type="range"
           value={playerVolume}
           min={0}
           max={100}

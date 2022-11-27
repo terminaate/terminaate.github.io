@@ -61,7 +61,7 @@
           }
         }
 
-        &[data-active="true"] {
+        &[data-active='true'] {
           background: none;
           backdrop-filter: blur(2px);
         }
@@ -90,6 +90,5 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
-
   }
 }

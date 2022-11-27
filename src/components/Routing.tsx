@@ -9,7 +9,6 @@ import { History } from '@/utils/history';
 import { useAppDispatch } from '@/store';
 import { refresh } from '@/store/reducers/user/authAPI';
 import WorksPage from '@/pages/WorksPage';
-import GithubPage from '@/pages/GithubPage';
 import AuthorizedRoute from '@/components/AuthorizedRoute';
 
 const PostPage = lazy(() => import('@/pages/PostPage'));
@@ -40,18 +39,23 @@ const Routing = () => {
           <Route path={'/home'} element={<HomePage />} />
           <Route path={'/posts'} element={<PostsPage />} />
           <Route path={'/posts/:id'} element={<PostPage />} />
-          <Route path={'/posts/:id/edit'} element={
-            <AuthorizedRoute>
-              <EditPostPage />
-            </AuthorizedRoute>
-          } />
-          <Route path={'/posts/create'} element={
-            <AuthorizedRoute>
-              <CreatePostPage />
-            </AuthorizedRoute>
-          } />
+          <Route
+            path={'/posts/:id/edit'}
+            element={
+              <AuthorizedRoute>
+                <EditPostPage />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path={'/posts/create'}
+            element={
+              <AuthorizedRoute>
+                <CreatePostPage />
+              </AuthorizedRoute>
+            }
+          />
           <Route path={'/works'} element={<WorksPage />} />
-          <Route path={'/github'} element={<GithubPage />} />
           <Route path={'/*'} element={<NotFoundPage />} />
         </Routes>
       </AnimatePresence>

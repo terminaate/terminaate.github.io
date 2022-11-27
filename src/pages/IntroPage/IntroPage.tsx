@@ -1,16 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import cl from './IntroPage.module.scss';
 import TypingText from '@/components/TypingText';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BasicPage from '@/components/BasicPage';
+import { useTranslation } from 'react-i18next';
 
 const IntroPage = () => {
   const visited = useRef<boolean>(Boolean(Math.floor(Math.random() * 2)));
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { t, i18n: { language: lang } } = useTranslation('intro');
+
+  useLayoutEffect(() => {
+    if (localStorage.getItem('visited') === null) {
+      visited.current = false;
+      localStorage.setItem('visited', true + '');
+    }
+  }, []);
+
+  console.log(t('intro_main'));
+  useEffect(() => {
+  }, [lang]);
 
   useEffect(() => {
+
     addEventListener('mousemove', onMouseMoveEventHandler);
 
     return () => removeEventListener('mousemove', onMouseMoveEventHandler);
@@ -41,13 +55,11 @@ const IntroPage = () => {
           <TypingText
             onClick={onTypingTextClick}
             className={visited.current ? cl.introTypingVisitedText : ''}
-            text={
-              'A programmer is a person who writes code and compiles it himself into an executable file, so we are all "script kiddy")'
-            }
+            text={t('intro_main')!}
           />
           <div onClick={skipButtonClickHandler} className={cl.introSkipButton}>
             <motion.span exit={{ marginRight: '15px' }}>-</motion.span>
-            <span>{visited.current ? 'skip' : 'who.... cares?'}</span>
+            <span>{'skip'}</span>
           </div>
         </div>
       </div>

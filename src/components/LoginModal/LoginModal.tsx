@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { setModal } from '@/store/reducers/modalsSlice';
 import ErrorMessage from '@/components/ErrorMessage';
 import { login } from '@/store/reducers/user/authAPI';
+import { useTranslation } from 'react-i18next';
 
 const LoginModal = () => {
   const [loginInput, onLoginChange, setLoginInput] = useInputState('');
@@ -19,6 +20,7 @@ const LoginModal = () => {
   const { loginModal } = useAppSelector((state) => state.modalsSlice);
   const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('auth');
 
   const setLoginModal = (state: boolean) => {
     dispatch(setModal({ loginModal: state }));
@@ -46,23 +48,23 @@ const LoginModal = () => {
     setPasswordError('');
 
     if (!loginInput) {
-      return setLoginError('Input login!');
+      return setLoginError(t('am_e_login-zero-input')!);
     }
 
     if (loginInput.length < 5) {
-      return setLoginError('Min length of input is 5 symbols!');
+      return setLoginError(t('am_e_login-min-length')!);
     }
 
     if (!passwordInput) {
-      return setPasswordError('Input password!');
+      return setPasswordError(t('am_e_password-zero-input')!);
     }
 
     if (passwordInput.length < 7) {
-      return setPasswordError('Min length of input is 5 symbols!');
+      return setPasswordError(t('am_e_password-min-length')!);
     }
 
     if (!codeInput) {
-      return setCodeError('Input code!');
+      return setCodeError(t('am_e_auth-code-zero-input')!);
     }
 
     dispatch(
@@ -87,12 +89,12 @@ const LoginModal = () => {
       state={loginModal}
       setState={setLoginModal}
     >
-      <h1 className={cl.title}>Sign in</h1>
+      <h1 className={cl.title}>{t('am_login-title')}</h1>
       <div className={cl.inputsContainer}>
         <Input
           value={loginInput}
           onChange={onLoginChange}
-          placeholder={'Login'}
+          placeholder={t('am_login-placeholder')!}
           container={true}
         >
           <ErrorMessage error={loginError} />
@@ -100,7 +102,7 @@ const LoginModal = () => {
         <Input
           value={passwordInput}
           onChange={onPasswordChange}
-          placeholder={'Password'}
+          placeholder={t('am_password-placeholder')!}
           type={'password'}
           container={true}
         >
@@ -109,21 +111,21 @@ const LoginModal = () => {
         <Input
           value={codeInput}
           onChange={onCodeChange}
-          placeholder={'Auth code'}
+          placeholder={t('am_auth-code-placeholder')!}
           container={true}
         >
           <button onClick={openCodeModal} className={cl.createCodeButton}>
-            Create auth code
+            {t('am_auth-code-create')}
           </button>
           <ErrorMessage error={codeError} />
         </Input>
       </div>
       <div className={cl.buttonsContainer}>
         <button onClick={openRegisterModal} className={cl.registerButton}>
-          Don't have account? Register
+          {t('am_register-link')}
         </button>
         <Button onClick={onLoginButtonClick} className={cl.loginButton}>
-          Login
+          {t('am_login-button')}
         </Button>
       </div>
     </Modal>

@@ -30,9 +30,10 @@ const PostsPage: FC = () => {
   const navigate = useNavigate();
 
   const getPostContent = (content: string) => {
-    return (content.length > 40
-      ? content.slice(0, content.length / 1.5)
-      : content) + '...';
+    return (
+      (content.length > 40 ? content.slice(0, content.length / 1.5) : content) +
+      '...'
+    );
   };
 
   const getServerData = async () => {
@@ -132,7 +133,7 @@ const PostsPage: FC = () => {
                   className={cl.authorContainer}
                 >
                   <div className={cl.authorImage}>
-                    <img src={userAvatarUrl + post.author.id} alt='' />
+                    <img src={userAvatarUrl + post.author.id} alt="" />
                   </div>
                   <span>{post.author.login}</span>
                 </div>
@@ -148,7 +149,12 @@ const PostsPage: FC = () => {
                   >
                     Delete
                   </Button>
-                  <Button onClick={(e) => changePost(e, post.id)} className={cl.changePostButton}>Change</Button>
+                  <Button
+                    onClick={(e) => changePost(e, post.id)}
+                    className={cl.changePostButton}
+                  >
+                    Change
+                  </Button>
                 </div>
               )}
             </motion.div>

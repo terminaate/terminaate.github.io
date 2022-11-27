@@ -18,16 +18,22 @@ type TabProps = {
   title: string;
   icon: ReactElement;
   content: (...props: any) => ReactElement;
-}
+};
 const tabs: TabProps[] = [
   {
     key: 0,
     title: 'Code',
     icon: <BsCode />,
-    content: (content: string, onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void) => (
+    content: (
+      content: string,
+      onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+    ) => (
       <TextArea
-        className={cl.textArea} rows={19} cols={30}
-        value={content} onChange={onContentChange}
+        className={cl.textArea}
+        rows={19}
+        cols={30}
+        value={content}
+        onChange={onContentChange}
         placeholder={'Content there...'}
         inputMode={'none'}
       />
@@ -77,19 +83,25 @@ const CreatePostPage = () => {
       <div className={cl.textAreaContainer}>
         <div className={cl.tabs}>
           {tabs.map((tab, k) => (
-            <div onClick={() => setCurrentTab(tab.key)} className={cl.tabContainer} key={k}
-                 data-active={tab.key === currentTab}>
+            <div
+              onClick={() => setCurrentTab(tab.key)}
+              className={cl.tabContainer}
+              key={k}
+              data-active={tab.key === currentTab}
+            >
               <div className={cl.tabContent}>
                 {tab.icon}
                 <h3 className={cl.tabTitle}>{tab.title}</h3>
               </div>
               {tab.key === currentTab && (
-                <motion.div className={cl.underline} layoutId='underline' />
+                <motion.div className={cl.underline} layoutId="underline" />
               )}
             </div>
           ))}
         </div>
-        {tabs.find(e => e.key === currentTab)!.content(content, onContentChange)}
+        {tabs
+          .find((e) => e.key === currentTab)!
+          .content(content, onContentChange)}
       </div>
       <div className={cl.buttonsContainer}>
         <Button onClick={onCreateButtonClick}>Create</Button>

@@ -11,7 +11,7 @@ const UserModal = () => {
   const { userModal, userModalData } = useAppSelector(
     (state) => state.modalsSlice,
   );
-  const { user } = useAppSelector(state => state.userSlice);
+  const { user } = useAppSelector((state) => state.userSlice);
   const isUserOwner = user.id === userModalData?.id;
   const dispatch = useAppDispatch();
 
@@ -29,11 +29,15 @@ const UserModal = () => {
   };
 
   return (
-    <Modal contentClassName={cl.userModal} state={userModal} setState={setUserModal}>
+    <Modal
+      contentClassName={cl.userModal}
+      state={userModal}
+      setState={setUserModal}
+    >
       <header className={cl.header}>
         <div className={cl.userInfoContainer}>
           <div className={cl.userImage}>
-            <img src={userAvatarUrl + userModalData?.id} alt='' />
+            <img src={userAvatarUrl + userModalData?.id} alt="" />
           </div>
           <span className={cl.userName}>{userModalData?.login}</span>
         </div>

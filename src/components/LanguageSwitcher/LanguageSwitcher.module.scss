@@ -1,0 +1,36 @@
+.container {
+  position: fixed;
+  bottom: 2rem;
+  right: 3rem;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  z-index: 10000;
+
+  .languageButton {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    padding-block: 5px;
+    border-radius: 5px;
+
+    span {
+      color: var(--text-primary);
+    }
+
+    .underline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      mix-blend-mode: difference;
+      border-radius: 2px;
+      background-color: var(--text-primary);
+    }
+  }
+}
