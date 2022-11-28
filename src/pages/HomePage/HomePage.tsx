@@ -55,7 +55,7 @@ const HomePage = () => {
           animateOnVisible={true}
         />
         <div className={cl.skillsContent}>
-          {skills.map((skill: SkillProps, key: number) => (
+          {skills.map((skill, key) => (
             <div key={key} className={cl.skillContainer}>
               <TypingText
                 className={cl.skillTitle}
@@ -63,7 +63,7 @@ const HomePage = () => {
                 animateOnVisible={true}
               />
               <div className={cl.skillContents}>
-                {skill.content.map((content: SkillProps['content'], key: number) => (
+                {skill.content.map((content, key) => (
                   <div className={cl.skillContent} key={key}>
                     {content.icon && (
                       <>
