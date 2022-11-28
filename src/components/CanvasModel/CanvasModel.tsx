@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as Three from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import cl from './CanvasModel.module.scss';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 const CanvasModel = () => {
   const containerRef = useRef<null | HTMLDivElement>(null);
@@ -33,36 +33,37 @@ const CanvasModel = () => {
 
       const scene = new Three.Scene();
       const camera = new Three.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.set(5, 2.5, 0);
+      camera.position.set(3, 1, 0);
       // camera.rotation.set(0, 0, 0);
       camera.lookAt(0, 0, 0);
 
       const controls = new OrbitControls(camera, renderer.domElement);
-      controls.target = new Three.Vector3(0, 2.5, 0);
+      controls.target = new Three.Vector3(0, 1, 0);
       controls.enableDamping = true;
       controls.enablePan = false;
       controls.autoRotate = true;
       controls.autoRotateSpeed = 5;
 
-      const ambientLight = new Three.AmbientLight(0xcccccc, 1);
+      const ambientLight = new Three.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
 
       const gltfLoader = new GLTFLoader();
+      const loadModel = (gltf: GLTF) => {
+        gltf.scene.position.set(0, 0, 0);
+        scene.add(gltf.scene);
+        setLoading(false);
+      };
+
       if (modelUrl instanceof Promise) {
         modelUrl.then(url => {
-          gltfLoader.load(url.default, (gltf) => {
-            gltf.scene.position.set(0, 2.5, 0);
-            scene.add(gltf.scene);
-            setLoading(false);
-          });
+          gltfLoader.load(url.default, loadModel);
         });
       } else {
-        gltfLoader.load(modelUrl, (gltf) => {
-          gltf.scene.position.set(0, 2.5, 0);
-          scene.add(gltf.scene);
-          setLoading(false);
-        });
+        gltfLoader.load(modelUrl, loadModel);
       }
+
+      // const gridHelper = new Three.GridHelper();
+      // scene.add(gridHelper);
 
       let req: number;
       const loop = () => {
