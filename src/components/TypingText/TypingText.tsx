@@ -9,16 +9,18 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   animateOnVisible?: boolean;
   visibleProps?: HTMLAttributes<HTMLSpanElement>;
   containerClassName?: string;
+  initialAnimate?: boolean;
 }
 
 const TypingText: FC<ITypingText> = ({
-  text,
-  defaultDelay = 300,
-  animateOnVisible = false,
-  visibleProps = {},
-  containerClassName,
-  ...props
-}) => {
+                                       text,
+                                       defaultDelay = 300,
+                                       animateOnVisible = false,
+                                       visibleProps = {},
+                                       containerClassName,
+                                       initialAnimate,
+                                       ...props
+                                     }) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
@@ -34,8 +36,7 @@ const TypingText: FC<ITypingText> = ({
         animate(false);
         setIsVisible(false);
       }
-    },
-  );
+    });
   const oldText = useRef<ITypingText['text']>(text);
 
   const pushParsedText = (newObj: Record<string, any>) => {
@@ -54,6 +55,8 @@ const TypingText: FC<ITypingText> = ({
         .map((obj) => (Number(obj) ? Number(obj) : obj));
     }
 
+    const visible = initialAnimate ? initialAnimate : !animateOnVisible;
+
     for (let i = 0; i < textArray.length; i++) {
       if (
         typeof textArray[i] === 'number' &&
@@ -62,18 +65,18 @@ const TypingText: FC<ITypingText> = ({
         pushParsedText({
           text: textArray[i + 1],
           delay: textArray[i],
-          visible: !animateOnVisible,
+          visible,
         });
       } else if (
         typeof textArray[i] === 'string' &&
         typeof textArray[i - 1] !== 'number'
       ) {
-        pushParsedText({ text: textArray[i], visible: !animateOnVisible });
+        pushParsedText({ text: textArray[i], visible });
       } else if (
         typeof textArray[i] === 'number' &&
         typeof textArray[i + 1] !== 'string'
       ) {
-        pushParsedText({ delay: textArray[i], visible: !animateOnVisible });
+        pushParsedText({ delay: textArray[i], visible });
       }
     }
   };

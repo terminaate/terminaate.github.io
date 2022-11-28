@@ -26,7 +26,7 @@ const HomePage = () => {
               components={{
                 span: <span />,
                 div: <div />,
-                logo: <img src={logoImg} alt="" />,
+                logo: <img src={logoImg} alt='' />,
               }}
             />
           </span>
@@ -38,9 +38,10 @@ const HomePage = () => {
             text={t('name')!}
             animateOnVisible={true}
             className={cl.name}
+            initialAnimate={true}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt="T$rm1naate" />
+            <img src={logoImg} alt='T$rm1naate' />
           </div>
         </div>
         <div className={cl.userImage}>img</div>
@@ -51,6 +52,7 @@ const HomePage = () => {
           text={t('about-me_title')!}
           animateOnVisible={true}
           visibleProps={{ className: cl.visibleTitle }}
+          initialAnimate={true}
         />
         <span className={cl.aboutText}>{t('about-me_main')}</span>
       </div>
@@ -60,6 +62,7 @@ const HomePage = () => {
           text={t('skills_title')!}
           animateOnVisible={true}
           visibleProps={{ className: cl.visibleTitle }}
+          initialAnimate={true}
         />
         <div className={cl.skillsContent}>
           {skills.map((skill, key) => (
