@@ -5,11 +5,16 @@ import {
   FaHtml5,
   FaReact,
   FaVuejs,
+  SiDocker,
   SiElectron,
   SiExpress,
   SiFramer,
+  SiGit,
+  SiGithub,
+  SiGithubactions,
   SiGulp,
   SiJavascript,
+  SiLinux,
   SiMobx,
   SiMongodb,
   SiMysql,
@@ -33,7 +38,7 @@ export type SkillProps = {
   title: string;
   content: Array<{
     text: string;
-    icon?: JSX.Element;
+    icon?: ReactElement;
   }>;
 };
 
@@ -131,7 +136,7 @@ export const skills: SkillProps[] = [
         icon: <SiNestjs />,
       },
       {
-        text: 'Electron',
+        text: 'Electron.js',
         icon: <SiElectron />,
       },
     ],
@@ -164,6 +169,10 @@ export const skills: SkillProps[] = [
         text: 'Sequelize',
         icon: <SiSequelize />,
       },
+      {
+        text: 'Mongoose',
+        icon: <SiMongodb />,
+      },
     ],
   },
   {
@@ -180,6 +189,31 @@ export const skills: SkillProps[] = [
       },
       {
         text: 'YAGNI',
+      },
+    ],
+  },
+  {
+    title: 'Devops',
+    content: [
+      {
+        text: 'Git',
+        icon: <SiGit />,
+      },
+      {
+        text: 'Github',
+        icon: <SiGithub />,
+      },
+      {
+        text: 'Docker',
+        icon: <SiDocker />,
+      },
+      {
+        text: 'CI/CD (Github actions)',
+        icon: <SiGithubactions />,
+      },
+      {
+        text: 'Linux',
+        icon: <SiLinux />,
       },
     ],
   },

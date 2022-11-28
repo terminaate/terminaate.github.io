@@ -7,6 +7,7 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
   defaultDelay?: number;
   animateOnVisible?: boolean;
+  visibleProps?: HTMLAttributes<HTMLSpanElement>;
   containerClassName?: string;
 }
 
@@ -14,6 +15,7 @@ const TypingText: FC<ITypingText> = ({
                                        text,
                                        defaultDelay = 300,
                                        animateOnVisible = false,
+                                       visibleProps = {},
                                        containerClassName,
                                        ...props
                                      }) => {
@@ -96,6 +98,8 @@ const TypingText: FC<ITypingText> = ({
     }
   }, [text]);
 
+  const classes = classNames([props.className, { [visibleProps?.className ?? '']: animateOnVisible && isVisible }]);
+  const mergedProps = { ...props, ...((animateOnVisible && isVisible) ? visibleProps : {}) };
   return (
     <div
       ref={containerRef}
@@ -104,7 +108,10 @@ const TypingText: FC<ITypingText> = ({
       {parsedText.map((obj, key) => (
         <span data-visible={obj.visible}
               style={{ animationDelay: (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms' }}
-              key={key} {...props}>
+              key={key}
+              {...mergedProps}
+              className={classes}
+        >
           {obj.text}
         </span>
       ))}

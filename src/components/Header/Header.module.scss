@@ -22,14 +22,6 @@
       align-items: center;
       justify-content: left;
 
-      @media screen and (max-width: 620px) {
-        display: none;
-
-        .homeLink {
-          display: flex !important;
-        }
-      }
-
       .homeLink {
         width: max-content;
         height: max-content;
@@ -80,6 +72,16 @@
             stroke: var(--text-primary);
             color: var(--text-primary);
           }
+        }
+      }
+
+      @media screen and (max-width: 620px) {
+        a {
+          display: none;
+        }
+
+        .homeLink {
+          display: flex !important;
         }
       }
     }

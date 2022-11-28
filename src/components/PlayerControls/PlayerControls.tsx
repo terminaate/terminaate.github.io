@@ -20,13 +20,11 @@ import { YouTubePlayer as YouTubeTarget } from 'react-youtube';
 interface IPlayerControls {
   playerRef: MutableRefObject<null | YouTubeTarget>;
   state: boolean;
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PlayerControls: FC<IPlayerControls> = ({
   playerRef,
   state,
-  setState,
 }) => {
   const dispatch = useAppDispatch();
   const [playerVolume, setPlayerVolume] = useState<number>(

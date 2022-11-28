@@ -10,7 +10,7 @@ const Player = () => {
   return (
     <>
       <YoutubePlayer playerRef={playerRef} state={state} setState={setState} />
-      <PlayerControls playerRef={playerRef} state={state} setState={setState} />
+      <PlayerControls playerRef={playerRef} state={state} />
     </>
   );
 };

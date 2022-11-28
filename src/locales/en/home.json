@@ -2,5 +2,6 @@
   "greetings": "Hello world! I'm <logo/> and i'm <span>young frontend developer<div></div></span>",
   "name": "Bahram Itkulov",
   "skills_title": "Skills",
-  "about-me_title": "About me"
+  "about-me_title": "About me",
+  "about-me_main": "Bahram is a young web developer living in Russia, he devotes most of his time to developing his own small projects, and self-improvement, he has been doing web development for about 2 years, during which time he studied the frontend and backend spheres, at the moment he positions himself as a React front-end developer."
 }

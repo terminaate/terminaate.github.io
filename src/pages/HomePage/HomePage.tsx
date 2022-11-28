@@ -3,7 +3,7 @@ import cl from './HomePage.module.scss';
 import BasicPage from '@/components/BasicPage';
 import logoImg from '!/logo.svg';
 import TypingText from '@/components/TypingText';
-import { SkillProps, skills } from '@/pages/HomePage/data';
+import { skills } from '@/pages/HomePage/data';
 import { Trans, useTranslation } from 'react-i18next';
 
 const HomePage = () => {
@@ -40,27 +40,30 @@ const HomePage = () => {
       </div>
       <div className={cl.aboutContainer}>
         <TypingText
-          className={cl.aboutTitle}
+          className={cl.title}
           text={t('about-me_title')!}
           animateOnVisible={true}
+          visibleProps={{ className: cl.visibleTitle }}
         />
         <span className={cl.aboutText}>
-          Bahram is a freelance and a full-stack developer based in Russia
+          {t('about-me_main')}
         </span>
       </div>
       <div className={cl.skillsContainer}>
         <TypingText
-          className={cl.skillsTitle}
+          className={cl.title}
           text={t('skills_title')!}
           animateOnVisible={true}
+          visibleProps={{ className: cl.visibleTitle }}
         />
         <div className={cl.skillsContent}>
           {skills.map((skill, key) => (
             <div key={key} className={cl.skillContainer}>
               <TypingText
-                className={cl.skillTitle}
+                className={cl.secondaryTitle}
                 text={skill.title}
                 animateOnVisible={true}
+                visibleProps={{ className: cl.visibleTitle }}
               />
               <div className={cl.skillContents}>
                 {skill.content.map((content, key) => (
