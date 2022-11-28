@@ -82,7 +82,6 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-      <span>asd</span>
     </BasicPage>
   );
 };

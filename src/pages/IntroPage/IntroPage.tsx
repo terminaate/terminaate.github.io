@@ -46,7 +46,7 @@ const IntroPage = () => {
   return (
     <BasicPage className={cl.introScreen}>
       <div className={cl.container}>
-        <div ref={containerRef} className={cl.introScreenContainer}>
+        <motion.div ref={containerRef} className={cl.introScreenContainer}>
           <TypingText
             onClick={onTypingTextClick}
             className={visited.current ? cl.introTypingVisitedText : ''}
@@ -56,7 +56,7 @@ const IntroPage = () => {
             <motion.span exit={{ marginRight: '15px' }}>-</motion.span>
             <span>{t('intro_skip')}</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </BasicPage>
   );

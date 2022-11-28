@@ -10,6 +10,7 @@ import { useAppDispatch } from '@/store';
 import { refresh } from '@/store/reducers/user/authAPI';
 import WorksPage from '@/pages/WorksPage';
 import AuthorizedRoute from '@/components/AuthorizedRoute';
+import LoadingPage from '@/pages/LoadingPage';
 
 const PostPage = lazy(() => import('@/pages/PostPage'));
 const EditPostPage = lazy(() => import('@/pages/EditPostPage'));
@@ -32,7 +33,7 @@ const Routing = () => {
   }, []);
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<LoadingPage/>}>
       <AnimatePresence mode={'wait'}>
         <Routes location={location} key={location.key}>
           <Route index element={<IntroPage />} />

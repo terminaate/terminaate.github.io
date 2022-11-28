@@ -1,17 +1,20 @@
 import { useEffect, useRef } from 'react';
 
 const useIntersectionObserver = (
-  cb: () => void,
+  cb: (t: Element) => void,
+  elseCb?: (t: Element) => void,
   options: IntersectionObserverInit = {},
 ) => {
   const elementRef = useRef(null);
 
   const observerRef = useRef(
-    new IntersectionObserver((entries, observer) => {
+    new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          cb();
-          observer.unobserve(entry.target);
+          cb(entry.target);
+          // observer.unobserve(entry.target);
+        } else if (elseCb) {
+          elseCb(entry.target);
         }
       });
     }, options),

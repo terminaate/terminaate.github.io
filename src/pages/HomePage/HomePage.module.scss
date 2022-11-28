@@ -55,10 +55,10 @@
               animation: blurMovingAnimation 4s infinite alternate;
 
               @keyframes blurMovingAnimation {
-                from {
+                0% {
                   left: 0;
                 }
-                to {
+                100% {
                   left: 95%;
                 }
               }
