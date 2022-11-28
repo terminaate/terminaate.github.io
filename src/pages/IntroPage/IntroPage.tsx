@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BasicPage from '@/components/BasicPage';
 import { useTranslation } from 'react-i18next';
+import Particles from '@/components/Particles';
 
 const IntroPage = () => {
   const visited = useRef<boolean>(Boolean(Math.floor(Math.random() * 2)));
@@ -48,6 +49,7 @@ const IntroPage = () => {
 
   return (
     <BasicPage className={cl.introScreen}>
+      <Particles/>
       <div className={cl.container}>
         <motion.div ref={containerRef} className={cl.introScreenContainer}>
           <TypingText

@@ -8,7 +8,7 @@ const CanvasModel = () => {
   const containerRef = useRef<null | HTMLDivElement>(null);
   const rendererRef = useRef<null | Three.WebGLRenderer>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const modelUrl = import.meta.env.PROD ? 'https://terminaate.netlify.app/model.glb' : import('#/models/model.glb?url');
+  const modelUrl = import.meta.env.PROD ? 'https://terminaate.netlify.app/model.glb' : new URL('../../assets/models/model.glb', import.meta.url);
 
   const handleWindowResize = useCallback(() => {
     const { current: renderer } = rendererRef;
@@ -54,10 +54,8 @@ const CanvasModel = () => {
         setLoading(false);
       };
 
-      if (modelUrl instanceof Promise) {
-        modelUrl.then(url => {
-          gltfLoader.load(url.default, loadModel);
-        });
+      if (modelUrl instanceof URL) {
+        gltfLoader.load(modelUrl.href, loadModel);
       } else {
         gltfLoader.load(modelUrl, loadModel);
       }
