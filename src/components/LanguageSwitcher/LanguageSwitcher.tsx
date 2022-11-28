@@ -21,7 +21,7 @@ const LanguageSwitcher = () => {
         >
           <span>{item.toUpperCase()}</span>
           {language.toLowerCase().includes(item) && (
-            <motion.div className={cl.underline} layoutId='underline' />
+            <motion.div className={cl.underline} layoutId="underline" />
           )}
         </motion.button>
       ))}

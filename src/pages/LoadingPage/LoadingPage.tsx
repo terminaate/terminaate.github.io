@@ -4,8 +4,13 @@ import BasicPage from '@/components/BasicPage';
 
 const LoadingPage = () => {
   return (
-    <BasicPage header={true} container={true} containerClassName={cl.container} className={cl.loadingPage}>
-      <div className={cl.loader}/>
+    <BasicPage
+      header={true}
+      container={true}
+      containerClassName={cl.container}
+      className={cl.loadingPage}
+    >
+      <div className={cl.loader} />
     </BasicPage>
   );
 };

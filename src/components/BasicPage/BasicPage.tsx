@@ -13,17 +13,17 @@ interface IBasicPage {
 }
 
 const BasicPage: FC<IBasicPage> = ({
-                                     children,
-                                     className,
-                                     containerClassName,
-                                     container = false,
-                                     header = false,
-                                   }) => {
+  children,
+  className,
+  containerClassName,
+  container = false,
+  header = false,
+}) => {
   const containerRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     if (container && containerRef.current) {
-      containerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, []);
 
@@ -53,7 +53,10 @@ const BasicPage: FC<IBasicPage> = ({
         >
           {header && <Header />}
           {container ? (
-            <div ref={containerRef} className={classNames(cl.container, containerClassName!)}>
+            <div
+              ref={containerRef}
+              className={classNames(cl.container, containerClassName!)}
+            >
               {children}
             </div>
           ) : (

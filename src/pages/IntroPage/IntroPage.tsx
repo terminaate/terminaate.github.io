@@ -10,7 +10,10 @@ const IntroPage = () => {
   const visited = useRef<boolean>(Boolean(Math.floor(Math.random() * 2)));
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const { t, i18n: { language: lang } } = useTranslation('intro');
+  const {
+    t,
+    i18n: { language: lang },
+  } = useTranslation('intro');
 
   useLayoutEffect(() => {
     if (localStorage.getItem('visited') === null) {

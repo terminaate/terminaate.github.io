@@ -22,10 +22,7 @@ interface IPlayerControls {
   state: boolean;
 }
 
-const PlayerControls: FC<IPlayerControls> = ({
-  playerRef,
-  state,
-}) => {
+const PlayerControls: FC<IPlayerControls> = ({ playerRef, state }) => {
   const dispatch = useAppDispatch();
   const [playerVolume, setPlayerVolume] = useState<number>(
     Number(localStorage.getItem('volume')) ||

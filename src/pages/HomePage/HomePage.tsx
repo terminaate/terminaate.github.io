@@ -20,8 +20,15 @@ const HomePage = () => {
         <span>rn nothing is here</span>
         <div className={cl.greetingsBlock}>
           <span>
-            <Trans ns={'home'} i18nKey={'greetings'}
-                   components={{ span: <span />, div: <div />, logo: <img src={logoImg} alt='' /> }} />
+            <Trans
+              ns={'home'}
+              i18nKey={'greetings'}
+              components={{
+                span: <span />,
+                div: <div />,
+                logo: <img src={logoImg} alt="" />,
+              }}
+            />
           </span>
         </div>
       </div>
@@ -33,7 +40,7 @@ const HomePage = () => {
             className={cl.name}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt='T$rm1naate' />
+            <img src={logoImg} alt="T$rm1naate" />
           </div>
         </div>
         <div className={cl.userImage}>img</div>
@@ -45,9 +52,7 @@ const HomePage = () => {
           animateOnVisible={true}
           visibleProps={{ className: cl.visibleTitle }}
         />
-        <span className={cl.aboutText}>
-          {t('about-me_main')}
-        </span>
+        <span className={cl.aboutText}>{t('about-me_main')}</span>
       </div>
       <div className={cl.skillsContainer}>
         <TypingText
@@ -68,11 +73,7 @@ const HomePage = () => {
               <div className={cl.skillContents}>
                 {skill.content.map((content, key) => (
                   <div className={cl.skillContent} key={key}>
-                    {content.icon && (
-                      <>
-                        {content.icon}
-                      </>
-                    )}
+                    {content.icon && <>{content.icon}</>}
                     <TypingText
                       className={cl.skillContentText}
                       text={content.text}

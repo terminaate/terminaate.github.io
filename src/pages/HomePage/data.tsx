@@ -163,7 +163,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: 'ORM\'s',
+    title: "ORM's",
     content: [
       {
         text: 'Sequelize',

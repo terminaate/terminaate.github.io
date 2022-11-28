@@ -12,34 +12,34 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const TypingText: FC<ITypingText> = ({
-                                       text,
-                                       defaultDelay = 300,
-                                       animateOnVisible = false,
-                                       visibleProps = {},
-                                       containerClassName,
-                                       ...props
-                                     }) => {
+  text,
+  defaultDelay = 300,
+  animateOnVisible = false,
+  visibleProps = {},
+  containerClassName,
+  ...props
+}) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
-  const containerRef = useIntersectionObserver(() => {
-    if (animateOnVisible && parsedTextRef.current.length) {
-      animate(true);
-      setIsVisible(true);
-    }
-  }, () => {
-    if (animateOnVisible && parsedTextRef.current.length) {
-      animate(false);
-      setIsVisible(false);
-    }
-  });
+  const containerRef = useIntersectionObserver(
+    () => {
+      if (animateOnVisible && parsedTextRef.current.length) {
+        animate(true);
+        setIsVisible(true);
+      }
+    },
+    () => {
+      if (animateOnVisible && parsedTextRef.current.length) {
+        animate(false);
+        setIsVisible(false);
+      }
+    },
+  );
   const oldText = useRef<ITypingText['text']>(text);
 
   const pushParsedText = (newObj: Record<string, any>) => {
-    setParsedText((words) => [
-      ...words,
-      newObj,
-    ]);
+    setParsedText((words) => [...words, newObj]);
   };
 
   const parseText = () => {
@@ -49,12 +49,21 @@ const TypingText: FC<ITypingText> = ({
     if (Array.isArray(text)) {
       textArray = text;
     } else {
-      textArray = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
+      textArray = text
+        .split(' ')
+        .map((obj) => (Number(obj) ? Number(obj) : obj));
     }
 
     for (let i = 0; i < textArray.length; i++) {
-      if (typeof textArray[i] === 'number' && typeof textArray[i + 1] === 'string') {
-        pushParsedText({ text: textArray[i + 1], delay: textArray[i], visible: !animateOnVisible });
+      if (
+        typeof textArray[i] === 'number' &&
+        typeof textArray[i + 1] === 'string'
+      ) {
+        pushParsedText({
+          text: textArray[i + 1],
+          delay: textArray[i],
+          visible: !animateOnVisible,
+        });
       } else if (
         typeof textArray[i] === 'string' &&
         typeof textArray[i - 1] !== 'number'
@@ -81,9 +90,14 @@ const TypingText: FC<ITypingText> = ({
 
   const animate = (state: boolean) => {
     if (parsedText.length) {
-      setParsedText(prevState => prevState.map(o => ({ ...o, visible: state })));
+      setParsedText((prevState) =>
+        prevState.map((o) => ({ ...o, visible: state })),
+      );
     } else if (parsedTextRef.current.length) {
-      parsedTextRef.current = parsedTextRef.current.map(o => ({ ...o, visible: state }));
+      parsedTextRef.current = parsedTextRef.current.map((o) => ({
+        ...o,
+        visible: state,
+      }));
       setParsedText(parsedTextRef.current);
     }
   };
@@ -98,19 +112,29 @@ const TypingText: FC<ITypingText> = ({
     }
   }, [text]);
 
-  const classes = classNames([props.className, { [visibleProps?.className ?? '']: animateOnVisible && isVisible }]);
-  const mergedProps = { ...props, ...((animateOnVisible && isVisible) ? visibleProps : {}) };
+  const classes = classNames([
+    props.className,
+    { [visibleProps?.className ?? '']: animateOnVisible && isVisible },
+  ]);
+  const mergedProps = {
+    ...props,
+    ...(animateOnVisible && isVisible ? visibleProps : {}),
+  };
   return (
     <div
       ref={containerRef}
       className={classNames(cl.typingTextContainer, containerClassName!)}
     >
       {parsedText.map((obj, key) => (
-        <span data-visible={obj.visible}
-              style={{ animationDelay: (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms' }}
-              key={key}
-              {...mergedProps}
-              className={classes}
+        <span
+          data-visible={obj.visible}
+          style={{
+            animationDelay:
+              (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
+          }}
+          key={key}
+          {...mergedProps}
+          className={classes}
         >
           {obj.text}
         </span>

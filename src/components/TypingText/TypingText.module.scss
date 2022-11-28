@@ -11,11 +11,11 @@
     font-size: 16px;
     transition: 0.7s;
 
-    &[data-visible="true"] {
+    &[data-visible='true'] {
       animation: typingTextAnimation 0.7s both;
     }
 
-    &[data-visible="false"] {
+    &[data-visible='false'] {
       opacity: 0;
       transform: translateX(-15px);
     }
