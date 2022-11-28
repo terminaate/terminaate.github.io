@@ -9,12 +9,10 @@ import Particles from '@/components/Particles';
 
 const IntroPage = () => {
   const visited = useRef<boolean>(Boolean(Math.floor(Math.random() * 2)));
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const particlesRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-  const {
-    t,
-    i18n: { language: lang },
-  } = useTranslation('intro');
+  const { t } = useTranslation('intro');
 
   useLayoutEffect(() => {
     if (localStorage.getItem('visited') === null) {
@@ -34,10 +32,9 @@ const IntroPage = () => {
   };
 
   const onMouseMoveEventHandler = (e: MouseEvent) => {
-    if (null !== containerRef.current) {
-      containerRef.current.style.transform = `translate(${
-        (window.innerWidth - e.pageX * 1.4) / 90
-      }px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
+    if (containerRef.current && particlesRef.current) {
+      containerRef.current.style.transform = `translate(${(window.innerWidth - e.pageX * 1.4) / 90}px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
+      particlesRef.current.style.transform = `translate(${(window.innerHeight - e.pageY * 1.4) / 90}px, ${(window.innerWidth - e.pageX * 1.4) / 90}px)`;
     }
   };
 
@@ -49,7 +46,7 @@ const IntroPage = () => {
 
   return (
     <BasicPage className={cl.introScreen}>
-      <Particles/>
+      <Particles ref={particlesRef} />
       <div className={cl.container}>
         <motion.div ref={containerRef} className={cl.introScreenContainer}>
           <TypingText

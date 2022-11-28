@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import cl from './Particles.module.scss';
 import classNames from 'classnames';
 
@@ -60,15 +60,16 @@ class Particle {
   }
 }
 
-const Particles: FC<IParticles> = ({
-                                     particlesCount = 50,
-                                     particlesSize = Math.random() * 2,
-                                     particlesColor = '#fff',
-                                     particlesVelocity = 0.4,
-                                     className = '',
-                                     height = '100%',
-                                     width = '100%',
-                                   }) => {
+// eslint-disable-next-line react/display-name
+const Particles = forwardRef<HTMLDivElement, IParticles>(({
+                                                            particlesCount = 50,
+                                                            particlesSize = Math.random() * 2,
+                                                            particlesColor = '#fff',
+                                                            particlesVelocity = 0.4,
+                                                            className = '',
+                                                            height = '100%',
+                                                            width = '100%',
+                                                          }, ref) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const getHeight = useCallback(() => {
@@ -160,10 +161,11 @@ const Particles: FC<IParticles> = ({
     <div
       style={{ height: localHeight, width: localWidth }}
       className={classNames(cl.particlesContainer, className)}
+      ref={ref}
     >
       <canvas ref={canvasRef} height={localHeight} width={localWidth} />
     </div>
   );
-};
+});
 
 export default Particles;
