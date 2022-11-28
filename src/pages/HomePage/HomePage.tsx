@@ -26,7 +26,7 @@ const HomePage = () => {
               components={{
                 span: <span />,
                 div: <div />,
-                logo: <img src={logoImg} alt='' />,
+                logo: <img src={logoImg} alt="" />,
               }}
             />
           </span>
@@ -41,7 +41,7 @@ const HomePage = () => {
             initialAnimate={true}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt='T$rm1naate' />
+            <img src={logoImg} alt="T$rm1naate" />
           </div>
         </div>
         <div className={cl.userImage}>img</div>

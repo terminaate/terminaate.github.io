@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import cl from './TypingText.module.scss';
 import classNames from 'classnames';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import VisibilitySensor from 'react-visibility-sensor';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
@@ -13,30 +13,17 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const TypingText: FC<ITypingText> = ({
-                                       text,
-                                       defaultDelay = 300,
-                                       animateOnVisible = false,
-                                       visibleProps = {},
-                                       containerClassName,
-                                       initialAnimate,
-                                       ...props
-                                     }) => {
+  text,
+  defaultDelay = 300,
+  animateOnVisible = false,
+  visibleProps = {},
+  containerClassName,
+  initialAnimate,
+  ...props
+}) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
-  const containerRef = useIntersectionObserver(
-    () => {
-      if (animateOnVisible && parsedTextRef.current.length) {
-        animate(true);
-        setIsVisible(true);
-      }
-    },
-    () => {
-      if (animateOnVisible && parsedTextRef.current.length) {
-        animate(false);
-        setIsVisible(false);
-      }
-    });
   const oldText = useRef<ITypingText['text']>(text);
 
   const pushParsedText = (newObj: Record<string, any>) => {
@@ -115,6 +102,13 @@ const TypingText: FC<ITypingText> = ({
     }
   }, [text]);
 
+  const onVisibleChange = (visible: boolean) => {
+    if (animateOnVisible && parsedTextRef.current.length) {
+      animate(visible);
+      setIsVisible(visible);
+    }
+  };
+
   const classes = classNames([
     props.className,
     { [visibleProps?.className ?? '']: animateOnVisible && isVisible },
@@ -124,25 +118,24 @@ const TypingText: FC<ITypingText> = ({
     ...(animateOnVisible && isVisible ? visibleProps : {}),
   };
   return (
-    <div
-      ref={containerRef}
-      className={classNames(cl.typingTextContainer, containerClassName!)}
-    >
-      {parsedText.map((obj, key) => (
-        <span
-          data-visible={obj.visible}
-          style={{
-            animationDelay:
-              (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
-          }}
-          key={key}
-          {...mergedProps}
-          className={classes}
-        >
-          {obj.text}
-        </span>
-      ))}
-    </div>
+    <VisibilitySensor onChange={onVisibleChange}>
+      <div className={classNames(cl.typingTextContainer, containerClassName!)}>
+        {parsedText.map((obj, key) => (
+          <span
+            data-visible={obj.visible}
+            style={{
+              animationDelay:
+                (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
+            }}
+            key={key}
+            {...mergedProps}
+            className={classes}
+          >
+            {obj.text}
+          </span>
+        ))}
+      </div>
+    </VisibilitySensor>
   );
 };
 
