@@ -5,6 +5,7 @@ import logoImg from '!/logo.svg';
 import TypingText from '@/components/TypingText';
 import { skills } from '@/pages/HomePage/data';
 import { Trans, useTranslation } from 'react-i18next';
+import CanvasModel from '@/components/CanvasModel';
 
 const HomePage = () => {
   const { t } = useTranslation('home');
@@ -17,7 +18,7 @@ const HomePage = () => {
       className={cl.homePage}
     >
       <div className={cl.canvasContainer}>
-        <span>rn nothing is here</span>
+        <CanvasModel/>
         <div className={cl.greetingsBlock}>
           <span>
             <Trans
