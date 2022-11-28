@@ -12,13 +12,13 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const TypingText: FC<ITypingText> = ({
-                                       text,
-                                       defaultDelay = 300,
-                                       animateOnVisible = false,
-                                       visibleProps = {},
-                                       containerClassName,
-                                       ...props
-                                     }) => {
+  text,
+  defaultDelay = 300,
+  animateOnVisible = false,
+  visibleProps = {},
+  containerClassName,
+  ...props
+}) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
