@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background: linear-gradient(45deg, #0c2e3e, #260000);
 
   @media screen and (max-width: 790px) {
     padding-inline: 20px;
