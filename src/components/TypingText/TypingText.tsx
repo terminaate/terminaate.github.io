@@ -9,18 +9,16 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   animateOnVisible?: boolean;
   visibleProps?: HTMLAttributes<HTMLSpanElement>;
   containerClassName?: string;
-  initialAnimate?: boolean;
 }
 
 const TypingText: FC<ITypingText> = ({
-  text,
-  defaultDelay = 300,
-  animateOnVisible = false,
-  visibleProps = {},
-  containerClassName,
-  initialAnimate,
-  ...props
-}) => {
+                                       text,
+                                       defaultDelay = 300,
+                                       animateOnVisible = false,
+                                       visibleProps = {},
+                                       containerClassName,
+                                       ...props
+                                     }) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
@@ -42,7 +40,7 @@ const TypingText: FC<ITypingText> = ({
         .map((obj) => (Number(obj) ? Number(obj) : obj));
     }
 
-    const visible = initialAnimate ? initialAnimate : !animateOnVisible;
+    const visible = !animateOnVisible;
 
     for (let i = 0; i < textArray.length; i++) {
       if (
@@ -118,7 +116,7 @@ const TypingText: FC<ITypingText> = ({
     ...(animateOnVisible && isVisible ? visibleProps : {}),
   };
   return (
-    <VisibilitySensor onChange={onVisibleChange}>
+    <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
       <div className={classNames(cl.typingTextContainer, containerClassName!)}>
         {parsedText.map((obj, key) => (
           <span
