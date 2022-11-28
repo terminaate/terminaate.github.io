@@ -8,8 +8,17 @@
 
   span {
     //line-height: 100%;
-    animation: typingTextAnimation 0.7s both;
     font-size: 16px;
+    transition: 0.7s;
+
+    &[data-visible='true'] {
+      animation: typingTextAnimation 0.7s both;
+    }
+
+    &[data-visible='false'] {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
 
     @keyframes typingTextAnimation {
       0% {
@@ -17,6 +26,7 @@
         transform: translateX(-15px);
       }
       50% {
+        position: relative;
         text-shadow: 0 0 30px var(--text-primary);
       }
       75% {

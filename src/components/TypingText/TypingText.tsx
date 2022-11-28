@@ -1,109 +1,139 @@
 import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import cl from './TypingText.module.scss';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import classNames from 'classnames';
+import VisibilitySensor from 'react-visibility-sensor';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
   defaultDelay?: number;
   animateOnVisible?: boolean;
+  visibleProps?: HTMLAttributes<HTMLSpanElement>;
   containerClassName?: string;
 }
 
 const TypingText: FC<ITypingText> = ({
-                                       text,
-                                       defaultDelay = 300,
-                                       animateOnVisible = false,
-                                       containerClassName,
-                                       ...props
-                                     }) => {
-  const [renderedWords, setRenderedWords] = useState<string[]>([]);
-  const parsedText = useRef<Array<Record<string, any>>>([]);
-  const containerRef = useIntersectionObserver(() => {
-    if (animateOnVisible && parsedText.current.length) {
-      animate();
-    }
-  });
+  text,
+  defaultDelay = 300,
+  animateOnVisible = false,
+  visibleProps = {},
+  containerClassName,
+  ...props
+}) => {
+  const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const parsedTextRef = useRef<typeof parsedText>([]);
   const oldText = useRef<ITypingText['text']>(text);
-  const [animationIsOn, setAnimationIsOn] = useState<boolean>(false);
+
+  const pushParsedText = (newObj: Record<string, any>) => {
+    setParsedText((words) => [...words, newObj]);
+  };
 
   const parseText = () => {
-    parsedText.current = [];
+    setParsedText([]);
     let textArray: (string | number)[];
 
     if (Array.isArray(text)) {
       textArray = text;
     } else {
-      textArray = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
+      textArray = text
+        .split(' ')
+        .map((obj) => (Number(obj) ? Number(obj) : obj));
     }
 
+    const visible = !animateOnVisible;
+
     for (let i = 0; i < textArray.length; i++) {
-      if (typeof textArray[i] === 'number' && typeof textArray[i + 1] === 'string') {
-        parsedText.current.push({ text: textArray[i + 1], delay: textArray[i] });
+      if (
+        typeof textArray[i] === 'number' &&
+        typeof textArray[i + 1] === 'string'
+      ) {
+        pushParsedText({
+          text: textArray[i + 1],
+          delay: textArray[i],
+          visible,
+        });
       } else if (
         typeof textArray[i] === 'string' &&
         typeof textArray[i - 1] !== 'number'
       ) {
-        parsedText.current.push({ text: textArray[i] });
+        pushParsedText({ text: textArray[i], visible });
       } else if (
         typeof textArray[i] === 'number' &&
         typeof textArray[i + 1] !== 'string'
       ) {
-        parsedText.current.push({ delay: textArray[i] });
+        pushParsedText({ delay: textArray[i], visible });
       }
     }
   };
 
-  const animate = () => {
-    setAnimationIsOn(true);
-    return new Promise(resolve => {
-      for (const i in parsedText.current) {
-        const timeout = setTimeout(() => {
-          const isLastIndex = Number(i) === parsedText.current.length - 1;
-          if (isLastIndex) {
-            setAnimationIsOn(false);
-            clearTimeout(timeout);
-            return resolve(0);
-          }
-          setRenderedWords((words: string[]) => [
-            ...words,
-            parsedText.current[i].text,
-          ]);
-        }, (parsedText.current[i].delay ? parsedText.current[i].delay : defaultDelay) * Number(i));
-      }
-    });
-  };
+  useEffect(() => {
+    if (parsedText.length) {
+      parsedTextRef.current = parsedText;
+    }
+  }, [parsedText]);
 
   useEffect(() => {
     parseText();
-    if (!animateOnVisible) {
-      animate();
-    }
   }, []);
 
+  const animate = (state: boolean) => {
+    if (parsedText.length) {
+      setParsedText((prevState) =>
+        prevState.map((o) => ({ ...o, visible: state })),
+      );
+    } else if (parsedTextRef.current.length) {
+      parsedTextRef.current = parsedTextRef.current.map((o) => ({
+        ...o,
+        visible: state,
+      }));
+      setParsedText(parsedTextRef.current);
+    }
+  };
+
   useEffect(() => {
-    if (text !== oldText.current && !animationIsOn) {
-      // setNewTextDetected();
-      setRenderedWords([]);
+    if (text !== oldText.current) {
       parseText();
-      if (!animateOnVisible) {
-        animate();
+      if (animateOnVisible && isVisible) {
+        animate(true);
       }
       oldText.current = text;
     }
-  }, [text, animationIsOn]);
+  }, [text]);
 
+  const onVisibleChange = (visible: boolean) => {
+    if (animateOnVisible && parsedTextRef.current.length) {
+      animate(visible);
+      setIsVisible(visible);
+    }
+  };
+
+  const classes = classNames([
+    props.className,
+    { [visibleProps?.className ?? '']: animateOnVisible && isVisible },
+  ]);
+  const mergedProps = {
+    ...props,
+    ...(animateOnVisible && isVisible ? visibleProps : {}),
+  };
   return (
-    <div
-      ref={containerRef}
-      className={classNames(cl.typingTextContainer, containerClassName!)}
-    >
-      {renderedWords.map((obj, key) => (
-        <span key={key} {...props}>
-          {obj}
-        </span>
-      ))}
-    </div>
+    <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
+      <div className={classNames(cl.typingTextContainer, containerClassName!)}>
+        {parsedText.map((obj, key) => (
+          <span
+            data-visible={obj.visible}
+            style={{
+              animationDelay:
+                (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
+            }}
+            key={key}
+            {...mergedProps}
+            className={classes}
+          >
+            {obj.text}
+          </span>
+        ))}
+      </div>
+    </VisibilitySensor>
   );
 };
 

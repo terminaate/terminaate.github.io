@@ -1,15 +1,15 @@
-import React, { lazy, Suspense, useEffect, useRef } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
 import PostsPage from '@/pages/PostsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
-import { History } from '@/utils/history';
 import { useAppDispatch } from '@/store';
 import { refresh } from '@/store/reducers/user/authAPI';
 import WorksPage from '@/pages/WorksPage';
 import AuthorizedRoute from '@/components/AuthorizedRoute';
+import LoadingPage from '@/pages/LoadingPage';
 
 const PostPage = lazy(() => import('@/pages/PostPage'));
 const EditPostPage = lazy(() => import('@/pages/EditPostPage'));
@@ -17,13 +17,7 @@ const CreatePostPage = lazy(() => import('@/pages/CreatePostPage'));
 
 const Routing = () => {
   const location = useLocation();
-  const previousRoute = useRef<string>(location.pathname);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    History.previousRoute = previousRoute.current;
-    previousRoute.current = location.pathname;
-  }, [location.pathname]);
 
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
@@ -32,7 +26,7 @@ const Routing = () => {
   }, []);
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<LoadingPage />}>
       <AnimatePresence mode={'wait'}>
         <Routes location={location} key={location.key}>
           <Route index element={<IntroPage />} />

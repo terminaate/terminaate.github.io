@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import cl from './BasicPage.module.scss';
 import Header from '@/components/Header';
@@ -19,12 +19,21 @@ const BasicPage: FC<IBasicPage> = ({
   container = false,
   header = false,
 }) => {
+  const containerRef = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (container && containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <>
       {header && container ? (
         <div className={classNames(cl.basicPage, className!)}>
           <Header />
           <motion.div
+            ref={containerRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -44,7 +53,10 @@ const BasicPage: FC<IBasicPage> = ({
         >
           {header && <Header />}
           {container ? (
-            <div className={classNames(cl.container, containerClassName!)}>
+            <div
+              ref={containerRef}
+              className={classNames(cl.container, containerClassName!)}
+            >
               {children}
             </div>
           ) : (

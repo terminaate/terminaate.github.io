@@ -4,7 +4,12 @@
   justify-content: center;
 
   .homePageContainer {
-    max-width: 600px;
+    //max-width: 600px;
+    padding-inline: 20px;
+
+    @media screen and (max-width: 790px) {
+      padding: 0;
+    }
 
     .canvasContainer {
       width: 100%;
@@ -18,7 +23,7 @@
       .greetingsBlock {
         position: absolute;
         width: 100%;
-        background-color: var(--background-secondary);
+        background-color: var(--background-third);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -50,15 +55,59 @@
               height: 100%;
               width: 15px;
               background-color: var(--text-primary);
-              filter: blur(10px);
-              animation: blurMovingAnimation 2s both infinite;
+              mix-blend-mode: difference;
+              filter: blur(2px);
+              animation: blurMovingAnimation 4s infinite alternate;
 
               @keyframes blurMovingAnimation {
-                30% {
-                  left: 100%;
+                0% {
+                  left: 0;
+                }
+                100% {
+                  left: 95%;
                 }
               }
             }
+          }
+        }
+      }
+    }
+
+    .secondaryTitle,
+    .title {
+      font-weight: 600;
+      font-family: var(--font-primary);
+      font-size: 20px;
+      overflow: hidden;
+
+      &:after {
+        content: ' ';
+        position: absolute;
+        top: 90%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--text-secondary);
+      }
+    }
+
+    .secondaryTitle {
+      font-size: 17px;
+    }
+
+    .visibleTitle {
+      &:after {
+        animation: lineAnimation 0.7s both;
+        animation-delay: 0.3s;
+
+        @keyframes lineAnimation {
+          from {
+            transform: translateX(-100%);
+          }
+          to {
+            transform: translateX(0);
           }
         }
       }
@@ -68,6 +117,7 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      margin-top: 15px;
 
       .userContent {
         display: flex;
@@ -109,29 +159,33 @@
       }
     }
 
-    .skillsContainer {
+    .aboutContainer {
       width: 100%;
       display: flex;
       align-items: flex-start;
       flex-direction: column;
 
-      .skillsTitle {
-        font-weight: 600;
+      .aboutText {
+        margin-top: 5px;
         font-family: var(--font-primary);
-        font-size: 20px;
-
-        &:after {
-          content: ' ';
-          position: absolute;
-          top: 90%;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          width: 100%;
-          height: 4px;
-          background-color: var(--text-secondary);
-        }
+        font-weight: 500;
+        font-size: 16px;
+        text-indent: 25px;
+        text-align: justify;
+        width: 100%;
+        //white-space: break-spaces;
+        hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
       }
+    }
+
+    .skillsContainer {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-top: 15px;
 
       .skillsContent {
         padding-left: 20px;
@@ -144,24 +198,6 @@
           display: flex;
           flex-direction: column;
           margin-top: 5px;
-
-          .skillTitle {
-            font-weight: 600;
-            font-family: var(--font-primary);
-            font-size: 17px;
-
-            &:after {
-              content: ' ';
-              position: absolute;
-              top: 90%;
-              left: 0;
-              bottom: 0;
-              right: 0;
-              width: 100%;
-              height: 4px;
-              background-color: var(--text-secondary);
-            }
-          }
 
           .skillContents {
             margin-top: 10px;

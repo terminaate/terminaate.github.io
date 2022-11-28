@@ -11,12 +11,14 @@
 :root {
   --background-primary: #111;
   --background-secondary: rgba(17, 17, 17, 0.8);
+  --background-third: #0e0d0d;
   --text-primary: #fff;
   --text-secondary: #666;
   --red: #cb1111;
   --green: rgba(10, 243, 78, 0.77);
   --border-primary: #222;
-  --font-primary: 'Poppins', sans-serif;
+  --font-sans-serif: Arial, sans-serif;
+  --font-primary: 'Poppins', var(--font-sans-serif);
   --font-secondary: 'Source Code Pro', monospace;
   --header-width: 700px;
 }

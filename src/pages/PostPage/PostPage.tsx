@@ -12,6 +12,9 @@ import { useAppDispatch, useAppSelector } from '@/store';
 import { setModal } from '@/store/reducers/modalsSlice';
 import Button from '@/components/UI/Button';
 
+// TODO
+// add translations in backend
+
 const PostPage = () => {
   const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
