@@ -18,16 +18,17 @@ const TypingText: FC<ITypingText> = ({
                                        ...props
                                      }) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
   const containerRef = useIntersectionObserver(() => {
     if (animateOnVisible && parsedTextRef.current.length) {
-      parsedTextRef.current = parsedTextRef.current.map(o => ({ ...o, visible: true }));
-      setParsedText(parsedTextRef.current);
+      animate(true);
+      setIsVisible(true);
     }
   }, () => {
     if (animateOnVisible && parsedTextRef.current.length) {
-      parsedTextRef.current = parsedTextRef.current.map(o => ({ ...o, visible: false }));
-      setParsedText(parsedTextRef.current);
+      animate(false);
+      setIsVisible(false);
     }
   });
   const oldText = useRef<ITypingText['text']>(text);
@@ -76,9 +77,21 @@ const TypingText: FC<ITypingText> = ({
     parseText();
   }, []);
 
+  const animate = (state: boolean) => {
+    if (parsedText.length) {
+      setParsedText(prevState => prevState.map(o => ({ ...o, visible: state })));
+    } else if (parsedTextRef.current.length) {
+      parsedTextRef.current = parsedTextRef.current.map(o => ({ ...o, visible: state }));
+      setParsedText(parsedTextRef.current);
+    }
+  };
+
   useEffect(() => {
     if (text !== oldText.current) {
       parseText();
+      if (animateOnVisible && isVisible) {
+        animate(true);
+      }
       oldText.current = text;
     }
   }, [text]);

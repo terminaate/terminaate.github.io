@@ -33,7 +33,7 @@ export type SkillProps = {
   title: string;
   content: Array<{
     text: string;
-    icon?: ReactElement;
+    icon?: JSX.Element;
   }>;
 };
 
