@@ -32,12 +32,18 @@ const Text = ({ text }: { text: string | ReactElement }) => {
   );
 };
 
-const HomePage = () => {
-  const {
-    t,
-    i18n: { language },
-  } = useTranslation('home');
+const LinkButton = ({ text, link }: { text: string; link: string }) => {
   const navigate = useNavigate();
+
+  return (
+    <button onClick={() => navigate(link)} className={cl.linkButton}>
+      {text}
+    </button>
+  );
+};
+
+const HomePage = () => {
+  const { t } = useTranslation('home');
 
   return (
     <BasicPage
@@ -68,9 +74,7 @@ const HomePage = () => {
       <div className={cl.aboutContainer}>
         <Title text={t('about-me_title')!} />
         <Text text={t('about-me_main')!} />
-        <button onClick={() => navigate('/works')} className={cl.worksButton}>
-          {t('works_button')}
-        </button>
+        <LinkButton text={t('works_button')} link={'/works'} />
       </div>
       <div className={cl.loveContainer}>
         <Title text={t('love_title')!} />
@@ -117,6 +121,7 @@ const HomePage = () => {
             </li>
           ))}
         </ul>
+        <LinkButton text={t('posts_button')} link={'/posts'} />
       </div>
       <div className={cl.copyrightContainer}>
         <span>© 2022 Bahram Itkulov. All Rights Reserved.</span>

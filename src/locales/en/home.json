@@ -4,8 +4,9 @@
   "skills_title": "Skills",
   "about-me_title": "About me",
   "about-me_main": "Bahram is a young web developer living in Russia, he devotes most of his time to developing his own small projects, and self-improvement, he has been doing web development for about 2 years, during which time he studied the frontend and backend spheres, at the moment he positions himself as a React front-end developer.",
-  "works_button": "Portfolio >",
+  "works_button": "My portfolio >",
   "love_title": "I love",
   "love_main": "Create web projects, learn new things, listen music, watch movies, playing games.",
-  "contacts_title": "Contacts"
+  "contacts_title": "Contacts",
+  "posts_button": "My posts >"
 }

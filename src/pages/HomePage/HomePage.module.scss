@@ -99,6 +99,16 @@
       }
     }
 
+    .linkButton {
+      background: linear-gradient(45deg, #0a5a81, #700202);
+      border-radius: 5px;
+      padding-inline: 15px;
+      padding-block: 10px;
+      font-size: 16px;
+      font-family: var(--font-primary);
+      font-weight: 600;
+    }
+
     .userContainer {
       width: 100%;
       display: flex;
@@ -152,16 +162,6 @@
 
     .aboutContainer {
       align-items: center;
-
-      .worksButton {
-        background: linear-gradient(45deg, #0a5a81, #700202);
-        border-radius: 5px;
-        padding-inline: 15px;
-        padding-block: 10px;
-        font-size: 16px;
-        font-family: var(--font-primary);
-        font-weight: 600;
-      }
     }
 
     .skillsContainer {
@@ -201,9 +201,13 @@
     }
 
     .contactsContainer {
+      align-items: center;
+
       .contactsContent {
+        width: 100%;
         display: flex;
         //row-gap: 10px;
+        align-items: flex-start;
         flex-direction: column;
         margin-top: 10px;
         list-style-type: none;
