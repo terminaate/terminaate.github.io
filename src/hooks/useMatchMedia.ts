@@ -1,7 +1,6 @@
 import { useLayoutEffect, useState } from 'react';
 
 const useMatchMedia = (query: string) => {
-
   const media = matchMedia(query);
 
   const [isMedia, setIsMedia] = useState(media.matches);
@@ -14,7 +13,6 @@ const useMatchMedia = (query: string) => {
     media.addEventListener('change', handler);
 
     return () => media.removeEventListener('change', handler);
-
   });
 
   return isMedia;

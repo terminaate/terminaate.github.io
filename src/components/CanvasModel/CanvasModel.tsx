@@ -8,7 +8,9 @@ const CanvasModel = () => {
   const containerRef = useRef<null | HTMLDivElement>(null);
   const rendererRef = useRef<null | Three.WebGLRenderer>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const modelUrl = import.meta.env.PROD ? 'https://terminaate.netlify.app/model.glb' : new URL('../../assets/models/model.glb', import.meta.url);
+  const modelUrl = import.meta.env.PROD
+    ? 'https://terminaate.netlify.app/model.glb'
+    : new URL('../../assets/models/model.glb', import.meta.url);
 
   const handleWindowResize = useCallback(() => {
     const { current: renderer } = rendererRef;
@@ -25,14 +27,22 @@ const CanvasModel = () => {
     const { current: container } = containerRef;
 
     if (container) {
-      const renderer = new Three.WebGLRenderer({ antialias: true, alpha: true });
+      const renderer = new Three.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.outputEncoding = Three.sRGBEncoding;
       container.appendChild(renderer.domElement);
 
       const scene = new Three.Scene();
-      const camera = new Three.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      const camera = new Three.PerspectiveCamera(
+        75,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000,
+      );
       camera.position.set(3, 1, 0);
       // camera.rotation.set(0, 0, 0);
       camera.lookAt(0, 0, 0);
@@ -54,7 +64,7 @@ const CanvasModel = () => {
         setLoading(false);
         setTimeout(() => {
           controls.autoRotateSpeed = 5;
-        }, 750)
+        }, 750);
       };
 
       if (modelUrl instanceof URL) {
@@ -69,7 +79,7 @@ const CanvasModel = () => {
       let req: number;
       let frame: number;
       const loop = () => {
-        frame++
+        frame++;
         req = requestAnimationFrame(loop);
         renderer.render(scene, camera);
         controls.update();
@@ -93,9 +103,7 @@ const CanvasModel = () => {
 
   return (
     <div ref={containerRef} className={cl.canvasContainer}>
-      {loading && (
-        <div className={cl.loader} />
-      )}
+      {loading && <div className={cl.loader} />}
     </div>
   );
 };

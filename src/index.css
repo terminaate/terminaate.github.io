@@ -3,65 +3,65 @@
 *,
 *:after,
 *:before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scrollbar-width: 2px;
-    scrollbar-color: var(--text-secondary) none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: 2px;
+  scrollbar-color: var(--text-secondary) none;
 }
 
 :root {
-    --background-primary: #111;
-    --background-secondary: rgba(17, 17, 17, 0.8);
-    --background-third: #0e0d0d;
-    --text-primary: #fff;
-    --text-secondary: #666;
-    --red: #cb1111;
-    --green: rgba(10, 243, 78, 0.77);
-    --border-primary: #222;
-    --font-sans-serif: Arial, sans-serif;
-    --font-primary: 'Poppins', var(--font-sans-serif);
-    --font-secondary: 'Source Code Pro', monospace;
-    --header-width: 700px;
+  --background-primary: #111;
+  --background-secondary: rgba(17, 17, 17, 0.8);
+  --background-third: #0e0d0d;
+  --text-primary: #fff;
+  --text-secondary: #666;
+  --red: #cb1111;
+  --green: rgba(10, 243, 78, 0.77);
+  --border-primary: #222;
+  --font-sans-serif: Arial, sans-serif;
+  --font-primary: 'Poppins', var(--font-sans-serif);
+  --font-secondary: 'Source Code Pro', monospace;
+  --header-width: 700px;
 }
 
 body {
-    color: var(--text-primary);
-    background-color: var(--background-primary);
-    font-family: var(--font-primary);
-    overflow-x: hidden;
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  font-family: var(--font-primary);
+  overflow-x: hidden;
 }
 
 img,
 button,
 h1 {
-    user-select: none;
+  user-select: none;
 }
 
 button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-primary);
-    font-family: var(--font-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
 }
 
 input {
-    outline: none;
+  outline: none;
 }
 
 @media screen and (max-width: 700px) {
-    * {
-        filter: none !important;
-        backdrop-filter: none !important;
-    }
+  * {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
 }
 
 ::-webkit-scrollbar {
-    width: 2px;
-    background: none;
+  width: 2px;
+  background: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--text-secondary);
+  background-color: var(--text-secondary);
 }

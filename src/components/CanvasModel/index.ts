@@ -1,3 +1,3 @@
-import CanvasModel from "./CanvasModel"
+import CanvasModel from './CanvasModel';
 
-export default CanvasModel
+export default CanvasModel;

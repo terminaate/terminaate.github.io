@@ -13,13 +13,13 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const TypingText: FC<ITypingText> = ({
-                                       text,
-                                       defaultDelay = 300,
-                                       animateOnVisible = false,
-                                       visibleProps = {},
-                                       containerClassName,
-                                       ...props
-                                     }) => {
+  text,
+  defaultDelay = 300,
+  animateOnVisible = false,
+  visibleProps = {},
+  containerClassName,
+  ...props
+}) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
@@ -131,8 +131,8 @@ const TypingText: FC<ITypingText> = ({
           {...mergedProps}
           className={classes}
         >
-            {obj.text}
-          </span>
+          {obj.text}
+        </span>
       ))}
     </div>
   );
@@ -140,9 +140,7 @@ const TypingText: FC<ITypingText> = ({
   return (
     <>
       {isMobile ? (
-        <>
-          {typingTextContainer}
-        </>
+        <>{typingTextContainer}</>
       ) : (
         <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
           {typingTextContainer}

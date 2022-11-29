@@ -8,7 +8,10 @@ import { useTranslation } from 'react-i18next';
 import CanvasModel from '@/components/CanvasModel';
 
 const HomePage = () => {
-  const { t, i18n: { language } } = useTranslation('home');
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation('home');
 
   return (
     <BasicPage
@@ -31,7 +34,7 @@ const HomePage = () => {
             className={cl.name}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt='T$rm1naate' />
+            <img src={logoImg} alt="T$rm1naate" />
           </div>
         </div>
         <div className={cl.userImage}>img</div>
@@ -43,7 +46,12 @@ const HomePage = () => {
           animateOnVisible={true}
           visibleProps={{ className: cl.visibleTitle }}
         />
-        <span data-ru-lang={language.toLowerCase().includes('ru')} className={cl.aboutText}>{t('about-me_main')}</span>
+        <span
+          data-ru-lang={language.toLowerCase().includes('ru')}
+          className={cl.aboutText}
+        >
+          {t('about-me_main')}
+        </span>
       </div>
       <div className={cl.skillsContainer}>
         <TypingText
