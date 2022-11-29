@@ -24,7 +24,7 @@ const TypingText: FC<ITypingText> = ({
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
   const oldText = useRef<ITypingText['text']>(text);
-  const isMobile = useMatchMedia("(max-width: 700px)");
+  const isMobile = useMatchMedia('(max-width: 700px)');
 
   const pushParsedText = (newObj: Record<string, any>) => {
     setParsedText((words) => [...words, newObj]);
@@ -118,24 +118,45 @@ const TypingText: FC<ITypingText> = ({
     ...(animateOnVisible && isVisible ? visibleProps : {}),
   };
   return (
-    <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
-      <div className={classNames(cl.typingTextContainer, containerClassName!)}>
-        {parsedText.map((obj, key) => (
-          <span
-            data-visible={obj.visible}
-            style={{
-              animationDelay:
-                (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
-            }}
-            key={key}
-            {...mergedProps}
-            className={classes}
-          >
+    <>
+      {isMobile ? (
+        <div className={classNames(cl.typingTextContainer, containerClassName!)}>
+          {parsedText.map((obj, key) => (
+            <span
+              data-visible={obj.visible}
+              style={{
+                animationDelay:
+                  (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
+              }}
+              key={key}
+              {...mergedProps}
+              className={classes}
+            >
             {obj.text}
           </span>
-        ))}
-      </div>
-    </VisibilitySensor>
+          ))}
+        </div>
+      ) : (
+        <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
+          <div className={classNames(cl.typingTextContainer, containerClassName!)}>
+            {parsedText.map((obj, key) => (
+              <span
+                data-visible={obj.visible}
+                style={{
+                  animationDelay:
+                    (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
+                }}
+                key={key}
+                {...mergedProps}
+                className={classes}
+              >
+            {obj.text}
+          </span>
+            ))}
+          </div>
+        </VisibilitySensor>
+      )}
+    </>
   );
 };
 
