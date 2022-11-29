@@ -56,13 +56,13 @@ const Header = () => {
     <header className={cl.header}>
       <div className={cl.headerContainer}>
         <div className={cl.linksContainer}>
-          <Link to={'/home'} className={cl.homeLink}>
-            <img src={logoImg} alt="T$rm1naate" />
+          <Link to={'/'} className={cl.homeLink}>
+            <img src={logoImg} alt='T$rm1naate' />
           </Link>
           {routes.map((route, key) => (
             <div key={key}>
               {route.external ? (
-                <a href={route.path} target={'_blank'} rel="noreferrer">
+                <a href={route.path} target={'_blank'} rel='noreferrer'>
                   {route.icon}
                   <span>{route.text}</span>
                 </a>
@@ -86,7 +86,7 @@ const Header = () => {
           ))}
         </div>
         <button onClick={onUserButtonClick} className={cl.userAvatar}>
-          <img src={userAvatarUrl + user.id} alt="" />
+          <img src={userAvatarUrl + user.id} alt='' />
         </button>
       </div>
     </header>

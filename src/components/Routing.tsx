@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
 import PostsPage from '@/pages/PostsPage';
 import NotFoundPage from '@/pages/NotFoundPage';
@@ -29,8 +28,7 @@ const Routing = () => {
     <Suspense fallback={<LoadingPage />}>
       <AnimatePresence mode={'wait'}>
         <Routes location={location} key={location.key}>
-          <Route index element={<IntroPage />} />
-          <Route path={'/home'} element={<HomePage />} />
+          <Route index element={<HomePage />} />
           <Route path={'/posts'} element={<PostsPage />} />
           <Route path={'/posts/:id'} element={<PostPage />} />
           <Route
