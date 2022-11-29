@@ -13,7 +13,7 @@ import {
   SiGithub,
   SiGithubactions,
   SiGulp,
-  SiJavascript, SiJquery,
+  SiJavascript, SiJquery, SiLess,
   SiLinux,
   SiMobx,
   SiMongodb,
@@ -61,6 +61,10 @@ export const skills: SkillProps[] = [
       {
         text: 'SASS',
         icon: <SiSass />,
+      },
+      {
+        text: "LESS",
+        icon: <SiLess/>
       },
       {
         text: 'Bootstrap',

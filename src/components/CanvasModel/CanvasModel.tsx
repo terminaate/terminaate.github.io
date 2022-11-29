@@ -42,7 +42,7 @@ const CanvasModel = () => {
       controls.enableDamping = true;
       controls.enablePan = false;
       controls.autoRotate = true;
-      controls.autoRotateSpeed = 5;
+      controls.autoRotateSpeed = 500;
 
       const ambientLight = new Three.AmbientLight(0xffffff, 1);
       scene.add(ambientLight);
@@ -52,6 +52,9 @@ const CanvasModel = () => {
         gltf.scene.position.set(0, 0, 0);
         scene.add(gltf.scene);
         setLoading(false);
+        setTimeout(() => {
+          controls.autoRotateSpeed = 5;
+        }, 750)
       };
 
       if (modelUrl instanceof URL) {
@@ -64,7 +67,9 @@ const CanvasModel = () => {
       // scene.add(gridHelper);
 
       let req: number;
+      let frame: number;
       const loop = () => {
+        frame++
         req = requestAnimationFrame(loop);
         renderer.render(scene, camera);
         controls.update();

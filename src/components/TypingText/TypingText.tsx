@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import cl from './TypingText.module.scss';
 import classNames from 'classnames';
 import VisibilitySensor from 'react-visibility-sensor';
+import useMatchMedia from '@/hooks/useMatchMedia';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
@@ -12,17 +13,18 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const TypingText: FC<ITypingText> = ({
-  text,
-  defaultDelay = 300,
-  animateOnVisible = false,
-  visibleProps = {},
-  containerClassName,
-  ...props
-}) => {
+                                       text,
+                                       defaultDelay = 300,
+                                       animateOnVisible = false,
+                                       visibleProps = {},
+                                       containerClassName,
+                                       ...props
+                                     }) => {
   const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const parsedTextRef = useRef<typeof parsedText>([]);
   const oldText = useRef<ITypingText['text']>(text);
+  const isMobile = useMatchMedia("(max-width: 700px)");
 
   const pushParsedText = (newObj: Record<string, any>) => {
     setParsedText((words) => [...words, newObj]);
@@ -40,7 +42,7 @@ const TypingText: FC<ITypingText> = ({
         .map((obj) => (Number(obj) ? Number(obj) : obj));
     }
 
-    const visible = !animateOnVisible;
+    const visible = isMobile ? true : !animateOnVisible;
 
     for (let i = 0; i < textArray.length; i++) {
       if (
@@ -101,7 +103,7 @@ const TypingText: FC<ITypingText> = ({
   }, [text]);
 
   const onVisibleChange = (visible: boolean) => {
-    if (animateOnVisible && parsedTextRef.current.length) {
+    if (!isMobile && animateOnVisible && parsedTextRef.current.length) {
       animate(visible);
       setIsVisible(visible);
     }
