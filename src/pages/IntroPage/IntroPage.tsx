@@ -46,7 +46,9 @@ const IntroPage = () => {
 
   return (
     <BasicPage className={cl.introScreen}>
-      <Particles ref={particlesRef} />
+      <div ref={particlesRef} className={cl.backgroundContainer}>
+        <Particles particlesCount={100} />
+      </div>
       <div className={cl.container}>
         <motion.div ref={containerRef} className={cl.introScreenContainer}>
           <TypingText
