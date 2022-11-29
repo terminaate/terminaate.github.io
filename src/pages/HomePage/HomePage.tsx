@@ -6,12 +6,25 @@ import TypingText from '@/components/TypingText';
 import { skills } from '@/pages/HomePage/data';
 import { useTranslation } from 'react-i18next';
 import CanvasModel from '@/components/CanvasModel';
+import { useNavigate } from 'react-router-dom';
+
+const Title = ({ text = 'Default title' }: { text: string }) => {
+  return (
+    <TypingText
+      className={cl.title}
+      text={text}
+      animateOnVisible={true}
+      visibleProps={{ className: cl.visibleTitle }}
+    />
+  );
+};
 
 const HomePage = () => {
   const {
     t,
     i18n: { language },
   } = useTranslation('home');
+  const navigate = useNavigate();
 
   return (
     <BasicPage
@@ -34,32 +47,25 @@ const HomePage = () => {
             className={cl.name}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt="T$rm1naate" />
+            <img src={logoImg} alt='T$rm1naate' />
           </div>
         </div>
         <div className={cl.userImage}>img</div>
       </div>
       <div className={cl.aboutContainer}>
-        <TypingText
-          className={cl.title}
-          text={t('about-me_title')!}
-          animateOnVisible={true}
-          visibleProps={{ className: cl.visibleTitle }}
-        />
+        <Title text={t('about-me_title')!} />
         <span
           data-ru-lang={language.toLowerCase().includes('ru')}
-          className={cl.aboutText}
+          className={cl.text}
         >
           {t('about-me_main')}
         </span>
+        <button onClick={() => navigate('/works')} className={cl.worksButton}>
+          {t('works_button')}
+        </button>
       </div>
       <div className={cl.skillsContainer}>
-        <TypingText
-          className={cl.title}
-          text={t('skills_title')!}
-          animateOnVisible={true}
-          visibleProps={{ className: cl.visibleTitle }}
-        />
+        <Title text={t('skills_title')!} />
         <div className={cl.skillsContent}>
           {skills.map((skill, key) => (
             <div key={key} className={cl.skillContainer}>

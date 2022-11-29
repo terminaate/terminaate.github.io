@@ -1,14 +1,11 @@
 .homePage {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .homePageContainer {
-    //max-width: 600px;
     padding-inline: 20px;
-    margin-top: 2%;
+    margin-top: 50px;
 
     @media screen and (max-width: 790px) {
       padding: 0;
@@ -42,96 +39,49 @@
         }
       }
     }
-  }
 
-  .secondaryTitle,
-  .title {
-    font-weight: 600;
-    font-family: var(--font-primary);
-    font-size: 20px;
-    overflow: hidden;
-    position: relative;
+    .secondaryTitle,
+    .title {
+      font-weight: 600;
+      font-family: var(--font-primary);
+      font-size: 20px;
+      overflow: hidden;
+      position: relative;
 
-    &:after {
-      content: ' ';
-      position: absolute;
-      top: 90%;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 4px;
-      background-color: var(--text-secondary);
-    }
-  }
-
-  .secondaryTitle {
-    font-size: 17px;
-  }
-
-  .visibleTitle {
-    &:after {
-      animation: lineAnimation 0.7s both;
-      animation-delay: 0.3s;
-
-      @keyframes lineAnimation {
-        from {
-          transform: translateX(-100%);
-        }
-        to {
-          transform: translateX(0);
-        }
+      &:after {
+        content: ' ';
+        position: absolute;
+        top: 90%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--text-secondary);
       }
     }
-  }
 
-  .userContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    .secondaryTitle {
+      font-size: 17px;
+    }
 
-    .userContent {
-      display: flex;
-      row-gap: 2px;
-      flex-direction: column;
+    .visibleTitle {
+      &:after {
+        animation: lineAnimation 0.7s both;
+        animation-delay: 0.3s;
 
-      .name {
-        font-family: var(--font-primary);
-        font-weight: 700;
-        font-size: 32px;
-        position: relative;
-      }
-
-      .logoContainer {
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
-
-        img {
-          height: 25px;
+        @keyframes lineAnimation {
+          from {
+            transform: translateX(-100%);
+          }
+          to {
+            transform: translateX(0);
+          }
         }
       }
     }
 
-    .userImage {
-      width: 100px;
-      height: 100px;
-      background: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  .aboutContainer {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-
-    .aboutText {
+    .text {
       margin-top: 5px;
       font-family: var(--font-primary);
       font-weight: 500;
@@ -145,45 +95,103 @@
       -webkit-hyphens: auto;
 
       &[data-ru-lang='true'] {
-        word-spacing: -2px;
+        word-spacing: -1px;
       }
     }
-  }
 
-  .skillsContainer {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-top: 15px;
-
-    .skillsContent {
-      padding-left: 20px;
-      margin-top: 15px;
+    .userContainer {
       width: 100%;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 15px;
 
-      .skillContainer {
+      .userContent {
+        display: flex;
+        row-gap: 2px;
+        flex-direction: column;
+
+        .name {
+          font-family: var(--font-primary);
+          font-weight: 700;
+          font-size: 32px;
+          position: relative;
+        }
+
+        .logoContainer {
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+
+          img {
+            height: 25px;
+          }
+        }
+      }
+
+      .userImage {
+        width: 100px;
+        height: 100px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .aboutContainer,
+    .skillsContainer {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .aboutContainer {
+      align-items: center;
+
+      .worksButton {
+        background: linear-gradient(45deg, #0a5a81, #700202);
+        border-radius: 5px;
+        padding-inline: 15px;
+        padding-block: 10px;
+        font-size: 16px;
+        font-family: var(--font-primary);
+        font-weight: 600;
+      }
+    }
+
+    .skillsContainer {
+      margin-top: 15px;
+
+      .skillsContent {
+        padding-left: 20px;
+        margin-top: 15px;
+        width: 100%;
         display: flex;
         flex-direction: column;
-        margin-top: 5px;
 
-        .skillContents {
-          margin-top: 10px;
-          padding-left: 20px;
+        .skillContainer {
           display: flex;
           flex-direction: column;
+          margin-top: 5px;
 
-          .skillContent {
+          .skillContents {
+            margin-top: 10px;
+            padding-left: 20px;
             display: flex;
-            align-items: center;
-            column-gap: 5px;
-            font-size: 17px;
+            flex-direction: column;
 
-            .skillContentText {
-              font-family: var(--font-primary);
-              font-weight: 600;
+            .skillContent {
+              display: flex;
+              align-items: center;
+              column-gap: 5px;
+              font-size: 17px;
+
+              .skillContentText {
+                font-family: var(--font-primary);
+                font-weight: 600;
+              }
             }
           }
         }

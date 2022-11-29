@@ -2,12 +2,13 @@
   position: sticky;
   top: 0;
   width: 100%;
-  padding-block: 10px;
-  height: 100px;
+  //padding-block: 10px;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
+  //background: #0e0d0d;
   backdrop-filter: blur(10px);
 
   .headerContainer {
