@@ -4,7 +4,7 @@ import BasicPage from '@/components/BasicPage';
 import logoImg from '!/logo.svg';
 import TypingText from '@/components/TypingText';
 import { skills } from '@/pages/HomePage/data';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import CanvasModel from '@/components/CanvasModel';
 
 const HomePage = () => {
@@ -20,17 +20,7 @@ const HomePage = () => {
       <div className={cl.canvasContainer}>
         <CanvasModel />
         <div className={cl.greetingsBlock}>
-          <span>
-            <Trans
-              ns={'home'}
-              i18nKey={'greetings'}
-              components={{
-                span: <span />,
-                div: <div />,
-                logo: <img src={logoImg} alt='' />,
-              }}
-            />
-          </span>
+          <span>{t('greetings')}</span>
         </div>
       </div>
       <div className={cl.userContainer}>
