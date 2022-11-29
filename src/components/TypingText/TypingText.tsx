@@ -117,43 +117,35 @@ const TypingText: FC<ITypingText> = ({
     ...props,
     ...(animateOnVisible && isVisible ? visibleProps : {}),
   };
+
+  const typingTextContainer = (
+    <div className={classNames(cl.typingTextContainer, containerClassName!)}>
+      {parsedText.map((obj, key) => (
+        <span
+          data-visible={obj.visible}
+          style={{
+            animationDelay:
+              (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
+          }}
+          key={key}
+          {...mergedProps}
+          className={classes}
+        >
+            {obj.text}
+          </span>
+      ))}
+    </div>
+  );
+
   return (
     <>
       {isMobile ? (
-        <div className={classNames(cl.typingTextContainer, containerClassName!)}>
-          {parsedText.map((obj, key) => (
-            <span
-              data-visible={obj.visible}
-              style={{
-                animationDelay:
-                  (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
-              }}
-              key={key}
-              {...mergedProps}
-              className={classes}
-            >
-            {obj.text}
-          </span>
-          ))}
-        </div>
+        <>
+          {typingTextContainer}
+        </>
       ) : (
         <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
-          <div className={classNames(cl.typingTextContainer, containerClassName!)}>
-            {parsedText.map((obj, key) => (
-              <span
-                data-visible={obj.visible}
-                style={{
-                  animationDelay:
-                    (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
-                }}
-                key={key}
-                {...mergedProps}
-                className={classes}
-              >
-            {obj.text}
-          </span>
-            ))}
-          </div>
+          {typingTextContainer}
         </VisibilitySensor>
       )}
     </>
