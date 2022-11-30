@@ -1,12 +1,8 @@
 import React from 'react';
-import BasicPage from '@/components/BasicPage';
+import PageContainer from '@/components/PageContainer';
 
 const WorksPage = () => {
-  return (
-    <BasicPage>
-      Works page
-    </BasicPage>
-  );
+  return <PageContainer>Works page</PageContainer>;
 };
 
 export default WorksPage;
