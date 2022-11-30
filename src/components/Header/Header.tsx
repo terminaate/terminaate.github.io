@@ -19,11 +19,6 @@ type RouteProps = {
 
 const routes: RouteProps[] = [
   {
-    path: '/posts',
-    text: 'Posts',
-    icon: <MdArticle />,
-  },
-  {
     path: '/works',
     text: 'Works',
     icon: <GrUserWorker />,
@@ -48,9 +43,6 @@ const Header = () => {
       dispatch(setModal({ userModal: true, userModalData: user as UserData }));
     }
   };
-
-  // todo
-  // fix icon animation (color)
 
   return (
     <header className={cl.header}>

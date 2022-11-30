@@ -3,7 +3,7 @@ import BasicPage from '@/components/BasicPage';
 
 const WorksPage = () => {
   return (
-    <BasicPage header={true} container={true}>
+    <BasicPage>
       Works page
     </BasicPage>
   );

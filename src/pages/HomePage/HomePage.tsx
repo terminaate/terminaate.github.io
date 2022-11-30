@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import cl from './HomePage.module.scss';
-import BasicPage from '@/components/BasicPage';
 import logoImg from '!/logo.svg';
 import TypingText from '@/components/TypingText';
 import { contacts, skills } from '@/pages/HomePage/data';
 import { useTranslation } from 'react-i18next';
 import CanvasModel from '@/components/CanvasModel';
 import { useNavigate } from 'react-router-dom';
+import PageContainer from '@/components/PageContainer';
 
 const Title = ({ text = 'Default title' }: { text: string }) => {
   return (
@@ -20,7 +20,9 @@ const Title = ({ text = 'Default title' }: { text: string }) => {
 };
 
 const Text = ({ text }: { text: string | ReactElement }) => {
-  const { i18n: { language } } = useTranslation();
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   return (
     <span
@@ -46,12 +48,7 @@ const HomePage = () => {
   const { t } = useTranslation('home');
 
   return (
-    <BasicPage
-      header={true}
-      container={true}
-      containerClassName={cl.homePageContainer}
-      className={cl.homePage}
-    >
+    <PageContainer className={cl.homePage}>
       <div className={cl.canvasContainer}>
         <CanvasModel />
         <div className={cl.greetingsBlock}>
@@ -66,7 +63,7 @@ const HomePage = () => {
             className={cl.name}
           />
           <div className={cl.logoContainer}>
-            <img src={logoImg} alt='T$rm1naate' />
+            <img src={logoImg} alt="T$rm1naate" />
           </div>
         </div>
         <div className={cl.userImage}>img</div>
@@ -112,9 +109,12 @@ const HomePage = () => {
         <ul className={cl.contactsContent}>
           {contacts.map((item, key) => (
             <li key={key}>
-              <a target={'_blank'} rel={'noreferrer'} href={item.link ? item.link : ''}
-                 onClick={item.onClick ? item.onClick : () => {
-                 }}>
+              <a
+                target={'_blank'}
+                rel={'noreferrer'}
+                href={item.link ? item.link : ''}
+                onClick={item.onClick ? item.onClick : () => {}}
+              >
                 {item.icon}
                 <span>{item.text}</span>
               </a>
@@ -126,7 +126,7 @@ const HomePage = () => {
       <div className={cl.copyrightContainer}>
         <span>© 2022 Bahram Itkulov. All Rights Reserved.</span>
       </div>
-    </BasicPage>
+    </PageContainer>
   );
 };
 

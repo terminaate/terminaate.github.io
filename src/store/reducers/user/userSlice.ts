@@ -1,5 +1,5 @@
 import { AnyAction, createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
-import { login, refresh, register } from './authAPI';
+import { login, refresh } from './authAPI';
 
 export interface UserState {
   authorized: boolean;
@@ -42,7 +42,6 @@ export const userSlice = createSlice({
     };
 
     builder.addCase(login.fulfilled, handleAuth);
-    builder.addCase(register.fulfilled, handleAuth);
     builder.addCase(refresh.fulfilled, handleAuth);
   },
 });

@@ -13,10 +13,8 @@ import { useTranslation } from 'react-i18next';
 const LoginModal = () => {
   const [loginInput, onLoginChange, setLoginInput] = useInputState('');
   const [passwordInput, onPasswordChange, setPasswordInput] = useInputState('');
-  const [codeInput, onCodeChange, setCodeInput] = useInputState('');
   const [loginError, setLoginError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
-  const [codeError, setCodeError] = useState<string>('');
   const { loginModal } = useAppSelector((state) => state.modalsSlice);
   const { authorized } = useAppSelector((state) => state.userSlice);
   const dispatch = useAppDispatch();
@@ -26,21 +24,11 @@ const LoginModal = () => {
     dispatch(setModal({ loginModal: state }));
   };
 
-  const openCodeModal = () => {
-    dispatch(setModal({ codeModal: true }));
-  };
-
-  const openRegisterModal = () => {
-    dispatch(setModal({ registerModal: true }));
-  };
-
   const resetData = () => {
     setLoginInput('');
     setPasswordInput('');
-    setCodeInput('');
     setLoginError('');
     setPasswordError('');
-    setCodeError('');
   };
 
   const onLoginButtonClick = () => {
@@ -63,23 +51,16 @@ const LoginModal = () => {
       return setPasswordError(t('am_e_password-min-length')!);
     }
 
-    if (!codeInput) {
-      return setCodeError(t('am_e_auth-code-zero-input')!);
-    }
-
     dispatch(
       login({
         login: loginInput,
         password: passwordInput,
-        authCode: codeInput,
       }),
     );
   };
 
   useEffect(() => {
-    dispatch(
-      setModal({ loginModal: false, codeModal: false, registerModal: false }),
-    );
+    dispatch(setModal({ loginModal: false }));
   }, [authorized]);
 
   return (
@@ -108,26 +89,10 @@ const LoginModal = () => {
         >
           <ErrorMessage error={passwordError} />
         </Input>
-        <Input
-          value={codeInput}
-          onChange={onCodeChange}
-          placeholder={t('am_auth-code-placeholder')!}
-          container={true}
-        >
-          <button onClick={openCodeModal} className={cl.createCodeButton}>
-            {t('am_auth-code-create')}
-          </button>
-          <ErrorMessage error={codeError} />
-        </Input>
       </div>
-      <div className={cl.buttonsContainer}>
-        <button onClick={openRegisterModal} className={cl.registerButton}>
-          {t('am_register-link')}
-        </button>
-        <Button onClick={onLoginButtonClick} className={cl.loginButton}>
-          {t('am_login-button')}
-        </Button>
-      </div>
+      <Button onClick={onLoginButtonClick} className={cl.loginButton}>
+        {t('am_login-button')}
+      </Button>
     </Modal>
   );
 };
