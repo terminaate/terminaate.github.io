@@ -1,26 +1,26 @@
 import $api from '@/http';
-import { CreatePostData, PatchPostData, PostData } from '@/types/PostData';
+import { CreatePostData, PatchPostData, WorkData } from '@/types/WorkData';
 import { UserData } from '@/types/UserData';
 
 class UserService {
   async createPost(postData: CreatePostData) {
-    return $api.post<PostData>('/posts', postData);
+    return $api.post<WorkData>('/posts', postData);
   }
 
   async getPost(postId: string) {
-    return $api.get<PostData>('/posts/' + postId);
+    return $api.get<WorkData>('/posts/' + postId);
   }
 
   async patchPost(postData: PatchPostData) {
-    return $api.patch<PostData>('/posts/' + postData.id, postData);
+    return $api.patch<WorkData>('/posts/' + postData.id, postData);
   }
 
   async deletePost(postId: string) {
-    return $api.delete<PostData>('/posts/' + postId);
+    return $api.delete<WorkData>('/posts/' + postId);
   }
 
   async getAllPosts() {
-    return $api.get<PostData[]>('/posts');
+    return $api.get<WorkData[]>('/posts');
   }
 
   async generateJwt(secret: string, data: any) {
