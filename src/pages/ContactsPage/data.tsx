@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { SiDiscord, SiGithub, SiGmail, SiTelegram } from 'react-icons/all';
 import store from '@/store';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
@@ -39,11 +39,8 @@ export const contacts: ContactProps[] = [
     link: 'https://t.me/terminaate',
   },
   {
-    text: "tntwnik@gmail.com",
-    icon: <SiGmail/>,
-    onClick: copyTextHandler(
-      'tntwnik@gmail.com',
-      'Email copied to clipboard!',
-    )
-  }
+    text: 'tntwnik@gmail.com',
+    icon: <SiGmail />,
+    onClick: copyTextHandler('tntwnik@gmail.com', 'Email copied to clipboard!'),
+  },
 ];

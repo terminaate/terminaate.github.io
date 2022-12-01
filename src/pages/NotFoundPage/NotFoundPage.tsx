@@ -8,7 +8,7 @@ const NotFoundPage: FC = () => {
       <div className={cl.container}>
         <span className={cl.notFoundLogo}>404</span>
         <span className={cl.notFoundText}>
-        Sry but i cant find page with this path ¯\_(ツ)_/¯
+          Sry but i cant find page with this path ¯\_(ツ)_/¯
         </span>
       </div>
     </PageContainer>

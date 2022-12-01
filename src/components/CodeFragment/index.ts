@@ -1,3 +1,3 @@
-import CodeFragment from "./CodeFragment"
+import CodeFragment from './CodeFragment';
 
-export default CodeFragment
+export default CodeFragment;

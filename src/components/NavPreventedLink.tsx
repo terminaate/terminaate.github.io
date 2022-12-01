@@ -1,6 +1,5 @@
 import React, { FC, MouseEvent, ReactNode } from 'react';
 import { NavLink, NavLinkProps, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 interface INavPreventedLink extends NavLinkProps {
   to: string;

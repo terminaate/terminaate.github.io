@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import cl from './Header.module.scss';
 import NavPreventedLink from '@/components/NavPreventedLink';
 import AnimatedSymbolsText, {

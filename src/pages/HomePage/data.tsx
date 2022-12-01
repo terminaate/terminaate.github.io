@@ -1,12 +1,10 @@
-import store from '@/store';
-import React, { MouseEventHandler, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import {
   FaBootstrap,
   FaCss3,
   FaHtml5,
   FaReact,
   FaVuejs,
-  SiDiscord,
   SiDocker,
   SiElectron,
   SiExpress,
@@ -32,13 +30,11 @@ import {
   SiSass,
   SiSequelize,
   SiSqlite,
-  SiTelegram,
   SiThreedotjs,
   SiTypescript,
   SiVite,
   SiWebpack,
 } from 'react-icons/all';
-import { setNotificationText } from '@/store/reducers/notificationSlice';
 
 export type SkillProps = {
   title: string;
@@ -177,7 +173,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: '//ORM\'s',
+    title: "//ORM's",
     content: [
       {
         text: 'Sequelize',

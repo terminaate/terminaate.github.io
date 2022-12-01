@@ -18,7 +18,7 @@ const CodeFragment: React.FC<ICodeFragment> = ({ text, ...props }) => {
         PreTag={'span'}
         wrapLines={true}
         style={paraisoDark}
-        customStyle={{background: "none", opacity: 0.8}}
+        customStyle={{ background: 'none', opacity: 0.8 }}
       >
         {text}
       </SyntaxHighlighter>

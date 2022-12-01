@@ -39,7 +39,14 @@ const ContactsPage = () => {
         <Contact {...contact} key={key} />
       ))}
       <span className={cl.creditsText}>
-        //Made with <span className={cl.heart}>❤</span> by <AnimatedSymbolsText delayAnim={500} delay={100} clearDelay={100} infinite={true} text={"terminaate"}/>
+        //Made with <span className={cl.heart}>❤</span> by{' '}
+        <AnimatedSymbolsText
+          delayAnim={500}
+          delay={100}
+          clearDelay={100}
+          infinite={true}
+          text={'terminaate'}
+        />
       </span>
     </PageContainer>
   );
