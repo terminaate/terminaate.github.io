@@ -29,6 +29,7 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
 }) => {
   const [formattedText, setFormattedText] = useState<string[]>([...text]);
   const [animationIsOn, setAnimationIsOn] = useState<boolean>(false);
+  const [isVisibled, setIsVisibled] = useState<boolean>(false);
 
   const updateSymbol = (index: number, newValue: string) => {
     setFormattedText((values) =>
@@ -59,7 +60,6 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
     }, delayAnim);
   };
 
-
   useEffect(() => {
     if (animate && !animationIsOn) {
       animation();
@@ -70,7 +70,8 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
   const container = <Component {...props}>{formattedText.join('')}</Component>;
 
   const onVisibilityChange = (visible: boolean) => {
-    if (visible && animateOnVisible && !animationIsOn) {
+    if (visible && animateOnVisible && !isVisibled && !animationIsOn) {
+      setIsVisibled(true);
       animation();
     }
   };

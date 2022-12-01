@@ -17,6 +17,7 @@
     --text-primary: #fff;
     --text-secondary: rgba(255, 255, 255, 0.5);
     --text-inactive: rgba(255, 255, 255, 0.2);
+    --text-red: red;
     --font-sans-serif: Arial, sans-serif;
     --font-primary: monospace;
     --font-code: "Source code pro", monospace;

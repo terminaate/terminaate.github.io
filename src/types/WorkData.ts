@@ -11,4 +11,4 @@ export type WorkData = {
 
 export type CreateWorkData = Omit<WorkData, 'id'>;
 
-export type PatchWorkData = Partial<CreateWorkData>;
+export type PatchWorkData = Partial<WorkData>;

@@ -1,17 +1,15 @@
 import React from 'react';
 import cl from './LoadingPage.module.scss';
 import BasicPage from '@/components/BasicPage';
+import PageContainer from '@/components/PageContainer';
 
 const LoadingPage = () => {
   return (
-    <BasicPage
-      header={true}
-      container={true}
-      containerClassName={cl.container}
+    <PageContainer
       className={cl.loadingPage}
     >
       <div className={cl.loader} />
-    </BasicPage>
+    </PageContainer>
   );
 };
 

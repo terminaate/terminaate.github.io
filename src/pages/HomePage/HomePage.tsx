@@ -2,7 +2,9 @@ import React, {
   CSSProperties,
   FC,
   ReactElement,
+  useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import PageContainer from '@/components/PageContainer';
@@ -12,7 +14,7 @@ import { skills } from '@/pages/HomePage/data';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineWork, RiContactsBookLine } from 'react-icons/all';
 import Tooltip from '@/components/Tooltip';
-import Particles from '@/components/Particles';
+import { useTranslation } from 'react-i18next';
 
 type LinkProps = {
   icon: ReactElement;
@@ -23,9 +25,28 @@ type LinkProps = {
 
 const Link: FC<LinkProps> = ({ icon, link, style, title }) => {
   const navigate = useNavigate();
+  const linkRef = useRef<null | HTMLButtonElement>(null);
+
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    const { current: link } = linkRef;
+    if (link) {
+      const x = (window.innerWidth - e.pageX * 3) / 90;
+      const y = (window.innerHeight - e.pageY * 3) / 90;
+      link.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', onMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+    };
+  }, []);
 
   return (
     <button
+      ref={linkRef}
       onClick={() => navigate(link)}
       style={style}
       className={cl.linkButton}
@@ -38,9 +59,9 @@ const Link: FC<LinkProps> = ({ icon, link, style, title }) => {
 };
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const [firstLink, setFirstLink] = useState<null | LinkProps>(null);
   const [secondLink, setSecondLink] = useState<null | LinkProps>(null);
+  const { t } = useTranslation('home');
 
   useEffect(() => {
     const variant = Boolean(Math.floor(Math.random() * 2));
@@ -101,7 +122,7 @@ const HomePage = () => {
                 text={'Bahram_Itkulov'}
                 className={cl.name}
               />
-              <span className={cl.subTitle}>//Name</span>
+              <span className={cl.subTitle}>//{t('name_comment')}</span>
             </span>
             <span className={cl.nameDescription}>
               <AnimatedSymbolsText
@@ -111,7 +132,7 @@ const HomePage = () => {
                 text={'Professional_React_developer'}
                 className={cl.nameDescription}
               />
-              <span className={cl.subTitle}>//Profession</span>
+              <span className={cl.subTitle}>//{t('profession_comment')}</span>
             </span>
           </div>
           <div className={cl.userAvatarContainer}>
@@ -123,15 +144,9 @@ const HomePage = () => {
             animateOnVisible={true}
             tag={'h1'}
             className={cl.title}
-            text={'//About me'}
+            text={'//' + t('about-me_title')}
           />
-          <span className={cl.aboutText}>
-            Bahram is a young web developer living in Russia, he devotes most of
-            his time to developing his own small projects, and self-improvement,
-            he has been doing web development for about 2 years, during which
-            time he studied the frontend and backend spheres, at the moment he
-            positions himself as a React front-end developer.
-          </span>
+          <span className={cl.aboutText}>{t('about-me_text')}</span>
         </div>
         <div className={cl.skillsContainer}>
           <AnimatedSymbolsText
