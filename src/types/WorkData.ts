@@ -1,10 +1,14 @@
 export type WorkData = {
   id: string;
   title: string;
-  content: string;
-  updatedAt: string;
+  description: string;
+  type: string;
+  link: string;
+  githubLink?: string;
+  image: string;
+  tags: string[];
 };
 
-export type PatchWorkData = Pick<WorkData, 'id' | 'title' | 'content'>;
+export type CreateWorkData = Omit<WorkData, 'id'>;
 
-export type CreateWorkData = Omit<WorkData, 'id' | 'updatedAt' | 'author'>;
+export type PatchWorkData = Partial<CreateWorkData>;

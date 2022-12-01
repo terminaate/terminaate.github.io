@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 
-interface IAnimatedSymbolsText extends HTMLAttributes<any> {
+export interface IAnimatedSymbolsText extends HTMLAttributes<any> {
   delay?: number;
   clearDelay?: number;
   animate?: boolean;

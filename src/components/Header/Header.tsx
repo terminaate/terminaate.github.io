@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useState } from 'react';
 import cl from './Header.module.scss';
 import NavPreventedLink from '@/components/NavPreventedLink';
-import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
+import AnimatedSymbolsText, {
+  IAnimatedSymbolsText,
+} from '@/components/AnimatedSymbolsText';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
@@ -10,11 +12,13 @@ type LinkProps = {
   text: string;
   to: string;
   animate: boolean;
+  props?: Partial<IAnimatedSymbolsText>;
 };
 
 const Link = ({ link }: { link: LinkProps }) => {
   const [animate, setAnimate] = useState(false);
   const location = useLocation();
+  const isMatch = location.pathname === link.to;
 
   useLayoutEffect(() => {
     setAnimate(link.animate);
@@ -27,28 +31,32 @@ const Link = ({ link }: { link: LinkProps }) => {
   return (
     <NavPreventedLink to={link.to}>
       <motion.span
-        onClick={onLinkClick}
+        onHoverStart={onLinkClick}
+        whileHover={!isMatch ? { color: 'var(--text-secondary)' } : {}}
         initial={{ color: 'var(--text-inactive)' }}
-        animate={
-          location.pathname === link.to ? { color: 'var(--text-primary)' } : {}
-        }
+        animate={isMatch ? { color: 'var(--text-primary)' } : {}}
         exit={{ color: 'var(--text-inactive)' }}
       >
         <AnimatedSymbolsText
           animate={animate}
           setAnimate={setAnimate}
           text={link.text}
+          {...link.props}
         />
       </motion.span>
     </NavPreventedLink>
   );
 };
 
-const links = [
+const links: LinkProps[] = [
   {
     text: 'new Terminaate()',
     to: '/',
     animate: false,
+    props: {
+      delay: 25,
+      clearDelay: 25,
+    },
   },
   {
     text: '.works()',

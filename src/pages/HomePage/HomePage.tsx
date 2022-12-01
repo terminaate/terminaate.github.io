@@ -12,6 +12,7 @@ import { skills } from '@/pages/HomePage/data';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineWork, RiContactsBookLine } from 'react-icons/all';
 import Tooltip from '@/components/Tooltip';
+import Particles from '@/components/Particles';
 
 type LinkProps = {
   icon: ReactElement;
@@ -46,9 +47,11 @@ const HomePage = () => {
 
     const minTop = 10;
     const maxTop = 85;
+    const minLeft = 15;
+    const maxLeft = 55;
     const createStyle = (rotate: boolean) => ({
       top: Math.floor(Math.random() * (maxTop - minTop) + minTop) + '%',
-      left: Math.floor(Math.random() * 50) + '%',
+      left: Math.floor(Math.random() * (maxLeft - minLeft) + minLeft) + '%',
       transform: rotate ? 'rotate(30deg)' : 'rotate(-30deg)',
     });
 

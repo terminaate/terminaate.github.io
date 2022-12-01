@@ -10,6 +10,7 @@ import WorksPage from '@/pages/WorksPage';
 // import AuthorizedRoute from '@/components/AuthorizedRoute';
 import LoadingPage from '@/pages/LoadingPage';
 import BasicPage from '@/components/BasicPage';
+import ContactsPage from '@/pages/ContactsPage';
 
 // const PostPage = lazy(() => import('@/pages/PostPage'));
 // const EditPostPage = lazy(() => import('@/pages/EditPostPage'));
@@ -50,6 +51,7 @@ const Routing = () => {
             {/*  }*/}
             {/*/>*/}
             <Route path={'/works'} element={<WorksPage />} />
+            <Route path={'/contacts'} element={<ContactsPage />} />
             <Route path={'/*'} element={<NotFoundPage />} />
           </Routes>
         </AnimatePresence>

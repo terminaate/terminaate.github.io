@@ -3,8 +3,6 @@ import cl from './PageContainer.module.scss';
 import classNames from 'classnames';
 import { HTMLMotionProps, motion, Variants } from 'framer-motion';
 
-type PageContainerProps = HTMLMotionProps<'div'>;
-
 const pageContainerVariants: Variants = {
   initial: {
     opacity: 0,
@@ -17,7 +15,7 @@ const pageContainerVariants: Variants = {
   },
 };
 
-const PageContainer: FC<PageContainerProps> = ({
+const PageContainer: FC<HTMLMotionProps<'div'>> = ({
   children,
   className,
   ...props
