@@ -50,7 +50,7 @@ export type SkillProps = {
 
 export const skills: SkillProps[] = [
   {
-    title: 'Frontend',
+    title: '//Frontend',
     content: [
       {
         text: 'HTML',
@@ -135,7 +135,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: 'Backend',
+    title: '//Backend',
     content: [
       {
         text: 'Node.js',
@@ -156,7 +156,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: 'Databases',
+    title: '//Databases',
     content: [
       {
         text: 'Mongodb',
@@ -177,7 +177,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: 'ORM\'s',
+    title: '//ORM\'s',
     content: [
       {
         text: 'Sequelize',
@@ -190,7 +190,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: 'Principles',
+    title: '//Principles',
     content: [
       {
         text: 'SOLID',
@@ -207,7 +207,7 @@ export const skills: SkillProps[] = [
     ],
   },
   {
-    title: 'Devops',
+    title: '//Devops',
     content: [
       {
         text: 'Git',
@@ -231,35 +231,4 @@ export const skills: SkillProps[] = [
       },
     ],
   },
-];
-
-type ContactProps = {
-  icon: ReactElement;
-  text: string;
-  link?: string;
-  onClick?: MouseEventHandler;
-}
-
-export const contacts: ContactProps[] = [
-  {
-    text: '@Terminaate',
-    link: 'https://github.com/terminaate',
-    icon: <SiGithub />,
-  },
-  {
-    text: 'Terminaate#9274',
-    icon: <SiDiscord />,
-    onClick: function(e) {
-      e.preventDefault();
-      navigator.clipboard.writeText('Terminaate#9274').then(() => {
-        store.dispatch(setNotificationText('Discord tag copied to clipboard!'));
-      });
-    },
-  },
-  {
-    text: '@terminaate',
-    icon: <SiTelegram />,
-    link: 'https://t.me/terminaate',
-  },
-
 ];

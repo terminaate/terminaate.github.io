@@ -1,130 +1,187 @@
-import React, { ReactElement } from 'react';
-import cl from './HomePage.module.scss';
-import logoImg from '!/logo.svg';
-import TypingText from '@/components/TypingText';
-import { contacts, skills } from '@/pages/HomePage/data';
-import { useTranslation } from 'react-i18next';
-import CanvasModel from '@/components/CanvasModel';
-import { useNavigate } from 'react-router-dom';
+import React, {
+  CSSProperties,
+  FC,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import PageContainer from '@/components/PageContainer';
+import cl from './HomePage.module.scss';
+import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
+import { skills } from '@/pages/HomePage/data';
+import { useNavigate } from 'react-router-dom';
+import { MdOutlineWork, RiContactsBookLine } from 'react-icons/all';
+import Tooltip from '@/components/Tooltip';
+import { useTranslation } from 'react-i18next';
 
-const Title = ({ text = 'Default title' }: { text: string }) => {
-  return (
-    <TypingText
-      className={cl.title}
-      text={text}
-      animateOnVisible={true}
-      visibleProps={{ className: cl.visibleTitle }}
-    />
-  );
+type LinkProps = {
+  icon: ReactElement;
+  link: string;
+  style: CSSProperties;
+  title: string;
 };
 
-const Text = ({ text }: { text: string | ReactElement }) => {
-  const {
-    i18n: { language },
-  } = useTranslation();
-
-  return (
-    <span
-      data-ru-lang={language.toLowerCase().includes('ru')}
-      className={cl.text}
-    >
-      {text}
-    </span>
-  );
-};
-
-const LinkButton = ({ text, link }: { text: string; link: string }) => {
+const Link: FC<LinkProps> = ({ icon, link, style, title }) => {
   const navigate = useNavigate();
+  const linkRef = useRef<null | HTMLButtonElement>(null);
+
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    const { current: link } = linkRef;
+    if (link) {
+      const x = (window.innerWidth - e.pageX * 3) / 90;
+      const y = (window.innerHeight - e.pageY * 3) / 90;
+      link.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', onMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+    };
+  }, []);
 
   return (
-    <button onClick={() => navigate(link)} className={cl.linkButton}>
-      {text}
+    <button
+      ref={linkRef}
+      onClick={() => navigate(link)}
+      style={style}
+      className={cl.linkButton}
+    >
+      <Tooltip position={'top'} text={title}>
+        {icon}
+      </Tooltip>
     </button>
   );
 };
 
 const HomePage = () => {
+  const [firstLink, setFirstLink] = useState<null | LinkProps>(null);
+  const [secondLink, setSecondLink] = useState<null | LinkProps>(null);
   const { t } = useTranslation('home');
+
+  useEffect(() => {
+    const variant = Boolean(Math.floor(Math.random() * 2));
+
+    const minTop = 10;
+    const maxTop = 85;
+    const minLeft = 15;
+    const maxLeft = 55;
+    const createStyle = (rotate: boolean) => ({
+      top: Math.floor(Math.random() * (maxTop - minTop) + minTop) + '%',
+      left: Math.floor(Math.random() * (maxLeft - minLeft) + minLeft) + '%',
+      transform: rotate ? 'rotate(30deg)' : 'rotate(-30deg)',
+    });
+
+    const { transform: workTransform, ...workStyle } = createStyle(variant);
+    const worksVariant = {
+      title: '.works()',
+      link: '/works',
+      icon: (
+        <MdOutlineWork
+          className={cl.linkIcon}
+          style={{ transform: workTransform }}
+        />
+      ),
+      style: workStyle,
+    };
+    const { transform: contactsTransform, ...contactsStyle } = createStyle(
+      !variant,
+    );
+    const contactsVariant = {
+      title: '.contacts()',
+      link: '/contacts',
+      icon: (
+        <RiContactsBookLine
+          className={cl.linkIcon}
+          style={{ transform: contactsTransform }}
+        />
+      ),
+      style: contactsStyle,
+    };
+
+    setFirstLink(variant ? worksVariant : contactsVariant);
+    setSecondLink(variant ? contactsVariant : worksVariant);
+  }, []);
 
   return (
     <PageContainer className={cl.homePage}>
-      <div className={cl.canvasContainer}>
-        <CanvasModel />
-        <div className={cl.greetingsBlock}>
-          <span>{t('greetings')}</span>
-        </div>
+      <div className={cl.linkContainer}>
+        <Link {...firstLink!} />
       </div>
-      <div className={cl.userContainer}>
-        <div className={cl.userContent}>
-          <TypingText
-            text={t('name')!}
-            animateOnVisible={true}
-            className={cl.name}
-          />
-          <div className={cl.logoContainer}>
-            <img src={logoImg} alt="T$rm1naate" />
+      <div className={cl.container}>
+        <div className={cl.userContainer}>
+          <div className={cl.nameContainer}>
+            <span className={cl.name}>
+              <AnimatedSymbolsText
+                animateOnVisible={true}
+                tag={'h1'}
+                text={'Bahram_Itkulov'}
+                className={cl.name}
+              />
+              <span className={cl.subTitle}>//{t('name_comment')}</span>
+            </span>
+            <span className={cl.nameDescription}>
+              <AnimatedSymbolsText
+                animateOnVisible={true}
+                clearDelay={25}
+                delay={25}
+                text={'Professional_React_developer'}
+                className={cl.nameDescription}
+              />
+              <span className={cl.subTitle}>//{t('profession_comment')}</span>
+            </span>
+          </div>
+          <div className={cl.userAvatarContainer}>
+            <img src="" alt="terminaate.avatar" />
           </div>
         </div>
-        <div className={cl.userImage}>img</div>
+        <div className={cl.aboutContainer}>
+          <AnimatedSymbolsText
+            animateOnVisible={true}
+            tag={'h1'}
+            className={cl.title}
+            text={'//' + t('about-me_title')}
+          />
+          <span className={cl.aboutText}>{t('about-me_text')}</span>
+        </div>
+        <div className={cl.skillsContainer}>
+          <AnimatedSymbolsText
+            animateOnVisible={true}
+            tag={'h1'}
+            className={cl.title}
+            text={'//Skills'}
+          />
+          <ul className={cl.skillsList}>
+            {skills.map((skill, key) => (
+              <li key={key} className={cl.skill}>
+                <AnimatedSymbolsText
+                  className={cl.subTitle}
+                  text={skill.title}
+                  animateOnVisible={true}
+                />
+                <ul className={cl.skillContents}>
+                  {skill.content.map((content, key) => (
+                    <li className={cl.skillContent} key={key}>
+                      {content.icon && <>{content.icon}</>}
+                      <AnimatedSymbolsText
+                        animateOnVisible={true}
+                        text={content.text}
+                        className={cl.skillContentText}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className={cl.aboutContainer}>
-        <Title text={t('about-me_title')!} />
-        <Text text={t('about-me_main')!} />
-        <LinkButton text={t('works_button')} link={'/works'} />
-      </div>
-      <div className={cl.loveContainer}>
-        <Title text={t('love_title')!} />
-        <Text text={t('love_main')!} />
-      </div>
-      <div className={cl.skillsContainer}>
-        <Title text={t('skills_title')!} />
-        <ul className={cl.skillsContent}>
-          {skills.map((skill, key) => (
-            <li key={key} className={cl.skillContainer}>
-              <TypingText
-                className={cl.secondaryTitle}
-                text={skill.title}
-                animateOnVisible={true}
-                visibleProps={{ className: cl.visibleTitle }}
-              />
-              <ul className={cl.skillContents}>
-                {skill.content.map((content, key) => (
-                  <li className={cl.skillContent} key={key}>
-                    {content.icon && <>{content.icon}</>}
-                    <TypingText
-                      className={cl.skillContentText}
-                      text={content.text}
-                      animateOnVisible={true}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={cl.contactsContainer}>
-        <Title text={t('contacts_title')!} />
-        <ul className={cl.contactsContent}>
-          {contacts.map((item, key) => (
-            <li key={key}>
-              <a
-                target={'_blank'}
-                rel={'noreferrer'}
-                href={item.link ? item.link : ''}
-                onClick={item.onClick ? item.onClick : () => {}}
-              >
-                {item.icon}
-                <span>{item.text}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <LinkButton text={t('posts_button')} link={'/posts'} />
-      </div>
-      <div className={cl.copyrightContainer}>
-        <span>© 2022 Bahram Itkulov. All Rights Reserved.</span>
+      <div className={cl.linkContainer}>
+        <Link {...secondLink!} />
       </div>
     </PageContainer>
   );

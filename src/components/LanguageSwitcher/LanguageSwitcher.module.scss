@@ -1,7 +1,4 @@
 .container {
-  position: fixed;
-  bottom: 2rem;
-  right: 3rem;
   width: max-content;
   height: max-content;
   display: flex;
@@ -11,7 +8,7 @@
 
   .languageButton {
     font-family: var(--font-primary);
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     position: relative;
     padding: 10px;

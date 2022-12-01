@@ -1,28 +1,34 @@
-import React, { useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 import cl from './PageContainer.module.scss';
-import { HTMLMotionProps, motion } from 'framer-motion';
 import classNames from 'classnames';
+import { HTMLMotionProps, motion, Variants } from 'framer-motion';
 
-const PageContainer: React.FC<HTMLMotionProps<'div'>> = ({
-  className,
+const pageContainerVariants: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
+const PageContainer: FC<HTMLMotionProps<'div'>> = ({
   children,
+  className,
   ...props
 }) => {
-  const containerRef = useRef<null | HTMLDivElement>(null);
-
-  useEffect(() => {
-    containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
   return (
     <motion.div
+      variants={pageContainerVariants}
+      initial={'initial'}
+      animate={'animate'}
+      exit={'exit'}
+      transition={{ duration: 0.6 }}
       {...props}
-      ref={containerRef}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className={classNames(cl.container, className!)}
+      className={classNames(cl.container, className)}
     >
       {children}
     </motion.div>

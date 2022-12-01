@@ -1,86 +1,97 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import cl from './Header.module.scss';
-import logoImg from '!/logo.svg';
-import { Link, useLocation } from 'react-router-dom';
-import { FaGithub, GrUserWorker, MdArticle } from 'react-icons/all';
-import { motion } from 'framer-motion';
 import NavPreventedLink from '@/components/NavPreventedLink';
-import { useAppDispatch, useAppSelector } from '@/store';
+import AnimatedSymbolsText, {
+  IAnimatedSymbolsText,
+} from '@/components/AnimatedSymbolsText';
+import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { setModal } from '@/store/reducers/modalsSlice';
-import { userAvatarUrl } from '@/http';
-import { UserData } from '@/types/UserData';
+import { useAppDispatch, useAppSelector } from '@/store';
 
-type RouteProps = {
-  path: string;
+type LinkProps = {
   text: string;
-  icon: JSX.Element;
-  external?: boolean;
+  to: string;
+  animate: boolean;
+  props?: Partial<IAnimatedSymbolsText>;
+  homeLink?: boolean;
 };
 
-const routes: RouteProps[] = [
-  {
-    path: '/works',
-    text: 'Works',
-    icon: <GrUserWorker />,
-  },
-  {
-    path: 'https://github.com/terminaate/terminaate.github.io',
-    text: 'Github',
-    icon: <FaGithub />,
-    external: true,
-  },
-];
-
-const Header = () => {
+const Link = ({ link }: { link: LinkProps }) => {
+  const [animate, setAnimate] = useState(false);
   const location = useLocation();
-  const { authorized, user } = useAppSelector((state) => state.userSlice);
+  const isMatch = location.pathname === link.to;
   const dispatch = useAppDispatch();
+  const { authorized } = useAppSelector((state) => state.userSlice);
 
-  const onUserButtonClick = () => {
+  useLayoutEffect(() => {
+    setAnimate(link.animate);
+  }, []);
+
+  const onLinkHover = () => {
+    setAnimate(true);
+  };
+
+  const onHomeLinkClick = () => {
     if (!authorized) {
       dispatch(setModal({ loginModal: true }));
-    } else {
-      dispatch(setModal({ userModal: true, userModalData: user as UserData }));
     }
   };
 
   return (
+    <NavPreventedLink to={link.to}>
+      <motion.span
+        onHoverStart={onLinkHover}
+        whileHover={!isMatch ? { color: 'var(--text-secondary)' } : {}}
+        initial={{ color: 'var(--text-inactive)' }}
+        animate={isMatch ? { color: 'var(--text-primary)' } : {}}
+        exit={{ color: 'var(--text-inactive)' }}
+      >
+        <AnimatedSymbolsText
+          animate={animate}
+          setAnimate={setAnimate}
+          text={link.text}
+          onDoubleClick={link.homeLink ? onHomeLinkClick : () => {}}
+          {...link.props}
+        />
+      </motion.span>
+    </NavPreventedLink>
+  );
+};
+
+const links: LinkProps[] = [
+  {
+    text: 'new Terminaate()',
+    to: '/',
+    animate: false,
+    props: {
+      delay: 25,
+      clearDelay: 25,
+    },
+    homeLink: true,
+  },
+  {
+    text: '.works()',
+    to: '/works',
+    animate: false,
+  },
+  {
+    text: '.contacts()',
+    to: '/contacts',
+    animate: false,
+  },
+];
+
+const Header = () => {
+  return (
     <header className={cl.header}>
-      <div className={cl.headerContainer}>
-        <div className={cl.linksContainer}>
-          <Link to={'/'} className={cl.homeLink}>
-            <img src={logoImg} alt="T$rm1naate" />
-          </Link>
-          {routes.map((route, key) => (
-            <div key={key}>
-              {route.external ? (
-                <a href={route.path} target={'_blank'} rel="noreferrer">
-                  {route.icon}
-                  <span>{route.text}</span>
-                </a>
-              ) : (
-                <NavPreventedLink to={route.path}>
-                  {route.icon}
-                  <motion.span
-                    initial={{ color: 'var(--text-secondary)' }}
-                    animate={
-                      location.pathname === route.path && {
-                        color: 'var(--text-primary)',
-                      }
-                    }
-                    exit={{ color: 'var(--text-secondary)' }}
-                  >
-                    {route.text}
-                  </motion.span>
-                </NavPreventedLink>
-              )}
-            </div>
-          ))}
-        </div>
-        <button onClick={onUserButtonClick} className={cl.userAvatar}>
-          <img src={userAvatarUrl + user.id} alt="" />
-        </button>
+      <div className={cl.linksContainer}>
+        {links.map((link, key) => (
+          <Link link={link} key={key} />
+        ))}
       </div>
+      <LanguageSwitcher />
     </header>
   );
 };

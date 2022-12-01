@@ -3,4 +3,25 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    row-gap: 15px;
+
+    .notFoundLogo {
+      font-family: var(--font-pixel);
+      font-size: 100px;
+    }
+
+    .notFoundText {
+      font-family: var(--font-primary);
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
 }

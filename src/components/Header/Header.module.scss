@@ -1,118 +1,25 @@
 .header {
-  position: sticky;
-  top: 0;
   width: 100%;
-  //padding-block: 10px;
-  min-height: 60px;
+  height: 60px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 100;
-  //background: #0e0d0d;
-  backdrop-filter: blur(10px);
+  justify-content: space-between;
+  padding-inline: 30px;
+  background-color: var(--background-secondary);
+  border-radius: 2px;
 
-  .headerContainer {
+  .linksContainer {
+    //padding-left: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: var(--header-width);
-    width: 100%;
+    column-gap: 15px;
 
-    .linksContainer {
-      column-gap: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: left;
-
-      .homeLink {
-        width: max-content;
-        height: max-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 10px;
-
-        img {
-          height: 30px;
-          transition: 0.2s;
-
-          &:hover {
-            filter: blur(3px);
-          }
-        }
-      }
-
-      a {
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
-        font-family: var(--font-primary);
-        font-weight: 700;
-        color: var(--text-secondary);
-        font-size: 20px;
-
-        svg {
-          path {
-            stroke: var(--text-secondary);
-          }
-        }
-
-        svg path,
-        span {
-          transition: filter 0.2s;
-        }
-
-        &:hover {
-          span {
-            filter: blur(2px);
-          }
-        }
-
-        &[aria-current='page'] {
-          svg path {
-            stroke: var(--text-primary);
-            color: var(--text-primary);
-          }
-        }
-      }
-
-      @media screen and (max-width: 620px) {
-        a {
-          display: none;
-        }
-
-        .homeLink {
-          display: flex !important;
-        }
-      }
-    }
-
-    .userAvatar {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 40px;
-      min-height: 40px;
-      max-width: 40px;
-      max-height: 40px;
-      border-radius: 50%;
-      border: 3px solid var(--text-primary);
-      cursor: pointer;
-      overflow: hidden;
-
-      &:hover {
-        img {
-          filter: blur(2px);
-        }
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        transition: filter 0.2s;
-      }
+    a {
+      font-family: var(--font-primary);
+      font-size: 23px;
+      text-decoration: none;
+      font-weight: 400;
     }
   }
 }

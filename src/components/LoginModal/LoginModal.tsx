@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import Modal from '@/components/Modal/Modal';
 import cl from './LoginModal.module.scss';
 import Button from '@/components/UI/Button';
@@ -31,7 +31,8 @@ const LoginModal = () => {
     setPasswordError('');
   };
 
-  const onLoginButtonClick = () => {
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
     setLoginError('');
     setPasswordError('');
 
@@ -71,28 +72,30 @@ const LoginModal = () => {
       setState={setLoginModal}
     >
       <h1 className={cl.title}>{t('am_login-title')}</h1>
-      <div className={cl.inputsContainer}>
-        <Input
-          value={loginInput}
-          onChange={onLoginChange}
-          placeholder={t('am_login-placeholder')!}
-          container={true}
-        >
-          <ErrorMessage error={loginError} />
-        </Input>
-        <Input
-          value={passwordInput}
-          onChange={onPasswordChange}
-          placeholder={t('am_password-placeholder')!}
-          type={'password'}
-          container={true}
-        >
-          <ErrorMessage error={passwordError} />
-        </Input>
-      </div>
-      <Button onClick={onLoginButtonClick} className={cl.loginButton}>
-        {t('am_login-button')}
-      </Button>
+      <form onSubmit={onSubmit}>
+        <div className={cl.inputsContainer}>
+          <Input
+            value={loginInput}
+            onChange={onLoginChange}
+            placeholder={t('am_login-placeholder')!}
+          >
+            <ErrorMessage error={loginError} />
+          </Input>
+          <Input
+            value={passwordInput}
+            onChange={onPasswordChange}
+            placeholder={t('am_password-placeholder')!}
+            type={'password'}
+          >
+            <ErrorMessage error={passwordError} />
+          </Input>
+        </div>
+        <div className={cl.buttonsContainer}>
+          <Button type={'submit'} className={cl.loginButton}>
+            {t('am_login-button')}
+          </Button>
+        </div>
+      </form>
     </Modal>
   );
 };
