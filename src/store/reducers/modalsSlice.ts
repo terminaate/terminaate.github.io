@@ -1,20 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserData } from '@/types/UserData';
 
 export interface ModalsState {
   loginModal: boolean;
-  registerModal: boolean;
-  codeModal: boolean;
-  userModal: boolean;
-  userModalData: UserData | null;
 }
 
 export const initialState: ModalsState = {
-  loginModal: false,
-  registerModal: false,
-  codeModal: false,
-  userModal: false,
-  userModalData: null,
+  loginModal: true,
 };
 
 export const modalsSlice = createSlice({

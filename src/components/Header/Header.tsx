@@ -7,6 +7,8 @@ import AnimatedSymbolsText, {
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { setModal } from '@/store/reducers/modalsSlice';
+import { dispatch } from '@/store';
 
 type LinkProps = {
   text: string;
@@ -56,6 +58,7 @@ const links: LinkProps[] = [
     props: {
       delay: 25,
       clearDelay: 25,
+      onDoubleClick: () => dispatch(setModal({ loginModal: true })),
     },
   },
   {

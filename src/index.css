@@ -13,6 +13,7 @@
 :root {
     --background-primary: #1c1c1c;
     --background-secondary: #181818;
+    --background-third: #212121;
     --text-primary: #fff;
     --text-secondary: rgba(255, 255, 255, 0.5);
     --text-inactive: rgba(255, 255, 255, 0.2);

@@ -232,34 +232,3 @@ export const skills: SkillProps[] = [
     ],
   },
 ];
-
-type ContactProps = {
-  icon: ReactElement;
-  text: string;
-  link?: string;
-  onClick?: MouseEventHandler;
-}
-
-export const contacts: ContactProps[] = [
-  {
-    text: '@Terminaate',
-    link: 'https://github.com/terminaate',
-    icon: <SiGithub />,
-  },
-  {
-    text: 'Terminaate#9274',
-    icon: <SiDiscord />,
-    onClick: function(e) {
-      e.preventDefault();
-      navigator.clipboard.writeText('Terminaate#9274').then(() => {
-        store.dispatch(setNotificationText('Discord tag copied to clipboard!'));
-      });
-    },
-  },
-  {
-    text: '@terminaate',
-    icon: <SiTelegram />,
-    link: 'https://t.me/terminaate',
-  },
-
-];

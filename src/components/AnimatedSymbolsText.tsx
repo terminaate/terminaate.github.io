@@ -11,6 +11,7 @@ export interface IAnimatedSymbolsText extends HTMLAttributes<any> {
   tag?: keyof JSX.IntrinsicElements;
   delayAnim?: number;
   animateOnVisible?: boolean;
+  infinite?: boolean;
   text: string;
 }
 
@@ -23,6 +24,7 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
   text,
   tag = 'span',
   animateOnVisible = false,
+  infinite = false,
   ...props
 }) => {
   const [formattedText, setFormattedText] = useState<string[]>([...text]);
@@ -36,6 +38,7 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
 
   const animation = () => {
     setAnimationIsOn(true);
+
     setTimeout(() => {
       const oldText = [...formattedText];
 
@@ -56,11 +59,12 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
     }, delayAnim);
   };
 
+
   useEffect(() => {
     if (animate && !animationIsOn) {
       animation();
     }
-  }, [animate]);
+  }, [animate, infinite ? animationIsOn : null]);
 
   const Component = tag;
   const container = <Component {...props}>{formattedText.join('')}</Component>;
