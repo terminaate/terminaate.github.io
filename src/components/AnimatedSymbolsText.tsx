@@ -71,19 +71,12 @@ const AnimatedSymbolsText: FC<IAnimatedSymbolsText> = ({
     }
   };
 
-  return (
-    <>
-      {animateOnVisible ? (
-        <VisibilitySensor
-          partialVisibility={true}
-          onChange={onVisibilityChange}
-        >
-          {container}
-        </VisibilitySensor>
-      ) : (
-        <>{container}</>
-      )}
-    </>
+  return animateOnVisible ? (
+    <VisibilitySensor partialVisibility={true} onChange={onVisibilityChange}>
+      {container}
+    </VisibilitySensor>
+  ) : (
+    container
   );
 };
 

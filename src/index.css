@@ -17,8 +17,7 @@
     --text-secondary: rgba(255, 255, 255, 0.5);
     --text-inactive: rgba(255, 255, 255, 0.2);
     --font-sans-serif: Arial, sans-serif;
-    --font-primary: 'Inter', var(--font-sans-serif);
-    --font-secondary: monospace;
+    --font-primary: monospace;
     --font-code: "Source code pro", monospace;
 }
 

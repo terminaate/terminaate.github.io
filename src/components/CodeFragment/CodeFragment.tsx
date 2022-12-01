@@ -1,20 +1,24 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React from 'react';
 import cl from './CodeFragment.module.scss';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atelierDuneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import SyntaxHighlighter, {
+  SyntaxHighlighterProps,
+} from 'react-syntax-highlighter';
+import { paraisoDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
-interface ICodeFragment {
+interface ICodeFragment extends Partial<SyntaxHighlighterProps> {
   text: string;
 }
 
-const CodeFragment: React.FC<ICodeFragment> = ({ text }) => {
+const CodeFragment: React.FC<ICodeFragment> = ({ text, ...props }) => {
   return (
     <div className={cl.codeContainer}>
       <SyntaxHighlighter
+        {...props}
         language={'javascript'}
-        style={atelierDuneDark}
         PreTag={'span'}
-        customStyle={{background: "none", padding: 0}}
+        wrapLines={true}
+        style={paraisoDark}
+        customStyle={{background: "none", opacity: 0.8}}
       >
         {text}
       </SyntaxHighlighter>

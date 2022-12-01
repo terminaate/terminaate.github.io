@@ -1,12 +1,10 @@
 import React, { useLayoutEffect, useState } from 'react';
 import cl from './Header.module.scss';
 import NavPreventedLink from '@/components/NavPreventedLink';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { setModal } from '@/store/reducers/modalsSlice';
-import { UserData } from '@/types/UserData';
 import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 type LinkProps = {
   text: string;
@@ -57,27 +55,33 @@ const links = [
     to: '/works',
     animate: false,
   },
+  {
+    text: '.contacts()',
+    to: '/contacts',
+    animate: false,
+  },
 ];
 
 const Header = () => {
-  const { authorized, user } = useAppSelector((state) => state.userSlice);
-  const dispatch = useAppDispatch();
+  // const { authorized, user } = useAppSelector((state) => state.userSlice);
+  // const dispatch = useAppDispatch();
 
-  const onUserButtonClick = () => {
-    if (!authorized) {
-      dispatch(setModal({ loginModal: true }));
-    } else {
-      dispatch(setModal({ userModal: true, userModalData: user as UserData }));
-    }
-  };
+  // const onUserButtonClick = () => {
+  //   if (!authorized) {
+  //     dispatch(setModal({ loginModal: true }));
+  //   } else {
+  //     dispatch(setModal({ userModal: true, userModalData: user as UserData }));
+  //   }
+  // };
 
   return (
     <header className={cl.header}>
-      <div className={cl.container}>
+      <div className={cl.linksContainer}>
         {links.map((link, key) => (
           <Link link={link} key={key} />
         ))}
       </div>
+      <LanguageSwitcher />
     </header>
   );
 };
