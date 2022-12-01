@@ -146,14 +146,15 @@
       margin-top: 15px;
       width: 100%;
       display: flex;
+      row-gap: 15px;
       flex-direction: column;
-      margin-top: 5px;
 
       .skill {
         display: flex;
+        row-gap: 5px;
         flex-direction: column;
 
-        .skillContent {
+        .skillContents {
           display: flex;
           flex-direction: column;
 
