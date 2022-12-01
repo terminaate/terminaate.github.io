@@ -84,17 +84,6 @@ const links: LinkProps[] = [
 ];
 
 const Header = () => {
-  // const { authorized, user } = useAppSelector((state) => state.userSlice);
-  // const dispatch = useAppDispatch();
-
-  // const onUserButtonClick = () => {
-  //   if (!authorized) {
-  //     dispatch(setModal({ loginModal: true }));
-  //   } else {
-  //     dispatch(setModal({ userModal: true, userModalData: user as UserData }));
-  //   }
-  // };
-
   return (
     <header className={cl.header}>
       <div className={cl.linksContainer}>

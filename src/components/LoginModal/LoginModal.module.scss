@@ -23,22 +23,8 @@
     }
   }
 
-  .buttonsContainer {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-
-    .registerButton {
-      font-family: var(--font-primary);
-      text-decoration: underline;
-      font-size: 13px;
-      letter-spacing: -0.5px;
-    }
-
-    .loginButton {
-      width: 80px;
-    }
+  .loginButton {
+    margin-top: 15px;
+    padding-block: 10px;
   }
 }
