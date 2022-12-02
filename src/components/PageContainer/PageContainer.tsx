@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import cl from './PageContainer.module.scss';
 import classNames from 'classnames';
 import { HTMLMotionProps, motion, Variants } from 'framer-motion';
+import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
 
 const pageContainerVariants: Variants = {
   initial: {

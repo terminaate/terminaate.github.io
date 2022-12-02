@@ -2,7 +2,6 @@ import React, {
   CSSProperties,
   FC,
   ReactElement,
-  useCallback,
   useEffect,
   useRef,
   useState,
@@ -15,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdOutlineWork, RiContactsBookLine } from 'react-icons/all';
 import Tooltip from '@/components/Tooltip';
 import { useTranslation } from 'react-i18next';
+import useMouseMove from '@/hooks/useMouseMove';
 
 type LinkProps = {
   icon: ReactElement;
@@ -27,22 +27,14 @@ const Link: FC<LinkProps> = ({ icon, link, style, title }) => {
   const navigate = useNavigate();
   const linkRef = useRef<null | HTMLButtonElement>(null);
 
-  const onMouseMove = useCallback((e: MouseEvent) => {
+  useMouseMove((e) => {
     const { current: link } = linkRef;
     if (link) {
       const x = (window.innerWidth - e.pageX * 3) / 90;
       const y = (window.innerHeight - e.pageY * 3) / 90;
       link.style.transform = `translate(${x}px, ${y}px)`;
     }
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('mousemove', onMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-    };
-  }, []);
+  });
 
   return (
     <button
@@ -62,6 +54,7 @@ const HomePage = () => {
   const [firstLink, setFirstLink] = useState<null | LinkProps>(null);
   const [secondLink, setSecondLink] = useState<null | LinkProps>(null);
   const { t } = useTranslation('home');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const variant = Boolean(Math.floor(Math.random() * 2));
@@ -147,6 +140,11 @@ const HomePage = () => {
             text={'//' + t('about-me_title')}
           />
           <span className={cl.aboutText}>{t('about-me_text')}</span>
+        </div>
+        <div className={cl.worksButtonContainer}>
+          <button onClick={() => navigate('/works')} className={cl.worksButton}>
+            {t('works-button_text') + ' >'}
+          </button>
         </div>
         <div className={cl.skillsContainer}>
           <AnimatedSymbolsText

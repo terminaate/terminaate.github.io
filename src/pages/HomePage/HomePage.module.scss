@@ -107,12 +107,18 @@
       }
     }
 
-    .aboutContainer {
+    .contactsContainer,
+    .loveContainer,
+    .aboutContainer,
+    .skillsContainer {
+      width: 100%;
       display: flex;
       align-items: flex-start;
       flex-direction: column;
       margin-top: 15px;
+    }
 
+    .aboutContainer {
       .aboutText {
         text-indent: 25px;
         font-family: var(--font-primary);
@@ -121,52 +127,59 @@
         margin-top: 5px;
       }
     }
-  }
 
-  .contactsContainer,
-  .loveContainer,
-  .aboutContainer,
-  .skillsContainer {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-top: 15px;
-  }
-
-  .skillsContainer {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-top: 30px;
-    padding-bottom: 50px;
-
-    .skillsList {
-      padding-left: 20px;
+    .worksButtonContainer {
       margin-top: 15px;
       width: 100%;
       display: flex;
-      row-gap: 15px;
-      flex-direction: column;
+      justify-content: center;
 
-      .skill {
+      .worksButton {
+        background: linear-gradient(-90deg, #4a2754, #584b85);
+        padding: 10px;
+        padding-inline: 15px;
+        font-family: var(--font-code);
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-primary);
+        border-radius: 5px;
+      }
+    }
+
+    .skillsContainer {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-top: 30px;
+      padding-bottom: 50px;
+
+      .skillsList {
+        padding-left: 20px;
+        margin-top: 15px;
+        width: 100%;
         display: flex;
-        row-gap: 5px;
+        row-gap: 15px;
         flex-direction: column;
 
-        .skillContents {
+        .skill {
           display: flex;
+          row-gap: 5px;
           flex-direction: column;
 
-          .skillContent {
+          .skillContents {
             display: flex;
-            align-items: center;
-            column-gap: 5px;
-            font-size: 20px;
+            flex-direction: column;
 
-            .skillContentText {
-              font-family: var(--font-code);
-              font-weight: 600;
+            .skillContent {
+              display: flex;
+              align-items: center;
+              column-gap: 5px;
+              font-size: 20px;
+
+              .skillContentText {
+                font-family: var(--font-code);
+                font-weight: 600;
+              }
             }
           }
         }
