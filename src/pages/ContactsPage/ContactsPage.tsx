@@ -3,6 +3,8 @@ import cl from './ContactsPage.module.scss';
 import PageContainer from '@/components/PageContainer';
 import { ContactProps, contacts } from './data';
 import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
+import Title from '@/components/Title';
+import { useTranslation } from 'react-i18next';
 
 const Contact: FC<ContactProps> = ({ text, icon, link, onClick }) => {
   const content = (
@@ -33,8 +35,11 @@ const Contact: FC<ContactProps> = ({ text, icon, link, onClick }) => {
 };
 
 const ContactsPage = () => {
+  const { t } = useTranslation('contacts');
+
   return (
     <PageContainer className={cl.contactsPage}>
+      <Title container>//{t('title')}</Title>
       {contacts.map((contact, key) => (
         <Contact {...contact} key={key} />
       ))}
