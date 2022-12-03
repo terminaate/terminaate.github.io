@@ -30,12 +30,12 @@ const WorksPage = () => {
   return (
     <PageContainer className={cl.worksPage}>
       <Title container>//{t('title')}</Title>
-      <ul className={cl.worksList}>
-        {works.map((work, key) => (
-          <li key={key} className={cl.workItem}>{work.title}</li>
-        ))}
-      </ul>
-      <div className={cl.container}></div>
+      {/*<ul className={cl.worksList}>*/}
+      {/*  {works.map((work, key) => (*/}
+      {/*    <li key={key} className={cl.workItem}>{work.title}</li>*/}
+      {/*  ))}*/}
+      {/*</ul>*/}
+      {/*<div className={cl.container}></div>*/}
       {authorized && (
         <button className={cl.createWorkButton}>
           <BsPlusSquare />
