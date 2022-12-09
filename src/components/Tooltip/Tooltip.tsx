@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactElement } from 'react';
 import cl from './Tooltip.module.scss';
 
 interface ITooltip {
-  children: ReactNode;
+  children: ReactElement;
   text: string;
   position?: 'top' | 'left' | 'bottom' | 'right';
 }

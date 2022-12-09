@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { FC, ReactNode, useEffect } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect } from 'react';
 import cl from './Modal.module.scss';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -23,12 +23,12 @@ const Modal: FC<IModal> = ({
   className,
   contentClassName,
 }) => {
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setState(false);
     if (onExit) {
       onExit();
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (!state && onExit) {

@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import Modal from '@/components/Modal/Modal';
 import cl from './LoginModal.module.scss';
 import Button from '@/components/UI/Button';
@@ -24,14 +24,14 @@ const LoginModal = () => {
     dispatch(setModal({ loginModal: state }));
   };
 
-  const resetData = () => {
+  const resetData = useCallback(() => {
     setLoginInput('');
     setPasswordInput('');
     setLoginError('');
     setPasswordError('');
-  };
+  }, []);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = useCallback((e: FormEvent) => {
     e.preventDefault();
     setLoginError('');
     setPasswordError('');
@@ -58,7 +58,7 @@ const LoginModal = () => {
         password: passwordInput,
       }),
     );
-  };
+  }, []);
 
   useEffect(() => {
     dispatch(setModal({ loginModal: false }));

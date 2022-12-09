@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import cl from './PageContainer.module.scss';
 import classNames from 'classnames';
 import { HTMLMotionProps, motion, Variants } from 'framer-motion';
-import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
+import Title from '@/components/Title';
 
 const pageContainerVariants: Variants = {
   initial: {
@@ -19,6 +19,7 @@ const pageContainerVariants: Variants = {
 const PageContainer: FC<HTMLMotionProps<'div'>> = ({
   children,
   className,
+  title,
   ...props
 }) => {
   return (
@@ -31,6 +32,7 @@ const PageContainer: FC<HTMLMotionProps<'div'>> = ({
       {...props}
       className={classNames(cl.container, className)}
     >
+      {title && <Title>{title}</Title>}
       {children}
     </motion.div>
   );

@@ -4,6 +4,7 @@ import { logout, UserState } from '@/store/reducers/user/userSlice';
 import { getErrorObject } from '@/utils/getErrorObject';
 import { logError } from '@/utils/logError';
 import { setNotificationText } from '@/store/reducers/notificationSlice';
+import { AxiosResponseError } from '@/types/AxiosResponseError';
 
 export const serverURL = import.meta.env.VITE_SERVER_URL;
 export const userAvatarUrl = 'https://robohash.org/';
@@ -25,12 +26,15 @@ $api.interceptors.request.use((config) => {
 
 $api.interceptors.response.use(
   (config) => config,
-  (e) => {
+  (e: AxiosResponseError) => {
+    if (!e.response) return;
     logError(e);
-    if (e.response.code !== 500) {
+
+    const { status } = e.response;
+    if (status !== 500) {
       store.dispatch(setNotificationText(getErrorObject(e).message));
     }
-    if (e.response.code === 401) {
+    if (status === 401) {
       store.dispatch(logout());
     }
   },

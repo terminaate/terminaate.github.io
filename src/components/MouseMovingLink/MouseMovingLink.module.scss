@@ -1,0 +1,26 @@
+.linkContainer {
+  position: sticky;
+  top: 0;
+  height: 100%;
+  width: 25%;
+
+  .linkButton {
+    position: absolute;
+    top: 10%;
+    left: 27%;
+    cursor: pointer;
+    z-index: 1000;
+
+    svg {
+      transform: rotate(30deg);
+      transition: 0.3s color;
+      font-family: var(--font-primary);
+      font-size: 6em;
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+}

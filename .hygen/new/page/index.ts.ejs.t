@@ -2,6 +2,7 @@
 to: <%= path %>/index.ts
 ---
 
-import <%= pageName %> from "./<%= pageName %>"
+import <%= pageName %> from "./<%= pageName %>";
 
-export default <%= pageName %>
+export * from './<%= pageName %>';
+export default <%= pageName %>;

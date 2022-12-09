@@ -5,7 +5,6 @@ import { BsPlusSquare } from 'react-icons/all';
 import { useAppSelector } from '@/store';
 import { WorkData } from '@/types/WorkData';
 import UserService from '@/services/UserService';
-import Title from '@/components/Title';
 import { useTranslation } from 'react-i18next';
 
 const WorksPage = () => {
@@ -17,25 +16,16 @@ const WorksPage = () => {
   const getServerWorks = useCallback(async () => {
     const { data } = await UserService.getAllWorks();
     setWorks(data);
+    setCurrentWork(data[0]);
   }, []);
 
   useLayoutEffect(() => {
     getServerWorks();
   }, []);
 
-  const onWorkClick = (work: WorkData) => {
-    setCurrentWork(work);
-  };
-
   return (
-    <PageContainer className={cl.worksPage}>
-      <Title container>//{t('title')}</Title>
-      {/*<ul className={cl.worksList}>*/}
-      {/*  {works.map((work, key) => (*/}
-      {/*    <li key={key} className={cl.workItem}>{work.title}</li>*/}
-      {/*  ))}*/}
-      {/*</ul>*/}
-      {/*<div className={cl.container}></div>*/}
+    <PageContainer title={`//${t('title')}`} className={cl.worksPage}>
+      <div className={cl.container}></div>
       {authorized && (
         <button className={cl.createWorkButton}>
           <BsPlusSquare />

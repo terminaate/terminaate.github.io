@@ -1,50 +1,21 @@
-import React, { FC } from 'react';
+import React from 'react';
 import cl from './ContactsPage.module.scss';
 import PageContainer from '@/components/PageContainer';
-import { ContactProps, contacts } from './data';
+import { contacts } from './data';
 import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
-import Title from '@/components/Title';
 import { useTranslation } from 'react-i18next';
-
-const Contact: FC<ContactProps> = ({ text, icon, link, onClick }) => {
-  const content = (
-    <>
-      {icon}
-      <AnimatedSymbolsText text={text} />
-    </>
-  );
-
-  return (
-    <>
-      {link ? (
-        <a
-          href={link}
-          target={'_blank'}
-          rel={'noreferrer'}
-          className={cl.contactContainer}
-        >
-          {content}
-        </a>
-      ) : (
-        <div onClick={onClick as any} className={cl.contactContainer}>
-          {content}
-        </div>
-      )}
-    </>
-  );
-};
+import Contact from '@/pages/ContactsPage/components/Contact';
 
 const ContactsPage = () => {
   const { t } = useTranslation('contacts');
 
   return (
-    <PageContainer className={cl.contactsPage}>
-      <Title container>//{t('title')}</Title>
+    <PageContainer title={`//${t('title')}`} className={cl.contactsPage}>
       {contacts.map((contact, key) => (
         <Contact {...contact} key={key} />
       ))}
       <span className={cl.creditsText}>
-        //Made with <span className={cl.heart}>❤</span> by{' '}
+        //Made with <span className={cl.heart}>❤</span> by
         <AnimatedSymbolsText
           delayAnim={500}
           delay={100}

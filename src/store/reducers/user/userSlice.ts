@@ -1,4 +1,4 @@
-import { AnyAction, createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createSlice, Draft } from '@reduxjs/toolkit';
 import { login, refresh } from './authAPI';
 
 export interface UserState {
@@ -23,9 +23,6 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateUser(state, action: PayloadAction<Partial<UserState>>) {
-      return { ...state, ...action.payload };
-    },
     logout() {
       localStorage.removeItem('accessToken');
       return initialState;
@@ -46,6 +43,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { updateUser, logout } = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

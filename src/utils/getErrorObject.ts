@@ -1,13 +1,22 @@
-export const getErrorObject = (e: any) => {
-  if (Array.isArray(e.response!.data.message)) {
+import { AxiosResponseError, ServerError } from '@/types/AxiosResponseError';
+
+export const getErrorObject = (
+  e: AxiosResponseError,
+): (ServerError & { message: string }) | AxiosResponseError => {
+  if (!e.response) return e;
+  const {
+    response: { data },
+  } = e;
+
+  if (Array.isArray(data.message)) {
     return {
-      ...e.response!.data,
-      message: e.response!.data.message[0],
+      ...data,
+      message: data.message[0],
     };
   } else {
     return {
-      ...e.response!.data,
-      message: e.response!.data.message,
+      ...data,
+      message: data.message,
     };
   }
 };

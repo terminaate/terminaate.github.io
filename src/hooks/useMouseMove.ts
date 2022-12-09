@@ -1,6 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { DependencyList, useCallback, useEffect, useState } from 'react';
 
-const useMouseMove = (callback?: (e: MouseEvent) => void): [number, number] => {
+const useMouseMove = (
+  callback?: (e: MouseEvent) => void,
+  deps: DependencyList = [],
+): [number, number] => {
   const [x, setX] = useState<number>(0);
   const [y, setY] = useState<number>(0);
 
@@ -10,7 +13,7 @@ const useMouseMove = (callback?: (e: MouseEvent) => void): [number, number] => {
     }
     setY(e.y);
     setX(e.x);
-  }, []);
+  }, deps);
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);

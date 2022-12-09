@@ -7,33 +7,6 @@
   justify-content: center;
   column-gap: 10px;
 
-  .linkContainer {
-    position: sticky;
-    top: 0;
-    height: 100%;
-    width: 25%;
-
-    .linkButton {
-      position: absolute;
-      top: 10%;
-      left: 27%;
-      cursor: pointer;
-      z-index: 1000;
-
-      .linkIcon {
-        transform: rotate(30deg);
-        transition: .3s color;
-        font-family: var(--font-primary);
-        font-size: 75px;
-        color: var(--text-secondary);
-
-        &:hover {
-          color: var(--text-primary)
-        }
-      }
-    }
-  }
-
   .title {
     font-size: 30px;
     color: var(--text-secondary);
@@ -52,10 +25,19 @@
     width: 50%;
     height: 100%;
 
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+    }
+
     .userContainer {
       width: 100%;
       display: flex;
       justify-content: space-between;
+
+      @media screen and (max-width: 1440px) {
+        flex-direction: column;
+        row-gap: 15px;
+      }
 
       .nameContainer {
         display: flex;
@@ -92,7 +74,6 @@
         height: 120px;
         border: 2px solid var(--text-primary);
         border-radius: 50%;
-
 
         img {
           width: 100%;
@@ -158,7 +139,7 @@
         margin-top: 15px;
         width: 100%;
         display: flex;
-        row-gap: 15px;
+        row-gap: 20px;
         flex-direction: column;
 
         .skill {
@@ -172,13 +153,37 @@
 
             .skillContent {
               display: flex;
-              align-items: center;
-              column-gap: 5px;
+              align-items: flex-start;
+              flex-direction: column;
               font-size: 20px;
+              cursor: pointer;
 
-              .skillContentText {
+              .skillContentContainer {
+                display: flex;
+                align-items: center;
+                column-gap: 5px;
+
+                .skillContentText {
+                  font-family: var(--font-code);
+                  font-weight: 600;
+                }
+
+                .rightIcon {
+                  transition: transform 0.25s;
+
+                  &[data-active='true'] {
+                    transform: rotate(90deg);
+                  }
+                }
+              }
+              .skillContentDesc {
+                text-indent: 25px;
+                white-space: break-spaces;
                 font-family: var(--font-code);
-                font-weight: 600;
+                color: var(--text-secondary);
+                font-size: 16px;
+                text-align: justify;
+                margin-top: 5px;
               }
             }
           }
