@@ -4,14 +4,14 @@ import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
 import cl from '@/pages/ContactsPage/ContactsPage.module.scss';
 
 const Contact: FC<ContactProps> = ({ text, icon, link, onClick }) => {
+  const onContactClick = useCallback(onClick! as any, []);
+
   const content = (
     <>
       {icon}
       <AnimatedSymbolsText text={text} />
     </>
   );
-
-  const onContactClick = useCallback(onClick! as any, []);
 
   return (
     <>

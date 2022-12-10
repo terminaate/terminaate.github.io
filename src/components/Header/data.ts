@@ -1,10 +1,10 @@
 import { IAnimatedSymbolsText } from '@/components/AnimatedSymbolsText';
+
 export type LinkProps = {
   text: string;
   to: string;
   animate: boolean;
   props?: Partial<IAnimatedSymbolsText>;
-  homeLink?: boolean;
 };
 
 export const links: LinkProps[] = [
@@ -16,7 +16,6 @@ export const links: LinkProps[] = [
       delay: 25,
       clearDelay: 25,
     },
-    homeLink: true,
   },
   {
     text: '.works()',

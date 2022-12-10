@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import Routing from '@/components/Routing';
-import Modals from '@/components/Modals';
 import Notification from '@/components/Notification';
+import { NotificationContextProvider } from '@/contexts/NotificationContext';
+import Routing from '@/components/Routing';
+import NotificationContextSetter from '@/components/NotificationContextSetter';
 
 const App: FC = () => {
   return (
-    <>
+    <NotificationContextProvider>
       <Routing />
       <Notification />
-      <Modals />
-    </>
+      <NotificationContextSetter />
+    </NotificationContextProvider>
   );
 };
 

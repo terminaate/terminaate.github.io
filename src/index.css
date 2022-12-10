@@ -22,6 +22,8 @@
   --font-primary: monospace;
   --font-code: 'Source code pro', monospace;
   --font-pixel: 'Press Start 2P', cursive;
+  --gradient-primary: linear-gradient(90deg, #4a2754, #584b85);
+  --gradient-secondary: linear-gradient(-90deg, #4a2754, #584b85);
 }
 
 body {

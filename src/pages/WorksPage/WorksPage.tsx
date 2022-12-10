@@ -1,36 +1,33 @@
-import React, { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PageContainer from '@/components/PageContainer';
 import cl from './WorksPage.module.scss';
-import { BsPlusSquare } from 'react-icons/all';
-import { useAppSelector } from '@/store';
 import { WorkData } from '@/types/WorkData';
-import UserService from '@/services/UserService';
 import { useTranslation } from 'react-i18next';
 
+const works: WorkData[] = [
+  {
+    type: '',
+    title: '',
+    description: '',
+    githubLink: '',
+    link: '',
+    image: '',
+    tags: ['123'],
+  },
+];
+
 const WorksPage = () => {
-  const { authorized } = useAppSelector((state) => state.userSlice);
-  const [works, setWorks] = useState<WorkData[]>([]);
-  const [currentWork, setCurrentWork] = useState<WorkData | null>(null);
   const { t } = useTranslation('works');
-
-  const getServerWorks = useCallback(async () => {
-    const { data } = await UserService.getAllWorks();
-    setWorks(data);
-    setCurrentWork(data[0]);
-  }, []);
-
-  useLayoutEffect(() => {
-    getServerWorks();
-  }, []);
 
   return (
     <PageContainer title={`//${t('title')}`} className={cl.worksPage}>
-      <div className={cl.container}></div>
-      {authorized && (
-        <button className={cl.createWorkButton}>
-          <BsPlusSquare />
-        </button>
-      )}
+      <div className={cl.container}>
+        {works.map((work, key) => (
+          <div className={cl.workContainer} key={key}>
+            Work
+          </div>
+        ))}
+      </div>
     </PageContainer>
   );
 };

@@ -4,7 +4,7 @@ import PageContainer from '@/components/PageContainer';
 import { contacts } from './data';
 import AnimatedSymbolsText from '@/components/AnimatedSymbolsText';
 import { useTranslation } from 'react-i18next';
-import Contact from '@/pages/ContactsPage/components/Contact';
+import Contact from './components/Contact';
 
 const ContactsPage = () => {
   const { t } = useTranslation('contacts');

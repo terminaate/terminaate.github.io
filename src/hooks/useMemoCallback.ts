@@ -1,12 +1,12 @@
 import { DependencyList, useCallback, useRef } from 'react';
 
 export default (
-  callback: (...args: any[]) => void,
+  callback: (...args: any[]) => any,
   deps: DependencyList = [],
 ) => {
   const returns = useRef<{ args: any[]; target: any }[]>([]);
 
-  const memoizedCallback = useCallback((...args: any[]) => {
+  return useCallback((...args: any[]) => {
     const candidate = returns.current.find(
       (r) => r.args.join() === args.join(),
     );
@@ -14,9 +14,7 @@ export default (
       return candidate.target;
     } else {
       const target = callback(...args);
-      returns.current.push({ args: args, target });
+      returns.current.push({ args, target });
     }
   }, deps);
-
-  return memoizedCallback;
 };

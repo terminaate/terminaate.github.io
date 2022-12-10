@@ -3,11 +3,13 @@ import classNames from 'classnames';
 import cl from './BasicPage.module.scss';
 import Header from '@/components/Header';
 
-type BasicPageProps = HTMLAttributes<HTMLDivElement>;
-
-const BasicPage: FC<BasicPageProps> = ({ children, ...props }) => {
+const BasicPage: FC<HTMLAttributes<HTMLDivElement>> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
-    <div {...props} className={classNames(cl.basicPage, props.className)}>
+    <div {...props} className={classNames(cl.basicPage, className)}>
       <Header />
       {children}
     </div>

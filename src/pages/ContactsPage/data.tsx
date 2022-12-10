@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { SiDiscord, SiGithub, SiGmail, SiTelegram } from 'react-icons/all';
-import store from '@/store';
-import { setNotificationText } from '@/store/reducers/notificationSlice';
+import { NotificationContextState } from '@/utils/NotificationContextState';
 
 export type ContactProps = {
   icon: ReactElement;
@@ -14,7 +13,8 @@ const copyTextHandler = (text: string, notificationText: string) => {
   return (e: MouseEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText(text).then(() => {
-      store.dispatch(setNotificationText(notificationText));
+      NotificationContextState.setState({ text: notificationText });
+      // store.dispatch(setNotificationText(notificationText));
     });
   };
 };

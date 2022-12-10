@@ -1,5 +1,4 @@
 export type WorkData = {
-  id: string;
   title: string;
   description: string;
   type: string;
@@ -8,7 +7,3 @@ export type WorkData = {
   image: string;
   tags: string[];
 };
-
-export type CreateWorkData = Omit<WorkData, 'id'>;
-
-export type PatchWorkData = Partial<WorkData>;

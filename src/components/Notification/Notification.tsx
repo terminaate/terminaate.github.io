@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import cl from './Notification.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { setNotificationText } from '@/store/reducers/notificationSlice';
-import { useAppDispatch, useAppSelector } from '@/store';
+import NotificationContext from '@/contexts/NotificationContext';
 
 const Notification = () => {
-  const { timeout, text } = useAppSelector((state) => state.notificationSlice);
-  const dispatch = useAppDispatch();
+  const {
+    state: { text, timeout },
+    setState,
+  } = useContext(NotificationContext);
 
   useEffect(() => {
     const t = setTimeout(() => {
-      dispatch(setNotificationText(''));
+      setState({ text: '' });
     }, timeout);
 
     return () => clearTimeout(t);

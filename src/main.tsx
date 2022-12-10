@@ -2,8 +2,6 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@/App';
 import './index.css';
-import { Provider } from 'react-redux';
-import store from '@/store';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -37,8 +35,6 @@ i18n
 
 createRoot(document.getElementById('root')!).render(
   <MemoryRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   </MemoryRouter>,
 );

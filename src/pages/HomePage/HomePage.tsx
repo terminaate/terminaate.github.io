@@ -12,6 +12,7 @@ import MouseMovingLink, {
 import Skill from './components/Skill';
 import SkillContent from './components/SkillContent';
 import { IconType } from 'react-icons';
+import Button from '@/components/UI/Button';
 
 const HomePage = () => {
   const [firstLink, setFirstLink] = useState<null | IMouseMovingLink>(null);
@@ -84,9 +85,7 @@ const HomePage = () => {
               <span className={cl.subTitle}>//{t('profession_comment')}</span>
             </span>
           </div>
-          <div className={cl.userAvatarContainer}>
-            <img src="" alt="terminaate.avatar" />
-          </div>
+          <div className={cl.userAvatarContainer}>terminaate.avatar</div>
         </div>
         <div className={cl.aboutContainer}>
           <AnimatedSymbolsText
@@ -98,9 +97,9 @@ const HomePage = () => {
           <span className={cl.aboutText}>{t('about-me_text')}</span>
         </div>
         <div className={cl.worksButtonContainer}>
-          <button onClick={() => navigate('/works')} className={cl.worksButton}>
+          <Button onClick={() => navigate('/works')} className={cl.worksButton}>
             {t('works-button_text') + ' >'}
-          </button>
+          </Button>
         </div>
         <div className={cl.skillsContainer}>
           <AnimatedSymbolsText
