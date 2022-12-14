@@ -1,0 +1,35 @@
+.typingTextContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: max-content;
+  column-gap: 5px;
+
+  span {
+    font-family: var(--font-primary);
+    font-size: 20px;
+    color: var(--text-primary);
+    animation: typingTextAnim 0.6s both;
+
+    @keyframes typingTextAnim {
+      0% {
+        text-shadow: none;
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      25% {
+        opacity: 1;
+      }
+      50% {
+        text-shadow: 0 0 5px var(--text-primary);
+      }
+      75% {
+        text-shadow: 0 0 20px var(--text-primary);
+      }
+      100% {
+        text-shadow: none;
+        transform: translateX(0);
+      }
+    }
+  }
+}

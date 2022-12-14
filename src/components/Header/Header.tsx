@@ -5,6 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import cl from './Header.module.scss';
 import logoImg from '!/logo.svg';
 import { BiMenuAltRight } from 'react-icons/all';
+import {
+  basePageTransition,
+  basePageVariants,
+} from '@/components/PageContainer';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -15,10 +19,11 @@ const Header = () => {
       {!isIntroPage && (
         <motion.header
           className={cl.headerContainer}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { delay: 0 } }}
+          transition={basePageTransition}
+          variants={basePageVariants}
+          initial={'initial'}
+          animate={'animate'}
+          exit={'exit'}
         >
           <button
             onClick={() => navigate('HomePage')}

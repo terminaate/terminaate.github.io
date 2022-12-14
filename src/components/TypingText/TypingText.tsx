@@ -1,39 +1,8 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
-
-const parseText = (text: string | string[]) => {
-  const parsedText: { text?: string; delay?: number }[] = [];
-  let textArray: (string | number)[];
-
-  if (Array.isArray(text)) {
-    textArray = text;
-  } else {
-    textArray = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
-  }
-
-  for (let i = 0; i < textArray.length; i++) {
-    if (
-      typeof textArray[i] === 'number' &&
-      typeof textArray[i + 1] === 'string'
-    ) {
-      parsedText.push({
-        text: textArray[i + 1] as string,
-        delay: textArray[i] as number,
-      });
-    } else if (
-      typeof textArray[i] === 'string' &&
-      typeof textArray[i - 1] !== 'number'
-    ) {
-      parsedText.push({ text: textArray[i] as string });
-    } else if (
-      typeof textArray[i] === 'number' &&
-      typeof textArray[i + 1] !== 'string'
-    ) {
-      parsedText.push({ delay: textArray[i] as number });
-    }
-  }
-
-  return parsedText;
-};
+import cl from './TypingText.module.scss';
+import parseText from '@/utils/parseText';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   onStart?: () => void;
@@ -45,10 +14,11 @@ interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
 
 const TypingText: FC<ITypingText> = ({
   text,
+  containerClassName,
   onStart = () => {},
   onEnd = () => {},
-  containerClassName = '',
   defaultDelay = 300,
+  ...props
 }) => {
   const [renderedWords, setRenderedWords] = useState<string[]>([]);
 
@@ -70,11 +40,16 @@ const TypingText: FC<ITypingText> = ({
   }, []);
 
   return (
-    <div>
+    <motion.div
+      layout={'position'}
+      className={classNames(cl.typingTextContainer, containerClassName)}
+    >
       {renderedWords.map((word, key) => (
-        <span key={key}>{word}</span>
+        <span {...props} key={key}>
+          {word}
+        </span>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
