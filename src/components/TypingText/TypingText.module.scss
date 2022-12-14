@@ -11,24 +11,28 @@
     color: var(--text-primary);
     animation: typingTextAnim 0.6s both;
 
+    @supports (background-clip: text) or (-webkit-background-clip: text) {
+      background-image:
+              url("!/circles.svg");
+      background-size: 110% auto;
+      background-position: center;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
     @keyframes typingTextAnim {
       0% {
-        text-shadow: none;
         opacity: 0;
-        transform: translateX(-10px);
-      }
-      25% {
-        opacity: 1;
+        filter: none;
       }
       50% {
-        text-shadow: 0 0 5px var(--text-primary);
-      }
-      75% {
-        text-shadow: 0 0 20px var(--text-primary);
+        opacity: 0.8;
+        filter: blur(10px);
       }
       100% {
-        text-shadow: none;
-        transform: translateX(0);
+        opacity: 1;
+        filter: none;
       }
     }
   }

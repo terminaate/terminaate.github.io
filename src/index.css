@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap');
 
 *,
 *:after,
@@ -10,7 +11,7 @@
 }
 
 :root {
-    --background-primary: #1c1c1c;
+    --background-primary: #000;
     --background-secondary: #1c1c1c;
     --background-third: #212121;
     --text-primary: #fff;
@@ -18,7 +19,7 @@
     --text-inactive: rgba(255, 255, 255, 0.3);
     --text-red: red;
     --font-sans-serif: Arial, sans-serif;
-    --font-primary: var(--font-sans-serif);
+    --font-primary: 'Work Sans', sans-serif;
 }
 
 body {

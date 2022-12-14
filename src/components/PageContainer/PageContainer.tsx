@@ -20,6 +20,7 @@ export const basePageVariants: Variants = {
 const PageContainer: React.FC<HTMLMotionProps<'div'>> = ({
   className,
   children,
+  transition,
   ...props
 }) => (
   <motion.div
@@ -27,7 +28,7 @@ const PageContainer: React.FC<HTMLMotionProps<'div'>> = ({
     initial={'initial'}
     animate={'animate'}
     exit={'exit'}
-    transition={basePageTransition}
+    transition={{ ...basePageTransition, ...(transition ?? {}) }}
     {...props}
     className={classNames(cl.pageContainer, className)}
   >
