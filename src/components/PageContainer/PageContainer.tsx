@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 import cl from './PageContainer.module.scss';
+import { HTMLMotionProps, motion, Transition, Variants } from 'framer-motion';
 import classNames from 'classnames';
-import { HTMLMotionProps, motion, Variants } from 'framer-motion';
-import Title from '@/components/Title';
 
-const pageContainerVariants: Variants = {
+export const basePageTransition: Transition = { delay: 0.6, duration: 0.6 };
+export const basePageVariants: Variants = {
   initial: {
     opacity: 0,
   },
@@ -13,29 +13,26 @@ const pageContainerVariants: Variants = {
   },
   exit: {
     opacity: 0,
+    transition: { delay: 0 },
   },
 };
 
-const PageContainer: FC<HTMLMotionProps<'div'>> = ({
-  children,
+const PageContainer: React.FC<HTMLMotionProps<'div'>> = ({
   className,
-  title,
+  children,
   ...props
-}) => {
-  return (
-    <motion.div
-      variants={pageContainerVariants}
-      initial={'initial'}
-      animate={'animate'}
-      exit={'exit'}
-      transition={{ duration: 0.6 }}
-      {...props}
-      className={classNames(cl.container, className)}
-    >
-      {title && <Title>{title}</Title>}
-      {children}
-    </motion.div>
-  );
-};
+}) => (
+  <motion.div
+    variants={basePageVariants}
+    initial={'initial'}
+    animate={'animate'}
+    exit={'exit'}
+    transition={basePageTransition}
+    {...props}
+    className={classNames(cl.pageContainer, className)}
+  >
+    {children}
+  </motion.div>
+);
 
 export default PageContainer;

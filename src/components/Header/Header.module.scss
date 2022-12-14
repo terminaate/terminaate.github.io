@@ -1,31 +1,26 @@
-.header {
+.headerContainer {
   width: 100%;
   height: 60px;
-  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 30px;
+  padding: 30px;
+  margin-top: 10px;
+  //padding-top: 20px;
   z-index: 100;
-  //background-color: var(--background-secondary);
-  //border-radius: 2px;
+  pointer-events: all;
 
-  .linksContainer {
-    //padding-left: 40px;
-    display: flex;
-    align-items: center;
-    column-gap: 15px;
+  --icons-size: 50px;
 
-    a {
-      font-family: var(--font-primary);
-      font-size: 23px;
-      text-decoration: none;
-      font-weight: 400;
+  button {
+    cursor: pointer;
+  }
 
-      @media screen and (max-width: 534px) {
-        font-size: 20px;
-        width: max-content;
-      }
-    }
+  .homeButton img {
+    height: var(--icons-size);
+  }
+
+  .menuButton svg {
+    font-size: var(--icons-size);
   }
 }

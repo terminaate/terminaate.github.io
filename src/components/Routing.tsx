@@ -1,31 +1,32 @@
-import React, { Suspense, useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import React, { ReactElement } from 'react';
+import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
-import NotFoundPage from '@/pages/NotFoundPage';
-// import { useAppDispatch } from '@/store';
-// import { refresh } from '@/store/reducers/user/authAPI';
 import WorksPage from '@/pages/WorksPage';
-import LoadingPage from '@/pages/LoadingPage';
-import BasicPage from '@/components/BasicPage';
 import ContactsPage from '@/pages/ContactsPage';
+import { AnimatePresence } from 'framer-motion';
+import BasicPage from '@/components/BasicPage';
+import useRoutingContext from '@/hooks/useRoutingContext';
+
+export const Pages: Record<string, ReactElement> = {
+  IntroPage: <IntroPage />,
+  HomePage: <HomePage />,
+  WorksPage: <WorksPage />,
+  ContactsPage: <ContactsPage />,
+};
 
 const Routing = () => {
-  const location = useLocation();
+  const { currentPage } = useRoutingContext().state;
+
+  console.log(currentPage);
 
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <BasicPage>
-        <AnimatePresence mode={'wait'}>
-          <Routes location={location} key={location.key}>
-            <Route index element={<HomePage />} />
-            <Route path={'/works'} element={<WorksPage />} />
-            <Route path={'/contacts'} element={<ContactsPage />} />
-            <Route path={'/*'} element={<NotFoundPage />} />
-          </Routes>
+    <BasicPage>
+      {Object.keys(Pages).map((page, key) => (
+        <AnimatePresence key={key} mode={'wait'}>
+          {currentPage === page && <>{Pages[page]}</>}
         </AnimatePresence>
-      </BasicPage>
-    </Suspense>
+      ))}
+    </BasicPage>
   );
 };
 

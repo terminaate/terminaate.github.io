@@ -2,39 +2,11 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@/App';
 import './index.css';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import ru from './locales/ru';
-import en from './locales/en';
-import { MemoryRouter } from 'react-router-dom';
+import { RoutingContextProvider } from '@/contexts/RoutingContext';
 
-i18n
-  .use(initReactI18next)
-  .use(LanguageDetector)
-  .init({
-    detection: {
-      order: ['navigator', 'localStorage'],
-      lookupLocalStorage: 'lang',
-    },
-    resources: {
-      ru,
-      en,
-    },
-    fallbackLng: 'en',
-    debug: import.meta.env.MODE === 'development',
-
-    react: {
-      transSupportBasicHtmlNodes: true,
-    },
-
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-
-createRoot(document.getElementById('root')!).render(
-  <MemoryRouter>
+const root = createRoot(document.getElementById('root')!);
+root.render(
+  <RoutingContextProvider>
     <App />
-  </MemoryRouter>,
+  </RoutingContextProvider>,
 );

@@ -1,12 +1,13 @@
 import React from 'react';
+import cl from './MenuPage.module.scss';
 import PageContainer from '@/components/PageContainer';
 
-const NotFoundPage = () => {
+const MenuPage = () => {
   return (
     <PageContainer>
-      I am sorry, something goes wrong, this page is not found
+
     </PageContainer>
   );
 };
 
-export default NotFoundPage;
+export default MenuPage;
