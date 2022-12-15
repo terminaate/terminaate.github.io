@@ -1,0 +1,66 @@
+.cursor {
+  --size: 6px;
+  --size-separated: calc(var(--size) / 2);
+  --neg-size: calc(var(--size-separated) * -1);
+
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  transform: translate(var(--neg-size), var(--neg-size));
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--text-primary);
+  border-radius: 50%;
+  z-index: 10001;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+
+.follower {
+  --size: 40px;
+  --size-separated: calc(var(--size) / 2);
+  --size-doubled: calc(var(--size) * 2);
+  --neg-size: calc(var(--size-separated) * -1);
+
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  transform: translate(var(--neg-size), var(--neg-size));
+  width: var(--size);
+  height: var(--size);
+  background: none;
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  border: 3px solid var(--background-secondary);
+  z-index: 10000;
+  transition: .2s;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //overflow: hidden;
+  //mix-blend-mode: difference;
+
+  .followerText {
+    position: absolute;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 22px;
+
+    &[data-position="top"] {
+      bottom: 102.5%;
+    }
+
+    &[data-position="bottom"] {
+      top: 102.5%;
+    }
+
+    &[data-position="left"] {
+      right: 115%;
+    }
+
+    &[data-position="right"] {
+      left: 115%;
+    }
+  }
+}

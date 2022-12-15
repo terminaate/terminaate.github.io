@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import useNavigate from '@/hooks/useNavigate';
 import useMatch from '@/hooks/useMatch';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,6 +13,7 @@ import {
 const Header = () => {
   const navigate = useNavigate();
   const isIntroPage = useMatch('IntroPage');
+  const logoRef = useRef<null | HTMLButtonElement>(null);
 
   return (
     <AnimatePresence>
@@ -26,6 +27,7 @@ const Header = () => {
           exit={'exit'}
         >
           <button
+            ref={logoRef}
             onClick={() => navigate('HomePage')}
             className={cl.homeButton}
           >

@@ -8,6 +8,7 @@
     box-sizing: border-box;
     scrollbar-width: 2px;
     scrollbar-color: var(--text-secondary) none;
+    user-select: none;
 }
 
 :root {
@@ -27,6 +28,10 @@ body {
     background-color: var(--background-primary);
     font-family: var(--font-primary);
     overflow-x: hidden;
+}
+
+body[data-dev="false"] * {
+    cursor: none;
 }
 
 img,

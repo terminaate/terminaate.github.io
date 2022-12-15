@@ -11,7 +11,8 @@
     "new:util": "hygen new util",
     "new:hook": "hygen new hook",
     "new:component": "hygen new component",
-    "new:page": "hygen new page"
+    "new:page": "hygen new page",
+    "new:context": "hygen new context"
   },
   "dependencies": {
     "classnames": "^2.3.2",

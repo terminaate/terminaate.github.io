@@ -24,7 +24,7 @@ const TypingText: FC<ITypingText> = ({
   const oldText = useRef<ReturnType<typeof parseText>>(parseText(text));
   const [animationIsOn, setAnimationIsOn] = useState<boolean>(false);
 
-  const animate = () => {
+  const animate = async () => {
     if (!animationIsOn) {
       setAnimationIsOn(true);
       const parsedText = parseText(text);

@@ -1,31 +1,40 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
-import WorksPage from '@/pages/WorksPage';
 import ContactsPage from '@/pages/ContactsPage';
 import { AnimatePresence } from 'framer-motion';
 import BasicPage from '@/components/BasicPage';
 import useRoutingContext from '@/hooks/useRoutingContext';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export const Pages: Record<string, ReactElement> = {
   IntroPage: <IntroPage />,
   HomePage: <HomePage />,
-  WorksPage: <WorksPage />,
   ContactsPage: <ContactsPage />,
 };
 
 const Routing = () => {
   const { currentPage } = useRoutingContext().state;
 
-  console.log(currentPage);
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.log('CURRENT PAGE:', currentPage);
+    }
+  }, [currentPage]);
+
+  const PagesKeys = Object.keys(Pages);
 
   return (
     <BasicPage>
-      {Object.keys(Pages).map((page, key) => (
-        <AnimatePresence key={key} mode={'wait'}>
-          {currentPage === page && <>{Pages[page]}</>}
-        </AnimatePresence>
-      ))}
+      {PagesKeys.includes(currentPage) ? (
+        PagesKeys.map((page, key) => (
+          <AnimatePresence key={key} mode={'wait'}>
+            {currentPage === page && <>{Pages[page]}</>}
+          </AnimatePresence>
+        ))
+      ) : (
+        <NotFoundPage />
+      )}
     </BasicPage>
   );
 };
