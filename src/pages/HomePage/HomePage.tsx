@@ -5,7 +5,9 @@ import MouseHover from '@/components/MouseHover';
 const HomePage = () => {
   return (
     <PageContainer>
-      Home page
+      <MouseHover text={"This is home page text"}>
+        Home page
+      </MouseHover>
     </PageContainer>
   );
 };

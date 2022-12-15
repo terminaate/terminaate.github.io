@@ -30,7 +30,7 @@ body {
     overflow-x: hidden;
 }
 
-body[data-dev="false"] * {
+body[data-dev="true"] * {
     cursor: none;
 }
 

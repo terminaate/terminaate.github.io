@@ -5,12 +5,13 @@ import ContactsPage from '@/pages/ContactsPage';
 import { AnimatePresence } from 'framer-motion';
 import BasicPage from '@/components/BasicPage';
 import useRoutingContext from '@/hooks/useRoutingContext';
-import NotFoundPage from '@/pages/NotFoundPage';
+import MenuPage from '@/pages/MenuPage';
 
 export const Pages: Record<string, ReactElement> = {
   IntroPage: <IntroPage />,
   HomePage: <HomePage />,
   ContactsPage: <ContactsPage />,
+  MenuPage: <MenuPage />,
 };
 
 const Routing = () => {
@@ -22,19 +23,13 @@ const Routing = () => {
     }
   }, [currentPage]);
 
-  const PagesKeys = Object.keys(Pages);
-
   return (
     <BasicPage>
-      {PagesKeys.includes(currentPage) ? (
-        PagesKeys.map((page, key) => (
-          <AnimatePresence key={key} mode={'wait'}>
-            {currentPage === page && <>{Pages[page]}</>}
-          </AnimatePresence>
-        ))
-      ) : (
-        <NotFoundPage />
-      )}
+      {Object.keys(Pages).map((page, key) => (
+        <AnimatePresence exitBeforeEnter={true} key={key} mode={'wait'}>
+          {currentPage === page && <>{Pages[page]}</>}
+        </AnimatePresence>
+      ))}
     </BasicPage>
   );
 };
