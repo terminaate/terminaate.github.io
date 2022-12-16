@@ -3,7 +3,7 @@ import cl from './PageContainer.module.scss';
 import { HTMLMotionProps, motion, Transition, Variants } from 'framer-motion';
 import classNames from 'classnames';
 
-export const basePageTransition: Transition = { delay: 0.6, duration: 0.6 };
+export const basePageTransition: Transition = { duration: 0.6 };
 export const basePageVariants: Variants = {
   initial: {
     opacity: 0,
@@ -13,7 +13,7 @@ export const basePageVariants: Variants = {
   },
   exit: {
     opacity: 0,
-    transition: { delay: 0 },
+    // transition: { delay: 0 },
   },
 };
 

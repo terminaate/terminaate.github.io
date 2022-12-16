@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import IntroPage from '@/pages/IntroPage';
 import HomePage from '@/pages/HomePage';
 import ContactsPage from '@/pages/ContactsPage';
@@ -7,11 +7,11 @@ import BasicPage from '@/components/BasicPage';
 import useRoutingContext from '@/hooks/useRoutingContext';
 import MenuPage from '@/pages/MenuPage';
 
-export const Pages: Record<string, ReactElement> = {
-  IntroPage: <IntroPage />,
-  HomePage: <HomePage />,
-  ContactsPage: <ContactsPage />,
-  MenuPage: <MenuPage />,
+export const Pages: Record<string, FC> = {
+  IntroPage,
+  HomePage,
+  ContactsPage,
+  MenuPage,
 };
 
 const Routing = () => {
@@ -23,15 +23,20 @@ const Routing = () => {
     }
   }, [currentPage]);
 
+  const Page = Pages[currentPage];
+
   return (
     <BasicPage>
-      {Object.keys(Pages).map((page, key) => (
-        <AnimatePresence exitBeforeEnter={true} key={key} mode={'wait'}>
-          {currentPage === page && <>{Pages[page]}</>}
-        </AnimatePresence>
-      ))}
+      <AnimatePresence mode={'wait'}>
+        <Page key={currentPage} />
+      </AnimatePresence>
+      {/*{Object.keys(Pages).map((page, key) => (*/}
+      {/*  <AnimatePresence key={key} mode={'wait'}>*/}
+      {/*    {currentPage === page && <>{Pages[page]}</>}*/}
+      {/*  </AnimatePresence>*/}
+      {/*))}*/}
     </BasicPage>
   );
-};
+};0
 
 export default Routing;

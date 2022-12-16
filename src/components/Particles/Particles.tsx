@@ -1,4 +1,10 @@
-import React, { CanvasHTMLAttributes, FC, useEffect, useRef } from 'react';
+import React, {
+  CanvasHTMLAttributes,
+  FC,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
 interface IParticles extends CanvasHTMLAttributes<HTMLCanvasElement> {
   particlesCount?: number;
@@ -54,32 +60,33 @@ const Particles: FC<IParticles> = ({
   particlesCount = 50,
   particlesVelocity = 2,
   particlesSize = 2,
+  width = '100%',
+  height = '100%',
   ...props
 }) => {
   const canvasRef = useRef<null | HTMLCanvasElement>(null);
 
+  const getWidth = useCallback(() => {
+    if (typeof width === 'number') return width;
+    return (innerWidth / 100) * parseInt(width);
+  }, [width]);
+
+  const getHeight = useCallback(() => {
+    if (typeof height === 'number') return height;
+    return (innerHeight / 100) * parseInt(height);
+  }, [height]);
+
   useEffect(() => {
     const particles: Particle[] = [];
-    const {width, height} = props;
 
     const canvas = canvasRef.current!;
-    if (width) {
-      canvas.width = width as number;
-    }
-
-    if (height) {
-      canvas.height = height as number;
-    }
+    canvas.width = getWidth();
+    canvas.height = getHeight();
 
     window.onresize = () => {
-      if (width) {
-        canvas.width = width as number;
-      }
-
-      if (height) {
-        canvas.height = height as number;
-      }
-    }
+      canvas.width = getWidth();
+      canvas.height = getHeight();
+    };
     const ctx = canvas.getContext('2d')!;
 
     let reqId = 0;
@@ -114,7 +121,14 @@ const Particles: FC<IParticles> = ({
     };
   }, []);
 
-  return <canvas ref={canvasRef} {...props} />;
+  return (
+    <canvas
+      {...props}
+      ref={canvasRef}
+      width={getWidth()}
+      height={getHeight()}
+    />
+  );
 };
 
 export default Particles;

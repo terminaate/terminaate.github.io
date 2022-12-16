@@ -9,6 +9,7 @@ import {
   basePageTransition,
   basePageVariants,
 } from '@/components/PageContainer';
+import MouseHover from '@/components/MouseHover';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,19 +27,25 @@ const Header = () => {
           animate={'animate'}
           exit={'exit'}
         >
-          <button
-            ref={logoRef}
-            onClick={() => navigate('HomePage')}
-            className={cl.homeButton}
-          >
-            <img src={logoImg} alt="" />
-          </button>
-          <button
-            onClick={() => navigate('MenuPage')}
-            className={cl.menuButton}
-          >
-            <BiMenuAltRight />
-          </button>
+          <MouseHover text={'Home'} position={'bottom'}>
+            <button
+              ref={logoRef}
+              onClick={() => navigate('HomePage')}
+              className={cl.homeButton}
+            >
+              <img src={logoImg} alt="" />
+            </button>
+          </MouseHover>
+          <MouseHover text={'Menu'} position={'bottom'}>
+            <button
+              onClick={() => navigate('MenuPage')}
+              className={cl.menuButton}
+            >
+              <span/>
+              <span/>
+              <span/>
+            </button>
+          </MouseHover>
         </motion.header>
       )}
     </AnimatePresence>

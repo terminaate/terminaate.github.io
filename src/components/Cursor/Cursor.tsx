@@ -22,9 +22,12 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   const { state: items } = useCursorContext();
   const followerRef = useRef<null | HTMLDivElement>(null);
   const cursorRef = useRef<null | HTMLDivElement>(null);
-  const [currentItem, setCurrentItem] = useState<CursorItemProps>({
+  const [currentItem, setCurrentItem] = useState<
+    { element: null | HTMLElement } & CursorItemProps
+  >({
     text: '',
     position: 'top',
+    element: null,
   });
   const [hovered, setHovered] = useState<boolean>(false);
 
@@ -69,14 +72,14 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
 
   useEffect(() => {
     for (const item of items) {
-      const onMouseOver = () => {
+      const onMouseOver = (e: MouseEvent) => {
         setHovered(true);
         setCurrentItem(item);
       };
 
       const onMouseOut = () => {
         setHovered(false);
-        setCurrentItem({ text: '', position: 'top' });
+        setCurrentItem({ text: '', position: 'top', element: item.element });
       };
 
       item.element.addEventListener('mouseover', onMouseOver);
@@ -98,7 +101,9 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
       <div
         ref={followerRef}
         style={
-          { '--size': (hovered ? size * 2 : size) + 'px' } as CSSProperties
+          {
+            '--size': (hovered ? size * 1.5 : size) + 'px',
+          } as CSSProperties
         }
         data-hover={hovered}
         className={cl.follower}

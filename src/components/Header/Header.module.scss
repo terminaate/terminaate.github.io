@@ -1,7 +1,6 @@
 .headerContainer {
   position: absolute;
   top: 0;
-  
   width: 100%;
   height: 60px;
   display: flex;
@@ -12,18 +11,39 @@
   //padding-top: 20px;
   z-index: 100;
   pointer-events: all;
+  border-bottom: 2px solid var(--background-secondary);
 
-  --icons-size: 50px;
-
-  button {
-    cursor: pointer;
-  }
 
   .homeButton img {
-    height: var(--icons-size);
+    height: 30px;
+    mix-blend-mode: difference;
   }
 
-  .menuButton svg {
-    font-size: var(--icons-size);
+  .menuButton {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    row-gap: 6px;
+
+    span {
+      height: 4px;
+      background-color: var(--text-primary);
+      width: 100%;
+      transition: width .6s;
+
+      &:nth-child(2) {
+        width: 50%;
+      }
+
+      &:nth-child(3) {
+        width: 25%;
+      }
+    }
+
+    &:hover span {
+      width: 100%;
+    }
   }
 }

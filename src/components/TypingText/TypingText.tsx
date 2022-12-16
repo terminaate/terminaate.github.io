@@ -1,76 +1,89 @@
-import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import cl from './TypingText.module.scss';
-import parseText from '@/utils/parseText';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
-  onStart?: () => void;
-  onEnd?: () => void;
-  text: string | string[];
-  containerClassName?: string;
+  text: string | (string | number)[];
   defaultDelay?: number;
+  containerClassName?: string;
+  onEnd: () => void;
 }
 
 const TypingText: FC<ITypingText> = ({
   text,
-  containerClassName,
-  onStart = () => {},
-  onEnd = () => {},
   defaultDelay = 500,
+  containerClassName = '',
+  onEnd = () => {},
   ...props
 }) => {
   const [renderedWords, setRenderedWords] = useState<string[]>([]);
-  const oldText = useRef<ReturnType<typeof parseText>>(parseText(text));
-  const [animationIsOn, setAnimationIsOn] = useState<boolean>(false);
-
-  const animate = async () => {
-    if (!animationIsOn) {
-      setAnimationIsOn(true);
-      const parsedText = parseText(text);
-      onStart();
-
-      for (let i = 0; i < parsedText.length; i++) {
-        const item = parsedText[i];
-        const timeoutId = setTimeout(() => {
-          setRenderedWords((prevState) =>
-            item.text ? [...prevState, item.text] : prevState,
-          );
-          if (i === parsedText.length - 1) {
-            setAnimationIsOn(false);
-            onEnd();
-          }
-          clearTimeout(timeoutId);
-        }, (item.delay ? item.delay : defaultDelay) * i);
-      }
-    }
-  };
 
   useEffect(() => {
     setRenderedWords([]);
-    animate();
   }, []);
 
   useEffect(() => {
-    const parsedText = parseText(text);
-    if (
-      JSON.stringify(parsedText) !== JSON.stringify(oldText.current) &&
-      !animationIsOn
-    ) {
-      setRenderedWords([]);
-      animate();
-      oldText.current = parsedText;
+    if (!Array.isArray(text)) {
+      text = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
     }
-  }, [text]);
+
+    const formattedText: any[] = [];
+
+    for (let i = 0; i < text.length; i++) {
+      if (typeof text[i] === 'number' && typeof text[i + 1] === 'string') {
+        formattedText.push({ text: text[i + 1], delay: text[i] });
+      } else if (
+        typeof text[i] === 'string' &&
+        typeof text[i - 1] !== 'number'
+      ) {
+        formattedText.push({ text: text[i] });
+      } else if (
+        typeof text[i] === 'number' &&
+        typeof text[i + 1] !== 'string'
+      ) {
+        formattedText.push({ delay: text[i] });
+      }
+    }
+
+    let i = -1;
+
+    function delayLoop() {
+      i++;
+      if (i >= formattedText.length || formattedText[i] === undefined) {
+        return onEnd();
+      }
+
+      setRenderedWords((prevState) => [
+        ...prevState,
+        formattedText[i]?.text ? formattedText[i].text : '',
+      ]);
+      setTimeout(
+        delayLoop,
+        formattedText[i]?.delay ? formattedText[i].delay : defaultDelay,
+      );
+    }
+
+    delayLoop();
+
+    // for (const i in formattedText) {
+    //   setTimeout(() => {
+    //     setRenderedWords((words: string[]) => [
+    //       ...words,
+    //       formattedText[i].text,
+    //     ]);
+    //   }, (formattedText[i].delay ? formattedText[i].delay : defaultDelay) * Number(i));
+    // }
+  }, []);
 
   return (
     <motion.div
       layout={'position'}
       className={classNames(cl.typingTextContainer, containerClassName)}
     >
-      {renderedWords.map((word, key) => (
+      {renderedWords.map((obj, key) => (
         <span {...props} key={key}>
-          {word}
+          {obj}
         </span>
       ))}
     </motion.div>
