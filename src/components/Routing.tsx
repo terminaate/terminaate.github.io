@@ -1,17 +1,18 @@
 import React, { FC, useEffect } from 'react';
 import IntroPage from '@/pages/IntroPage';
-import HomePage from '@/pages/HomePage';
+import AboutPage from '@/pages/AboutPage';
 import ContactsPage from '@/pages/ContactsPage';
 import { AnimatePresence } from 'framer-motion';
-import BasicPage from '@/components/BasicPage';
 import useRoutingContext from '@/hooks/useRoutingContext';
-import MenuPage from '@/pages/MenuPage';
+import Nav from '@/components/Nav';
+import BasicPage from '@/components/BasicPage';
+import ProjectsPage from '@/pages/ProjectsPage';
 
 export const Pages: Record<string, FC> = {
   IntroPage,
-  HomePage,
+  AboutPage,
+  ProjectsPage,
   ContactsPage,
-  MenuPage,
 };
 
 const Routing = () => {
@@ -27,16 +28,13 @@ const Routing = () => {
 
   return (
     <BasicPage>
+      <Nav />
       <AnimatePresence mode={'wait'}>
         <Page key={currentPage} />
       </AnimatePresence>
-      {/*{Object.keys(Pages).map((page, key) => (*/}
-      {/*  <AnimatePresence key={key} mode={'wait'}>*/}
-      {/*    {currentPage === page && <>{Pages[page]}</>}*/}
-      {/*  </AnimatePresence>*/}
-      {/*))}*/}
     </BasicPage>
   );
-};0
+};
+0;
 
 export default Routing;

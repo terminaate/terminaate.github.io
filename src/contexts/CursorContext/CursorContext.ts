@@ -1,16 +1,20 @@
 import { Action } from './CursorContextReducer';
-import React, { createContext } from 'react';
+import React, { createContext, MutableRefObject } from 'react';
 
 export interface ICursorContext {
   state: {
+    id: number;
     text?: string;
     position?: 'top' | 'left' | 'right' | 'bottom';
-    element: HTMLElement;
+    ref: MutableRefObject<null | HTMLElement>;
   }[];
   dispatch: (action: Action) => void | React.Dispatch<Action>;
 }
 
-export type CursorItemProps = Omit<ArrayElement<ICursorContext['state']>, "element">
+export type CursorItemProps = Omit<
+  ArrayElement<ICursorContext['state']>,
+  'ref'
+>;
 
 export const initialState: ICursorContext = {
   state: [],

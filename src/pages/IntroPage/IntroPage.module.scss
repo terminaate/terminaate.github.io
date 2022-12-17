@@ -1,5 +1,8 @@
 .introPage {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 
   .backgroundParticles {
     position: absolute;

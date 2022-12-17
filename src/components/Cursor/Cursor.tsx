@@ -22,12 +22,10 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   const { state: items } = useCursorContext();
   const followerRef = useRef<null | HTMLDivElement>(null);
   const cursorRef = useRef<null | HTMLDivElement>(null);
-  const [currentItem, setCurrentItem] = useState<
-    { element: null | HTMLElement } & CursorItemProps
-  >({
+  const [currentItem, setCurrentItem] = useState<CursorItemProps>({
+    id: 0,
     text: '',
     position: 'top',
-    element: null,
   });
   const [hovered, setHovered] = useState<boolean>(false);
 
@@ -71,26 +69,36 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   useWindowEvent('contextmenu', (e) => e.preventDefault());
 
   useEffect(() => {
+    console.log(items.find((i) => i.id === currentItem.id));
+
     for (const item of items) {
-      const onMouseOver = (e: MouseEvent) => {
+      const { current: target } = item.ref;
+      const onMouseOver = () => {
         setHovered(true);
         setCurrentItem(item);
       };
 
       const onMouseOut = () => {
         setHovered(false);
-        setCurrentItem({ text: '', position: 'top', element: item.element });
+        setCurrentItem({ id: 0, text: '', position: 'top' });
       };
 
-      item.element.addEventListener('mouseover', onMouseOver);
-
-      item.element.addEventListener('mouseout', onMouseOut);
+      if (target !== null) {
+        target.addEventListener('mouseover', onMouseOver);
+        target.addEventListener('mouseout', onMouseOut);
+      }
     }
 
     return () => {
+      setCurrentItem({ id: 0, text: '', position: 'top' });
+      setHovered(false);
       for (const item of items) {
-        item.element.removeEventListener('mouseover', onMouseOver);
-        item.element.removeEventListener('mouseout', onMouseOver);
+        const { current: target } = item.ref;
+
+        if (target !== null) {
+          target.removeEventListener('mouseover', onMouseOver);
+          target.removeEventListener('mouseout', onMouseOver);
+        }
       }
     };
   }, [items]);
@@ -123,7 +131,7 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
         </AnimatePresence>
       </div>
     </>,
-    document.body,
+    document.querySelector('#cursor')!,
   );
 };
 
