@@ -1,12 +1,15 @@
 import React, { FC, HTMLAttributes, ReactNode, useEffect, useRef } from 'react';
 import useCursorContext from '@/hooks/useCursorContext';
-import { pushRef, removeRef } from '@/contexts/CursorContext';
+import { CursorItemProps, pushRef, removeRef } from '@/contexts/CursorContext';
 
 interface IMouseHover extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-const MouseHover: FC<IMouseHover> = ({ children, ...props }) => {
+const MouseHover: FC<IMouseHover & Partial<CursorItemProps>> = ({
+  children,
+  ...props
+}) => {
   const ref = useRef<null | HTMLDivElement>(null);
   const { dispatch } = useCursorContext();
 
@@ -19,7 +22,11 @@ const MouseHover: FC<IMouseHover> = ({ children, ...props }) => {
     };
   }, []);
 
-  return <div ref={ref} {...props}>{children}</div>;
+  return (
+    <div ref={ref} {...props}>
+      {children}
+    </div>
+  );
 };
 
 export default MouseHover;
