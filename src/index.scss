@@ -27,7 +27,7 @@
   --text-primary: #fff;
   --text-secondary: rgba(255, 255, 255, 0.5);
   --text-inactive: rgba(255, 255, 255, 0.3);
-  --text-green: #00FDCF;
+  --text-green: #00fdcf;
   --red: red;
   --green: #54d254;
   --font-sans-serif: Arial, sans-serif;
@@ -101,7 +101,7 @@ input {
 
   &:after {
     --deco-height: 0.3125em;
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     right: 0;
@@ -110,6 +110,6 @@ input {
     background-size: auto 110%;
     background-repeat: repeat-x;
     background-position: 0;
-    background-image: url("!/underline.svg")
+    background-image: url('!/underline.svg');
   }
 }

@@ -11,7 +11,10 @@ interface IProjectCard {
 const ProjectCard: FC<IProjectCard> = ({ project }) => {
   return (
     <div className={cl.projectContainer}>
-      <div className={cl.projectImage} style={{backgroundImage: `url(${project.image})`}} />
+      <div
+        className={cl.projectImage}
+        style={{ backgroundImage: `url(${project.image})` }}
+      />
       <div className={cl.projectContent}>
         <div className={cl.projectTitleContainer}>
           <h2 className={cl.projectTitle}>{project.title}</h2>
@@ -37,9 +40,7 @@ const ProjectCard: FC<IProjectCard> = ({ project }) => {
           </div>
         </div>
         <MouseHover>
-          <div className={cl.projectDescription}>
-            {project.description}
-          </div>
+          <div className={cl.projectDescription}>{project.description}</div>
         </MouseHover>
         <div className={cl.projectTags}>
           {project.tags.map((tag, key) => (

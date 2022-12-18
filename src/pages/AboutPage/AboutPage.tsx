@@ -4,7 +4,7 @@ import cl from './AboutPage.module.scss';
 import Title from '@/components/Title';
 import ProjectCard from '@/components/ProjectCard';
 import MouseHover from '@/components/MouseHover';
-import { projects } from '@/data';
+import { projects, skills } from '@/data';
 import Link from '@/components/Link';
 import { HiOutlineArrowRight } from 'react-icons/all';
 
@@ -42,6 +42,21 @@ const AboutPage = () => {
       </div>
       <div className={cl.contentContainer}>
         <h2 className={cl.title}>Skills:</h2>
+        <ul className={cl.skills}>
+          {skills.map((skill, key) => (
+            <li key={key} className={cl.skillContainer}>
+              <h3 className={cl.title}>{skill.title}</h3>
+              <ul className={cl.skillContents}>
+                {skill.content.map((skillContent, key) => (
+                  <li className={cl.skillContent} key={key}>
+                    {skillContent.icon ? skillContent.icon : null}
+                    <span>{skillContent.title}</span>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
       </div>
     </PageContainer>
   );

@@ -1,4 +1,4 @@
-@import "@/index.scss";
+@import '@/index.scss';
 
 .aboutPage {
   display: flex;
@@ -55,6 +55,37 @@
         font-size: 20px;
         width: 50px;
         height: 50px;
+      }
+    }
+
+    .skills {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      padding-left: 20px;
+      list-style-type: none;
+
+      .skillContainer {
+        display: flex;
+        row-gap: 10px;
+        flex-direction: column;
+
+        .skillContents {
+          list-style-type: none;
+          padding-left: 20px;
+          display: flex;
+          row-gap: 2px;
+          flex-direction: column;
+
+          .skillContent {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+            font-size: 17px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+          }
+        }
       }
     }
   }

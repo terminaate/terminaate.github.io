@@ -45,7 +45,7 @@ const Nav = () => {
             {links.map((link, key) => (
               <NavLink link={link} key={key} />
             ))}
-            <MouseHover text={"Hmmm..."}>
+            <MouseHover text={'Hmmm...'}>
               <button className={cl.devToolsButton} onClick={openDevToolsModal}>
                 .
               </button>
