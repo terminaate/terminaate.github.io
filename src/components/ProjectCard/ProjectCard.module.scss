@@ -31,12 +31,12 @@
     //height: 75%;
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
-    background-color: var(--background-secondary);
+    background-color: var(--background-alt);
     padding: 15px;
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s;
-    mix-blend-mode: difference;
+    //mix-blend-mode: difference;
     display: flex;
     flex-direction: column;
     row-gap: 10px;

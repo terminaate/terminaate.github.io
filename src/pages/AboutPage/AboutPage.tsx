@@ -6,7 +6,7 @@ import ProjectCard from '@/components/ProjectCard';
 import MouseHover from '@/components/MouseHover';
 import { projects } from '@/data';
 import Link from '@/components/Link';
-import { FaArrowRight } from 'react-icons/all';
+import { HiOutlineArrowRight } from 'react-icons/all';
 
 const AboutPage = () => {
   return (
@@ -14,7 +14,6 @@ const AboutPage = () => {
       <MouseHover text={'My name is...'} position={'bottom'}>
         <Title className={cl.username}>BAHRAM TERMINAATE</Title>
       </MouseHover>
-      {/*<h1>Overview:</h1>*/}
       <div className={cl.contentContainer}>
         <h2 className={cl.title}>About me:</h2>
         <MouseHover>
@@ -36,10 +35,13 @@ const AboutPage = () => {
           <ProjectCard project={projects[0]} />
           <MouseHover text={'More projects...'}>
             <Link href={'ProjectsPage'} className={cl.projectsLink}>
-              <FaArrowRight />
+              <HiOutlineArrowRight />
             </Link>
           </MouseHover>
         </div>
+      </div>
+      <div className={cl.contentContainer}>
+        <h2 className={cl.title}>Skills:</h2>
       </div>
     </PageContainer>
   );
