@@ -33,7 +33,7 @@ const Nav = () => {
     <>
       <AnimatePresence>
         {!isMatch && (
-          <motion.div
+          <motion.nav
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -46,7 +46,7 @@ const Nav = () => {
             <button className={cl.devToolsButton} onClick={openDevToolsModal}>
               .
             </button>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>
