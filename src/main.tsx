@@ -2,16 +2,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@/App';
 import './index.scss';
-import { RoutingContextProvider } from '@/contexts/RoutingContext';
-import { CursorContextProvider } from '@/contexts/CursorContext';
+import ContextsProviders from '@/components/ContextsProviders';
 
-document.body.setAttribute('data-dev', import.meta.env.DEV + '');
+document.body.setAttribute('data-cursor', import.meta.env.DEV + '');
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
-  <CursorContextProvider>
-    <RoutingContextProvider>
-      <App />
-    </RoutingContextProvider>
-  </CursorContextProvider>,
+  <ContextsProviders>
+    <App />
+  </ContextsProviders>,
 );

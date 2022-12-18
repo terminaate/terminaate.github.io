@@ -13,7 +13,7 @@
   border-radius: 50%;
   z-index: 10001;
   pointer-events: none;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
   mix-blend-mode: difference;
 }
 
@@ -33,13 +33,13 @@
   border-radius: 50%;
   border: 3px solid var(--background-third);
   z-index: 10000;
-  transition: .2s;
+  transition: 0.2s;
   pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  &[data-hover="true"] {
+  &[data-hover='true'] {
     mix-blend-mode: difference;
     background-color: var(--text-primary);
   }
@@ -51,19 +51,19 @@
     font-size: 22px;
     pointer-events: none;
 
-    &[data-position="top"] {
+    &[data-position='top'] {
       bottom: 102.5%;
     }
 
-    &[data-position="bottom"] {
+    &[data-position='bottom'] {
       top: 102.5%;
     }
 
-    &[data-position="left"] {
+    &[data-position='left'] {
       right: 115%;
     }
 
-    &[data-position="right"] {
+    &[data-position='right'] {
       left: 115%;
     }
   }

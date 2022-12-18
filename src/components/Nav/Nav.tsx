@@ -25,33 +25,40 @@ const Nav = () => {
   const {
     state: { currentPage },
   } = useRoutingContext();
-  const isMatch = useMatch(['AboutPage', 'ContactsPage', 'ProjectsPage']);
+  const isMatch = useMatch('IntroPage');
   const navigate = useNavigate();
 
   return (
-    <AnimatePresence>
-      {isMatch && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className={cl.navContainer}
-        >
-          {links.map((link, key) => (
-            <MouseHover
-              onClick={() => navigate(link.href)}
-              key={key}
-              className={cl.link}
-            >
-              <span className={link.href === currentPage ? "circlesText" : ""}>{link.text}</span>
-              {link.href === currentPage && (
-                <motion.div layoutId={'underline'} className={cl.underline} />
-              )}
-            </MouseHover>
-          ))}
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <>
+      <AnimatePresence>
+        {!isMatch && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            className={cl.navContainer}
+          >
+            {links.map((link, key) => (
+              <MouseHover
+                onClick={() => navigate(link.href)}
+                key={key}
+                className={cl.link}
+              >
+                <span
+                  className={link.href === currentPage ? 'circlesText' : ''}
+                >
+                  {link.text}
+                </span>
+                {link.href === currentPage && (
+                  <motion.div layoutId={'navline'} className={cl.navline} />
+                )}
+              </MouseHover>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

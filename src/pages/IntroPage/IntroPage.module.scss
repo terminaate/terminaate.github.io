@@ -13,8 +13,8 @@
   }
 
   .typingTextContainer {
-    z-index: 10;
-    max-width: 650px;
+    z-index: 1;
+    max-width: 700px;
     background-color: var(--background-primary);
 
     .typingText {
@@ -33,7 +33,7 @@
     border: 2px solid transparent;
     background-color: var(--background-secondary);
     border-radius: 50%;
-    transition: border-color .2s, background-color .2s, color .2s;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +41,7 @@
     &:hover {
       border-color: var(--background-third);
       background-color: var(--text-primary);
-      color: var(--background-secondary)
+      color: var(--background-secondary);
     }
   }
 }

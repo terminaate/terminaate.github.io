@@ -1,4 +1,4 @@
-import ContactsPage from "./ContactsPage";
+import ContactsPage from './ContactsPage';
 
 export * from './ContactsPage';
 export default ContactsPage;

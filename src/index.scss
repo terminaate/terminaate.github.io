@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap');
 
 @font-face {
-  src: url("./assets/fonts/HelveticaNeue-Medium.otf");
+  src: url('./assets/fonts/HelveticaNeue-Medium.otf');
   font-family: 'Helvetica Neue';
 }
 
@@ -14,12 +14,14 @@
   scrollbar-width: 2px;
   scrollbar-color: var(--text-secondary) none;
   user-select: none;
+  outline: none;
 }
 
 :root {
   --background-primary: #000;
   --background-secondary: #0b0b0b;
   --background-third: #212121;
+  --background-ui: #181818;
   --text-primary: #fff;
   --text-secondary: rgba(255, 255, 255, 0.5);
   --text-inactive: rgba(255, 255, 255, 0.3);
@@ -35,7 +37,7 @@ body {
   font-family: var(--font-primary);
   overflow-x: hidden;
 
-  &[data-dev="false"] * {
+  &[data-cursor='false'] * {
     cursor: none;
   }
 }
@@ -76,7 +78,7 @@ input {
 
 .circlesText {
   @supports (background-clip: text) or (-webkit-background-clip: text) {
-    background-image: url("!/circles.svg");
+    background-image: url('!/circles.svg');
     background-size: 110% auto;
     background-position: center;
     color: transparent;

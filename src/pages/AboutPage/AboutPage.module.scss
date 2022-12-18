@@ -1,2 +1,16 @@
 .aboutPage {
+  padding-inline: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .usernameContainer {
+    line-height: 150%;
+    margin-top: 10px;
+
+    .username {
+      font-family: var(--font-secondary);
+      font-size: 27px;
+      text-transform: uppercase;
+    }
+  }
 }

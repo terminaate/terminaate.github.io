@@ -7,6 +7,8 @@ import useRoutingContext from '@/hooks/useRoutingContext';
 import Nav from '@/components/Nav';
 import BasicPage from '@/components/BasicPage';
 import ProjectsPage from '@/pages/ProjectsPage';
+import useConfigContext from '@/hooks/useConfigContext';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export const Pages: Record<string, FC> = {
   IntroPage,
@@ -17,6 +19,7 @@ export const Pages: Record<string, FC> = {
 
 const Routing = () => {
   const { currentPage } = useRoutingContext().state;
+  const { transitionBetweenPages } = useConfigContext().state;
 
   useEffect(() => {
     if (import.meta.env.DEV) {
@@ -24,14 +27,18 @@ const Routing = () => {
     }
   }, [currentPage]);
 
-  const Page = Pages[currentPage];
+  const Page = Pages[currentPage] ?? NotFoundPage;
 
   return (
     <BasicPage>
       <Nav />
-      <AnimatePresence mode={'wait'}>
-        <Page key={currentPage} />
-      </AnimatePresence>
+      {transitionBetweenPages ? (
+        <AnimatePresence mode={'wait'}>
+          <Page key={currentPage} />
+        </AnimatePresence>
+      ) : (
+        <Page />
+      )}
     </BasicPage>
   );
 };

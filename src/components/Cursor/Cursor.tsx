@@ -1,7 +1,6 @@
 import React, {
   CSSProperties,
   FC,
-  MutableRefObject,
   useCallback,
   useEffect,
   useRef,
@@ -13,6 +12,7 @@ import { createPortal } from 'react-dom';
 import useCursorContext from '@/hooks/useCursorContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CursorItemProps } from '@/contexts/CursorContext';
+import useConfigContext from '@/hooks/useConfigContext';
 
 interface ICursor {
   size?: number;
@@ -20,6 +20,9 @@ interface ICursor {
 
 const Cursor: FC<ICursor> = ({ size = 40 }) => {
   const { state: items } = useCursorContext();
+  const {
+    state: { showCustomCursor },
+  } = useConfigContext();
   const followerRef = useRef<null | HTMLDivElement>(null);
   const cursorRef = useRef<null | HTMLDivElement>(null);
   const [currentItem, setCurrentItem] = useState<CursorItemProps>({
@@ -43,24 +46,21 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
     setCords(cursor);
   }, []);
 
-  const setOpacity = useCallback(
-    (ref: MutableRefObject<null | HTMLElement>, opacity: number) => {
-      const { current: target } = ref;
-      if (!target) return;
+  const setOpacity = useCallback((opacity: number) => {
+    const { current: cursor } = cursorRef;
+    const { current: follower } = followerRef;
+    if (!cursor || !follower) return;
 
-      target.style.opacity = opacity + '';
-    },
-    [],
-  );
+    cursor.style.opacity = opacity + '';
+    follower.style.opacity = opacity + '';
+  }, []);
 
   const onMouseOut = useCallback(() => {
-    setOpacity(followerRef, 0);
-    setOpacity(cursorRef, 0);
+    setOpacity(0);
   }, []);
 
   const onMouseOver = useCallback(() => {
-    setOpacity(followerRef, 1);
-    setOpacity(cursorRef, 1);
+    setOpacity(1);
   }, []);
 
   useWindowEvent('mouseover', onMouseOver);
@@ -69,8 +69,6 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   useWindowEvent('contextmenu', (e) => e.preventDefault());
 
   useEffect(() => {
-    console.log(items.find((i) => i.id === currentItem.id));
-
     for (const item of items) {
       const { current: target } = item.ref;
       const onMouseOver = () => {
@@ -103,34 +101,40 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
     };
   }, [items]);
 
+  useEffect(() => {
+    setOpacity(Number(showCustomCursor));
+  }, [showCustomCursor]);
+
   return createPortal(
-    <>
-      <div ref={cursorRef} data-hover={hovered} className={cl.cursor} />
-      <div
-        ref={followerRef}
-        style={
-          {
-            '--size': (hovered ? size * 1.5 : size) + 'px',
-          } as CSSProperties
-        }
-        data-hover={hovered}
-        className={cl.follower}
-      >
-        <AnimatePresence>
-          {currentItem.text && (
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={cl.followerText}
-              data-position={currentItem.position ?? 'top'}
-            >
-              {currentItem.text}
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </div>
-    </>,
+    showCustomCursor && (
+      <>
+        <div ref={cursorRef} data-hover={hovered} className={cl.cursor} />
+        <div
+          ref={followerRef}
+          style={
+            {
+              '--size': (hovered ? size * 1.5 : size) + 'px',
+            } as CSSProperties
+          }
+          data-hover={hovered}
+          className={cl.follower}
+        >
+          <AnimatePresence>
+            {currentItem.text && (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className={cl.followerText}
+                data-position={currentItem.position ?? 'top'}
+              >
+                {currentItem.text}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
+      </>
+    ),
     document.querySelector('#cursor')!,
   );
 };

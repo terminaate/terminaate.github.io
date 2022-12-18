@@ -1,0 +1,17 @@
+.titleContainer {
+  overflow: hidden;
+
+  .title {
+    display: inline-block;
+    transform: translateY(-150%);
+
+    @keyframes slideAnim {
+      from {
+        transform: translateY(-150%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  }
+}

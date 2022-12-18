@@ -1,16 +1,10 @@
 import React from 'react';
 import cl from './MouseMove.module.scss';
 
-interface IMouseMove {
-
-}
+interface IMouseMove {}
 
 const MouseMove: React.FC<IMouseMove> = () => {
-  return (
-    <>
-
-    </>
-  );
+  return <></>;
 };
 
 export default MouseMove;

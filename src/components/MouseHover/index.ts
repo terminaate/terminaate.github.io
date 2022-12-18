@@ -1,4 +1,4 @@
-import MouseHover from "./MouseHover";
+import MouseHover from './MouseHover';
 
 export * from './MouseHover';
 export default MouseHover;
