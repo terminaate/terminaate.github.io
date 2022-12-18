@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import cl from './Nav.module.scss';
-import useRoutingContext from '@/hooks/useRoutingContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import useMatch from '@/hooks/useMatch';
-import MouseHover from '@/components/MouseHover';
-import useNavigate from '@/hooks/useNavigate';
+import useConfigContext from '@/hooks/useConfigContext';
+import { updateConfig } from '@/contexts/ConfigContext';
+import NavLink from '@/components/Nav/NavLink';
 
-const links: { text: string; href: string }[] = [
+export const links: { text: string; href: string }[] = [
   {
     text: 'About me',
     href: 'AboutPage',
@@ -22,11 +22,12 @@ const links: { text: string; href: string }[] = [
 ];
 
 const Nav = () => {
-  const {
-    state: { currentPage },
-  } = useRoutingContext();
   const isMatch = useMatch('IntroPage');
-  const navigate = useNavigate();
+  const { dispatch } = useConfigContext();
+
+  const openDevToolsModal = useCallback(() => {
+    dispatch(updateConfig({ devToolsModal: true }));
+  }, []);
 
   return (
     <>
@@ -40,21 +41,11 @@ const Nav = () => {
             className={cl.navContainer}
           >
             {links.map((link, key) => (
-              <MouseHover
-                onClick={() => navigate(link.href)}
-                key={key}
-                className={cl.link}
-              >
-                <span
-                  className={link.href === currentPage ? 'circlesText' : ''}
-                >
-                  {link.text}
-                </span>
-                {link.href === currentPage && (
-                  <motion.div layoutId={'navline'} className={cl.navline} />
-                )}
-              </MouseHover>
+              <NavLink link={link} key={key} />
             ))}
+            <button className={cl.devToolsButton} onClick={openDevToolsModal}>
+              .
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

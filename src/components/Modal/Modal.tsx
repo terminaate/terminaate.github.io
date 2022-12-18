@@ -5,9 +5,11 @@ import cl from './Modal.module.scss';
 import classNames from 'classnames';
 import useKeyPress from '@/hooks/useKeyPress';
 
-interface IModal extends HTMLAttributes<HTMLDivElement> {
+export interface IModal extends HTMLAttributes<HTMLDivElement> {
   state: boolean;
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
+  setState:
+    | React.Dispatch<React.SetStateAction<boolean>>
+    | ((newValue: boolean) => void);
 }
 
 const Modal: React.FC<IModal> = ({

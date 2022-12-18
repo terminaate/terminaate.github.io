@@ -1,3 +1,5 @@
+@import '@/index.scss';
+
 .typingTextContainer {
   display: flex;
   align-items: center;
@@ -6,19 +8,11 @@
   column-gap: 5px;
 
   span {
+    @include circlesText;
     font-family: var(--font-primary);
     font-size: 20px;
     color: var(--text-primary);
     animation: typingTextAnim 0.6s both;
-
-    @supports (background-clip: text) or (-webkit-background-clip: text) {
-      background-image: url('!/circles.svg');
-      background-size: 110% auto;
-      background-position: center;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
 
     @keyframes typingTextAnim {
       0% {

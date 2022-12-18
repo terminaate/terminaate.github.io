@@ -20,6 +20,8 @@ const Select: FC<ISelect> = ({ currentState, setCurrentState, variants }) => {
     setVariantsVisible(false);
   });
 
+  const filteredVariants = variants.filter((v) => v !== currentState);
+
   return (
     <div ref={containerRef} className={cl.selectContainer}>
       <div
@@ -39,13 +41,11 @@ const Select: FC<ISelect> = ({ currentState, setCurrentState, variants }) => {
             onClick={() => setVariantsVisible(false)}
             className={cl.selectVariantsContainer}
           >
-            {variants
-              .filter((v) => v !== currentState)
-              .map((variant, key) => (
-                <span onClick={() => setCurrentState(variant)} key={key}>
-                  {variant}
-                </span>
-              ))}
+            {filteredVariants.map((variant, key) => (
+              <span onClick={() => setCurrentState(variant)} key={key}>
+                {variant}
+              </span>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>

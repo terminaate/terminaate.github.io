@@ -1,31 +1,32 @@
 .cursor {
-  --size: 6px;
-  --size-separated: calc(var(--size) / 2);
-  --neg-size: calc(var(--size-separated) * -1);
+  $size: 6px;
+  $size-separated: calc($size / 2);
+  $neg-size: calc($size-separated * -1);
 
+  $size: 6px;
   position: fixed;
   top: -100%;
   left: -100%;
-  transform: translate(var(--neg-size), var(--neg-size));
-  width: var(--size);
-  height: var(--size);
+  transform: translate($neg-size, $neg-size);
+  width: $size;
+  height: $size;
   background-color: var(--text-primary);
   border-radius: 50%;
-  z-index: 10001;
   pointer-events: none;
   transition: opacity 0.2s;
+  z-index: 10001;
   mix-blend-mode: difference;
 }
 
 .follower {
   --size: 40px;
-  --size-separated: calc(var(--size) / 2);
-  --neg-size: calc(var(--size-separated) * -1);
+  $size-separated: calc(var(--size) / 2);
+  $neg-size: calc($size-separated * -1);
 
   position: fixed;
   top: -100%;
   left: -100%;
-  transform: translate(var(--neg-size), var(--neg-size));
+  transform: translate($neg-size, $neg-size);
   width: var(--size);
   height: var(--size);
   //background: none;

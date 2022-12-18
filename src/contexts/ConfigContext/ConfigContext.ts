@@ -6,6 +6,7 @@ export interface IConfigContext {
     showCursor: boolean;
     showCustomCursor: boolean;
     transitionBetweenPages: boolean;
+    devToolsModal: boolean;
   };
   dispatch: (action: Action) => void | React.Dispatch<Action>;
 }
@@ -15,6 +16,7 @@ export const initialState: IConfigContext = {
     showCursor: import.meta.env.DEV,
     showCustomCursor: true,
     transitionBetweenPages: true,
+    devToolsModal: false,
   },
   dispatch: () => {},
 };

@@ -1,7 +1,7 @@
 .checkBoxContainer {
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  row-gap: 10px;
 
   .checkBox {
     width: 50px;
@@ -15,7 +15,7 @@
     transition: background-color 0.4s;
 
     &[data-checked='true'] {
-      background-color: #54d254;
+      background-color: var(--green);
     }
 
     input {
@@ -30,7 +30,7 @@
     .point {
       position: absolute;
       left: 0;
-      transform: translateX(5px);
+      transform: translateX(30px);
       width: 15px;
       height: calc(100% - 10px);
       background: #fff;
@@ -39,7 +39,7 @@
       pointer-events: none;
 
       &[data-checked='false'] {
-        transform: translateX(30px);
+        transform: translateX(5px);
       }
     }
   }

@@ -6,9 +6,9 @@ import DevToolsModal from '@/components/DevToolsModal';
 const App = () => {
   return (
     <>
-      <DevToolsModal />
       <Cursor />
       <Routing />
+      <DevToolsModal />
     </>
   );
 };

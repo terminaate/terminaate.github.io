@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import useNavigate from '@/hooks/useNavigate';
 import PageContainer from '@/components/PageContainer';
 import cl from './IntroPage.module.scss';
@@ -9,16 +9,23 @@ import MouseHover from '@/components/MouseHover';
 import Link from '@/components/Link';
 
 const introPageText =
-  'Hello 1000 world , my name is 1000 Terminaate , im professional React developer 1000 , let me show you little bit more information about me.';
+  "Hello 1000 world , my name is 1000 Terminaate , i'm a professional React developer 1000 , let me show you little bit more information about me.";
 
 const IntroPage = () => {
   const navigate = useNavigate();
+  const timeoutId = useRef<number>(0);
 
-  const navigateToHome = () => {
-    setTimeout(() => {
+  const navigateToHome = useCallback(() => {
+    timeoutId.current = setTimeout(() => {
       navigate('AboutPage');
     }, 2500);
-  };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  }, []);
 
   return (
     <PageContainer className={cl.introPage}>

@@ -10,11 +10,21 @@ import { Pages } from '@/components/Routing';
 import Select from '@/components/UI/Select';
 import useNavigate from '@/hooks/useNavigate';
 import useRoutingContext from '@/hooks/useRoutingContext';
+import useConfigContext from '@/hooks/useConfigContext';
+import { updateConfig } from '@/contexts/ConfigContext';
 
 const PagesVariants = Object.keys(Pages);
 
 const DevToolsModal = () => {
-  const [modalState, setModalState] = useState<boolean>(false);
+  const {
+    state: { devToolsModal },
+    dispatch,
+  } = useConfigContext();
+
+  const setModalState = (newValue: boolean) => {
+    dispatch(updateConfig({ devToolsModal: newValue }));
+  };
+
   const [showCursor, onShowCursorChange] = useConfigInput('showCursor');
   const [showCustomCursor, onShowCustomCursorChange, setShowCustomCursor] =
     useConfigInput('showCustomCursor');
@@ -49,11 +59,11 @@ const DevToolsModal = () => {
   return (
     <Modal
       className={cl.devToolsModal}
-      state={modalState}
+      state={devToolsModal}
       setState={setModalState}
     >
-      <Title className={cl.title}>
-        Welcome to <span className={'circlesText'}>Devtools</span>
+      <Title containerClassName={cl.titleContainer} className={cl.title}>
+        Welcome to <span>Devtools</span>
       </Title>
       <motion.div
         initial={{ opacity: 0 }}
@@ -64,17 +74,20 @@ const DevToolsModal = () => {
       >
         <div className={cl.inputsContainer}>
           <Checkbox
-            title={'Show cursor:'}
+            containerClassName={cl.checkBoxContainer}
+            title={'Cursor:'}
             checked={showCursor}
             onChange={onShowCursorChange}
           />
           <Checkbox
-            title={'Show custom cursor:'}
+            containerClassName={cl.checkBoxContainer}
+            title={'Custom cursor:'}
             checked={showCustomCursor}
             onChange={onShowCustomCursorChange}
           />
           <Checkbox
-            title={'Transition between pages:'}
+            containerClassName={cl.checkBoxContainer}
+            title={'Pages transition:'}
             checked={transitionBetweenPages}
             onChange={onTransitionBetweenPagesChange}
           />

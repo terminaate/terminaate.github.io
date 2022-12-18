@@ -1,3 +1,5 @@
+@import '@/index.scss';
+
 .navContainer {
   width: 15%;
   min-width: 225px;
@@ -5,6 +7,7 @@
   height: 100%;
   border-right: 2px solid var(--background-secondary);
   display: flex;
+  align-items: center;
   flex-direction: column;
   position: relative;
   //z-index: -10;
@@ -23,11 +26,6 @@
     color: var(--text-primary);
     position: relative;
 
-    span {
-      transition: 0.6s;
-      //z-index: 10;
-    }
-
     .navline {
       position: absolute;
       height: 100%;
@@ -37,6 +35,22 @@
       top: 0;
       left: 1px;
       pointer-events: none;
+      z-index: 5;
     }
+
+    span {
+      transition: 0.6s;
+      z-index: 10;
+
+      &[data-active='true'] {
+        @include circlesText;
+      }
+    }
+  }
+
+  .devToolsButton {
+    position: absolute;
+    bottom: 1rem;
+    font-size: 20px;
   }
 }
