@@ -51,6 +51,7 @@
     font-weight: 500;
     font-size: 22px;
     pointer-events: none;
+    width: max-content;
 
     &[data-position='top'] {
       bottom: 102.5%;

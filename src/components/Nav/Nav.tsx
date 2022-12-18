@@ -5,6 +5,8 @@ import useMatch from '@/hooks/useMatch';
 import useConfigContext from '@/hooks/useConfigContext';
 import { updateConfig } from '@/contexts/ConfigContext';
 import NavLink from '@/components/Nav/NavLink';
+import MouseMove from '@/components/MouseMove';
+import MouseHover from '@/components/MouseHover';
 
 export const links: { text: string; href: string }[] = [
   {
@@ -43,9 +45,11 @@ const Nav = () => {
             {links.map((link, key) => (
               <NavLink link={link} key={key} />
             ))}
-            <button className={cl.devToolsButton} onClick={openDevToolsModal}>
-              .
-            </button>
+            <MouseHover text={"Hmmm..."}>
+              <button className={cl.devToolsButton} onClick={openDevToolsModal}>
+                .
+              </button>
+            </MouseHover>
           </motion.nav>
         )}
       </AnimatePresence>

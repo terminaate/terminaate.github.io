@@ -1,16 +1,62 @@
+@import "@/index.scss";
+
 .aboutPage {
   padding-inline: 20px;
+  padding-block: 15px;
   display: flex;
+  row-gap: 15px;
   flex-direction: column;
 
-  .usernameContainer {
-    line-height: 150%;
-    margin-top: 10px;
+  .username {
+    font-family: var(--font-primary);
+    font-size: 27px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 
-    .username {
-      font-family: var(--font-secondary);
-      font-size: 27px;
-      text-transform: uppercase;
+  .contentContainer {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .text {
+      font-size: 17px;
+      max-width: 750px;
+      text-align: justify;
+      //text-indent: 5px;
+      padding-left: 20px;
+
+      span {
+        @include circlesText;
+        font-family: var(--font-secondary);
+        text-shadow: 0 0 20px var(--text-green);
+      }
+    }
+
+    .projectsContainer {
+      display: flex;
+      align-items: center;
+      //flex-direction: column;
+      padding-left: 20px;
+      column-gap: 40px;
+      margin-top: 5px;
+      width: 100%;
+
+      .projectsLink {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 50%;
+        border: 2px solid var(--text-primary);
+        color: var(--text-primary);
+        width: min-content;
+      }
     }
   }
 }

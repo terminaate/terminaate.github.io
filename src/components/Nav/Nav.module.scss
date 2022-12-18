@@ -51,6 +51,9 @@
   .devToolsButton {
     position: absolute;
     bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 20px;
+    padding: 10px;
   }
 }
