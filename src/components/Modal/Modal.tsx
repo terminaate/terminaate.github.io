@@ -19,7 +19,7 @@ const Modal: React.FC<IModal> = ({
   setState,
   className,
   onClick,
-  containerProps={},
+  containerProps = {},
   ...props
 }) => {
   const closeModal = useCallback(() => {

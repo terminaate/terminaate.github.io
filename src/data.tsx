@@ -12,7 +12,8 @@ import {
   SiFramer,
   SiGit,
   SiGithub,
-  SiGithubactions, SiGmail,
+  SiGithubactions,
+  SiGmail,
   SiGulp,
   SiJavascript,
   SiJquery,
@@ -30,7 +31,8 @@ import {
   SiRedux,
   SiSass,
   SiSequelize,
-  SiSqlite, SiTelegram,
+  SiSqlite,
+  SiTelegram,
   SiThreedotjs,
   SiTypescript,
   SiVite,
@@ -335,7 +337,7 @@ export const contacts: ContactProps[] = [
   {
     text: 'Terminaate#9274',
     icon: <SiDiscord />,
-    link: '',
+    link: 'https://discord.com/users/925765821937098802',
   },
   {
     text: '@terminaate',
@@ -345,6 +347,6 @@ export const contacts: ContactProps[] = [
   {
     text: 'tntwnik@gmail.com',
     icon: <SiGmail />,
-    link: "mailto:tntwnik@gmail.com"
+    link: 'mailto:tntwnik@gmail.com',
   },
 ];

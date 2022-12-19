@@ -5,6 +5,8 @@ import Title from '@/components/Title';
 import ProjectCard from '@/components/ProjectCard';
 import { projects } from '@/data';
 
+// maybe in feature release an iframe project view
+
 const ProjectsPage = () => {
   return (
     <PageContainer className={cl.projectsPage}>
