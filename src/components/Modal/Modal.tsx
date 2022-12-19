@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, MouseEvent, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import cl from './Modal.module.scss';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ export interface IModal extends HTMLAttributes<HTMLDivElement> {
   setState:
     | React.Dispatch<React.SetStateAction<boolean>>
     | ((newValue: boolean) => void);
+  containerProps?: HTMLMotionProps<'div'>;
 }
 
 const Modal: React.FC<IModal> = ({
@@ -18,6 +19,7 @@ const Modal: React.FC<IModal> = ({
   setState,
   className,
   onClick,
+  containerProps={},
   ...props
 }) => {
   const closeModal = useCallback(() => {
@@ -37,10 +39,11 @@ const Modal: React.FC<IModal> = ({
     <AnimatePresence>
       {state && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          {...containerProps}
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1 }}
+          // exit={{ opacity: 0 }}
+          // transition={{ duration: 0.6 }}
           className={cl.modalScreen}
           onClick={closeModal}
         >

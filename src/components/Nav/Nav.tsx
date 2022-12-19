@@ -4,7 +4,7 @@ import useMatchMedia from '@/hooks/useMatchMedia';
 import NavMobile from '@/components/Nav/NavMobile';
 
 const Nav = () => {
-  const isMobile = useMatchMedia('(max-width: 800px)');
+  const isMobile = useMatchMedia(`(max-width: ${800}px)`);
 
   return isMobile ? <NavMobile /> : <NavDesktop />;
 };

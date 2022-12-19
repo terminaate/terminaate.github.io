@@ -4,6 +4,7 @@ import App from '@/App';
 import './index.scss';
 import ContextsProviders from '@/components/ContextsProviders';
 
+document.addEventListener("touchstart", function() {}, true);
 document.body.setAttribute('data-cursor', import.meta.env.DEV + '');
 
 const root = createRoot(document.getElementById('root')!);

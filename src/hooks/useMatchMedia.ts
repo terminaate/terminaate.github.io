@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 export default (query: string) => {
   const media = matchMedia(query);
 
   const [isMedia, setIsMedia] = useState<boolean>(media.matches);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handler = () => {
       setIsMedia(media.matches);
     };
@@ -15,7 +15,5 @@ export default (query: string) => {
     return () => media.removeEventListener('change', handler);
   });
 
-  // console.log(isMedia);
-
-  return useMemo(() => isMedia, [isMedia]);
+  return isMedia;
 };

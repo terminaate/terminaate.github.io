@@ -3,18 +3,25 @@
   flex-direction: column;
   row-gap: 10px;
 
+  $width: 50px;
+  $height: 25px;
+  $padding: 7px;
+
   .checkBox {
-    width: 50px;
-    height: 25px;
-    border-radius: 25px;
+
+    width: $width;
+    height: $height;
+    border-radius: calc($width / 2);
     background-color: var(--background-third);
     position: relative;
-    padding: 10px;
+    padding: $padding;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     transition: background-color 0.4s;
 
     &[data-checked='true'] {
+      justify-content: flex-end;
       background-color: var(--green);
     }
 
@@ -28,19 +35,10 @@
     }
 
     .point {
-      position: absolute;
-      left: 0;
-      transform: translateX(30px);
-      width: 15px;
-      height: calc(100% - 10px);
-      background: #fff;
+      width: calc($width / 2 - $padding);
+      height: calc($height - $padding);
+      background-color: var(--text-primary);
       border-radius: inherit;
-      transition: transform 0.4s;
-      pointer-events: none;
-
-      &[data-checked='false'] {
-        transform: translateX(5px);
-      }
     }
   }
 }

@@ -6,7 +6,7 @@
     "deploy": "npm run build && gh-pages -d dist",
     "lint": "eslint ./src/**/* --fix",
     "format": "prettier --write ./src/**/*",
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "tsc && vite build",
     "new:util": "hygen new util",
     "new:hook": "hygen new hook",
