@@ -1,25 +1,25 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useCallback, useRef } from 'react';
+import useWindowEvent from '@/hooks/useWindowEvent';
 
-export default (
-  ref: RefObject<HTMLElement>,
+export default <T extends HTMLElement>(
   then: () => void,
-  elseThen: () => void,
+  event: 'mousedown' | 'mouseup' | 'click' = 'mousedown',
+  except?: RefObject<HTMLElement>,
 ) => {
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      const { target } = e as MouseEvent & { target: HTMLElement };
-      if (null === ref.current) {
-        return;
-      }
+  const ref = useRef<null | T>(null);
 
-      if (!ref.current?.contains(target)) {
-        then();
-      } else {
-        elseThen();
-      }
-    };
+  const handler = useCallback((e: MouseEvent) => {
+    const { target } = e as MouseEvent & { target: HTMLElement };
+    if (null === ref.current) {
+      return;
+    }
 
-    window.addEventListener('mousedown', handler);
-    return () => window.removeEventListener('mousedown', handler);
+    if (!ref.current?.contains(target) && !except?.current?.contains(target)) {
+      then();
+    }
   }, []);
+
+  useWindowEvent(event, handler);
+
+  return ref;
 };

@@ -1,32 +1,47 @@
-import React, { Suspense, useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import HomePage from '@/pages/HomePage';
-import NotFoundPage from '@/pages/NotFoundPage';
-// import { useAppDispatch } from '@/store';
-// import { refresh } from '@/store/reducers/user/authAPI';
-import WorksPage from '@/pages/WorksPage';
-import LoadingPage from '@/pages/LoadingPage';
-import BasicPage from '@/components/BasicPage';
+import React, { FC, useEffect } from 'react';
+import IntroPage from '@/pages/IntroPage';
+import AboutPage from '@/pages/AboutPage';
 import ContactsPage from '@/pages/ContactsPage';
+import { AnimatePresence } from 'framer-motion';
+import useRoutingContext from '@/hooks/useRoutingContext';
+import Nav from '@/components/Nav';
+import BasicPage from '@/components/BasicPage';
+import ProjectsPage from '@/pages/ProjectsPage';
+import useConfigContext from '@/hooks/useConfigContext';
+import NotFoundPage from '@/pages/NotFoundPage';
+
+export const Pages: Record<string, FC> = {
+  IntroPage,
+  AboutPage,
+  ProjectsPage,
+  ContactsPage,
+};
 
 const Routing = () => {
-  const location = useLocation();
+  const { currentPage } = useRoutingContext().state;
+  const { transitionBetweenPages } = useConfigContext().state;
+
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.log('CURRENT PAGE:', currentPage);
+    }
+  }, [currentPage]);
+
+  const Page = Pages[currentPage] ?? NotFoundPage;
 
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <BasicPage>
+    <BasicPage>
+      <Nav />
+      {transitionBetweenPages ? (
         <AnimatePresence mode={'wait'}>
-          <Routes location={location} key={location.key}>
-            <Route index element={<HomePage />} />
-            <Route path={'/works'} element={<WorksPage />} />
-            <Route path={'/contacts'} element={<ContactsPage />} />
-            <Route path={'/*'} element={<NotFoundPage />} />
-          </Routes>
+          <Page key={currentPage} />
         </AnimatePresence>
-      </BasicPage>
-    </Suspense>
+      ) : (
+        <Page />
+      )}
+    </BasicPage>
   );
 };
+0;
 
 export default Routing;

@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
 
-const useMatchMedia = (query: string) => {
+export default (query: string) => {
   const media = matchMedia(query);
 
-  const [isMedia, setIsMedia] = useState(media.matches);
+  const [isMedia, setIsMedia] = useState<boolean>(media.matches);
 
   useLayoutEffect(() => {
     const handler = () => {
@@ -17,5 +17,3 @@ const useMatchMedia = (query: string) => {
 
   return isMedia;
 };
-
-export default useMatchMedia;

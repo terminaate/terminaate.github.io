@@ -1,19 +1,8 @@
-import React, { FC, HTMLAttributes } from 'react';
-import classNames from 'classnames';
+import React, { PropsWithChildren } from 'react';
 import cl from './BasicPage.module.scss';
-import Header from '@/components/Header';
 
-const BasicPage: FC<HTMLAttributes<HTMLDivElement>> = ({
-  children,
-  className,
-  ...props
-}) => {
-  return (
-    <div {...props} className={classNames(cl.basicPage, className)}>
-      <Header />
-      {children}
-    </div>
-  );
+const BasicPage: React.FC<PropsWithChildren> = ({ children }) => {
+  return <main className={cl.basicPage}>{children}</main>;
 };
 
 export default BasicPage;

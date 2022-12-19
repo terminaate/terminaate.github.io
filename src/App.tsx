@@ -1,16 +1,28 @@
-import React, { FC } from 'react';
-import Notification from '@/components/Notification';
-import { NotificationContextProvider } from '@/contexts/NotificationContext';
+import React, { useEffect } from 'react';
 import Routing from '@/components/Routing';
-import NotificationContextSetter from '@/components/NotificationContextSetter';
+import Cursor from '@/components/Cursor';
+import DevToolsModal from '@/components/DevToolsModal';
+import useConfigContext from '@/hooks/useConfigContext';
+import useMatchMedia from '@/hooks/useMatchMedia';
+import { updateConfig } from '@/contexts/ConfigContext';
 
-const App: FC = () => {
+// TODO
+// add global site loader
+
+const App = () => {
+  const { dispatch } = useConfigContext();
+  const isMobile = useMatchMedia('(max-width: 850px)');
+
+  useEffect(() => {
+    dispatch(updateConfig({ showCustomCursor: !isMobile }));
+  }, [isMobile]);
+
   return (
-    <NotificationContextProvider>
+    <>
+      <Cursor />
       <Routing />
-      <Notification />
-      <NotificationContextSetter />
-    </NotificationContextProvider>
+      {!isMobile && <DevToolsModal />}
+    </>
   );
 };
 

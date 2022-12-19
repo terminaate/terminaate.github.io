@@ -1,42 +1,36 @@
 .contactsPage {
   display: flex;
-  align-items: center;
-  flex-direction: column;
   row-gap: 15px;
+  flex-direction: column;
 
-  .contactContainer {
+  .container {
     display: flex;
-    column-gap: 10px;
-    align-items: center;
-    //flex-direction: column;
-    font-family: var(--font-code);
-    font-size: 21px;
-    font-weight: 500;
-    padding: 10px;
-    padding-inline: 15px;
-    border-radius: 10px;
-    transition: 0.3s;
-    color: var(--text-primary);
-    cursor: pointer;
-    text-decoration: none;
+    flex-direction: column;
+    row-gap: 10px;
 
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-  }
+    .hoverContainer {
+      width: max-content;
 
-  .creditsText {
-    font-family: var(--font-primary);
-    font-weight: 500;
-    font-size: 20px;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-    margin-top: 10px;
+      .contact {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        font-family: var(--font-primary);
+        font-size: 21px;
+        font-weight: 600;
+        padding: 10px;
+        padding-inline: 15px;
+        border-radius: 10px;
+        transition: 0.3s;
+        color: var(--text-primary);
+        cursor: pointer;
+        text-decoration: none;
 
-    .heart {
-      color: var(--text-red);
+        &:hover {
+          background-color: var(--text-primary);
+          color: var(--background-primary);
+        }
+      }
     }
   }
 }
