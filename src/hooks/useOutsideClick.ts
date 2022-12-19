@@ -1,12 +1,13 @@
-import { RefObject, useCallback } from 'react';
+import { RefObject, useCallback, useRef } from 'react';
 import useWindowEvent from '@/hooks/useWindowEvent';
 
-export default (
-  ref: RefObject<HTMLElement>,
+export default <T extends HTMLElement>(
   then: () => void,
   event: 'mousedown' | 'mouseup' | 'click' = 'mousedown',
   except?: RefObject<HTMLElement>,
 ) => {
+  const ref = useRef<null | T>(null);
+
   const handler = useCallback((e: MouseEvent) => {
     const { target } = e as MouseEvent & { target: HTMLElement };
     if (null === ref.current) {
@@ -19,4 +20,6 @@ export default (
   }, []);
 
   useWindowEvent(event, handler);
+
+  return ref;
 };

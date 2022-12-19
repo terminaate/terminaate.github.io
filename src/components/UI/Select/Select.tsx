@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import cl from './Select.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoIosArrowUp } from 'react-icons/all';
@@ -14,9 +14,7 @@ interface ISelect {
 
 const Select: FC<ISelect> = ({ currentState, setCurrentState, variants }) => {
   const [variantsVisible, setVariantsVisible] = useState<boolean>(false);
-  const containerRef = useRef<null | HTMLDivElement>(null);
-
-  useOutsideClick(containerRef, () => {
+  const containerRef = useOutsideClick<HTMLDivElement>(() => {
     setVariantsVisible(false);
   });
 

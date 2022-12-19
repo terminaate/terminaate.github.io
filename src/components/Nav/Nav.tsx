@@ -1,60 +1,12 @@
-import React, { useCallback } from 'react';
-import cl from './Nav.module.scss';
-import { AnimatePresence, motion } from 'framer-motion';
-import useMatch from '@/hooks/useMatch';
-import useConfigContext from '@/hooks/useConfigContext';
-import { updateConfig } from '@/contexts/ConfigContext';
-import NavLink from '@/components/Nav/NavLink';
-import MouseMove from '@/components/MouseMove';
-import MouseHover from '@/components/MouseHover';
-
-export const links: { text: string; href: string }[] = [
-  {
-    text: 'About me',
-    href: 'AboutPage',
-  },
-  {
-    text: 'Projects',
-    href: 'ProjectsPage',
-  },
-  {
-    text: 'Contacts',
-    href: 'ContactsPage',
-  },
-];
+import React from 'react';
+import NavDesktop from '@/components/Nav/NavDesktop';
+import useMatchMedia from '@/hooks/useMatchMedia';
+import NavMobile from '@/components/Nav/NavMobile';
 
 const Nav = () => {
-  const isMatch = useMatch('IntroPage');
-  const { dispatch } = useConfigContext();
+  const isMobile = useMatchMedia('(max-width: 800px)');
 
-  const openDevToolsModal = useCallback(() => {
-    dispatch(updateConfig({ devToolsModal: true }));
-  }, []);
-
-  return (
-    <>
-      <AnimatePresence>
-        {!isMatch && (
-          <motion.nav
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className={cl.navContainer}
-          >
-            {links.map((link, key) => (
-              <NavLink link={link} key={key} />
-            ))}
-            <MouseHover text={'Hmmm...'}>
-              <button className={cl.devToolsButton} onClick={openDevToolsModal}>
-                .
-              </button>
-            </MouseHover>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </>
-  );
+  return isMobile ? <NavMobile /> : <NavDesktop />;
 };
 
 export default Nav;

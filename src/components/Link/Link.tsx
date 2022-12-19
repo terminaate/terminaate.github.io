@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, useCallback, MouseEvent } from 'react';
+import React, { AnchorHTMLAttributes, MouseEvent, useCallback } from 'react';
 import useNavigate from '@/hooks/useNavigate';
 
 interface ILink extends AnchorHTMLAttributes<HTMLAnchorElement> {

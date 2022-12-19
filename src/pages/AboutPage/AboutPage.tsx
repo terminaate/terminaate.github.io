@@ -11,11 +11,15 @@ import { HiOutlineArrowRight } from 'react-icons/all';
 const AboutPage = () => {
   return (
     <PageContainer className={cl.aboutPage}>
-      <MouseHover text={'My name is...'} position={'bottom'}>
-        <Title className={cl.username}>BAHRAM TERMINAATE</Title>
+      <MouseHover
+        className={cl.usernameContainer}
+        text={'My name is...'}
+        position={'bottom'}
+      >
+        <Title containerClassName={cl.username}>BAHRAM TERMINAATE</Title>
       </MouseHover>
       <div className={cl.contentContainer}>
-        <h2 className={cl.title}>About me:</h2>
+        <Title className={cl.title}>About me:</Title>
         <MouseHover>
           <p className={cl.text}>
             I'm a <span>young web developer</span> living in <span>Russia</span>
@@ -30,7 +34,7 @@ const AboutPage = () => {
         </MouseHover>
       </div>
       <div className={cl.contentContainer}>
-        <h2 className={cl.title}>Latest projects: </h2>
+        <Title className={cl.title}>Latest projects: </Title>
         <div className={cl.projectsContainer}>
           <ProjectCard project={projects[0]} />
           <MouseHover text={'More projects...'}>
@@ -41,11 +45,11 @@ const AboutPage = () => {
         </div>
       </div>
       <div className={cl.contentContainer}>
-        <h2 className={cl.title}>Skills:</h2>
+        <Title className={cl.title}>Skills:</Title>
         <ul className={cl.skills}>
           {skills.map((skill, key) => (
             <li key={key} className={cl.skillContainer}>
-              <h3 className={cl.title}>{skill.title}</h3>
+              <Title className={cl.title}>{skill.title}</Title>
               <ul className={cl.skillContents}>
                 {skill.content.map((skillContent, key) => (
                   <li className={cl.skillContent} key={key}>

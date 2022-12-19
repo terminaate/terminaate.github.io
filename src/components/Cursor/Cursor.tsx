@@ -13,6 +13,7 @@ import useCursorContext from '@/hooks/useCursorContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CursorItemProps } from '@/contexts/CursorContext';
 import useConfigContext from '@/hooks/useConfigContext';
+import useMatchMedia from '@/hooks/useMatchMedia';
 
 interface ICursor {
   size?: number;
@@ -31,6 +32,7 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
     position: 'top',
   });
   const [hovered, setHovered] = useState<boolean>(false);
+  const isMobile = useMatchMedia('(max-width: 750px)');
 
   const onMouseMove = useCallback((e: MouseEvent) => {
     const { current: follower } = followerRef;
@@ -69,6 +71,21 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   useWindowEvent('contextmenu', (e) => e.preventDefault());
 
   useEffect(() => {
+    const clearCallback = () => {
+      setCurrentItem({ id: 0, text: '', position: 'top' });
+      setHovered(false);
+      for (const item of items) {
+        const { current: target } = item.ref;
+
+        if (target !== null) {
+          target.removeEventListener('mouseover', onMouseOver);
+          target.removeEventListener('mouseout', onMouseOver);
+        }
+      }
+    };
+
+    if (isMobile) return clearCallback;
+
     for (const item of items) {
       const { current: target } = item.ref;
       const onMouseOver = () => {
@@ -87,23 +104,8 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
       }
     }
 
-    return () => {
-      setCurrentItem({ id: 0, text: '', position: 'top' });
-      setHovered(false);
-      for (const item of items) {
-        const { current: target } = item.ref;
-
-        if (target !== null) {
-          target.removeEventListener('mouseover', onMouseOver);
-          target.removeEventListener('mouseout', onMouseOver);
-        }
-      }
-    };
-  }, [items]);
-
-  useEffect(() => {
-    setOpacity(Number(showCustomCursor));
-  }, [showCustomCursor]);
+    return clearCallback;
+  }, [items, isMobile]);
 
   return createPortal(
     showCustomCursor && (

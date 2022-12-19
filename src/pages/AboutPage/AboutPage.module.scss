@@ -5,11 +5,20 @@
   row-gap: 15px;
   flex-direction: column;
 
-  .username {
-    font-family: var(--font-primary);
-    font-size: 27px;
-    font-weight: 700;
-    text-transform: uppercase;
+  .usernameContainer {
+    width: max-content;
+
+    .username {
+      line-height: 100%;
+
+      span {
+        font-family: var(--font-primary);
+        font-size: 27px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 100%;
+      }
+    }
   }
 
   .contentContainer {
@@ -20,6 +29,7 @@
 
     .title {
       font-size: 20px;
+      width: max-content;
     }
 
     .text {
@@ -28,6 +38,10 @@
       text-align: justify;
       //text-indent: 5px;
       padding-left: 20px;
+
+      @media screen and (max-width: 800px) {
+        padding: 0;
+      }
 
       span {
         @include circlesText;

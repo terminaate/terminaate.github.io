@@ -48,10 +48,6 @@ const DevToolsModal = () => {
     }
   }, [showCursor, showCustomCursor]);
 
-  useEffect(() => {
-    document.body.setAttribute('data-cursor', showCursor + '');
-  }, [showCursor]);
-
   useKeyPress('Period', () => {
     setModalState(true);
   });

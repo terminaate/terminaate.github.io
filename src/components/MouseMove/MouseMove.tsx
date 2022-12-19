@@ -1,5 +1,4 @@
 import React from 'react';
-import cl from './MouseMove.module.scss';
 
 interface IMouseMove {}
 

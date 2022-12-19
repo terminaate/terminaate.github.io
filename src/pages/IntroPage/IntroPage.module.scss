@@ -14,13 +14,18 @@
 
   .typingTextContainer {
     z-index: 1;
-    max-width: 700px;
+    max-width: 825px;
+    width: 100%;
     background-color: var(--background-primary);
 
     .typingText {
       font-size: 35px;
       font-weight: 600;
       font-family: var(--font-primary);
+
+      @media screen and (max-width: 450px) {
+        font-size: 25px;
+      }
     }
   }
 
@@ -30,16 +35,16 @@
     right: 1rem;
     width: 40px;
     height: 40px;
-    border: 2px solid transparent;
+    //border: 2px solid transparent;
     background-color: var(--background-secondary);
     border-radius: 50%;
-    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
 
     &:hover {
-      border-color: var(--background-third);
+      //border-color: var(--background-third);
       background-color: var(--text-primary);
       color: var(--background-secondary);
     }

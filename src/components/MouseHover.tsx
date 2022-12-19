@@ -8,6 +8,8 @@ interface IMouseHover extends HTMLAttributes<HTMLDivElement> {
 
 const MouseHover: FC<IMouseHover & Partial<CursorItemProps>> = ({
   children,
+  text,
+  position,
   ...props
 }) => {
   const ref = useRef<null | HTMLDivElement>(null);
@@ -15,7 +17,7 @@ const MouseHover: FC<IMouseHover & Partial<CursorItemProps>> = ({
 
   useEffect(() => {
     const id = Date.now();
-    dispatch(pushRef({ ...props, ref, id }));
+    dispatch(pushRef({ text, position, ref, id }));
 
     return () => {
       dispatch(removeRef(id));
