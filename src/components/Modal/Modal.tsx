@@ -1,62 +1,63 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { FC, ReactNode, useEffect } from 'react';
-import cl from './Modal.module.scss';
+import React, { HTMLAttributes, MouseEvent, useCallback } from 'react';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
+import cl from './Modal.module.scss';
 import classNames from 'classnames';
+import useKeyPress from '@/hooks/useKeyPress';
 
-export interface IModal {
+export interface IModal extends HTMLAttributes<HTMLDivElement> {
   state: boolean;
   setState:
     | React.Dispatch<React.SetStateAction<boolean>>
-    | ((state: boolean) => void);
-  onExit?: () => void;
-  children?: ReactNode;
-  className?: string;
-  contentClassName?: string;
+    | ((newValue: boolean) => void);
+  containerProps?: HTMLMotionProps<'div'>;
 }
 
-const Modal: FC<IModal> = ({
+const Modal: React.FC<IModal> = ({
+  children,
   state,
   setState,
-  children,
-  onExit,
   className,
-  contentClassName,
+  onClick,
+  containerProps = {},
+  ...props
 }) => {
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setState(false);
-    if (onExit) {
-      onExit();
-    }
-  };
-
-  useEffect(() => {
-    if (!state && onExit) {
-      onExit();
-    }
   }, [state]);
+
+  const preventClosingModal = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (onClick) {
+      onClick(e);
+    }
+  }, []);
+
+  useKeyPress('Escape', closeModal, 'keydown');
 
   return createPortal(
     <AnimatePresence>
       {state && (
         <motion.div
-          onMouseDown={closeModal}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          exit={{ opacity: 0 }}
-          className={classNames(className!, cl.modalScreen)}
+          {...containerProps}
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1 }}
+          // exit={{ opacity: 0 }}
+          // transition={{ duration: 0.6 }}
+          className={cl.modalScreen}
+          onClick={closeModal}
         >
           <div
-            onMouseDown={(e) => e.stopPropagation()}
-            className={classNames(contentClassName!, cl.modalContent)}
+            className={classNames(cl.modalContent, className)}
+            onClick={preventClosingModal}
+            {...props}
           >
             {children}
           </div>
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body,
+    document.querySelector('#modals')!,
   );
 };
 

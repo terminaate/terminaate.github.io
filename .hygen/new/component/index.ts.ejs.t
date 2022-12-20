@@ -2,6 +2,7 @@
 to: <%= path %>/index.ts
 ---
 
-import <%= componentName %> from "./<%= componentName %>"
+import <%= componentName %> from "./<%= componentName %>";
 
-export default <%= componentName %>
+export * from './<%= componentName %>';
+export default <%= componentName %>;

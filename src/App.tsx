@@ -1,16 +1,27 @@
-import React, { FC } from 'react';
+import React, { useEffect } from 'react';
 import Routing from '@/components/Routing';
-import Notification from '@/components/Notification';
-import Modals from '@/components/Modals';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Cursor from '@/components/Cursor';
+import DevToolsModal from '@/components/DevToolsModal';
+import useConfigContext from '@/hooks/useConfigContext';
+import useMatchMedia from '@/hooks/useMatchMedia';
+import { updateConfig } from '@/contexts/ConfigContext';
 
-const App: FC = () => {
+// TODO
+// add global site loader
+
+const App = () => {
+  const { dispatch } = useConfigContext();
+  const isMobile = useMatchMedia('(max-width: 850px)');
+
+  useEffect(() => {
+    dispatch(updateConfig({ showCustomCursor: !isMobile }));
+  }, [isMobile]);
+
   return (
     <>
-      <LanguageSwitcher />
+      <Cursor />
       <Routing />
-      <Notification />
-      <Modals />
+      {!isMobile && <DevToolsModal />}
     </>
   );
 };

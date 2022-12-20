@@ -1,44 +1,15 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@/App';
-import './index.css';
-import { HashRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from '@/store';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import ru from './locales/ru';
-import en from './locales/en';
+import './index.scss';
+import ContextsProviders from '@/components/ContextsProviders';
 
-i18n
-  .use(initReactI18next)
-  .use(LanguageDetector)
-  .init({
-    detection: {
-      order: ['navigator', 'localStorage'],
-      lookupLocalStorage: 'lang',
-    },
-    resources: {
-      ru,
-      en,
-    },
-    fallbackLng: 'en',
-    debug: import.meta.env.MODE === 'development',
+document.addEventListener('touchstart', function () {}, true);
+document.body.setAttribute('data-cursor', import.meta.env.DEV + '');
 
-    react: {
-      transSupportBasicHtmlNodes: true,
-    },
-
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-
-createRoot(document.getElementById('root')!).render(
-  <HashRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </HashRouter>,
+const root = createRoot(document.getElementById('root')!);
+root.render(
+  <ContextsProviders>
+    <App />
+  </ContextsProviders>,
 );

@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
-import cl from './NotFoundPage.module.scss';
-import BasicPage from '@/components/BasicPage';
+import React from 'react';
+import PageContainer from '@/components/PageContainer';
 
-const NotFoundPage: FC = () => {
+const NotFoundPage = () => {
   return (
-    <BasicPage header={true} container={true} className={cl.notFoundPage}>
-      Sry but i cant find page with this path ¯\_(ツ)_/¯
-    </BasicPage>
+    <PageContainer>
+      I am sorry, something goes wrong, this page is not found
+    </PageContainer>
   );
 };
 

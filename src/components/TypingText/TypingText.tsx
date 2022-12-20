@@ -1,139 +1,92 @@
-import React, { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import cl from './TypingText.module.scss';
 import classNames from 'classnames';
-import VisibilitySensor from 'react-visibility-sensor';
+import { motion } from 'framer-motion';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
   defaultDelay?: number;
-  animateOnVisible?: boolean;
-  visibleProps?: HTMLAttributes<HTMLSpanElement>;
   containerClassName?: string;
+  onEnd: () => void;
 }
 
 const TypingText: FC<ITypingText> = ({
   text,
-  defaultDelay = 300,
-  animateOnVisible = false,
-  visibleProps = {},
-  containerClassName,
+  defaultDelay = 500,
+  containerClassName = '',
+  onEnd = () => {},
   ...props
 }) => {
-  const [parsedText, setParsedText] = useState<Array<Record<string, any>>>([]);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const parsedTextRef = useRef<typeof parsedText>([]);
-  const oldText = useRef<ITypingText['text']>(text);
-
-  const pushParsedText = (newObj: Record<string, any>) => {
-    setParsedText((words) => [...words, newObj]);
-  };
-
-  const parseText = () => {
-    setParsedText([]);
-    let textArray: (string | number)[];
-
-    if (Array.isArray(text)) {
-      textArray = text;
-    } else {
-      textArray = text
-        .split(' ')
-        .map((obj) => (Number(obj) ? Number(obj) : obj));
-    }
-
-    const visible = !animateOnVisible;
-
-    for (let i = 0; i < textArray.length; i++) {
-      if (
-        typeof textArray[i] === 'number' &&
-        typeof textArray[i + 1] === 'string'
-      ) {
-        pushParsedText({
-          text: textArray[i + 1],
-          delay: textArray[i],
-          visible,
-        });
-      } else if (
-        typeof textArray[i] === 'string' &&
-        typeof textArray[i - 1] !== 'number'
-      ) {
-        pushParsedText({ text: textArray[i], visible });
-      } else if (
-        typeof textArray[i] === 'number' &&
-        typeof textArray[i + 1] !== 'string'
-      ) {
-        pushParsedText({ delay: textArray[i], visible });
-      }
-    }
-  };
+  const [renderedWords, setRenderedWords] = useState<string[]>([]);
 
   useEffect(() => {
-    if (parsedText.length) {
-      parsedTextRef.current = parsedText;
-    }
-  }, [parsedText]);
-
-  useEffect(() => {
-    parseText();
+    setRenderedWords([]);
   }, []);
 
-  const animate = (state: boolean) => {
-    if (parsedText.length) {
-      setParsedText((prevState) =>
-        prevState.map((o) => ({ ...o, visible: state })),
-      );
-    } else if (parsedTextRef.current.length) {
-      parsedTextRef.current = parsedTextRef.current.map((o) => ({
-        ...o,
-        visible: state,
-      }));
-      setParsedText(parsedTextRef.current);
-    }
-  };
-
   useEffect(() => {
-    if (text !== oldText.current) {
-      parseText();
-      if (animateOnVisible && isVisible) {
-        animate(true);
+    if (!Array.isArray(text)) {
+      text = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
+    }
+
+    const formattedText: any[] = [];
+
+    for (let i = 0; i < text.length; i++) {
+      if (typeof text[i] === 'number' && typeof text[i + 1] === 'string') {
+        formattedText.push({ text: text[i + 1], delay: text[i] });
+      } else if (
+        typeof text[i] === 'string' &&
+        typeof text[i - 1] !== 'number'
+      ) {
+        formattedText.push({ text: text[i] });
+      } else if (
+        typeof text[i] === 'number' &&
+        typeof text[i + 1] !== 'string'
+      ) {
+        formattedText.push({ delay: text[i] });
       }
-      oldText.current = text;
     }
-  }, [text]);
 
-  const onVisibleChange = (visible: boolean) => {
-    if (animateOnVisible && parsedTextRef.current.length) {
-      animate(visible);
-      setIsVisible(visible);
+    let i = -1;
+
+    function delayLoop() {
+      i++;
+      if (i >= formattedText.length || formattedText[i] === undefined) {
+        return onEnd();
+      }
+
+      setRenderedWords((prevState) => [
+        ...prevState,
+        formattedText[i]?.text ? formattedText[i].text : '',
+      ]);
+      setTimeout(
+        delayLoop,
+        formattedText[i]?.delay ? formattedText[i].delay : defaultDelay,
+      );
     }
-  };
 
-  const classes = classNames([
-    props.className,
-    { [visibleProps?.className ?? '']: animateOnVisible && isVisible },
-  ]);
-  const mergedProps = {
-    ...props,
-    ...(animateOnVisible && isVisible ? visibleProps : {}),
-  };
+    delayLoop();
+
+    // for (const i in formattedText) {
+    //   setTimeout(() => {
+    //     setRenderedWords((words: string[]) => [
+    //       ...words,
+    //       formattedText[i].text,
+    //     ]);
+    //   }, (formattedText[i].delay ? formattedText[i].delay : defaultDelay) * Number(i));
+    // }
+  }, []);
+
   return (
-    <VisibilitySensor partialVisibility={true} onChange={onVisibleChange}>
-      <div className={classNames(cl.typingTextContainer, containerClassName!)}>
-        {parsedText.map((obj, key) => (
-          <span
-            data-visible={obj.visible}
-            style={{
-              animationDelay:
-                (obj.delay ? obj.delay : defaultDelay) * Number(key) + 'ms',
-            }}
-            key={key}
-            {...mergedProps}
-            className={classes}
-          >
-            {obj.text}
-          </span>
-        ))}
-      </div>
-    </VisibilitySensor>
+    <motion.div
+      layout={'position'}
+      className={classNames(cl.typingTextContainer, containerClassName)}
+    >
+      {renderedWords.map((obj, key) => (
+        <span {...props} key={key}>
+          {obj}
+        </span>
+      ))}
+    </motion.div>
   );
 };
 

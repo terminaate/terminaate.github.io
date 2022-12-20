@@ -1,67 +1,54 @@
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
+import useNavigate from '@/hooks/useNavigate';
+import PageContainer from '@/components/PageContainer';
 import cl from './IntroPage.module.scss';
 import TypingText from '@/components/TypingText';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import BasicPage from '@/components/BasicPage';
-import { useTranslation } from 'react-i18next';
+import Particles from '@/components/Particles';
+import { FaPlay } from 'react-icons/all';
+import MouseHover from '@/components/MouseHover';
+import Link from '@/components/Link';
+
+const introPageText =
+  "Hello 1000 world , my name is 1000 Terminaate(nickname) , i'm a professional React developer 1000 , let me show you little bit more information about me.";
 
 const IntroPage = () => {
-  const visited = useRef<boolean>(Boolean(Math.floor(Math.random() * 2)));
-  const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const {
-    t,
-    i18n: { language: lang },
-  } = useTranslation('intro');
+  const timeoutId = useRef<number>(0);
 
-  useLayoutEffect(() => {
-    if (localStorage.getItem('visited') === null) {
-      visited.current = false;
-      localStorage.setItem('visited', true + '');
-    }
+  const navigateToHome = useCallback(() => {
+    timeoutId.current = setTimeout(() => {
+      navigate('AboutPage');
+    }, 2500);
   }, []);
 
   useEffect(() => {
-    addEventListener('mousemove', onMouseMoveEventHandler);
-
-    return () => removeEventListener('mousemove', onMouseMoveEventHandler);
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
   }, []);
 
-  const skipButtonClickHandler = () => {
-    navigate('/home');
-  };
-
-  const onMouseMoveEventHandler = (e: MouseEvent) => {
-    if (null !== containerRef.current) {
-      containerRef.current.style.transform = `translate(${
-        (window.innerWidth - e.pageX * 1.4) / 90
-      }px, ${(window.innerHeight - e.pageY * 1.4) / 90}px)`;
-    }
-  };
-
-  const onTypingTextClick = (
-    e: React.MouseEvent<HTMLElement> & { target: HTMLElement },
-  ) => {
-    e.target.style.background = 'none';
-  };
-
   return (
-    <BasicPage className={cl.introScreen}>
-      <div className={cl.container}>
-        <motion.div ref={containerRef} className={cl.introScreenContainer}>
-          <TypingText
-            onClick={onTypingTextClick}
-            className={visited.current ? cl.introTypingVisitedText : ''}
-            text={t('intro_main')!}
-          />
-          <div onClick={skipButtonClickHandler} className={cl.introSkipButton}>
-            <motion.span exit={{ marginRight: '15px' }}>-</motion.span>
-            <span>{t('intro_skip')}</span>
-          </div>
-        </motion.div>
-      </div>
-    </BasicPage>
+    <PageContainer className={cl.introPage}>
+      <Particles
+        className={cl.backgroundParticles}
+        width={'100%'}
+        height={'100%'}
+      />
+      <TypingText
+        defaultDelay={400}
+        onEnd={navigateToHome}
+        className={cl.typingText}
+        containerClassName={cl.typingTextContainer}
+        text={introPageText}
+      />
+      <MouseHover text={'Skip'} position={'top'}>
+        <Link href={'AboutPage'}>
+          <button className={cl.skipButton}>
+            <FaPlay />
+          </button>
+        </Link>
+      </MouseHover>
+    </PageContainer>
   );
 };
 

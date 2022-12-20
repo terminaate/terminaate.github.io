@@ -1,41 +1,31 @@
+@import '@/index.scss';
+
 .typingTextContainer {
   display: flex;
   align-items: center;
-  justify-content: inherit;
   flex-wrap: wrap;
-  gap: 10px;
-  width: 100%;
+  height: max-content;
+  column-gap: 5px;
 
   span {
-    //line-height: 100%;
-    font-size: 16px;
-    transition: 0.7s;
+    @include circlesText;
+    font-family: var(--font-primary);
+    font-size: 20px;
+    color: var(--text-primary);
+    animation: typingTextAnim 0.6s both;
 
-    &[data-visible='true'] {
-      animation: typingTextAnimation 0.7s both;
-    }
-
-    &[data-visible='false'] {
-      opacity: 0;
-      transform: translateX(-15px);
-    }
-
-    @keyframes typingTextAnimation {
+    @keyframes typingTextAnim {
       0% {
         opacity: 0;
-        transform: translateX(-15px);
+        filter: none;
       }
       50% {
-        position: relative;
-        text-shadow: 0 0 30px var(--text-primary);
-      }
-      75% {
-        text-shadow: 0 0 5px var(--text-primary);
+        opacity: 0.8;
+        filter: blur(10px);
       }
       100% {
         opacity: 1;
-        transform: translateX(0);
-        text-shadow: none;
+        filter: none;
       }
     }
   }
