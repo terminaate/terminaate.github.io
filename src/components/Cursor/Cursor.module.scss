@@ -43,6 +43,7 @@
   &[data-hover='true'] {
     mix-blend-mode: difference;
     background-color: var(--text-primary);
+    backdrop-filter: blur(0);
   }
 
   .followerText {
