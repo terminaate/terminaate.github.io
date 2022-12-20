@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import IntroPage from '@/pages/IntroPage';
 import AboutPage from '@/pages/AboutPage';
 import ContactsPage from '@/pages/ContactsPage';
@@ -27,7 +27,7 @@ const Routing = () => {
     }
   }, [currentPage]);
 
-  const Page = Pages[currentPage] ?? NotFoundPage;
+  const Page = useMemo(() => Pages[currentPage] ?? NotFoundPage, [currentPage]);
 
   return (
     <BasicPage>
