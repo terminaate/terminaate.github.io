@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import cl from './TypingText.module.scss';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import parseText from '@/utils/parseText';
 
 interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
   text: string | (string | number)[];
@@ -24,39 +25,19 @@ const TypingText: FC<ITypingText> = ({
   }, []);
 
   useEffect(() => {
-    if (!Array.isArray(text)) {
-      text = text.split(' ').map((obj) => (Number(obj) ? Number(obj) : obj));
-    }
-
-    const formattedText: any[] = [];
-
-    for (let i = 0; i < text.length; i++) {
-      if (typeof text[i] === 'number' && typeof text[i + 1] === 'string') {
-        formattedText.push({ text: text[i + 1], delay: text[i] });
-      } else if (
-        typeof text[i] === 'string' &&
-        typeof text[i - 1] !== 'number'
-      ) {
-        formattedText.push({ text: text[i] });
-      } else if (
-        typeof text[i] === 'number' &&
-        typeof text[i + 1] !== 'string'
-      ) {
-        formattedText.push({ delay: text[i] });
-      }
-    }
+    const formattedText: any[] = parseText(text);
 
     let i = -1;
 
     function delayLoop() {
       i++;
-      if (i >= formattedText.length || formattedText[i] === undefined) {
+      if (i >= formattedText.length || !formattedText[i]) {
         return onEnd();
       }
 
       setRenderedWords((prevState) => [
         ...prevState,
-        formattedText[i]?.text ? formattedText[i].text : '',
+        formattedText[i]?.text ?? '',
       ]);
       setTimeout(
         delayLoop,
@@ -65,15 +46,6 @@ const TypingText: FC<ITypingText> = ({
     }
 
     delayLoop();
-
-    // for (const i in formattedText) {
-    //   setTimeout(() => {
-    //     setRenderedWords((words: string[]) => [
-    //       ...words,
-    //       formattedText[i].text,
-    //     ]);
-    //   }, (formattedText[i].delay ? formattedText[i].delay : defaultDelay) * Number(i));
-    // }
   }, []);
 
   return (
