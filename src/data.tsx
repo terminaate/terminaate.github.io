@@ -255,10 +255,10 @@ export const skills: SkillProps[] = [
         title: 'Postgresql',
         icon: <SiPostgresql />,
       },
-      {
-        title: 'Mysql',
-        icon: <SiMysql />,
-      },
+      // {
+      //   title: 'Mysql',
+      //   icon: <SiMysql />,
+      // },
     ],
   },
   {
@@ -302,10 +302,10 @@ export const skills: SkillProps[] = [
         title: 'Github',
         icon: <SiGithub />,
       },
-      {
-        title: 'Docker',
-        icon: <SiDocker />,
-      },
+      // {
+      //   title: 'Docker',
+      //   icon: <SiDocker />,
+      // },
       {
         title: 'CI/CD (Github actions)',
         icon: <SiGithubactions />,
