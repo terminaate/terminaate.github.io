@@ -19,7 +19,9 @@ const AboutPage = () => {
         <Title containerClassName={cl.username}>BAHRAM TERMINAATE</Title>
       </MouseHover>
       <div className={cl.contentContainer}>
-        <Title className={cl.title}>About me:</Title>
+        <MouseHover>
+          <Title className={cl.title}>About me:</Title>
+        </MouseHover>
         <MouseHover>
           <p className={cl.text}>
             I'm a <span>young web developer</span> living in <span>Russia</span>
@@ -34,7 +36,9 @@ const AboutPage = () => {
         </MouseHover>
       </div>
       <div className={cl.contentContainer}>
-        <Title className={cl.title}>Latest projects: </Title>
+        <MouseHover>
+          <Title className={cl.title}>Latest projects: </Title>
+        </MouseHover>
         <div className={cl.projectsContainer}>
           <ProjectCard project={projects[0]} />
           <MouseHover text={'More projects...'}>
@@ -45,7 +49,9 @@ const AboutPage = () => {
         </div>
       </div>
       <div className={cl.contentContainer}>
-        <Title className={cl.title}>Skills:</Title>
+        <MouseHover>
+          <Title className={cl.title}>Skills:</Title>
+        </MouseHover>
         <ul className={cl.skills}>
           {skills.map((skill, key) => (
             <li key={key} className={cl.skillContainer}>

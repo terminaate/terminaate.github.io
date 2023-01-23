@@ -42,7 +42,10 @@ const IntroPage = () => {
         text={introPageText}
       />
       <MouseHover text={'Skip'} position={'top'}>
-        <Link href={'AboutPage'}>
+        <Link
+          href={'AboutPage'}
+          onClick={() => clearTimeout(timeoutId.current)}
+        >
           <button className={cl.skipButton}>
             <FaPlay />
           </button>
