@@ -18,7 +18,9 @@ const ProjectCard: FC<IProjectCard> = ({ project, className, ...props }) => {
       />
       <div className={cl.projectContent}>
         <div className={cl.projectTitleContainer}>
-          <h2 className={cl.projectTitle}>{project.title}</h2>
+          <MouseHover>
+            <h2 className={cl.projectTitle}>{project.title}</h2>
+          </MouseHover>
           <div className={cl.projectLinks}>
             {project.githubLink && (
               <MouseHover text={'Source code'}>

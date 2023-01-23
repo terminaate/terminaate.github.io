@@ -6,10 +6,10 @@ import TypingText from '@/components/TypingText';
 import Particles from '@/components/Particles';
 import { FaPlay } from 'react-icons/all';
 import MouseHover from '@/components/MouseHover';
-import Link from '@/components/Link';
+import Link from '@/components/UI/Link';
 
 const introPageText =
-  "Hello 1000 world , my name is 1000 Terminaate(nickname) , i'm a professional React developer 1000 , let me show you little bit more information about me.";
+  "Hello 1000 world , my name is 1000 Terminaate(nickname) , i'm a junior React developer 1000 , let me show you little bit more information about me.";
 
 const IntroPage = () => {
   const navigate = useNavigate();
@@ -42,7 +42,10 @@ const IntroPage = () => {
         text={introPageText}
       />
       <MouseHover text={'Skip'} position={'top'}>
-        <Link href={'AboutPage'}>
+        <Link
+          href={'AboutPage'}
+          onClick={() => clearTimeout(timeoutId.current)}
+        >
           <button className={cl.skipButton}>
             <FaPlay />
           </button>

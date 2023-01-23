@@ -83,6 +83,7 @@
         display: flex;
         row-gap: 10px;
         flex-direction: column;
+        width: max-content;
 
         .skillContents {
           list-style-type: none;

@@ -1,4 +1,4 @@
-export default (text: string | string[]) => {
+export default (text: string | (string | number)[]) => {
   const parsedText: { text?: string; delay?: number }[] = [];
   let textArray: (string | number)[];
 

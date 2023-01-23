@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '@/components/Modal';
+import Modal from '@/components/UI/Modal';
 import useKeyPress from '@/hooks/useKeyPress';
 import Title from '@/components/Title';
 import cl from './DevToolsModal.module.scss';
@@ -12,6 +12,7 @@ import useNavigate from '@/hooks/useNavigate';
 import useRoutingContext from '@/hooks/useRoutingContext';
 import useConfigContext from '@/hooks/useConfigContext';
 import { updateConfig } from '@/contexts/ConfigContext';
+import useMatchMedia from '@/hooks/useMatchMedia';
 
 const PagesVariants = Object.keys(Pages);
 
@@ -20,6 +21,7 @@ const DevToolsModal = () => {
     state: { devToolsModal },
     dispatch,
   } = useConfigContext();
+  const isMobile = useMatchMedia('(max-width: 850px)');
 
   const setModalState = (newValue: boolean) => {
     dispatch(updateConfig({ devToolsModal: newValue }));
@@ -51,6 +53,10 @@ const DevToolsModal = () => {
   useKeyPress('Period', () => {
     setModalState(true);
   });
+
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <Modal
