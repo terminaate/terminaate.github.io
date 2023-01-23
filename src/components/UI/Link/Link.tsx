@@ -5,16 +5,22 @@ interface ILink extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
 }
 
-const Link: React.FC<ILink> = ({ href, children, ...props }) => {
+const Link: React.FC<ILink> = ({
+  href,
+  children,
+  onClick = () => {},
+  ...props
+}) => {
   const navigate = useNavigate();
 
-  const onClick = useCallback((e: MouseEvent) => {
+  const onLinkClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     navigate(href);
+    onClick(e);
   }, []);
 
   return (
-    <a onClick={onClick} {...props}>
+    <a onClick={onLinkClick} {...props}>
       {children}
     </a>
   );
