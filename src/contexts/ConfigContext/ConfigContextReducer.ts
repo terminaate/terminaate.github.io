@@ -18,5 +18,5 @@ export const ConfigContextReducer = (
     case 'UPDATE_CONFIG':
       return { ...state, ...action.payload };
   }
-  throw new Error('Unkown action type.');
+  throw new Error('Unknown action type.');
 };

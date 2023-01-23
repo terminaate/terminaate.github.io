@@ -23,5 +23,5 @@ export const RoutingContextReducer = (
         currentPage: action.payload,
       };
   }
-  throw new Error('Unkown action type.');
+  throw new Error('Unknown action type.');
 };

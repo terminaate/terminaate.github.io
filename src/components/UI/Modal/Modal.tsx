@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, MouseEvent, useCallback } from 'react';
-import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import cl from './Modal.module.scss';
 import classNames from 'classnames';

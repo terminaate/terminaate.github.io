@@ -5,7 +5,7 @@ import Title from '@/components/Title';
 import ProjectCard from '@/components/ProjectCard';
 import MouseHover from '@/components/MouseHover';
 import { projects, skills } from '@/data';
-import Link from '@/components/Link';
+import Link from '@/components/UI/Link';
 import { HiOutlineArrowRight } from 'react-icons/all';
 
 const AboutPage = () => {

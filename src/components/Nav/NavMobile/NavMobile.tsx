@@ -4,7 +4,7 @@ import { FaGripLines } from 'react-icons/all';
 import { AnimatePresence, motion } from 'framer-motion';
 import { links } from '@/components/Nav/data';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import Link from '@/components/Link';
+import Link from '@/components/UI/Link';
 import useRoutingContext from '@/hooks/useRoutingContext';
 import useMatch from '@/hooks/useMatch';
 

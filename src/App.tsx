@@ -21,7 +21,7 @@ const App = () => {
     <>
       <Cursor />
       <Routing />
-      {!isMobile && <DevToolsModal />}
+      <DevToolsModal />
     </>
   );
 };

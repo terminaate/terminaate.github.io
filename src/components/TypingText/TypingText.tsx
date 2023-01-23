@@ -53,8 +53,8 @@ const TypingText: FC<ITypingText> = ({
       layout={'position'}
       className={classNames(cl.typingTextContainer, containerClassName)}
     >
-      {renderedWords.map((obj, key) => (
-        <span {...props} key={key}>
+      {renderedWords.map((obj) => (
+        <span {...props} key={obj}>
           {obj}
         </span>
       ))}
