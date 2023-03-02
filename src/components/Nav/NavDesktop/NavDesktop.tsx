@@ -1,11 +1,11 @@
-import React, { FC, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import cl from './NavDesktop.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import useMatch from '@/hooks/useMatch';
 import useConfigContext from '@/hooks/useConfigContext';
 import { updateConfig } from '@/contexts/ConfigContext';
 import MouseHover from '@/components/MouseHover';
-import { links } from '@/components/Nav/data';
+import { links } from '../Nav.const';
 import useNavigate from '@/hooks/useNavigate';
 import useRoutingContext from '@/hooks/useRoutingContext';
 

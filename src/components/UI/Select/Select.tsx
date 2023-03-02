@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import cl from './Select.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoIosArrowUp } from 'react-icons/all';
@@ -6,8 +6,8 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 
 interface ISelect {
   currentState: string;
-  setCurrentState: React.Dispatch<
-    React.SetStateAction<ISelect['currentState']>
+  setCurrentState: Dispatch<
+    SetStateAction<ISelect['currentState']>
   >;
   variants: string[];
 }

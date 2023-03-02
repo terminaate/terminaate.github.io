@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import IntroPage from '@/pages/IntroPage';
 import AboutPage from '@/pages/AboutPage';
 import ContactsPage from '@/pages/ContactsPage';
@@ -42,6 +42,5 @@ const Routing = () => {
     </BasicPage>
   );
 };
-0;
 
 export default Routing;

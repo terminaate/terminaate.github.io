@@ -1,9 +1,8 @@
-import React from 'react';
 import cl from './ProjectsPage.module.scss';
 import PageContainer from '@/components/PageContainer';
 import Title from '@/components/Title';
 import ProjectCard from '@/components/ProjectCard';
-import { projects } from '@/data';
+import { projects } from './ProjectsPage.const';
 
 // maybe in feature release an iframe project view
 

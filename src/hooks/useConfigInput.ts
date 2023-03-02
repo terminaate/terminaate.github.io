@@ -1,13 +1,13 @@
-import { IConfigContext, updateConfig } from '@/contexts/ConfigContext';
+import { IConfigContextState, updateConfig } from '@/contexts/ConfigContext';
 import { ChangeEvent, useCallback } from 'react';
 import useConfigContext from '@/hooks/useConfigContext';
 
-export default function useConfigInput<T extends keyof IConfigContext['state']>(
+export default function useConfigInput<T extends keyof IConfigContextState>(
   key: T,
 ): [
-  IConfigContext['state'][T],
+  IConfigContextState[T],
   (e: ChangeEvent<HTMLInputElement>) => void,
-  (newValue: IConfigContext['state'][T]) => void,
+  (newValue: IConfigContextState[T]) => void,
 ] {
   const {
     dispatch,
@@ -24,7 +24,7 @@ export default function useConfigInput<T extends keyof IConfigContext['state']>(
   );
 
   const setState = useCallback(
-    (newValue: IConfigContext['state'][T]) => {
+    (newValue: IConfigContextState[T]) => {
       dispatch(updateConfig({ [key]: newValue }));
     },
     [state],

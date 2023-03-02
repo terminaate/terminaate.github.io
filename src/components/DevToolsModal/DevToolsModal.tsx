@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Modal from '@/components/UI/Modal';
 import useKeyPress from '@/hooks/useKeyPress';
 import Title from '@/components/Title';
@@ -22,11 +22,6 @@ const DevToolsModal = () => {
     dispatch,
   } = useConfigContext();
   const isMobile = useMatchMedia('(max-width: 850px)');
-
-  const setModalState = (newValue: boolean) => {
-    dispatch(updateConfig({ devToolsModal: newValue }));
-  };
-
   const [showCursor, onShowCursorChange] = useConfigInput('showCursor');
   const [showCustomCursor, onShowCustomCursorChange, setShowCustomCursor] =
     useConfigInput('showCustomCursor');
@@ -53,6 +48,13 @@ const DevToolsModal = () => {
   useKeyPress('Period', () => {
     setModalState(true);
   });
+
+  const setModalState = useCallback(
+    (newValue: boolean) => {
+      dispatch(updateConfig({ devToolsModal: newValue }));
+    },
+    [devToolsModal],
+  );
 
   if (isMobile) {
     return null;

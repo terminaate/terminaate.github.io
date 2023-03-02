@@ -1,10 +1,11 @@
-import React, {
+import {
   CanvasHTMLAttributes,
   FC,
   useCallback,
   useEffect,
   useRef,
 } from 'react';
+import { TypeOf } from '@/utils/TypeOf';
 
 interface IParticles extends CanvasHTMLAttributes<HTMLCanvasElement> {
   particlesCount?: number;
@@ -67,13 +68,17 @@ const Particles: FC<IParticles> = ({
   const canvasRef = useRef<null | HTMLCanvasElement>(null);
 
   const getWidth = useCallback(() => {
-    if (typeof width === 'number') return width;
-    return (innerWidth / 100) * parseInt(width);
+    if (TypeOf(width) === 'number') {
+      return +width;
+    }
+    return (innerWidth / 100) * parseInt(width + '');
   }, [width]);
 
-  const getHeight = useCallback(() => {
-    if (typeof height === 'number') return height;
-    return (innerHeight / 100) * parseInt(height);
+  const getHeight = useCallback((): number => {
+    if (TypeOf(height) === 'number') {
+      return +height;
+    }
+    return (innerHeight / 100) * parseInt(height + '');
   }, [height]);
 
   useEffect(() => {

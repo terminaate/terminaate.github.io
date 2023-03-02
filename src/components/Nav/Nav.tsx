@@ -1,4 +1,3 @@
-import React from 'react';
 import NavDesktop from '@/components/Nav/NavDesktop';
 import useMatchMedia from '@/hooks/useMatchMedia';
 import NavMobile from '@/components/Nav/NavMobile';

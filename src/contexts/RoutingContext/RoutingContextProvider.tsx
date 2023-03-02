@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useReducer } from 'react';
+import { FC, PropsWithChildren, useReducer } from 'react';
 import RoutingContext, { initialState } from './RoutingContext';
 import { RoutingContextReducer } from './RoutingContextReducer';
 

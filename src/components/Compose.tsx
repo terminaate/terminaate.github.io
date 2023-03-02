@@ -1,7 +1,7 @@
-import React, { FC, JSXElementConstructor, PropsWithChildren } from 'react';
+import { FC, JSXElementConstructor, PropsWithChildren } from 'react';
 
 interface IContextsProviders {
-  components: JSXElementConstructor<PropsWithChildren<unknown>>[];
+  components: JSXElementConstructor<PropsWithChildren>[];
 }
 
 const Compose: FC<PropsWithChildren<IContextsProviders>> = ({
@@ -17,11 +17,6 @@ const Compose: FC<PropsWithChildren<IContextsProviders>> = ({
         children,
       )}
     </>
-    // <RoutingContextProvider>
-    //   <ConfigContextProvider>
-    //     <CursorContextProvider>{children}</CursorContextProvider>
-    //   </ConfigContextProvider>
-    // </RoutingContextProvider>
   );
 };
 

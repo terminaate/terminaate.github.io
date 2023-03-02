@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect, useReducer } from 'react';
+import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import ConfigContext, { initialState } from './ConfigContext';
 import { ConfigContextReducer } from './ConfigContextReducer';
 

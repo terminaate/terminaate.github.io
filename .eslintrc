@@ -23,7 +23,8 @@
     "react/no-unescaped-entities": "off",
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-    "react/jsx-no-comment-textnodes": "off"
+    "react/jsx-no-comment-textnodes": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {

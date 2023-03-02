@@ -1,12 +1,12 @@
-import React from 'react';
 import PageContainer from '@/components/PageContainer';
 import cl from './AboutPage.module.scss';
 import Title from '@/components/Title';
 import ProjectCard from '@/components/ProjectCard';
 import MouseHover from '@/components/MouseHover';
-import { projects, skills } from '@/data';
+import { skills } from './AboutPage.const';
 import Link from '@/components/UI/Link';
 import { HiOutlineArrowRight } from 'react-icons/all';
+import { projects } from '@/pages/ProjectsPage/ProjectsPage.const';
 
 const AboutPage = () => {
   return (

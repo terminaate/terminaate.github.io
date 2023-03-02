@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, ReactNode, useEffect, useRef } from 'react';
+import { FC, HTMLAttributes, ReactNode, useEffect, useRef } from 'react';
 import useCursorContext from '@/hooks/useCursorContext';
 import { CursorItemProps, pushRef, removeRef } from '@/contexts/CursorContext';
 

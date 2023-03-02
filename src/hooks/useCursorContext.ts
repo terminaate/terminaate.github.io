@@ -1,4 +1,4 @@
 import { useContext } from 'react';
-import CursorContext, { ICursorContext } from '@/contexts/CursorContext';
+import CursorContext, { CursorContextType } from '@/contexts/CursorContext';
 
-export default () => useContext<ICursorContext>(CursorContext);
+export default () => useContext<CursorContextType>(CursorContext);

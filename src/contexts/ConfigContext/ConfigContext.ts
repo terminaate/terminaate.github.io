@@ -1,26 +1,23 @@
-import { Action } from './ConfigContextReducer';
-import React, { createContext } from 'react';
+import { createContext } from 'react';
+import { ContextState } from '@/types/ContextState';
+import { createContextDefaultState } from '@/utils/createContextDefaultState';
 
-export interface IConfigContext {
-  state: {
-    showCursor: boolean;
-    showCustomCursor: boolean;
-    transitionBetweenPages: boolean;
-    devToolsModal: boolean;
-  };
-  dispatch: (action: Action) => void | React.Dispatch<Action>;
+export interface IConfigContextState {
+  showCursor: boolean;
+  showCustomCursor: boolean;
+  transitionBetweenPages: boolean;
+  devToolsModal: boolean;
 }
 
-export const initialState: IConfigContext = {
-  state: {
-    showCursor: import.meta.env.DEV,
-    showCustomCursor: true,
-    transitionBetweenPages: true,
-    devToolsModal: false,
-  },
-  dispatch: () => {},
-};
+export type ConfigContextType = ContextState<IConfigContextState>;
 
-const ConfigContext = createContext<IConfigContext>(initialState);
+export const initialState = createContextDefaultState<IConfigContextState>({
+  showCursor: import.meta.env.DEV,
+  showCustomCursor: true,
+  transitionBetweenPages: true,
+  devToolsModal: false,
+});
+
+const ConfigContext = createContext<ConfigContextType>(initialState);
 
 export default ConfigContext;

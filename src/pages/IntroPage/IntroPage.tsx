@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import useNavigate from '@/hooks/useNavigate';
 import PageContainer from '@/components/PageContainer';
 import cl from './IntroPage.module.scss';

@@ -1,11 +1,11 @@
-import React, { AnchorHTMLAttributes, MouseEvent, useCallback } from 'react';
+import { AnchorHTMLAttributes, FC, MouseEvent, useCallback } from 'react';
 import useNavigate from '@/hooks/useNavigate';
 
 interface ILink extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
 }
 
-const Link: React.FC<ILink> = ({
+const Link: FC<ILink> = ({
   href,
   children,
   onClick = () => {},

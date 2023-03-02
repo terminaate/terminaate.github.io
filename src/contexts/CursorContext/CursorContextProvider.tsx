@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useReducer } from 'react';
+import { FC, PropsWithChildren, useReducer } from 'react';
 import CursorContext, { initialState } from './CursorContext';
 import { CursorContextReducer } from './CursorContextReducer';
 
