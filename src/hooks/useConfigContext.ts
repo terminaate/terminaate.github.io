@@ -1,4 +1,4 @@
 import { useContext } from 'react';
-import ConfigContext, { IConfigContext } from '@/contexts/ConfigContext';
+import ConfigContext, { ConfigContextType } from '@/contexts/ConfigContext';
 
-export default () => useContext<IConfigContext>(ConfigContext);
+export default () => useContext<ConfigContextType>(ConfigContext);

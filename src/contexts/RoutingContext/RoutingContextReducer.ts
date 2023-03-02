@@ -1,21 +1,16 @@
-import { IRoutingContext } from './RoutingContext';
+import { IRoutingContextState } from './RoutingContext';
+import { DispatchAction } from '@/types/DispatchAction';
 
-export type Action<T = any> = {
-  type: string;
-  payload?: T;
-};
-
-export const setCurrentPage = (
-  page: IRoutingContext['state']['currentPage'],
-) => ({
+export const setCurrentPage = (page: IRoutingContextState['currentPage']) => ({
   type: 'SET_PAGE',
   payload: page,
 });
 
-export const RoutingContextReducer = (
-  state: IRoutingContext['state'],
-  action: Action,
-): typeof state => {
+export function RoutingContextReducer(
+  state: IRoutingContextState,
+  action: DispatchAction,
+): typeof state;
+export function RoutingContextReducer(state, action) {
   switch (action.type) {
     case 'SET_PAGE':
       return {
@@ -24,4 +19,4 @@ export const RoutingContextReducer = (
       };
   }
   throw new Error('Unknown action type.');
-};
+}

@@ -1,8 +1,7 @@
-import React from 'react';
 import PageContainer from '@/components/PageContainer';
 import Title from '@/components/Title';
 import cl from './ContactsPage.module.scss';
-import { contacts } from '@/data';
+import { contacts } from './ContactsPage.const';
 import MouseHover from '@/components/MouseHover';
 
 const ContactsPage = () => {

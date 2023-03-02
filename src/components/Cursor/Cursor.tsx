@@ -1,4 +1,4 @@
-import React, {
+import {
   CSSProperties,
   FC,
   useCallback,
@@ -20,10 +20,8 @@ interface ICursor {
 }
 
 const Cursor: FC<ICursor> = ({ size = 40 }) => {
-  const { state: items } = useCursorContext();
-  const {
-    state: { showCustomCursor },
-  } = useConfigContext();
+  const items = useCursorContext().state;
+  const { showCustomCursor } = useConfigContext().state;
   const followerRef = useRef<null | HTMLDivElement>(null);
   const cursorRef = useRef<null | HTMLDivElement>(null);
   const [currentItem, setCurrentItem] = useState<CursorItemProps>({
@@ -37,7 +35,9 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   const onMouseMove = useCallback((e: MouseEvent) => {
     const { current: follower } = followerRef;
     const { current: cursor } = cursorRef;
-    if (!follower || !cursor) return;
+    if (!follower || !cursor) {
+      return;
+    }
 
     const setCords = (el: HTMLElement) => {
       el.style.top = e.clientY + 'px';
@@ -51,7 +51,9 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
   const setOpacity = useCallback((opacity: number) => {
     const { current: cursor } = cursorRef;
     const { current: follower } = followerRef;
-    if (!cursor || !follower) return;
+    if (!cursor || !follower) {
+      return;
+    }
 
     cursor.style.opacity = opacity + '';
     follower.style.opacity = opacity + '';
@@ -84,7 +86,9 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
       }
     };
 
-    if (isMobile) return clearCallback;
+    if (isMobile) {
+      return clearCallback;
+    }
 
     for (const item of items) {
       const { current: target } = item.ref;

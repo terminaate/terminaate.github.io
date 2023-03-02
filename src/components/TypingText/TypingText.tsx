@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
+import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import cl from './TypingText.module.scss';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';

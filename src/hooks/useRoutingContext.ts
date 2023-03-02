@@ -1,4 +1,4 @@
 import { useContext } from 'react';
-import RoutingContext, { IRoutingContext } from '@/contexts/RoutingContext';
+import RoutingContext, { RoutingContextType } from '@/contexts/RoutingContext';
 
-export default () => useContext<IRoutingContext>(RoutingContext);
+export default () => useContext<RoutingContextType>(RoutingContext);

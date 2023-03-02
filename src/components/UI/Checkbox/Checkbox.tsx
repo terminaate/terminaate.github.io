@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useId } from 'react';
+import { FC, InputHTMLAttributes, useId } from 'react';
 import cl from './Checkbox.module.scss';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -7,7 +7,7 @@ interface ICheckbox extends InputHTMLAttributes<HTMLInputElement> {
   containerClassName?: string;
 }
 
-const Checkbox: React.FC<ICheckbox> = ({
+const Checkbox: FC<ICheckbox> = ({
   checked = false,
   title,
   containerClassName,

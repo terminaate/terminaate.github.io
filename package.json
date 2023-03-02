@@ -12,7 +12,8 @@
     "new:hook": "hygen new hook",
     "new:component": "hygen new component",
     "new:page": "hygen new page",
-    "new:context": "hygen new context"
+    "new:context": "hygen new context",
+    "prepare": "husky install"
   },
   "dependencies": {
     "classnames": "^2.3.2",
@@ -32,6 +33,7 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "gh-pages": "^4.0.0",
+    "husky": "^8.0.3",
     "hygen": "^6.2.11",
     "prettier": "^2.7.1",
     "sass": "^1.55.0",

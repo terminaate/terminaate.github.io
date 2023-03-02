@@ -1,8 +1,8 @@
-import React from 'react';
 import cl from './PageContainer.module.scss';
 import { HTMLMotionProps, motion, Transition, Variants } from 'framer-motion';
 import classNames from 'classnames';
 import useConfigContext from '@/hooks/useConfigContext';
+import { FC } from 'react';
 
 export const basePageTransition: Transition = { duration: 0.6 };
 export const basePageVariants: Variants = {
@@ -18,7 +18,7 @@ export const basePageVariants: Variants = {
   },
 };
 
-const PageContainer: React.FC<HTMLMotionProps<'div'>> = ({
+const PageContainer: FC<HTMLMotionProps<'div'>> = ({
   className,
   children,
   transition,

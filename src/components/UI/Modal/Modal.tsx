@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, MouseEvent, useCallback } from 'react';
+import { Dispatch, FC, HTMLAttributes, MouseEvent, SetStateAction, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import cl from './Modal.module.scss';
@@ -8,11 +8,11 @@ import useKeyPress from '@/hooks/useKeyPress';
 export interface IModal extends HTMLAttributes<HTMLDivElement> {
   state: boolean;
   setState:
-    | React.Dispatch<React.SetStateAction<boolean>>
+    | Dispatch<SetStateAction<boolean>>
     | ((newValue: boolean) => void);
 }
 
-const Modal: React.FC<IModal> = ({
+const Modal: FC<IModal> = ({
   children,
   state,
   setState,

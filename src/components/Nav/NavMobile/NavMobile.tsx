@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import cl from './NavMobile.module.scss';
 import { FaGripLines } from 'react-icons/all';
 import { AnimatePresence, motion } from 'framer-motion';
-import { links } from '@/components/Nav/data';
+import { links } from '../Nav.const';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import Link from '@/components/UI/Link';
 import useRoutingContext from '@/hooks/useRoutingContext';

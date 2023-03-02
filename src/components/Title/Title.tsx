@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import cl from './Title.module.scss';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import classNames from 'classnames';

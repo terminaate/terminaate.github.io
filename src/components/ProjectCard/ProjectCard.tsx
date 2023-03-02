@@ -1,9 +1,9 @@
-import React, { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes } from 'react';
 import cl from './ProjectCard.module.scss';
-import { ProjectProps } from '@/data';
 import { BiLink, FaGithub } from 'react-icons/all';
 import MouseHover from '@/components/MouseHover';
 import classNames from 'classnames';
+import { ProjectProps } from '@/pages/ProjectsPage/ProjectsPage.const';
 
 interface IProjectCard extends HTMLAttributes<HTMLDivElement> {
   project: ProjectProps;

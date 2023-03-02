@@ -1,28 +1,23 @@
-import { ICursorContext } from './CursorContext';
-
-export type Action<T = any> = {
-  type: string;
-  payload?: T;
-};
+import { DispatchAction } from '@/types/DispatchAction';
+import { CursorContextState } from '@/contexts/CursorContext/CursorContext';
 
 export const pushRef = (
-  payload: ArrayElement<ICursorContext['state']>,
-): Action<typeof payload> => ({
+  payload: ArrayElement<CursorContextState>,
+): DispatchAction<typeof payload> => ({
   type: 'PUSH_REF',
   payload,
 });
 
-export const removeRef = (
-  payload: ArrayElement<ICursorContext['state']>['id'],
-) => ({
+export const removeRef = (payload: ArrayElement<CursorContextState>['id']) => ({
   type: 'REMOVE_REF',
   payload,
 });
 
-export const CursorContextReducer = (
-  state: ICursorContext['state'],
-  action: Action,
-): typeof state => {
+export function CursorContextReducer(
+  state: CursorContextState,
+  action: DispatchAction,
+): typeof state;
+export function CursorContextReducer(state, action) {
   switch (action.type) {
     case 'PUSH_REF':
       return [...state, action.payload];
@@ -30,4 +25,4 @@ export const CursorContextReducer = (
       return state.filter((s) => s.id !== action.payload);
   }
   throw new Error('Unknown action type.');
-};
+}
