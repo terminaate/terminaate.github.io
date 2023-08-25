@@ -14,7 +14,7 @@ export const contacts: ContactProps[] = [
     link: 'https://github.com/terminaate',
   },
   {
-    text: 'Terminaate#9274',
+    text: 'terminaate',
     icon: <SiDiscord />,
     link: 'https://discord.com/users/925765821937098802',
   },

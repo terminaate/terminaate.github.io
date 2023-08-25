@@ -2,13 +2,24 @@ import { ReactElement } from 'react';
 import {
   FaBootstrap,
   FaCss3,
-  FaHtml5, FaReact, FaVuejs, SiElectron, SiExpress, SiFramer, SiGit, SiGithub, SiGithubactions, SiGulp,
+  FaHtml5,
+  FaReact,
+  SiExpress,
+  SiFramer,
   SiJavascript,
-  SiJquery,
-  SiLess, SiLinux, SiMobx, SiMongodb, SiNestjs, SiNextdotjs, SiNginx, SiNodedotjs, SiPostgresql,
-  SiPug, SiRedux,
-  SiSass, SiSequelize, SiSqlite, SiThreedotjs,
-  SiTypescript, SiVite, SiWebpack,
+  SiMobx,
+  SiMongodb,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiRedux,
+  SiSass,
+  SiSequelize,
+  SiSqlite,
+  SiTypescript,
+  SiVite,
+  SiWebpack,
 } from 'react-icons/all';
 
 export type SkillContentProps = {
@@ -30,10 +41,6 @@ export const skills: SkillProps[] = [
         icon: <FaHtml5 />,
       },
       {
-        title: 'PUG',
-        icon: <SiPug />,
-      },
-      {
         title: 'CSS',
         icon: <FaCss3 />,
       },
@@ -42,20 +49,12 @@ export const skills: SkillProps[] = [
         icon: <SiSass />,
       },
       {
-        title: 'LESS',
-        icon: <SiLess />,
-      },
-      {
         title: 'Bootstrap',
         icon: <FaBootstrap />,
       },
       {
         title: 'Javascript',
         icon: <SiJavascript />,
-      },
-      {
-        title: 'Jquery',
-        icon: <SiJquery />,
       },
       {
         title: 'Typescript',
@@ -68,10 +67,6 @@ export const skills: SkillProps[] = [
       {
         title: 'Webpack',
         icon: <SiWebpack />,
-      },
-      {
-        title: 'Gulp',
-        icon: <SiGulp />,
       },
       {
         title: 'React',
@@ -88,14 +83,6 @@ export const skills: SkillProps[] = [
       {
         title: 'Next',
         icon: <SiNextdotjs />,
-      },
-      {
-        title: 'Vue',
-        icon: <FaVuejs />,
-      },
-      {
-        title: 'Three',
-        icon: <SiThreedotjs />,
       },
       {
         title: 'Framer motion',
@@ -118,10 +105,6 @@ export const skills: SkillProps[] = [
         title: 'Nest.js',
         icon: <SiNestjs />,
       },
-      {
-        title: 'Electron.js',
-        icon: <SiElectron />,
-      },
     ],
   },
   {
@@ -139,10 +122,6 @@ export const skills: SkillProps[] = [
         title: 'Postgresql',
         icon: <SiPostgresql />,
       },
-      // {
-      //   title: 'Mysql',
-      //   icon: <SiMysql />,
-      // },
     ],
   },
   {
@@ -172,35 +151,6 @@ export const skills: SkillProps[] = [
       },
       {
         title: 'YAGNI',
-      },
-    ],
-  },
-  {
-    title: 'Devops:',
-    content: [
-      {
-        title: 'Git',
-        icon: <SiGit />,
-      },
-      {
-        title: 'Github',
-        icon: <SiGithub />,
-      },
-      // {
-      //   title: 'Docker',
-      //   icon: <SiDocker />,
-      // },
-      {
-        title: 'CI/CD (Github actions)',
-        icon: <SiGithubactions />,
-      },
-      {
-        title: 'Linux',
-        icon: <SiLinux />,
-      },
-      {
-        title: 'Nginx',
-        icon: <SiNginx />,
       },
     ],
   },
