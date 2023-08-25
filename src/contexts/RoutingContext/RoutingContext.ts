@@ -7,7 +7,7 @@ export interface IRoutingContextState {
   currentPage: keyof typeof Pages;
 }
 
-export type RoutingContextType = ContextState<IRoutingContextState>
+export type RoutingContextType = ContextState<IRoutingContextState>;
 
 export const initialState = createContextDefaultState<IRoutingContextState>({
   currentPage: import.meta.env.DEV ? 'AboutPage' : 'IntroPage',

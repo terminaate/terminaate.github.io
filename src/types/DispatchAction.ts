@@ -1,4 +1,4 @@
-export interface DispatchAction<T=any> {
+export interface DispatchAction<T = any> {
   type: string;
   payload: T;
 }

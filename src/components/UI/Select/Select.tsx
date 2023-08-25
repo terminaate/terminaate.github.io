@@ -6,9 +6,7 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 
 interface ISelect {
   currentState: string;
-  setCurrentState: Dispatch<
-    SetStateAction<ISelect['currentState']>
-  >;
+  setCurrentState: Dispatch<SetStateAction<ISelect['currentState']>>;
   variants: string[];
 }
 

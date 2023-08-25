@@ -4,4 +4,4 @@
 *.scss
 *.svg
 *.png
-./src/assets
+*.otf
