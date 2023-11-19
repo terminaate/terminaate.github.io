@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useRef } from 'react';
-import useNavigate from '@/hooks/useNavigate';
-import PageContainer from '@/components/PageContainer';
+import { PageContainer } from '@/components/PageContainer';
 import cl from './IntroPage.module.scss';
-import TypingText from '@/components/TypingText';
-import Particles from '@/components/Particles';
+import { TypingText } from '@/components/TypingText';
+import { Particles } from '@/components/Particles';
 import { FaPlay } from 'react-icons/all';
-import MouseHover from '@/components/MouseHover';
-import Link from '@/components/UI/Link';
+import { MouseHover } from '@/components/MouseHover';
+import { Link } from '@/components/UI/Link';
+import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
 
 const introPageText =
-  "Hello 1000 world , my name is 1000 Terminaate(nickname) , i'm a Frontend React developer 1000 , let me show you little bit more information about me.";
+  "Hello world 1000 , my name is Terminaate(nickname) 1000 , i'm a Frontend React developer 1000 , let me show you little bit more information about me.";
 
-const IntroPage = () => {
-  const navigate = useNavigate();
+export const IntroPage = () => {
+  const { setCurrentPage: navigate } = useRoutingActions();
   const timeoutId = useRef<number>(0);
 
   const navigateToHome = useCallback(() => {
@@ -54,5 +54,3 @@ const IntroPage = () => {
     </PageContainer>
   );
 };
-
-export default IntroPage;

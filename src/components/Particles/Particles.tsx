@@ -7,11 +7,11 @@ import {
 } from 'react';
 import { TypeOf } from '@/utils/TypeOf';
 
-interface IParticles extends CanvasHTMLAttributes<HTMLCanvasElement> {
+type Props = CanvasHTMLAttributes<HTMLCanvasElement> & {
   particlesCount?: number;
   particlesSize?: number;
   particlesVelocity?: number;
-}
+};
 
 type ParticleProps = {
   velocity: number;
@@ -57,7 +57,7 @@ class Particle {
   }
 }
 
-const Particles: FC<IParticles> = ({
+export const Particles: FC<Props> = ({
   particlesCount = 50,
   particlesVelocity = 2,
   particlesSize = 2,
@@ -135,5 +135,3 @@ const Particles: FC<IParticles> = ({
     />
   );
 };
-
-export default Particles;

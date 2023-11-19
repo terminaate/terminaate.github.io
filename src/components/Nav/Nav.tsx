@@ -1,11 +1,10 @@
-import NavDesktop from '@/components/Nav/NavDesktop';
-import useMatchMedia from '@/hooks/useMatchMedia';
-import NavMobile from '@/components/Nav/NavMobile';
+import { NavDesktop } from '@/components/Nav/NavDesktop';
+import { useMatchMedia } from '@/hooks/useMatchMedia';
+import { NavMobile } from '@/components/Nav/NavMobile';
+import { ScreenBreakPoints } from '@/common/constants/ScreenBreakPoints';
 
-const Nav = () => {
-  const isMobile = useMatchMedia(`(max-width: ${800}px)`);
+export const Nav = () => {
+  const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
 
   return isMobile ? <NavMobile /> : <NavDesktop />;
 };
-
-export default Nav;

@@ -1,8 +1,8 @@
 import cl from './PageContainer.module.scss';
 import { HTMLMotionProps, motion, Transition, Variants } from 'framer-motion';
 import classNames from 'classnames';
-import useConfigContext from '@/hooks/useConfigContext';
 import { FC } from 'react';
+import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
 
 export const basePageTransition: Transition = { duration: 0.6 };
 export const basePageVariants: Variants = {
@@ -14,17 +14,16 @@ export const basePageVariants: Variants = {
   },
   exit: {
     opacity: 0,
-    // transition: { delay: 0 },
   },
 };
 
-const PageContainer: FC<HTMLMotionProps<'div'>> = ({
+export const PageContainer: FC<HTMLMotionProps<'div'>> = ({
   className,
   children,
   transition,
   ...props
 }) => {
-  const { transitionBetweenPages } = useConfigContext().state;
+  const { transitionBetweenPages } = useConfigState();
 
   return transitionBetweenPages ? (
     <motion.div
@@ -44,5 +43,3 @@ const PageContainer: FC<HTMLMotionProps<'div'>> = ({
     </motion.div>
   );
 };
-
-export default PageContainer;

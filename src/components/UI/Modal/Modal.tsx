@@ -10,14 +10,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import cl from './Modal.module.scss';
 import classNames from 'classnames';
-import useKeyPress from '@/hooks/useKeyPress';
+import { useKeyPress } from '@/hooks/useKeyPress';
 
-export interface IModal extends HTMLAttributes<HTMLDivElement> {
+type Props = HTMLAttributes<HTMLDivElement> & {
   state: boolean;
   setState: Dispatch<SetStateAction<boolean>> | ((newValue: boolean) => void);
-}
+};
 
-const Modal: FC<IModal> = ({
+export const Modal: FC<Props> = ({
   children,
   state,
   setState,
@@ -62,5 +62,3 @@ const Modal: FC<IModal> = ({
     document.querySelector('#modals')!,
   );
 };
-
-export default Modal;

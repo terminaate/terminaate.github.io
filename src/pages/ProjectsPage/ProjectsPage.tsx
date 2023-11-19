@@ -1,12 +1,10 @@
 import cl from './ProjectsPage.module.scss';
-import PageContainer from '@/components/PageContainer';
-import Title from '@/components/Title';
-import ProjectCard from '@/components/ProjectCard';
+import { PageContainer } from '@/components/PageContainer';
+import { Title } from '@/components/Title';
+import { ProjectCard } from '@/components/ProjectCard';
 import { projects } from './ProjectsPage.const';
 
-// maybe in feature release an iframe project view
-
-const ProjectsPage = () => {
+export const ProjectsPage = () => {
   return (
     <PageContainer className={cl.projectsPage}>
       <Title>Projects:</Title>
@@ -22,5 +20,3 @@ const ProjectsPage = () => {
     </PageContainer>
   );
 };
-
-export default ProjectsPage;

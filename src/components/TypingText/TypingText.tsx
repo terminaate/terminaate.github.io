@@ -2,50 +2,49 @@ import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import cl from './TypingText.module.scss';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import parseText from '@/utils/parseText';
+import { parseTypingText } from './utils/parseTypingText';
+import { wait } from '@/utils/wait';
 
-interface ITypingText extends HTMLAttributes<HTMLSpanElement> {
-  text: string | (string | number)[];
+type Props = HTMLAttributes<HTMLSpanElement> & {
+  text: string | Array<string | number>;
   defaultDelay?: number;
   containerClassName?: string;
-  onEnd: () => void;
-}
+  onEnd?: () => void;
+};
 
-const TypingText: FC<ITypingText> = ({
+type RenderedWord = {
+  id: number;
+  text: string;
+};
+
+export const TypingText: FC<Props> = ({
   text,
   defaultDelay = 500,
   containerClassName = '',
   onEnd = () => {},
   ...props
 }) => {
-  const [renderedWords, setRenderedWords] = useState<string[]>([]);
+  const [renderedWords, setRenderedWords] = useState<RenderedWord[]>([]);
 
-  useEffect(() => {
-    setRenderedWords([]);
-  }, []);
+  const renderWords = async () => {
+    const formattedText = parseTypingText(text);
 
-  useEffect(() => {
-    const formattedText: any[] = parseText(text);
+    for (const obj of formattedText) {
+      await wait(obj.delay ?? defaultDelay);
 
-    let i = -1;
-
-    function delayLoop() {
-      i++;
-      if (i >= formattedText.length || !formattedText[i]) {
-        return onEnd();
+      if (obj.text !== undefined) {
+        setRenderedWords((prevState) => [
+          ...prevState,
+          { id: obj.id, text: obj.text! },
+        ]);
       }
-
-      setRenderedWords((prevState) => [
-        ...prevState,
-        formattedText[i]?.text ?? '',
-      ]);
-      setTimeout(
-        delayLoop,
-        formattedText[i]?.delay ? formattedText[i].delay : defaultDelay,
-      );
     }
 
-    delayLoop();
+    onEnd();
+  };
+
+  useEffect(() => {
+    void renderWords();
   }, []);
 
   return (
@@ -54,12 +53,10 @@ const TypingText: FC<ITypingText> = ({
       className={classNames(cl.typingTextContainer, containerClassName)}
     >
       {renderedWords.map((obj) => (
-        <span {...props} key={obj}>
-          {obj}
+        <span {...props} key={obj.id}>
+          {obj.text}
         </span>
       ))}
     </motion.div>
   );
 };
-
-export default TypingText;

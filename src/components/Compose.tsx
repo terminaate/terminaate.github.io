@@ -1,10 +1,10 @@
 import { FC, JSXElementConstructor, PropsWithChildren } from 'react';
 
-interface IContextsProviders {
+type Props = {
   components: JSXElementConstructor<PropsWithChildren>[];
-}
+};
 
-const Compose: FC<PropsWithChildren<IContextsProviders>> = ({
+export const Compose: FC<PropsWithChildren<Props>> = ({
   children,
   components,
 }) => {
@@ -19,5 +19,3 @@ const Compose: FC<PropsWithChildren<IContextsProviders>> = ({
     </>
   );
 };
-
-export default Compose;

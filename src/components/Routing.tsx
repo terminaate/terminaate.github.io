@@ -1,14 +1,14 @@
 import { FC, useEffect, useMemo } from 'react';
-import IntroPage from '@/pages/IntroPage';
-import AboutPage from '@/pages/AboutPage';
-import ContactsPage from '@/pages/ContactsPage';
+import { IntroPage } from '@/pages/IntroPage';
+import { AboutPage } from '@/pages/AboutPage';
+import { ContactsPage } from '@/pages/ContactsPage';
 import { AnimatePresence } from 'framer-motion';
-import useRoutingContext from '@/hooks/useRoutingContext';
-import Nav from '@/components/Nav';
-import BasicPage from '@/components/BasicPage';
-import ProjectsPage from '@/pages/ProjectsPage';
-import useConfigContext from '@/hooks/useConfigContext';
-import NotFoundPage from '@/pages/NotFoundPage';
+import { useRoutingState } from '@/contexts/RoutingContext/hooks/useRoutingState';
+import { Nav } from '@/components/Nav';
+import { BasicPage } from '@/components/BasicPage';
+import { ProjectsPage } from '@/pages/ProjectsPage';
+import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 
 export const Pages: Record<string, FC> = {
   IntroPage,
@@ -17,9 +17,9 @@ export const Pages: Record<string, FC> = {
   ContactsPage,
 };
 
-const Routing = () => {
-  const { currentPage } = useRoutingContext().state;
-  const { transitionBetweenPages } = useConfigContext().state;
+export const Routing = () => {
+  const { currentPage } = useRoutingState();
+  const { transitionBetweenPages } = useConfigState();
 
   useEffect(() => {
     if (import.meta.env.DEV) {
@@ -42,5 +42,3 @@ const Routing = () => {
     </BasicPage>
   );
 };
-
-export default Routing;

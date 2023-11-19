@@ -1,19 +1,14 @@
-import { IConfigContextState } from './ConfigContext';
-import { DispatchAction } from '@/types/DispatchAction';
-
-export const updateConfig = (payload: Partial<IConfigContextState>) => ({
-  type: 'UPDATE_CONFIG',
-  payload,
-});
+import { ConfigContextState } from './ConfigContext';
+import { DispatchAction } from '@/lib/context/types/DispatchAction';
+import { actionsHandlers } from './actions';
 
 export function ConfigContextReducer(
-  state: IConfigContextState,
+  state: ConfigContextState,
   action: DispatchAction,
-): typeof state;
-export function ConfigContextReducer(state, action) {
-  switch (action.type) {
-    case 'UPDATE_CONFIG':
-      return { ...state, ...action.payload };
+): typeof state {
+  if (actionsHandlers[action.type]) {
+    return actionsHandlers[action.type](state, action);
   }
+
   throw new Error('Unknown action type.');
 }

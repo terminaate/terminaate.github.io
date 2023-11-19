@@ -1,12 +1,12 @@
-import MouseHover from '@/components/MouseHover';
-import Title from '@/components/Title';
+import { MouseHover } from '@/components/MouseHover';
+import { Title } from '@/components/Title';
 import cl from '@/pages/AboutPage/AboutPage.module.scss';
-import ProjectCard from '@/components/ProjectCard';
+import { ProjectCard } from '@/components/ProjectCard';
 import { projects } from '@/pages/ProjectsPage/ProjectsPage.const';
-import Link from '@/components/UI/Link';
+import { Link } from '@/components/UI/Link';
 import { HiOutlineArrowRight } from 'react-icons/all';
 
-const LatestProjects = () => {
+export const LatestProjects = () => {
   return (
     <>
       <MouseHover>
@@ -23,5 +23,3 @@ const LatestProjects = () => {
     </>
   );
 };
-
-export default LatestProjects;

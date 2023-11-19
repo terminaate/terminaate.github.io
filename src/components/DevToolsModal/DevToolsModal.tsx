@@ -1,34 +1,33 @@
 import { useCallback, useEffect, useState } from 'react';
-import Modal from '@/components/UI/Modal';
-import useKeyPress from '@/hooks/useKeyPress';
-import Title from '@/components/Title';
+import { Modal } from '@/components/UI/Modal';
+import { useKeyPress } from '@/hooks/useKeyPress';
+import { Title } from '@/components/Title';
 import cl from './DevToolsModal.module.scss';
-import Checkbox from '@/components/UI/Checkbox';
+import { Checkbox } from '@/components/UI/Checkbox';
 import { motion } from 'framer-motion';
-import useConfigInput from '@/hooks/useConfigInput';
+import { useConfigInput } from '@/contexts/ConfigContext/hooks/useConfigInput';
 import { Pages } from '@/components/Routing';
-import Select from '@/components/UI/Select';
-import useNavigate from '@/hooks/useNavigate';
-import useRoutingContext from '@/hooks/useRoutingContext';
-import useConfigContext from '@/hooks/useConfigContext';
-import { updateConfig } from '@/contexts/ConfigContext';
-import useMatchMedia from '@/hooks/useMatchMedia';
+import { Select } from '@/components/UI/Select';
+import { useMatchMedia } from '@/hooks/useMatchMedia';
+import { ScreenBreakPoints } from '@/common/constants/ScreenBreakPoints';
+import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
+import { useConfigActions } from '@/contexts/ConfigContext/hooks/useConfigActions';
+import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
+import { useRoutingState } from '@/contexts/RoutingContext/hooks/useRoutingState';
 
 const PagesVariants = Object.keys(Pages);
 
-const DevToolsModal = () => {
-  const {
-    state: { devToolsModal },
-    dispatch,
-  } = useConfigContext();
-  const isMobile = useMatchMedia('(max-width: 850px)');
+export const DevToolsModal = () => {
+  const { devToolsModal } = useConfigState();
+  const { updateConfig } = useConfigActions();
+  const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
   const [showCursor, onShowCursorChange] = useConfigInput('showCursor');
   const [showCustomCursor, onShowCustomCursorChange, setShowCustomCursor] =
     useConfigInput('showCustomCursor');
   const [transitionBetweenPages, onTransitionBetweenPagesChange] =
     useConfigInput('transitionBetweenPages');
-  const navigate = useNavigate();
-  const { currentPage } = useRoutingContext().state;
+  const { setCurrentPage: navigate } = useRoutingActions();
+  const { currentPage } = useRoutingState();
   const [currentPageInput, setCurrentPageInput] = useState<string>(currentPage);
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const DevToolsModal = () => {
 
   const setModalState = useCallback(
     (newValue: boolean) => {
-      dispatch(updateConfig({ devToolsModal: newValue }));
+      updateConfig({ devToolsModal: newValue });
     },
     [devToolsModal],
   );
@@ -108,5 +107,3 @@ const DevToolsModal = () => {
     </Modal>
   );
 };
-
-export default DevToolsModal;

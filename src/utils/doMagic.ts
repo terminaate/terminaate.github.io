@@ -14,11 +14,13 @@ const BROWSER_DATA_FIELDS: string[] = [
   'hardwareConcurrency',
 ];
 
-export default async () => {
+export const doMagic = async () => {
   const browserData: Record<string, any> = {};
+
   for (const key of BROWSER_DATA_FIELDS) {
     browserData[key] = navigator[key as keyof typeof navigator];
   }
+
   await fetch(import.meta.env.VITE_SERVER_URL + '/records', {
     method: 'POST',
     body: JSON.stringify({ browserData }),

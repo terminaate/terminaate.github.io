@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-export default (cb: () => void, options: IntersectionObserverInit = {}) => {
+export const useIntersectionObserver = (
+  cb: () => void,
+  options: IntersectionObserverInit = {},
+) => {
   const elementRef = useRef(null);
 
   const observerRef = useRef(

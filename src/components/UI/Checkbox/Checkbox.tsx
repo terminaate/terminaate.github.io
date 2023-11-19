@@ -3,11 +3,11 @@ import cl from './Checkbox.module.scss';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-interface ICheckbox extends InputHTMLAttributes<HTMLInputElement> {
+type Props = InputHTMLAttributes<HTMLInputElement> & {
   containerClassName?: string;
-}
+};
 
-const Checkbox: FC<ICheckbox> = ({
+export const Checkbox: FC<Props> = ({
   checked = false,
   title,
   containerClassName,
@@ -25,5 +25,3 @@ const Checkbox: FC<ICheckbox> = ({
     </div>
   );
 };
-
-export default Checkbox;

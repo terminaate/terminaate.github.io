@@ -1,23 +1,20 @@
 import { FC, useCallback } from 'react';
 import cl from './NavDesktop.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import useMatch from '@/hooks/useMatch';
-import useConfigContext from '@/hooks/useConfigContext';
-import { updateConfig } from '@/contexts/ConfigContext';
-import MouseHover from '@/components/MouseHover';
+import { useMatch } from '@/contexts/RoutingContext/hooks/useMatch';
+import { MouseHover } from '@/components/MouseHover';
 import { links } from '../Nav.const';
-import useNavigate from '@/hooks/useNavigate';
-import useRoutingContext from '@/hooks/useRoutingContext';
+import { useRoutingState } from '@/contexts/RoutingContext/hooks/useRoutingState';
+import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
+import { useConfigActions } from '@/contexts/ConfigContext/hooks/useConfigActions';
 
-interface INavLink {
+type Props = {
   link: ArrayElement<typeof links>;
-}
+};
 
-const NavLink: FC<INavLink> = ({ link }) => {
-  const navigate = useNavigate();
-  const {
-    state: { currentPage },
-  } = useRoutingContext();
+const NavLink: FC<Props> = ({ link }) => {
+  const { setCurrentPage: navigate } = useRoutingActions();
+  const { currentPage } = useRoutingState();
 
   return (
     <MouseHover onClick={() => navigate(link.href)} className={cl.link}>
@@ -29,12 +26,12 @@ const NavLink: FC<INavLink> = ({ link }) => {
   );
 };
 
-const NavDesktop = () => {
+export const NavDesktop = () => {
   const isMatch = useMatch('IntroPage');
-  const { dispatch } = useConfigContext();
+  const { updateConfig } = useConfigActions();
 
   const openDevToolsModal = useCallback(() => {
-    dispatch(updateConfig({ devToolsModal: true }));
+    updateConfig({ devToolsModal: true });
   }, []);
 
   return (
@@ -62,5 +59,3 @@ const NavDesktop = () => {
     </>
   );
 };
-
-export default NavDesktop;

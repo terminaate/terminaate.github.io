@@ -1,4 +1,4 @@
-export function TypeOf(value) {
+export function TypeOf(value: unknown) {
   return Object.prototype.toString
     .call(value)
     .split(' ')[1]

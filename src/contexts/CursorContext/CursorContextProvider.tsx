@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useReducer } from 'react';
-import CursorContext, { initialState } from './CursorContext';
+import { initialState, CursorContext } from './CursorContext';
 import { CursorContextReducer } from './CursorContextReducer';
 
 export const CursorContextProvider: FC<PropsWithChildren> = ({ children }) => {

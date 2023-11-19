@@ -1,12 +1,17 @@
 import { AnchorHTMLAttributes, FC, MouseEvent, useCallback } from 'react';
-import useNavigate from '@/hooks/useNavigate';
+import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
 
-interface ILink extends AnchorHTMLAttributes<HTMLAnchorElement> {
+type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
-}
+};
 
-const Link: FC<ILink> = ({ href, children, onClick = () => {}, ...props }) => {
-  const navigate = useNavigate();
+export const Link: FC<Props> = ({
+  href,
+  children,
+  onClick = () => {},
+  ...props
+}) => {
+  const { setCurrentPage: navigate } = useRoutingActions();
 
   const onLinkClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -20,5 +25,3 @@ const Link: FC<ILink> = ({ href, children, onClick = () => {}, ...props }) => {
     </a>
   );
 };
-
-export default Link;
