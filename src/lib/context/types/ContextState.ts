@@ -1,4 +1,4 @@
-import { DispatchAction } from '@/types/DispatchAction';
+import { DispatchAction } from '@/lib/context/types/DispatchAction';
 import { Dispatch } from 'react';
 
 export interface ContextState<State> {

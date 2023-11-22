@@ -3,20 +3,18 @@ import cl from './NavMobile.module.scss';
 import { FaGripLines } from 'react-icons/all';
 import { AnimatePresence, motion } from 'framer-motion';
 import { links } from '../Nav.const';
-import useOutsideClick from '@/hooks/useOutsideClick';
-import Link from '@/components/UI/Link';
-import useRoutingContext from '@/hooks/useRoutingContext';
-import useMatch from '@/hooks/useMatch';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { Link } from '@/components/UI/Link';
+import { useMatch } from '@/contexts/RoutingContext/hooks/useMatch';
+import { useRoutingState } from '@/contexts/RoutingContext/hooks/useRoutingState';
 
-const NavMobile = () => {
+export const NavMobile = () => {
   const isMatch = useMatch('IntroPage');
   const [visible, setVisible] = useState<boolean>(false);
   const containerRef = useOutsideClick(() => {
     setVisible(false);
   });
-  const {
-    state: { currentPage },
-  } = useRoutingContext();
+  const { currentPage } = useRoutingState();
 
   return (
     <>
@@ -57,5 +55,3 @@ const NavMobile = () => {
     </>
   );
 };
-
-export default NavMobile;

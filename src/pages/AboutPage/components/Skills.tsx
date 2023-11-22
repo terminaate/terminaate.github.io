@@ -1,5 +1,5 @@
-import MouseHover from '@/components/MouseHover';
-import Title from '@/components/Title';
+import { MouseHover } from '@/components/MouseHover';
+import { Title } from '@/components/Title';
 import cl from '@/pages/AboutPage/AboutPage.module.scss';
 import { SkillProps, skills } from '@/pages/AboutPage/AboutPage.const';
 import { FC } from 'react';
@@ -20,7 +20,7 @@ const Skill: FC<SkillProps> = ({ title, content }) => {
   );
 };
 
-const Skills = () => {
+export const Skills = () => {
   return (
     <>
       <MouseHover>
@@ -34,5 +34,3 @@ const Skills = () => {
     </>
   );
 };
-
-export default Skills;

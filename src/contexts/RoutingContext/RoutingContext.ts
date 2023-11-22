@@ -1,18 +1,18 @@
 import { Pages } from '@/components/Routing';
 import { createContext } from 'react';
-import { createContextDefaultState } from '@/utils/createContextDefaultState';
-import { ContextState } from '@/types/ContextState';
+import { createContextDefaultState } from '@/lib/context/createContextDefaultState';
+import { ContextState } from '@/lib/context/types/ContextState';
 
-export interface IRoutingContextState {
+export type RoutingContextState = {
   currentPage: keyof typeof Pages;
-}
+};
 
-export type RoutingContextType = ContextState<IRoutingContextState>;
+export type RoutingContextType = ContextState<RoutingContextState>;
 
-export const initialState = createContextDefaultState<IRoutingContextState>({
-  currentPage: import.meta.env.DEV ? 'AboutPage' : 'IntroPage',
+const DEFAULT_PAGE = import.meta.env.DEV ? 'AboutPage' : 'IntroPage';
+
+export const initialState = createContextDefaultState<RoutingContextState>({
+  currentPage: DEFAULT_PAGE,
 });
 
-const RoutingContext = createContext<RoutingContextType>(initialState);
-
-export default RoutingContext;
+export const RoutingContext = createContext<RoutingContextType>(initialState);

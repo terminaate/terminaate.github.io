@@ -2,15 +2,19 @@ import { Dispatch, FC, SetStateAction, useState } from 'react';
 import cl from './Select.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoIosArrowUp } from 'react-icons/all';
-import useOutsideClick from '@/hooks/useOutsideClick';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
 
-interface ISelect {
+type Props = {
   currentState: string;
-  setCurrentState: Dispatch<SetStateAction<ISelect['currentState']>>;
+  setCurrentState: Dispatch<SetStateAction<Props['currentState']>>;
   variants: string[];
-}
+};
 
-const Select: FC<ISelect> = ({ currentState, setCurrentState, variants }) => {
+export const Select: FC<Props> = ({
+  currentState,
+  setCurrentState,
+  variants,
+}) => {
   const [variantsVisible, setVariantsVisible] = useState<boolean>(false);
   const containerRef = useOutsideClick<HTMLDivElement>(() => {
     setVariantsVisible(false);
@@ -48,5 +52,3 @@ const Select: FC<ISelect> = ({ currentState, setCurrentState, variants }) => {
     </div>
   );
 };
-
-export default Select;

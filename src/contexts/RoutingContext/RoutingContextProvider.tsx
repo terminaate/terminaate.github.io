@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useReducer } from 'react';
-import RoutingContext, { initialState } from './RoutingContext';
+import { initialState, RoutingContext } from './RoutingContext';
 import { RoutingContextReducer } from './RoutingContextReducer';
 
 export const RoutingContextProvider: FC<PropsWithChildren> = ({ children }) => {

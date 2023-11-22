@@ -1,8 +1,8 @@
-import MouseHover from '@/components/MouseHover';
-import Title from '@/components/Title';
+import { MouseHover } from '@/components/MouseHover';
+import { Title } from '@/components/Title';
 import cl from '@/pages/AboutPage/AboutPage.module.scss';
 
-const About = () => {
+export const About = () => {
   return (
     <>
       <MouseHover>
@@ -23,5 +23,3 @@ const About = () => {
     </>
   );
 };
-
-export default About;

@@ -1,15 +1,15 @@
 import { FC, HTMLAttributes } from 'react';
 import cl from './ProjectCard.module.scss';
 import { BiLink, FaGithub } from 'react-icons/all';
-import MouseHover from '@/components/MouseHover';
+import { MouseHover } from '@/components/MouseHover';
 import classNames from 'classnames';
 import { ProjectProps } from '@/pages/ProjectsPage/ProjectsPage.const';
 
-interface IProjectCard extends HTMLAttributes<HTMLDivElement> {
+type Props = HTMLAttributes<HTMLDivElement> & {
   project: ProjectProps;
-}
+};
 
-const ProjectCard: FC<IProjectCard> = ({ project, className, ...props }) => {
+export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
   return (
     <div {...props} className={classNames(cl.projectContainer, className)}>
       <div
@@ -54,5 +54,3 @@ const ProjectCard: FC<IProjectCard> = ({ project, className, ...props }) => {
     </div>
   );
 };
-
-export default ProjectCard;

@@ -39,10 +39,6 @@ body {
   background-color: var(--background-primary);
   font-family: var(--font-primary);
   overflow-x: hidden;
-
-  &[data-cursor='false'] * {
-    cursor: none;
-  }
 }
 
 img,

@@ -2,13 +2,13 @@ import { FC, useState } from 'react';
 import cl from './Title.module.scss';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import classNames from 'classnames';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
-interface ITitle extends HTMLMotionProps<'span'> {
+type Props = HTMLMotionProps<'span'> & {
   containerClassName?: string;
-}
+};
 
-const Title: FC<ITitle> = ({
+export const Title: FC<Props> = ({
   children,
   containerClassName,
   className,
@@ -41,5 +41,3 @@ const Title: FC<ITitle> = ({
     </h1>
   );
 };
-
-export default Title;

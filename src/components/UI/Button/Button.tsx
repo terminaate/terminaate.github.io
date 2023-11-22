@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes } from 'react';
 import cl from './Button.module.scss';
 
-const Button: FC<HTMLAttributes<HTMLButtonElement>> = ({
+export const Button: FC<HTMLAttributes<HTMLButtonElement>> = ({
   children,
   ...props
 }) => {
@@ -11,5 +11,3 @@ const Button: FC<HTMLAttributes<HTMLButtonElement>> = ({
     </button>
   );
 };
-
-export default Button;

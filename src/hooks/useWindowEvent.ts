@@ -1,10 +1,10 @@
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
-export default <K extends keyof WindowEventMap>(
+export const useWindowEvent = <K extends keyof WindowEventMap>(
   type: K,
   listener: (ev: WindowEventMap[K]) => void,
 ) => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener(type, listener);
 
     return () => {

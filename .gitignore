@@ -23,3 +23,6 @@ src/assets/models
 *.njsproj
 *.sln
 *.sw?
+
+.env.production
+*.production

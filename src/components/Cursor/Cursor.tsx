@@ -7,21 +7,22 @@ import {
   useState,
 } from 'react';
 import cl from './Cursor.module.scss';
-import useWindowEvent from '@/hooks/useWindowEvent';
+import { useWindowEvent } from '@/hooks/useWindowEvent';
 import { createPortal } from 'react-dom';
-import useCursorContext from '@/hooks/useCursorContext';
+import { useCursorState } from '@/contexts/CursorContext/hooks/useCursorState';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CursorItemProps } from '@/contexts/CursorContext';
-import useConfigContext from '@/hooks/useConfigContext';
-import useMatchMedia from '@/hooks/useMatchMedia';
+import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
+import { useMatchMedia } from '@/hooks/useMatchMedia';
+import { ScreenBreakPoints } from '@/common/constants/ScreenBreakPoints';
 
-interface ICursor {
+type Props = {
   size?: number;
-}
+};
 
-const Cursor: FC<ICursor> = ({ size = 40 }) => {
-  const items = useCursorContext().state;
-  const { showCustomCursor } = useConfigContext().state;
+export const Cursor: FC<Props> = ({ size = 40 }) => {
+  const items = useCursorState();
+  const { showCustomCursor } = useConfigState();
   const followerRef = useRef<null | HTMLDivElement>(null);
   const cursorRef = useRef<null | HTMLDivElement>(null);
   const [currentItem, setCurrentItem] = useState<CursorItemProps>({
@@ -30,7 +31,7 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
     position: 'top',
   });
   const [hovered, setHovered] = useState<boolean>(false);
-  const isMobile = useMatchMedia('(max-width: 750px)');
+  const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
 
   const onMouseMove = useCallback((e: MouseEvent) => {
     const { current: follower } = followerRef;
@@ -144,5 +145,3 @@ const Cursor: FC<ICursor> = ({ size = 40 }) => {
     document.querySelector('#cursor')!,
   );
 };
-
-export default Cursor;
