@@ -27,9 +27,9 @@ export const Title: FC<Props> = ({
       <AnimatePresence>
         {visible && (
           <motion.span
+            {...props}
             transition={{ duration: 0.8 }}
             className={classNames(cl.title, className)}
-            {...props}
             initial={{ translateY: '-150%' }}
             animate={{ translateY: 0 }}
             exit={{ translateY: '150%' }}

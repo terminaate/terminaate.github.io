@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import cl from './NavMobile.module.scss';
-import { FaGripLines } from 'react-icons/all';
+import { FaGripLines } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 import { links } from '../Nav.const';
 import { useOutsideClick } from '@/hooks/useOutsideClick';

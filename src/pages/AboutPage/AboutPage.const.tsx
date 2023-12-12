@@ -1,9 +1,5 @@
 import { ReactElement } from 'react';
 import {
-  FaBootstrap,
-  FaCss3,
-  FaHtml5,
-  FaReact,
   SiExpress,
   SiFramer,
   SiJavascript,
@@ -20,7 +16,8 @@ import {
   SiTypescript,
   SiVite,
   SiWebpack,
-} from 'react-icons/all';
+} from 'react-icons/si';
+import { FaBootstrap, FaCss3, FaHtml5, FaReact } from 'react-icons/fa';
 
 export type SkillContentProps = {
   title: string;

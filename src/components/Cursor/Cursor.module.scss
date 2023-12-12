@@ -34,7 +34,11 @@
   border-radius: 50%;
   border: 3px solid var(--background-third);
   z-index: 10000;
-  transition: transform 0.2s, height 0.2s, width 0.2s, background-color 0.2s,
+  transition:
+    transform 0.2s,
+    height 0.2s,
+    width 0.2s,
+    background-color 0.2s,
     backdrop-filter 0.2s;
   pointer-events: none;
   display: flex;

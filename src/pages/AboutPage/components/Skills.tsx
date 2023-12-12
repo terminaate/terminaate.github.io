@@ -1,4 +1,3 @@
-import { MouseHover } from '@/components/MouseHover';
 import { Title } from '@/components/Title';
 import cl from '@/pages/AboutPage/AboutPage.module.scss';
 import { SkillProps, skills } from '@/pages/AboutPage/AboutPage.const';
@@ -23,9 +22,7 @@ const Skill: FC<SkillProps> = ({ title, content }) => {
 export const Skills = () => {
   return (
     <>
-      <MouseHover>
-        <Title className={cl.title}>Skills:</Title>
-      </MouseHover>
+      <Title className={cl.title}>Skills:</Title>
       <ul className={cl.skills}>
         {skills.map((skill, key) => (
           <Skill key={key} {...skill} />

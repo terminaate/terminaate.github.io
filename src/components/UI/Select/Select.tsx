@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import cl from './Select.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { IoIosArrowUp } from 'react-icons/all';
+import { IoIosArrowUp } from 'react-icons/io';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 type Props = {

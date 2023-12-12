@@ -3,6 +3,7 @@
 @font-face {
   src: url('./assets/fonts/HelveticaNeue-Medium.otf');
   font-family: 'Helvetica Neue';
+  font-display: swap;
 }
 
 *,
@@ -14,7 +15,10 @@
   scrollbar-width: 2px;
   scrollbar-color: var(--text-secondary) none;
   user-select: none;
-  outline: none;
+
+  // TODO
+  // do normal shit with outline
+  //outline: none;
 }
 
 :root {

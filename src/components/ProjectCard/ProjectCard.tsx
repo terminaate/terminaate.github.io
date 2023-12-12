@@ -1,6 +1,7 @@
 import { FC, HTMLAttributes } from 'react';
 import cl from './ProjectCard.module.scss';
-import { BiLink, FaGithub } from 'react-icons/all';
+import { FaGithub } from 'react-icons/fa';
+import { BiLink } from 'react-icons/bi';
 import { MouseHover } from '@/components/MouseHover';
 import classNames from 'classnames';
 import { ProjectProps } from '@/pages/ProjectsPage/ProjectsPage.const';
@@ -10,9 +11,15 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 };
 
 export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
+  // TODO
+  // Add for project background image - MouseHover
+
   return (
     <div {...props} className={classNames(cl.projectContainer, className)}>
-      <div
+      <a
+        rel={'noreferrer'}
+        href={project.link ?? project.githubLink}
+        target={'_blank'}
         className={cl.projectImage}
         style={{ backgroundImage: `url(${project.image})` }}
       />
@@ -42,9 +49,8 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
             )}
           </div>
         </div>
-        <MouseHover>
-          <div className={cl.projectDescription}>{project.description}</div>
-        </MouseHover>
+
+        <div className={cl.projectDescription}>{project.description}</div>
         <div className={cl.projectTags}>
           {project.tags.map((tag, key) => (
             <span key={key}>{tag}</span>
