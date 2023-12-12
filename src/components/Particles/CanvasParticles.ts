@@ -1,56 +1,68 @@
+import { getRandomBetween } from '@/utils/getRandomBetween';
+
 type ParticleProps = {
-  velocity: number;
-  size: number;
+  angleVelocity: number | [number, number];
+  radius: number | [number, number];
+  particleSize: number;
   ctx: CanvasRenderingContext2D;
 };
 
 class Particle {
-  size: number;
-  velocityX: number;
-  velocityY: number;
+  ctx: CanvasRenderingContext2D;
+  particleSize: number;
+  centerX: number;
+  centerY: number;
   x: number;
   y: number;
-  ctx: CanvasRenderingContext2D;
+  angleVelocity: number;
+  radius: number;
+  angle = Math.random() * 360;
 
-  constructor({ velocity, size, ctx }: ParticleProps) {
+  constructor({ particleSize, ctx, radius, angleVelocity }: ParticleProps) {
     this.ctx = ctx;
-    this.size = size;
-    this.velocityX = Math.random() * (velocity * 2) - velocity;
-    this.velocityY = Math.random() * (velocity * 2) + velocity;
-    this.x = Math.random() * ctx.canvas.width;
-    this.y = this.ctx.canvas.height + this.size;
+
+    this.centerX = this.ctx.canvas.width / 2;
+    this.centerY = this.ctx.canvas.height / 2;
+
+    this.particleSize = particleSize;
+    this.angleVelocity = Array.isArray(angleVelocity)
+      ? getRandomBetween(...angleVelocity)
+      : angleVelocity;
+    this.radius = Array.isArray(radius) ? getRandomBetween(...radius) : radius;
+
+    this.x =
+      this.centerX + this.radius * Math.cos((this.angle * Math.PI) / 180);
+    this.y =
+      this.centerY + this.radius * Math.sin((this.angle * Math.PI) / 180);
   }
 
   draw() {
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    this.ctx.arc(this.x, this.y, this.particleSize, 0, Math.PI * 2);
     this.ctx.closePath();
-    this.ctx.fillStyle = 'rgb(0,210,131)';
+    this.ctx.fillStyle = '#00a080';
     this.ctx.fill();
   }
 
   updatePosition() {
-    this.x = this.ctx.canvas.width / 2 + Math.cos(45) * this.velocityX;
-    this.y = this.ctx.canvas.height / 2 + Math.sin(45) * this.velocityY;
+    this.x =
+      this.centerX + this.radius * Math.cos((this.angle * Math.PI) / 180);
+    this.y =
+      this.centerY + this.radius * Math.sin((this.angle * Math.PI) / 180);
 
-    // this.x += this.velocityX;
-    // if (this.x > this.ctx.canvas.width) {
-    //   this.x = 0;
-    // } else if (this.x < 0) {
-    //   this.x = this.ctx.canvas.width;
-    // }
-    //
-    // this.y -= this.velocityY;
-    // if (this.y <= 0) {
-    //   this.y = this.ctx.canvas.height + this.size;
-    // }
+    this.angle += this.angleVelocity;
+
+    if (this.angle > 360) {
+      this.angle = 0;
+    }
   }
 }
 
 export type CanvasParticlesProps = {
   particlesCount: number;
-  particlesSize: number;
-  particlesVelocity: number;
+  particlesSize: ParticleProps['particleSize'];
+  particlesVelocity: ParticleProps['angleVelocity'];
+  particlesRadius: ParticleProps['radius'];
 };
 
 export class CanvasParticles {
@@ -81,19 +93,21 @@ export class CanvasParticles {
     particlesCount,
     particlesVelocity,
     particlesSize,
+    particlesRadius,
   }: CanvasParticlesProps) {
     this.onWindowResize();
     this.mountEvents();
 
     for (let i = 0; i <= particlesCount; i++) {
       const newParticle = new Particle({
-        velocity: particlesVelocity,
+        angleVelocity: particlesVelocity,
         ctx: this.ctx,
-        size: particlesSize,
+        particleSize: particlesSize,
+        radius: particlesRadius,
       });
 
       // INFO: do little delay for remove strange effect of particles moving
-      newParticle.y += particlesCount * 2;
+      // newParticle.y += particlesCount * 2;
 
       this.particles.push(newParticle);
     }

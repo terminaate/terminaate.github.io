@@ -12,7 +12,7 @@ export type RoutingContextType = ContextState<RoutingContextState>;
 const DEFAULT_PAGE = import.meta.env.DEV ? 'AboutPage' : 'IntroPage';
 
 export const initialState = createContextDefaultState<RoutingContextState>({
-  currentPage: 'IntroPage',
+  currentPage: DEFAULT_PAGE,
 });
 
 export const RoutingContext = createContext<RoutingContextType>(initialState);

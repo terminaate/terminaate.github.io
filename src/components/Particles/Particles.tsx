@@ -9,8 +9,9 @@ type Props = CanvasHTMLAttributes<HTMLCanvasElement> &
 
 export const Particles: FC<Props> = ({
   particlesCount = 100,
-  particlesVelocity = 1.5,
-  particlesSize = 5,
+  particlesVelocity = [0.05, 0.1],
+  particlesSize = 3,
+  particlesRadius = [200, 1000],
   ...props
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -24,6 +25,7 @@ export const Particles: FC<Props> = ({
       particlesCount,
       particlesVelocity,
       particlesSize,
+      particlesRadius,
     };
 
     const canvasParticles = new CanvasParticles(
@@ -34,11 +36,9 @@ export const Particles: FC<Props> = ({
     return canvasParticles.onUnMount;
   }, []);
 
-  // TODO: maybe do an interesting effect, not bored particles
-
   return (
     <>
-      <canvas {...props} ref={canvasRef} />
+      <canvas style={{ filter: 'blur(3px)' }} {...props} ref={canvasRef} />
     </>
   );
 };

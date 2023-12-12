@@ -17,15 +17,14 @@
     @keyframes typingTextAnim {
       0% {
         opacity: 0;
-        filter: none;
+        transform: translateY(15px);
       }
       50% {
         opacity: 0.8;
-        filter: blur(10px);
+        transform: translateY(0);
       }
       100% {
         opacity: 1;
-        filter: none;
       }
     }
   }
