@@ -4,14 +4,12 @@ import cl from '@/pages/AboutPage/AboutPage.module.scss';
 import { ProjectCard } from '@/components/ProjectCard';
 import { projects } from '@/pages/ProjectsPage/ProjectsPage.const';
 import { Link } from '@/components/UI/Link';
-import { HiOutlineArrowRight } from 'react-icons/all';
+import { HiOutlineArrowRight } from 'react-icons/hi';
 
 export const LatestProjects = () => {
   return (
     <>
-      <MouseHover>
-        <Title className={cl.title}>Latest projects: </Title>
-      </MouseHover>
+      <Title className={cl.title}>Latest projects: </Title>
       <div className={cl.projectsContainer}>
         <ProjectCard project={projects[0]} />
         <MouseHover text={'More projects...'}>

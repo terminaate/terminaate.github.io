@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { SiDiscord, SiGithub, SiGmail, SiTelegram } from 'react-icons/all';
+import { SiDiscord, SiGithub, SiGmail, SiTelegram } from 'react-icons/si';
 
 export type ContactProps = {
   icon: ReactElement;

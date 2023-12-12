@@ -3,7 +3,7 @@ import { PageContainer } from '@/components/PageContainer';
 import cl from './IntroPage.module.scss';
 import { TypingText } from '@/components/TypingText';
 import { Particles } from '@/components/Particles';
-import { FaPlay } from 'react-icons/all';
+import { FaPlay } from 'react-icons/fa';
 import { MouseHover } from '@/components/MouseHover';
 import { Link } from '@/components/UI/Link';
 import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
@@ -29,11 +29,7 @@ export const IntroPage = () => {
 
   return (
     <PageContainer className={cl.introPage}>
-      <Particles
-        className={cl.backgroundParticles}
-        width={'100%'}
-        height={'100%'}
-      />
+      <Particles className={cl.backgroundParticles} />
       <TypingText
         defaultDelay={400}
         onEnd={navigateToHome}
