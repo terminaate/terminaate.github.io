@@ -1,67 +1,35 @@
 .cursor {
+  position: fixed;
   backdrop-filter: blur(10px);
   //background-color: var(--text-primary);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10001;
+  z-index: 1000;
   border: 3px solid var(--background-third);
-}
 
-//.follower {
-//  --size: 40px;
-//  $size-separated: calc(var(--size) / 2);
-//  $neg-size: calc($size-separated * -1);
-//
-//  position: fixed;
-//  top: -100%;
-//  left: -100%;
-//  transform: translate($neg-size, $neg-size);
-//  width: var(--size);
-//  height: var(--size);
-//  //background: none;
-//  backdrop-filter: blur(5px);
-//  border-radius: 50%;
-//  border: 3px solid var(--background-third);
-//  z-index: 10000;
-//  transition:
-//    transform 0.2s,
-//    height 0.2s,
-//    width 0.2s,
-//    background-color 0.2s,
-//    backdrop-filter 0.2s;
-//  pointer-events: none;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//
-//  &[data-hover='true'] {
-//    mix-blend-mode: difference;
-//    background-color: var(--text-primary);
-//    backdrop-filter: blur(0);
-//  }
-//
-//}
-.followerText {
-  position: absolute;
-  font-family: var(--font-secondary);
-  font-weight: 500;
-  font-size: 22px;
-  pointer-events: none;
-  width: max-content;
+  .followerText {
+    position: absolute;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 22px;
+    pointer-events: none;
+    width: max-content;
 
-  &[data-position='top'] {
-    bottom: 102.5%;
+    &[data-position='top'] {
+      bottom: 102.5%;
+    }
+
+    &[data-position='bottom'] {
+      top: 102.5%;
+    }
+
+    &[data-position='left'] {
+      right: 115%;
+    }
+
+    &[data-position='right'] {
+      left: 115%;
+    }
   }
 
-  &[data-position='bottom'] {
-    top: 102.5%;
-  }
-
-  &[data-position='left'] {
-    right: 115%;
-  }
-
-  &[data-position='right'] {
-    left: 115%;
-  }
 }

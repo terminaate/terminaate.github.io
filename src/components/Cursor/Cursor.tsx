@@ -13,18 +13,16 @@ type Props = {
 };
 
 const cursorVariants: Variants = {
-  initial: ({ size, mousePosition }) => {
-    return {
-      opacity: 1,
-      width: size,
-      height: size,
-      x: mousePosition.x - size / 2,
-      y: mousePosition.y - size / 2,
-    };
-  },
+  initial: ({ size, mousePosition }) => ({
+    opacity: 1,
+    width: size,
+    height: size,
+    x: mousePosition.x - size / 2,
+    y: mousePosition.y - size / 2,
+  }),
 
   animate: ({ mousePosition, hovered, size }) => {
-    const sizeStyles = {
+    let sizeStyles: Record<string, any> = {
       width: hovered ? size * 2 : size,
       height: hovered ? size * 2 : size,
     };
@@ -38,14 +36,38 @@ const cursorVariants: Variants = {
       return { ...newMousePosition, ...sizeStyles };
     }
 
-    const { elementData } = hovered;
+    const {
+      magneticElement,
+      fitToElement,
+      magneticAntiPressure,
+      hoveredStyles: customHoverStyles,
+    } = hovered;
 
-    if (elementData) {
+    if (magneticElement) {
+      if (fitToElement) {
+        sizeStyles = {
+          width: magneticElement.width,
+          height: magneticElement.height,
+          borderRadius: fitToElement.borderRadius,
+        };
+      }
+
       newMousePosition = {
-        x: elementData.x - sizeStyles.width / 2,
-        y: elementData.y - sizeStyles.height / 2,
+        x:
+          magneticElement.x -
+          sizeStyles.width / 2 +
+          (mousePosition.x - magneticElement.x) / magneticAntiPressure,
+        y:
+          magneticElement.y -
+          sizeStyles.height / 2 +
+          (mousePosition.y - magneticElement.y) / magneticAntiPressure,
       };
     }
+
+    // console.log(customHoverStyles);
+
+    // TODO
+    // add support for custom hover styles
 
     return {
       ...sizeStyles,
@@ -89,8 +111,6 @@ export const Cursor: FC<Props> = ({ size = 30 }) => {
     return null;
   }
 
-  console.log(isOutOfScreen);
-
   const showCursor = !isOutOfScreen && showCustomCursor;
 
   return createPortal(
@@ -101,13 +121,19 @@ export const Cursor: FC<Props> = ({ size = 30 }) => {
           initial={'initial'}
           animate={'animate'}
           exit={'exit'}
-          custom={{ mousePosition, hovered: currentItem, size }}
           transition={{
-            type: 'just',
-            duration: 0.3,
-            x: { duration: 0.1 },
-            y: { duration: 0.1 },
+            type: 'tween',
+            duration: 0.2,
+            x: {
+              type: 'tween',
+              duration: 0.05,
+            },
+            y: {
+              type: 'tween',
+              duration: 0.05,
+            },
           }}
+          custom={{ mousePosition, hovered: currentItem, size }}
           className={cl.cursor}
         >
           <AnimatePresence>

@@ -15,7 +15,17 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
   // Add for project background image - MouseHover
 
   return (
-    <div {...props} className={classNames(cl.projectContainer, className)}>
+    <MouseHover
+      magnetic
+      magneticAntiPressure={15}
+      fitToElement={{ borderRadius: '15px' }}
+      hoveredStyles={{
+        background: 'none',
+        border: '3px solid var(--text-primary)',
+      }}
+      {...props}
+      className={classNames(cl.projectContainer, className)}
+    >
       <a
         rel={'noreferrer'}
         href={project.link ?? project.githubLink}
@@ -25,27 +35,23 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
       />
       <div className={cl.projectContent}>
         <div className={cl.projectTitleContainer}>
-          <MouseHover>
-            <h2 className={cl.projectTitle}>{project.title}</h2>
-          </MouseHover>
+          {/*<MouseHover>*/}
+          <h2 className={cl.projectTitle}>{project.title}</h2>
+          {/*</MouseHover>*/}
           <div className={cl.projectLinks}>
             {project.githubLink && (
-              <MouseHover text={'Source code'}>
-                <a
-                  href={project.githubLink}
-                  target={'_blank'}
-                  rel={'noreferrer'}
-                >
-                  <FaGithub />
-                </a>
-              </MouseHover>
+              // <MouseHover text={'Source code'}>
+              <a href={project.githubLink} target={'_blank'} rel={'noreferrer'}>
+                <FaGithub />
+              </a>
+              // </MouseHover>
             )}
             {project.link && (
-              <MouseHover text={'Link'}>
-                <a href={project.link} target={'_blank'} rel={'noreferrer'}>
-                  <BiLink />
-                </a>
-              </MouseHover>
+              // <MouseHover text={'Link'}>
+              <a href={project.link} target={'_blank'} rel={'noreferrer'}>
+                <BiLink />
+              </a>
+              // </MouseHover>
             )}
           </div>
         </div>
@@ -57,6 +63,6 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
           ))}
         </div>
       </div>
-    </div>
+    </MouseHover>
   );
 };

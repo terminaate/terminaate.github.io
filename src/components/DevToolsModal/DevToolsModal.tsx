@@ -21,7 +21,8 @@ export const DevToolsModal = () => {
   const { devToolsModal } = useConfigState();
   const { updateConfig } = useConfigActions();
   const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
-  const [showCursor, onShowCursorChange] = useConfigInput('showCursor');
+  const [showCursor, onShowCursorChange, setShowCursor] =
+    useConfigInput('showCursor');
   const [showCustomCursor, onShowCustomCursorChange, setShowCustomCursor] =
     useConfigInput('showCustomCursor');
   const [transitionBetweenPages, onTransitionBetweenPagesChange] =
@@ -42,7 +43,13 @@ export const DevToolsModal = () => {
     if (!showCursor && !showCustomCursor) {
       setShowCustomCursor(true);
     }
-  }, [showCursor, showCustomCursor]);
+  }, [showCursor]);
+
+  useEffect(() => {
+    if (!showCustomCursor && !showCursor) {
+      setShowCursor(true);
+    }
+  }, [showCustomCursor]);
 
   useKeyPress('Period', () => {
     setModalState(true);

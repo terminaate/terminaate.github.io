@@ -14,7 +14,6 @@
   box-sizing: border-box;
   scrollbar-width: 2px;
   scrollbar-color: var(--text-secondary) none;
-  user-select: none;
 
   // TODO
   // do normal shit with outline
@@ -25,7 +24,7 @@
   --background-primary: #000;
   --background-alt: rgba(0, 0, 0, 0.9);
   --background-secondary: #0b0b0b;
-  --background-third: #212121;
+  --background-third: #2c2b2b;
   --background-ui: #181818;
   --background-ui-hover: #2d2d2d;
   --text-primary: #fff;
@@ -37,6 +36,14 @@
   --font-primary: 'Work Sans', sans-serif;
   --font-secondary: 'Helvetica Neue';
 }
+
+//::selection {
+//  background: blueviolet;
+//}
+
+//::selection {
+//  background: var(--background-third);
+//}
 
 body {
   color: var(--text-primary);
@@ -50,8 +57,7 @@ body {
 }
 
 img,
-button,
-h1 {
+button {
   user-select: none;
 }
 
@@ -82,6 +88,10 @@ input {
     display: none;
   }
 }
+
+//#cursor {
+//  z-index: 1000;
+//}
 
 ::-webkit-scrollbar {
   width: 2px;

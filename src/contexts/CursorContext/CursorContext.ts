@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { ContextState } from '@/lib/context/types/ContextState';
 import { createContextDefaultState } from '@/lib/context/createContextDefaultState';
+import { TargetAndTransition } from 'framer-motion';
 
 type ElementData = {
   x: number;
@@ -12,7 +13,10 @@ type ElementData = {
 export type CursorContextState = null | {
   text?: string;
   position?: 'top' | 'left' | 'right' | 'bottom';
-  elementData?: ElementData;
+  magneticElement?: ElementData;
+  magneticAntiPressure?: number;
+  fitToElement?: { borderRadius: string };
+  hoveredStyles?: Omit<TargetAndTransition, 'transition' | 'transitionEnd'>;
 };
 
 export type CursorContextType = ContextState<CursorContextState>;
