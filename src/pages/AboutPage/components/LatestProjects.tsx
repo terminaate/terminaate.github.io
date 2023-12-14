@@ -12,7 +12,7 @@ export const LatestProjects = () => {
       <Title className={cl.title}>Latest projects: </Title>
       <div className={cl.projectsContainer}>
         <ProjectCard project={projects[0]} />
-        <MouseHover text={'More projects...'}>
+        <MouseHover magnetic text={'More projects...'}>
           <Link href={'ProjectsPage'} className={cl.projectsLink}>
             <HiOutlineArrowRight />
           </Link>

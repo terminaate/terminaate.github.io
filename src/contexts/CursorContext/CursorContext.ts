@@ -1,18 +1,22 @@
-import { createContext, MutableRefObject } from 'react';
+import { createContext } from 'react';
 import { ContextState } from '@/lib/context/types/ContextState';
 import { createContextDefaultState } from '@/lib/context/createContextDefaultState';
 
-export type CursorContextState = {
-  id: number;
+type ElementData = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export type CursorContextState = null | {
   text?: string;
   position?: 'top' | 'left' | 'right' | 'bottom';
-  ref: MutableRefObject<null | HTMLElement>;
-}[];
+  elementData?: ElementData;
+};
 
 export type CursorContextType = ContextState<CursorContextState>;
 
-export type CursorItemProps = Omit<ArrayElement<CursorContextState>, 'ref'>;
-
-export const initialState = createContextDefaultState<CursorContextState>([]);
+export const initialState = createContextDefaultState<CursorContextState>(null);
 
 export const CursorContext = createContext<CursorContextType>(initialState);

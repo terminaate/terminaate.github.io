@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export const useWindowEvent = <K extends keyof WindowEventMap>(
   type: K,
-  listener: (ev: WindowEventMap[K]) => void,
+  callback: (ev: WindowEventMap[K]) => void,
 ) => {
+  const listener = useCallback(callback, []);
+
   useEffect(() => {
     window.addEventListener(type, listener);
 

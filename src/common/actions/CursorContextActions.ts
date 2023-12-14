@@ -1,4 +1,3 @@
 export const enum CursorContextActions {
-  PUSH_REF = 'PUSH_REF',
-  REMOVE_REF = 'REMOVE_REF',
+  SET_CURSOR_STATE = 'SET_CURSOR_STATE',
 }

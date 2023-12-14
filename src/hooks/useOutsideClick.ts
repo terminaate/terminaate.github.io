@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback, useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 import { useWindowEvent } from '@/hooks/useWindowEvent';
 
 type OptionsEvent = 'mousedown' | 'mouseup' | 'click';
@@ -16,7 +16,7 @@ export const useOutsideClick = <T extends HTMLElement>(
 
   const ref = useRef<null | T>(null);
 
-  const handler = useCallback((e: MouseEvent) => {
+  const handler = (e: MouseEvent) => {
     const target = e.target as T;
 
     if (ref.current === null) {
@@ -26,7 +26,7 @@ export const useOutsideClick = <T extends HTMLElement>(
     if (!ref.current?.contains(target) && !except?.current?.contains(target)) {
       then();
     }
-  }, []);
+  };
 
   useWindowEvent(event, handler);
 
