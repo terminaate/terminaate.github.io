@@ -2,9 +2,9 @@ import { FC, HTMLAttributes, MouseEvent, ReactNode, useEffect } from 'react';
 import { useCursorActions } from '@/contexts/CursorContext/hooks/useCursorActions';
 import { CursorContextState } from '@/contexts/CursorContext';
 
-type Props = HTMLAttributes<HTMLDivElement> &
+type Props = HTMLAttributes<HTMLOrSVGElement> &
   Partial<CursorContextState> & {
-    children: ReactNode;
+    children?: ReactNode;
     magnetic?: boolean;
   };
 

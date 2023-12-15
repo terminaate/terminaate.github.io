@@ -16,6 +16,9 @@ export const AboutPage = () => {
         className={cl.usernameContainer}
         text={'My name is...'}
         position={'bottom'}
+        magnetic
+        magneticAntiPressure={5}
+        fitToElement={{ borderRadius: '3px' }}
       >
         <Title containerClassName={cl.username}>BAHRAM TERMINAATE</Title>
       </MouseHover>

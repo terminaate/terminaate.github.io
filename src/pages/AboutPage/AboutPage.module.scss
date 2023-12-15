@@ -28,6 +28,7 @@
     row-gap: 10px;
 
     .title {
+      user-select: text !important;
       font-size: 20px;
       width: max-content;
     }

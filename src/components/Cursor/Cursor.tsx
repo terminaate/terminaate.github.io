@@ -64,17 +64,19 @@ const cursorVariants: Variants = {
       };
     }
 
-    // console.log(customHoverStyles);
-
-    // TODO
-    // add support for custom hover styles
+    const styles = customHoverStyles
+      ? customHoverStyles
+      : {
+          backgroundColor: '#fff',
+          mixBlendMode: 'difference',
+          border: 'none',
+        };
 
     return {
       ...sizeStyles,
       ...newMousePosition,
-      backgroundColor: '#fff',
-      mixBlendMode: 'difference',
-      border: 'none',
+      ...styles,
+      backdropFilter: 'none',
     };
   },
 

@@ -11,25 +11,14 @@ type Props = HTMLAttributes<HTMLDivElement> & {
 };
 
 export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
-  // TODO
-  // Add for project background image - MouseHover
+  const openProjectLink = () => {
+    window.open(project.link ?? project.githubLink, '_blank');
+  };
 
   return (
-    <MouseHover
-      magnetic
-      magneticAntiPressure={15}
-      fitToElement={{ borderRadius: '15px' }}
-      hoveredStyles={{
-        background: 'none',
-        border: '3px solid var(--text-primary)',
-      }}
-      {...props}
-      className={classNames(cl.projectContainer, className)}
-    >
-      <a
-        rel={'noreferrer'}
-        href={project.link ?? project.githubLink}
-        target={'_blank'}
+    <div {...props} className={classNames(cl.projectContainer, className)}>
+      <MouseHover
+        onClick={openProjectLink}
         className={cl.projectImage}
         style={{ backgroundImage: `url(${project.image})` }}
       />
@@ -40,18 +29,22 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
           {/*</MouseHover>*/}
           <div className={cl.projectLinks}>
             {project.githubLink && (
-              // <MouseHover text={'Source code'}>
-              <a href={project.githubLink} target={'_blank'} rel={'noreferrer'}>
-                <FaGithub />
-              </a>
-              // </MouseHover>
+              <MouseHover magnetic text={'Source code'}>
+                <a
+                  href={project.githubLink}
+                  target={'_blank'}
+                  rel={'noreferrer'}
+                >
+                  <FaGithub />
+                </a>
+              </MouseHover>
             )}
             {project.link && (
-              // <MouseHover text={'Link'}>
-              <a href={project.link} target={'_blank'} rel={'noreferrer'}>
-                <BiLink />
-              </a>
-              // </MouseHover>
+              <MouseHover text={'Link'}>
+                <a href={project.link} target={'_blank'} rel={'noreferrer'}>
+                  <BiLink />
+                </a>
+              </MouseHover>
             )}
           </div>
         </div>
@@ -63,6 +56,7 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
           ))}
         </div>
       </div>
-    </MouseHover>
+      ;
+    </div>
   );
 };
