@@ -68,7 +68,7 @@ export type CanvasParticlesProps = {
 export class CanvasParticles {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  private reqId: number = 0;
+  private reqId: number | null = 0;
   private particles: Particle[] = [];
 
   constructor(canvas: HTMLCanvasElement, props: CanvasParticlesProps) {
@@ -79,6 +79,10 @@ export class CanvasParticles {
   }
 
   private animationLoop() {
+    if (this.reqId === null) {
+      return;
+    }
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     for (const particle of this.particles) {
@@ -116,7 +120,9 @@ export class CanvasParticles {
   }
 
   onUnMount = () => {
-    cancelAnimationFrame(this.reqId);
+    cancelAnimationFrame(this.reqId as number);
+    this.reqId = null;
+
     this.unMountEvents();
   };
 

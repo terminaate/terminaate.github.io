@@ -24,8 +24,8 @@ export const contacts: ContactProps[] = [
     link: 'https://t.me/terminaate',
   },
   {
-    text: 'tntwnik@gmail.com',
+    text: 'terminaatecorp@gmail.com',
     icon: <SiGmail />,
-    link: 'mailto:tntwnik@gmail.com',
+    link: 'mailto:terminaatecorp@gmail.com',
   },
 ];
