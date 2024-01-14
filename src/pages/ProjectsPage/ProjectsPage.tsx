@@ -4,7 +4,7 @@ import { Title } from '@/components/Title';
 import { ProjectCard } from '@/components/ProjectCard';
 import { projects } from './ProjectsPage.const';
 
-export const ProjectsPage = () => {
+const ProjectsPage = () => {
   return (
     <PageContainer className={cl.projectsPage}>
       <Title>Projects:</Title>
@@ -20,3 +20,5 @@ export const ProjectsPage = () => {
     </PageContainer>
   );
 };
+
+export default ProjectsPage;

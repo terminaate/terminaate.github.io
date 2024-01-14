@@ -11,7 +11,7 @@ import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingAct
 const introPageText =
   "Hello world 1000 , my name is Terminaate(nickname) 1000 , i'm a Frontend React developer 1000 , let me show you little bit more information about me.";
 
-export const IntroPage = () => {
+const IntroPage = () => {
   const { setCurrentPage: navigate } = useRoutingActions();
   const timeoutId = useRef<number>(0);
 
@@ -50,3 +50,5 @@ export const IntroPage = () => {
     </PageContainer>
   );
 };
+
+export default IntroPage;

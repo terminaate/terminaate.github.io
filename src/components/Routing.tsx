@@ -1,14 +1,15 @@
-import { FC, useEffect, useMemo } from 'react';
-import { IntroPage } from '@/pages/IntroPage';
-import { AboutPage } from '@/pages/AboutPage';
-import { ContactsPage } from '@/pages/ContactsPage';
+import { FC, lazy, useEffect, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useRoutingState } from '@/contexts/RoutingContext/hooks/useRoutingState';
 import { Nav } from '@/components/Nav';
 import { BasicPage } from '@/components/BasicPage';
-import { ProjectsPage } from '@/pages/ProjectsPage';
 import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
-import { NotFoundPage } from '@/pages/NotFoundPage';
+import IntroPage from '@/pages/IntroPage';
+import AboutPage from '@/pages/AboutPage';
+
+const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'));
+const ContactsPage = lazy(() => import('@/pages/ContactsPage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 export const Pages: Record<string, FC> = {
   IntroPage,

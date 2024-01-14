@@ -16,7 +16,7 @@ const Contact: FC<ContactProps> = ({ text, link, icon }) => {
   );
 };
 
-export const ContactsPage = () => {
+const ContactsPage = () => {
   return (
     <PageContainer className={cl.contactsPage}>
       <Title>Contacts:</Title>
@@ -28,3 +28,5 @@ export const ContactsPage = () => {
     </PageContainer>
   );
 };
+
+export default ContactsPage;

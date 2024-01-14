@@ -9,7 +9,7 @@ import { FC } from 'react';
 
 const contentContainers: FC[] = [About, LatestProjects, Skills];
 
-export const AboutPage = () => {
+const AboutPage = () => {
   return (
     <PageContainer className={cl.aboutPage}>
       <MouseHover
@@ -31,3 +31,5 @@ export const AboutPage = () => {
     </PageContainer>
   );
 };
+
+export default AboutPage;
