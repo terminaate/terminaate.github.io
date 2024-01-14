@@ -34,11 +34,13 @@
     }
 
     .text {
-      font-size: 17px;
+      font-size: 16px;
       max-width: 750px;
-      text-align: justify;
+      text-align: left;
+      //text-align: justify;
       //text-indent: 5px;
       padding-left: 20px;
+      line-height: 25px;
 
       @media screen and (max-width: 800px) {
         padding: 0;

@@ -6,14 +6,15 @@ export const About = () => {
     <>
       <Title className={cl.title}>About me:</Title>
       <p className={cl.text}>
-        I'm a <span>young web developer</span> living in <span>Russia</span>, I
-        devote most of my time to <span>developing</span> my own small projects
-        and <span>self-improvement</span>, I have been doing web development for
-        about <span>3 years</span>, during this time I tried{' '}
-        <span>Frontend</span> and <span>Backend</span> directions, I write
-        Backend completely only on Node. js (Nest/Express), in the Frontend area
-        I have quite a lot of experience in writing React applications, so now I
-        position myself as a <span>React frontend developer</span>
+        I am a young web developer from <span>Russia</span> with{' '}
+        <span>3 years</span> of experience in development. My three-year journey
+        in frontend development has been characterized by continuous growth and
+        refinement. With <span>2 years</span> of hands-on experience in
+        commercial development, I have cultivated deep expertise in{' '}
+        <span>React</span> and significant proficiency in <span>Next.js</span>.
+        My projects stand out for their efficiency, modularity, and appealing
+        design. I am dedicated to delivering high-quality web applications that
+        not only meet technical standards but also embody aesthetic excellence.
       </p>
     </>
   );

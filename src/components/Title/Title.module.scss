@@ -1,4 +1,7 @@
+@import '@/index.scss';
+
 .titleContainer {
+  @include circlesText;
   overflow: hidden;
   //line-height: 125%;
   user-select: none;
