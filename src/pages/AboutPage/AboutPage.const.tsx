@@ -1,18 +1,11 @@
 import { ReactElement } from 'react';
 import {
-  SiExpress,
   SiFramer,
   SiJavascript,
   SiMobx,
-  SiMongodb,
-  SiNestjs,
   SiNextdotjs,
-  SiNodedotjs,
-  SiPostgresql,
   SiRedux,
   SiSass,
-  SiSequelize,
-  SiSqlite,
   SiTypescript,
   SiVite,
   SiWebpack,
@@ -84,53 +77,6 @@ export const skills: SkillProps[] = [
       {
         title: 'Framer motion',
         icon: <SiFramer />,
-      },
-    ],
-  },
-  {
-    title: 'Backend:',
-    content: [
-      {
-        title: 'Node.js',
-        icon: <SiNodedotjs />,
-      },
-      {
-        title: 'Express.js',
-        icon: <SiExpress />,
-      },
-      {
-        title: 'Nest.js',
-        icon: <SiNestjs />,
-      },
-    ],
-  },
-  {
-    title: 'Databases:',
-    content: [
-      {
-        title: 'Mongodb',
-        icon: <SiMongodb />,
-      },
-      {
-        title: 'Sqlite3',
-        icon: <SiSqlite />,
-      },
-      {
-        title: 'Postgresql',
-        icon: <SiPostgresql />,
-      },
-    ],
-  },
-  {
-    title: "ORM's:",
-    content: [
-      {
-        title: 'Sequelize',
-        icon: <SiSequelize />,
-      },
-      {
-        title: 'Mongoose',
-        icon: <SiMongodb />,
       },
     ],
   },
