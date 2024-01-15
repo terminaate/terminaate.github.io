@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { PageContainer } from '@/components/PageContainer';
 import cl from './IntroPage.module.scss';
 import { TypingText } from '@/components/TypingText';
@@ -9,11 +9,12 @@ import { Link } from '@/components/UI/Link';
 import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
 
 const introPageText =
-  "Hello world 1000 , my name is Terminaate(nickname) 1000 , i'm a Frontend React developer 1000 , let me show you little bit more information about me.";
+  'Hello world 1000 , my name is Terminaate(nickname) 1000 , i\'m a Frontend React developer 1000 , let me show you little bit more information about me.';
 
 const IntroPage = () => {
   const { setCurrentPage: navigate } = useRoutingActions();
   const timeoutId = useRef<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigateToHome = useCallback(() => {
     timeoutId.current = setTimeout(() => {
@@ -22,7 +23,14 @@ const IntroPage = () => {
   }, []);
 
   useEffect(() => {
+    const onBodyLoad = () => {
+      setIsLoading(false);
+    };
+
+    window.addEventListener('load', onBodyLoad);
+
     return () => {
+      window.removeEventListener('load', onBodyLoad);
       clearTimeout(timeoutId.current);
     };
   }, []);
@@ -37,16 +45,18 @@ const IntroPage = () => {
         containerClassName={cl.typingTextContainer}
         text={introPageText}
       />
-      <MouseHover text={'Skip'} position={'top'}>
-        <Link
-          href={'AboutPage'}
-          onClick={() => clearTimeout(timeoutId.current)}
-        >
-          <button className={cl.skipButton}>
-            <FaPlay />
-          </button>
-        </Link>
-      </MouseHover>
+      {!isLoading && (
+        <MouseHover text={'Skip'} position={'top'}>
+          <Link
+            href={'AboutPage'}
+            onClick={() => clearTimeout(timeoutId.current)}
+          >
+            <button className={cl.skipButton}>
+              <FaPlay />
+            </button>
+          </Link>
+        </MouseHover>
+      )}
     </PageContainer>
   );
 };
