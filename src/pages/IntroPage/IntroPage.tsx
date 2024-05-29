@@ -9,7 +9,7 @@ import { Link } from '@/components/UI/Link';
 import { useRoutingActions } from '@/contexts/RoutingContext/hooks/useRoutingActions';
 
 const introPageText =
-  'Hello world 1000 , my name is Terminaate(nickname) 1000 , i\'m a Frontend React developer 1000 , let me show you little bit more information about me.';
+  "Hello world 1000 , my name is Terminaate(nickname) 1000 , i'm a Frontend React developer 1000 , let me show you little bit more information about me.";
 
 const IntroPage = () => {
   const { setCurrentPage: navigate } = useRoutingActions();
