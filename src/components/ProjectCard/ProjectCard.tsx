@@ -56,7 +56,6 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
           ))}
         </div>
       </div>
-      ;
     </div>
   );
 };
