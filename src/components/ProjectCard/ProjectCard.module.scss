@@ -1,7 +1,7 @@
 .projectContainer {
-  //width: 100%;
-  //max-width: 800px;
-  min-width: 800px;
+  width: 100%;
+  max-width: 800px;
+  //min-width: 800px;
   min-height: 400px;
   height: 100%;
   display: flex;
@@ -10,10 +10,6 @@
   position: relative;
   border: 2px solid var(--background-third);
   border-radius: 15px;
-
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
 
   .projectImage {
     width: 100%;
