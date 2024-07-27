@@ -64,13 +64,11 @@ const cursorVariants: Variants = {
       };
     }
 
-    const styles = customHoverStyles
-      ? customHoverStyles
-      : {
-          backgroundColor: '#fff',
-          mixBlendMode: 'difference',
-          border: 'none',
-        };
+    const styles = customHoverStyles || {
+      backgroundColor: '#fff',
+      mixBlendMode: 'difference',
+      border: 'none',
+    };
 
     return {
       ...sizeStyles,
@@ -89,7 +87,7 @@ export const Cursor: FC<Props> = ({ size = 30 }) => {
   const currentItem = useCursorState();
   const { showCustomCursor } = useConfigState();
   const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isOutOfScreen, setIsOutOfScreen] = useState(false);
 
   useWindowEvent('mousemove', (e) => {

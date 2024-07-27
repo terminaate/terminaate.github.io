@@ -7,9 +7,6 @@ import { useConfigActions } from '@/contexts/ConfigContext/hooks/useConfigAction
 import { useEffect } from 'react';
 import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState'; // TODO
 
-// TODO
-// add global site loader
-
 export const App = () => {
   const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
   const { updateConfig } = useConfigActions();

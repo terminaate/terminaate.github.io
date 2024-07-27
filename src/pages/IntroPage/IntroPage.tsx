@@ -22,16 +22,19 @@ const IntroPage = () => {
     }, 2500);
   }, []);
 
-  useEffect(() => {
-    const onBodyLoad = () => {
-      setIsLoading(false);
-    };
+  const onBodyLoad = () => {
+    setIsLoading(false);
+  };
 
+  useEffect(() => {
     window.addEventListener('load', onBodyLoad);
+    const bodyLoadTimer = setTimeout(onBodyLoad, 7500)
 
     return () => {
       window.removeEventListener('load', onBodyLoad);
+
       clearTimeout(timeoutId.current);
+      clearTimeout(bodyLoadTimer);
     };
   }, []);
 
@@ -39,7 +42,7 @@ const IntroPage = () => {
     <PageContainer className={cl.introPage}>
       <Particles className={cl.backgroundParticles} />
       <TypingText
-        defaultDelay={400}
+        defaultDelay={300}
         onEnd={navigateToHome}
         className={cl.typingText}
         containerClassName={cl.typingTextContainer}

@@ -24,9 +24,7 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
       />
       <div className={cl.projectContent}>
         <div className={cl.projectTitleContainer}>
-          {/*<MouseHover>*/}
           <h2 className={cl.projectTitle}>{project.title}</h2>
-          {/*</MouseHover>*/}
           <div className={cl.projectLinks}>
             {project.githubLink && (
               <MouseHover magnetic text={'Source code'}>

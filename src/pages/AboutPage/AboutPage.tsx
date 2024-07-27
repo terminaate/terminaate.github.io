@@ -7,7 +7,7 @@ import { About } from '@/pages/AboutPage/components/About';
 import { LatestProjects } from '@/pages/AboutPage/components/LatestProjects';
 import { FC } from 'react';
 
-const contentContainers: FC[] = [About, LatestProjects, Skills];
+const sections: FC[] = [About, LatestProjects, Skills];
 
 const AboutPage = () => {
   return (
@@ -17,13 +17,13 @@ const AboutPage = () => {
         text={'My name is...'}
         position={'bottom'}
         magnetic
-        magneticAntiPressure={5}
         fitToElement={{ borderRadius: '3px' }}
+        magneticAntiPressure={9}
       >
         <Title containerClassName={cl.username}>BAHRAM TERMINAATE</Title>
       </MouseHover>
 
-      {contentContainers.map((Component, key) => (
+      {sections.map((Component, key) => (
         <div key={key} className={cl.contentContainer}>
           <Component />
         </div>

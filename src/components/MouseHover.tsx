@@ -48,10 +48,7 @@ export const MouseHover: FC<Props> = ({
         height: target.clientHeight,
       };
 
-      if (fitToElement) {
-        newData.fitToElement = fitToElement;
-      }
-
+      newData.fitToElement = fitToElement;
       newData.magneticAntiPressure = magneticAntiPressure;
     }
 
