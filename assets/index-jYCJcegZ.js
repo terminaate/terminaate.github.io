@@ -1,1 +1,0 @@
-import{j as s,P as a,T as e,p as r,a as j}from"./index-1lCy8vb0.js";const c="_projectsPage_6i5jr_1",i="_container_6i5jr_6",o="_projectContainer_6i5jr_18",t=()=>s.jsxs(a,{className:c,children:[s.jsx(e,{children:"Projects:"}),s.jsx("div",{className:i,children:r.map(((a,e)=>s.jsx(j,{className:o,project:a},e)))})]});export{t as default};
