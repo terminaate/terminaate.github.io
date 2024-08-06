@@ -19,6 +19,42 @@ export const projects: ProjectProps[] = [
   },
 
   {
+    link: 'https://discord.gg/4m8Rq8gTgp',
+    title: 'Aura RP',
+    description:
+      'Aura RP is a big RP server owned by 89squad, I worked on this project for 2 years, the project has a huge code base. The team consisted of 10 people. The server platform is RageMP',
+    tags: [
+      'RageMP',
+      'TypeScript',
+      'NodeJS',
+      'React',
+      'StyledComponents',
+      'Mobx',
+      'Vite',
+    ],
+    image: 'https://i.imgur.com/R3fg4f1.jpeg',
+  },
+
+  {
+    link: 'https://discord.gg/cybermp',
+    title: 'CyberMP',
+    description:
+      'CyberMP is a major modification of Cyberpunk 2077 that adds a multiplayer platform to the game. I created the launcher, website, and server manager website for this project.',
+    tags: [
+      'TypeScript',
+      'Rust',
+      'Tauri',
+      'NodeJS',
+      'NestJS',
+      'React',
+      'Tailwind',
+      'Redux toolkit',
+      'Vite',
+    ],
+    image: 'https://i.imgur.com/tEa1BDt.jpeg',
+  },
+
+  {
     githubLink: 'https://github.com/terminaate/lonely-chat',
     link: 'https://terminaate.github.io/lonely-chat',
     title: 'Lonely chat',

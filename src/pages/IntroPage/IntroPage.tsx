@@ -28,7 +28,7 @@ const IntroPage = () => {
 
   useEffect(() => {
     window.addEventListener('load', onBodyLoad);
-    const bodyLoadTimer = setTimeout(onBodyLoad, 7500)
+    const bodyLoadTimer = setTimeout(onBodyLoad, 7500);
 
     return () => {
       window.removeEventListener('load', onBodyLoad);
