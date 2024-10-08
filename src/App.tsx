@@ -4,8 +4,8 @@ import { DevToolsModal } from '@/components/DevToolsModal';
 import { useMatchMedia } from '@/hooks/useMatchMedia';
 import { ScreenBreakPoints } from '@/common/constants/ScreenBreakPoints';
 import { useConfigActions } from '@/contexts/ConfigContext/hooks/useConfigActions';
-import { useEffect } from 'react';
-import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState'; // TODO
+import { Suspense, useEffect } from 'react';
+import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
 
 export const App = () => {
   const isMobile = useMatchMedia(`(max-width: ${ScreenBreakPoints.MOBILE}px)`);
@@ -23,7 +23,9 @@ export const App = () => {
   return (
     <>
       <Cursor />
-      <Routing />
+      <Suspense fallback={null}>
+        <Routing />
+      </Suspense>
       <DevToolsModal />
     </>
   );
