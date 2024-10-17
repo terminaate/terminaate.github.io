@@ -1,4 +1,4 @@
-import { FC, lazy, useEffect, useMemo } from 'react';
+import { FC, lazy, Suspense, useEffect, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useRoutingState } from '@/contexts/RoutingContext/hooks/useRoutingState';
 import { Nav } from '@/components/Nav';
@@ -33,13 +33,15 @@ export const Routing = () => {
   return (
     <BasicPage>
       <Nav />
-      {transitionBetweenPages ? (
-        <AnimatePresence mode={'wait'}>
-          <Page key={currentPage} />
-        </AnimatePresence>
-      ) : (
-        <Page />
-      )}
+      <Suspense fallback={null}>
+        {transitionBetweenPages ? (
+          <AnimatePresence mode={'wait'}>
+            <Page key={currentPage} />
+          </AnimatePresence>
+        ) : (
+          <Page />
+        )}
+      </Suspense>
     </BasicPage>
   );
 };

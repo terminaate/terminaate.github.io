@@ -19,7 +19,7 @@ const IntroPage = () => {
   const navigateToHome = useCallback(() => {
     timeoutId.current = setTimeout(() => {
       navigate('AboutPage');
-    }, 2500);
+    }, 1500);
   }, []);
 
   const onBodyLoad = () => {

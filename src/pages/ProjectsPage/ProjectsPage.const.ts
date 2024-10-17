@@ -9,7 +9,6 @@ export type ProjectProps = {
 
 export const projects: ProjectProps[] = [
   {
-    githubLink: 'https://github.com/terminaate/refleep',
     link: 'https://refleep.vercel.app/',
     title: 'Refleep',
     description:
@@ -22,7 +21,7 @@ export const projects: ProjectProps[] = [
     link: 'https://discord.gg/4m8Rq8gTgp',
     title: 'Aura RP',
     description:
-      'Aura RP is a big RP server owned by 89squad, I worked on this project for 2 years, the project has a huge code base. The team consisted of 10 people. The server platform is RageMP',
+      'Aura RP is a big RP server owned by 89squad, I worked on this project for 1.6 years, the project has a huge code base. The team consisted of 10 people. The server platform is RageMP',
     tags: [
       'RageMP',
       'TypeScript',

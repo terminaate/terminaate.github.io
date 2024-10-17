@@ -4,7 +4,7 @@ import { DevToolsModal } from '@/components/DevToolsModal';
 import { useMatchMedia } from '@/hooks/useMatchMedia';
 import { ScreenBreakPoints } from '@/common/constants/ScreenBreakPoints';
 import { useConfigActions } from '@/contexts/ConfigContext/hooks/useConfigActions';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useConfigState } from '@/contexts/ConfigContext/hooks/useConfigState';
 
 export const App = () => {
@@ -23,9 +23,7 @@ export const App = () => {
   return (
     <>
       <Cursor />
-      <Suspense fallback={null}>
-        <Routing />
-      </Suspense>
+      <Routing />
       <DevToolsModal />
     </>
   );
