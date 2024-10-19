@@ -15,7 +15,9 @@ export const Link: FC<Props> = ({
 
   const onLinkClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+
     navigate(href);
+
     onClick(e);
   }, []);
 

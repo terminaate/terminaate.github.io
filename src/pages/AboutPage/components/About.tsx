@@ -9,7 +9,7 @@ export const About = () => {
         I am a young web developer from <span>Russia</span> with{' '}
         <span>3 years</span> of experience in development. My three-year journey
         in frontend development has been characterized by continuous growth and
-        refinement. With <span>2 years</span> of hands-on experience in
+        refinement. With <span>2+ years</span> of hands-on experience in
         commercial development, I have cultivated deep expertise in{' '}
         <span>React</span> and significant proficiency in <span>Next.js</span>.
         My projects stand out for their efficiency, modularity, and appealing

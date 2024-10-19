@@ -38,7 +38,7 @@ export const ProjectCard: FC<Props> = ({ project, className, ...props }) => {
               </MouseHover>
             )}
             {project.link && (
-              <MouseHover text={'Link'}>
+              <MouseHover magnetic text={'Link'}>
                 <a href={project.link} target={'_blank'} rel={'noreferrer'}>
                   <BiLink />
                 </a>

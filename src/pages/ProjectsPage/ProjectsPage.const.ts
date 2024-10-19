@@ -50,7 +50,7 @@ export const projects: ProjectProps[] = [
       'Redux toolkit',
       'Vite',
     ],
-    image: 'https://i.imgur.com/tEa1BDt.jpeg',
+    image: 'https://i.imgur.com/htJdzpv.png',
   },
 
   {
